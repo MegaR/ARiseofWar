@@ -1,6 +1,5 @@
 #pragma once
-class Tile :
-	public TileSysthem
+class Tile
 {
 public:
 	Tile(void);

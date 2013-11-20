@@ -1,6 +1,6 @@
 #pragma once
 #include "tile.h"
-lass TileGrass :
+class TileGrass :
 	public Tile
 {
 public:
