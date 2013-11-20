@@ -6,5 +6,15 @@ class Unit :
 public:
 	Unit(void);
 	~Unit(void);
+
+	int attack;
+	int defence;
+	int maxDistance;
+	int attackDistance;
+	// moveAnimation
+	// attackanimation
+
+	void move();
+	//void attack(Entity tartget);
 };
 
