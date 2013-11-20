@@ -1,10 +1,5 @@
 #pragma once
 
-#ifdef _DEBUG
-#include <Windows.h>
-#endif
-
-#include <stdio.h>
 #include <iostream>
 using namespace std;
 

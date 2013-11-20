@@ -55,7 +55,7 @@
       <AdditionalIncludeDirectories>C:\irrlicht-1.8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\irrlicht-1.8\lib\Win32-visualstudio;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -84,7 +84,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="button.cpp" />
+    <ClCompile Include="src\button.cpp" />
     <ClCompile Include="src\EnemyPlayer.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -99,7 +99,7 @@
     <ClCompile Include="src\UnitKnight.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="button.h" />
+    <ClInclude Include="src\button.h" />
     <ClInclude Include="src\EnemyPlayer.h" />
     <ClInclude Include="src\Entity.h" />
     <ClInclude Include="src\Game.h" />

@@ -66,15 +66,6 @@ void Game::loop() {
 }
 
 int main() {
-
-	#ifdef _DEBUG
-	AllocConsole();
-	freopen("conin$","r",stdin);
-	freopen("conout$","w",stdout);
-	freopen("conout$","w",stderr);
-	cout << "test" << endl;
-	#endif
-
 	Game *game;
 	game = &Game::getInstance();
 	game->start();
