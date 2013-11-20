@@ -6,9 +6,9 @@ public:
 	Scene(void);
 	~Scene(void);
 
-	void Click(int x, int  y);
-	void start();
-	void update();
-	void render();
+	virtual void Click(int x, int  y);
+	virtual void start();
+	virtual void update();
+	virtual void render();
 	
 };

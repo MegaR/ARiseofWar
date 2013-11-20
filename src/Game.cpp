@@ -36,7 +36,7 @@ void Game::start() {
 	}*/
 	camera = sceneManager->addCameraSceneNode(0, vector3df(0,30,-40), vector3df(0,5,0));
 
-	changeScene(new MenuScene);
+	changeScene(new GameScene());
 
 	loop();
 	device->drop();
@@ -48,7 +48,7 @@ void Game::changeScene(Scene* newScene) {
 		delete currentScene;
 	}
 
-	currentScene = new Scene;
+	currentScene = newScene;
 	currentScene->start();
 }
 
@@ -65,7 +65,16 @@ void Game::loop() {
 	}
 }
 
-int __stdcall WinMain() {
+int main() {
+
+	#ifdef _DEBUG
+	AllocConsole();
+	freopen("conin$","r",stdin);
+	freopen("conout$","w",stdout);
+	freopen("conout$","w",stderr);
+	cout << "test" << endl;
+	#endif
+
 	Game *game;
 	game = &Game::getInstance();
 	game->start();

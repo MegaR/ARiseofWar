@@ -59,7 +59,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\irrlicht-1.8\lib\Win32-visualstudio;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <EntryPointSymbol>WinMain</EntryPointSymbol>
+      <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -80,7 +80,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\irrlicht-1.8\lib\Win32-visualstudio;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <EntryPointSymbol>WinMain</EntryPointSymbol>
+      <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -94,7 +94,7 @@
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\Tile.cpp" />
     <ClCompile Include="src\TileGrass.cpp" />
-    <ClCompile Include="src\TileSysthem.cpp" />
+    <ClCompile Include="src\TileSystem.cpp" />
     <ClCompile Include="src\Unit.cpp" />
     <ClCompile Include="src\UnitKnight.cpp" />
   </ItemGroup>
@@ -109,7 +109,7 @@
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\Tile.h" />
     <ClInclude Include="src\TileGrass.h" />
-    <ClInclude Include="src\TileSysthem.h" />
+    <ClInclude Include="src\TileSystem.h" />
     <ClInclude Include="src\Unit.h" />
     <ClInclude Include="src\UnitKnight.h" />
   </ItemGroup>

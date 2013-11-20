@@ -1,5 +1,13 @@
 #pragma once
 
+#ifdef _DEBUG
+#include <Windows.h>
+#endif
+
+#include <stdio.h>
+#include <iostream>
+using namespace std;
+
 #include <irrlicht.h>
 using namespace irr;
 using namespace core;
@@ -10,6 +18,7 @@ using namespace gui;
 
 #include "Scene.h"
 #include "MenuScene.h"
+#include "GameScene.h"
 
 class Game {
 public:

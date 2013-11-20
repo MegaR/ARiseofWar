@@ -1,13 +1,20 @@
 #pragma once
-class GameScene
+#include <vector>
+
+#include "Entity.h"
+#include "TileSystem.h"
+#include "Scene.h"
+
+class GameScene : public Scene
 {
 public:
 	GameScene(void);
 	~GameScene(void);
 
-	//tilesysthem
-	//entities[]
+	TileSystem tilesystem;
+	std::vector<Entity> entities;
 	int turnCount;
 
 	void turn();
+	void update();
 };

@@ -9,7 +9,7 @@ Scene::~Scene() {
 }
 
 
-void Scene::Click (int x,int y){
+void Scene::Click (int x, int y){
 
 
 }
