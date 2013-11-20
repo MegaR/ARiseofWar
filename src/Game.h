@@ -8,6 +8,8 @@ using namespace video;
 using namespace io;
 using namespace gui;
 
+#include "Scene.h"
+#include "MenuScene.h"
 
 class Game {
 public:
@@ -15,14 +17,15 @@ public:
 
 	void start();
 	void loop();
+	void changeScene(Scene* newScene);
 
 	IrrlichtDevice* device;
 	IVideoDriver* videoDriver;
 	ISceneManager* sceneManager;
 	IGUIEnvironment* gui;
 
+	Scene* currentScene;
 	ICameraSceneNode* camera;
-
 
 private:
 	Game();

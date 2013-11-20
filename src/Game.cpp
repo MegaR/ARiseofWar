@@ -17,8 +17,9 @@ void Game::start() {
 	sceneManager = device->getSceneManager();
 	gui = device->getGUIEnvironment();
 	
-	gui->addStaticText(L"Hello World! This is the Irrlicht Software renderer!",
+	gui->addStaticText(L"W00T this is a test",
 		rect<s32>(10,10,260,22), true);
+	IGUIButton* button = gui->addButton(rect<s32>(50,50,120,100), 0, -1, L"I AM BUTTON");
 
 	/*IAnimatedMesh* mesh = smgr->getMesh("../../media/sydney.md2");
 	if (!mesh)
@@ -35,14 +36,27 @@ void Game::start() {
 	}*/
 	camera = sceneManager->addCameraSceneNode(0, vector3df(0,30,-40), vector3df(0,5,0));
 
+	changeScene(new MenuScene);
+
 	loop();
 	device->drop();
 	return;
 }
 
+void Game::changeScene(Scene* newScene) {
+	if(currentScene) {
+		delete currentScene;
+	}
+
+	currentScene = new Scene;
+	currentScene->start();
+}
+
 void Game::loop() {
 	while(device->run()) {
 		videoDriver->beginScene(true, true, SColor(255,100,101,140));
+
+		currentScene->update();
 
 		sceneManager->drawAll();
 		gui->drawAll();
