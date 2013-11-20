@@ -84,10 +84,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="button.cpp" />
     <ClCompile Include="src\EnemyPlayer.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameScene.cpp" />
+    <ClCompile Include="src\MenuScene.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\Tile.cpp" />
@@ -97,10 +99,12 @@
     <ClCompile Include="src\UnitKnight.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="button.h" />
     <ClInclude Include="src\EnemyPlayer.h" />
     <ClInclude Include="src\Entity.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\GameScene.h" />
+    <ClInclude Include="src\MenuScene.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\Tile.h" />
