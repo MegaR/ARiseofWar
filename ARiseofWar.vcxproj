@@ -109,6 +109,9 @@
     <ClInclude Include="src\Unit.h" />
     <ClInclude Include="src\UnitKnight.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Irrlicht.dll" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
