@@ -20,12 +20,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -82,7 +84,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\EnemyPlayer.cpp" />
+    <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GameScene.cpp" />
+    <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\Scene.cpp" />
+    <ClCompile Include="src\Tile.cpp" />
+    <ClCompile Include="src\TileGrass.cpp" />
+    <ClCompile Include="src\TileSysthem.cpp" />
+    <ClCompile Include="src\Unit.cpp" />
+    <ClCompile Include="src\UnitKnight.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\EnemyPlayer.h" />
+    <ClInclude Include="src\Entity.h" />
+    <ClInclude Include="src\GameScene.h" />
+    <ClInclude Include="src\Player.h" />
+    <ClInclude Include="src\Scene.h" />
+    <ClInclude Include="src\Tile.h" />
+    <ClInclude Include="src\TileGrass.h" />
+    <ClInclude Include="src\TileSysthem.h" />
+    <ClInclude Include="src\Unit.h" />
+    <ClInclude Include="src\UnitKnight.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
