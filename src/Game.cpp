@@ -9,7 +9,7 @@ Game& Game::getInstance() {
 void Game::start() {
 
 	#ifdef _DEBUG
-	device = createDevice( video::EDT_SOFTWARE, dimension2d<u32>(800, 600), 16,
+	device = createDevice( video::EDT_OPENGL, dimension2d<u32>(800, 600), 16,
         false, false, false, 0);
 	screenWidth = 800;
 	screenHeight = 600;
@@ -42,7 +42,7 @@ void Game::start() {
 		node->setMD2Animation(scene::EMAT_STAND);
 		node->setMaterialTexture( 0, driver->getTexture("../../media/sydney.bmp") );
 	}*/
-	camera = sceneManager->addCameraSceneNode(0, vector3df(0,40,-40));//, vector3df(0,5,0));
+	camera = sceneManager->addCameraSceneNode(0, vector3df(0, 50, -40));
 
 	//changeScene(new MenuScene());
 	changeScene(new GameScene());

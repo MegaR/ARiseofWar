@@ -1,7 +1,7 @@
 #include "GameScene.h"
 
 GameScene::GameScene() {
-	
+	moveCamera(0,0,0);
 }
 
 GameScene::~GameScene() {
@@ -50,4 +50,8 @@ void GameScene::moveCamera(int x, int y, int z) {
 	position.Y += y;
 	position.Z += z;
 	camera->setPosition(position);
+
+	position.Y += -1;
+	position.Z += 0.5f;
+	camera->setTarget(position);
 }
