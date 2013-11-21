@@ -31,6 +31,9 @@ public:
 	Scene* currentScene;
 	ICameraSceneNode* camera;
 
+	int screenWidth;
+	int screenHeight;
+
 private:
 	Game();
 	Game(Game const&);

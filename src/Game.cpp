@@ -7,8 +7,20 @@ Game& Game::getInstance() {
 }
 
 void Game::start() {
+
+	#ifdef _DEBUG
 	device = createDevice( video::EDT_SOFTWARE, dimension2d<u32>(800, 600), 16,
         false, false, false, 0);
+	screenWidth = 800;
+	screenHeight = 600;
+	#else
+	IrrlichtDevice *nulldevice = createDevice(video::EDT_NULL);
+	core::dimension2d<u32> deskres = nulldevice->getVideoModeList()->getDesktopResolution();
+	nulldevice -> drop();
+	device = createDevice(video::EDT_OPENGL, deskres, 32, true, false, true, 0);
+	screenWidth = deskres.Width;
+	screenHeight = deskres.Height;
+	#endif
 
 	if (!device) return;
 	device->setWindowCaption(L"A Rise of War");
@@ -30,7 +42,7 @@ void Game::start() {
 		node->setMD2Animation(scene::EMAT_STAND);
 		node->setMaterialTexture( 0, driver->getTexture("../../media/sydney.bmp") );
 	}*/
-	camera = sceneManager->addCameraSceneNode(0, vector3df(0,30,-40), vector3df(0,5,0));
+	camera = sceneManager->addCameraSceneNode(0, vector3df(0,40,-40));//, vector3df(0,5,0));
 
 	//changeScene(new MenuScene());
 	changeScene(new GameScene());

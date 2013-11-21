@@ -19,4 +19,8 @@ public:
 
 	void turn();
 	void update();
+	void updateMouse();
+	
+private:
+	void moveCamera(int x, int y, int z);
 };
