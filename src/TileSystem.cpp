@@ -6,7 +6,7 @@ TileSystem::TileSystem(void)
 	cout << "Filling tilemap" << endl;
 	for(int x = 0; x < MAPSIZE; x++) {
 		for(int y = 0; y < MAPSIZE; y++) {
-			tiles[x][y] = new TileGrass();
+			tiles[x][y] = new TileGrass(x,y);
 		}
 	}
 }

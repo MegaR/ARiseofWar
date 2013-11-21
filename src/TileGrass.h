@@ -1,10 +1,10 @@
 #pragma once
-#include "tile.h"
-class TileGrass :
-	public Tile
+#include "Tile.h"
+
+class TileGrass : public Tile
 {
 public:
-	TileGrass(void);
+	TileGrass(int x = 0, int y = 0);
 	~TileGrass(void);
 };
 

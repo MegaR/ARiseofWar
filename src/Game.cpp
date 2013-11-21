@@ -32,7 +32,8 @@ void Game::start() {
 	}*/
 	camera = sceneManager->addCameraSceneNode(0, vector3df(0,30,-40), vector3df(0,5,0));
 
-	changeScene(new MenuScene());
+	//changeScene(new MenuScene());
+	changeScene(new GameScene());
 
 	loop();
 	device->drop();

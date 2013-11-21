@@ -1,8 +1,6 @@
 #include "TileGrass.h"
 
-
-TileGrass::TileGrass(void)
-{
+TileGrass::TileGrass(int x, int y) : Tile(x, y) {
 }
 
 
