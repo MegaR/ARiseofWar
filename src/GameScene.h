@@ -5,6 +5,8 @@
 #include "TileSystem.h"
 #include "Scene.h"
 
+#include "Game.h"
+
 class GameScene : public Scene
 {
 public:

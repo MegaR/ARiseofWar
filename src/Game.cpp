@@ -16,10 +16,6 @@ void Game::start() {
 	videoDriver = device->getVideoDriver();
 	sceneManager = device->getSceneManager();
 	gui = device->getGUIEnvironment();
-	
-	gui->addStaticText(L"W00T this is a test",
-		rect<s32>(10,10,260,22), true);
-	IGUIButton* button = gui->addButton(rect<s32>(50,50,120,100), 0, -1, L"I AM BUTTON");
 
 	/*IAnimatedMesh* mesh = smgr->getMesh("../../media/sydney.md2");
 	if (!mesh)
@@ -36,7 +32,7 @@ void Game::start() {
 	}*/
 	camera = sceneManager->addCameraSceneNode(0, vector3df(0,30,-40), vector3df(0,5,0));
 
-	changeScene(new GameScene());
+	changeScene(new MenuScene());
 
 	loop();
 	device->drop();
