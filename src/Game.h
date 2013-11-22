@@ -33,6 +33,7 @@ public:
 
 	int screenWidth;
 	int screenHeight;
+	f32 delta;
 
 private:
 	Game();

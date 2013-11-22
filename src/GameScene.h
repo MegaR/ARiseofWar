@@ -22,5 +22,5 @@ public:
 	void updateMouse();
 	
 private:
-	void moveCamera(int x, int y, int z);
+	void moveCamera(float x, float y, float z);
 };

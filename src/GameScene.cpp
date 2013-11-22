@@ -30,20 +30,20 @@ void GameScene::updateMouse() {
 	//cout << "MousePosition: X=" << x << "Y=" << y << endl;
 	
 	if(x < 10) {
-		moveCamera(-1, 0, 0);
+		moveCamera(-100 * game->delta, 0, 0);
 	}
 	if(x > game->screenWidth-10) {
-		moveCamera(1, 0, 0);
+		moveCamera(100 * game->delta, 0, 0);
 	}
 	if(y < 10) {
-		moveCamera(0,0,1);
+		moveCamera(0,0,100 * game->delta);
 	}
 	if(y > game->screenHeight-10) {
-		moveCamera(0,0,-1);
+		moveCamera(0,0,-100 * game->delta);
 	}
 }
 
-void GameScene::moveCamera(int x, int y, int z) {
+void GameScene::moveCamera(float x, float y, float z) {
 	ICameraSceneNode* camera = Game::getInstance().camera;
 	vector3df position = camera->getPosition();
 	position.X += x;

@@ -63,11 +63,14 @@ void Game::changeScene(Scene* newScene) {
 }
 
 void Game::loop() {
+	u32 prevTime = device->getTimer()->getTime();
+
 	while(device->run()) {
+		delta = (f32)(device->getTimer()->getTime() - prevTime) / 1000.f;
+		prevTime = device->getTimer()->getTime();
+
 		videoDriver->beginScene(true, true, SColor(255,100,101,140));
-
 		currentScene->update();
-
 		sceneManager->drawAll();
 		gui->drawAll();
 
