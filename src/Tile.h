@@ -1,7 +1,8 @@
 #pragma once
 
-#include <iostream>
-using namespace std;
+#include <irrlicht.h>
+using namespace irr;
+using namespace scene;
 
 class Tile
 {
@@ -10,5 +11,6 @@ public:
 	~Tile(void);
 
 	//Model model;
+	IMeshSceneNode* node;
 
 };

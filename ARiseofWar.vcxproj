@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Irrlicht.dll" />
+    <None Include="res\tileGrass.3DS" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

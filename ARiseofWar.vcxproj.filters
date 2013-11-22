@@ -98,5 +98,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Irrlicht.dll" />
+    <None Include="res\tileGrass.3DS">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
