@@ -55,7 +55,11 @@ void GameScene::updateMouse() {
 		*line3d_trace=game->sceneManager->getSceneCollisionManager()->getRayFromScreenCoordinates(*pos,camera);
 
 		scene::ISceneNode *nodeline = game->sceneManager->getSceneCollisionManager()->getSceneNodeFromRayBB(*line3d_trace,0x1,false);
-		cout << "the cake is not a lie" << endl;
+		
+		if (nodeline){
+		nodeline->setVisible(false);
+		};
+		
 }
 
 void GameScene::moveCamera(float x, float y, float z) {
@@ -65,7 +69,7 @@ void GameScene::moveCamera(float x, float y, float z) {
 	position.Y += y;
 	position.Z += z;
 	camera->setPosition(position);
-
+	cout << position.Z << endl;
 	position.Y += -1;
 	position.Z += 0.5f;
 	camera->setTarget(position);
