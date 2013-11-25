@@ -41,12 +41,16 @@ void Game::start() {
 }
 
 void Game::changeScene(Scene* newScene) {
-	if(currentScene) {
-		delete currentScene;
-	}
+	//cout << "current scene: " << currentScene << endl;
+	//cout << "new scene: " << newScene << endl;
+
+	delete currentScene;
+	//cout << "deleted currentScene" << endl;
 
 	currentScene = newScene;
 	currentScene->start();
+
+	//cout << "new current scene: " << currentScene << endl;
 }
 
 void Game::loop() {

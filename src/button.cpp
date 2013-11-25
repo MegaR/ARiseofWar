@@ -18,6 +18,7 @@ Button::Button(int x, int y, int w, int h, std::string t)
 Button::~Button()
 {
 	btn->remove();
+	cout << "Button destructor" << endl;
 }
 
 void Button::update()
