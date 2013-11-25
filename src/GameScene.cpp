@@ -9,7 +9,9 @@ GameScene::~GameScene() {
 }
 
 void GameScene::update() {
+	mouseRay();
 	updateMouse();
+	
 }
 
 void GameScene::turn(){
@@ -27,7 +29,7 @@ void GameScene::updateMouse() {
 	if (y < 0) {y = 0;}
 	if (y >	game->screenHeight) {y = game->screenHeight;}
 
-	//cout << "MousePosition: X=" << x << "Y=" << y << endl;
+	
 	
 	if(x < 10) {
 		moveCamera(-100 * game->delta, 0, 0);
@@ -42,23 +44,7 @@ void GameScene::updateMouse() {
 		moveCamera(0,0,-100 * game->delta);
 	}
 
-		//Game* game = &Game::getInstance();
-		//vector2d<s32> mousePosition = game->device->getCursorControl()->getPosition();
-		//int x = mousePosition.X;
-		//int y = mousePosition.Y;
-	
-		position2d<s32> *pos = new position2d<s32>(mousePosition.X,mousePosition.Y);
-
-		ICameraSceneNode* camera = Game::getInstance().camera;
-	
-		line3d<f32> *line3d_trace = new line3d<f32>;
-		*line3d_trace=game->sceneManager->getSceneCollisionManager()->getRayFromScreenCoordinates(*pos,camera);
-
-		scene::ISceneNode *nodeline = game->sceneManager->getSceneCollisionManager()->getSceneNodeFromRayBB(*line3d_trace,0x1,false);
 		
-		if (nodeline){
-		nodeline->setVisible(false);
-		};
 		
 }
 
@@ -73,4 +59,28 @@ void GameScene::moveCamera(float x, float y, float z) {
 	position.Y += -1;
 	position.Z += 0.5f;
 	camera->setTarget(position);
+	
+}
+
+void GameScene::mouseRay(){
+	Game* game = &Game::getInstance();
+	vector2d<s32> mousePosition = game->device->getCursorControl()->getPosition();
+	
+	position2d<s32> *pos = new position2d<s32>(mousePosition.X,mousePosition.Y);
+
+		ICameraSceneNode* camera = Game::getInstance().camera;
+	
+		line3d<f32> *line3d_trace = new line3d<f32>;
+		*line3d_trace=game->sceneManager->getSceneCollisionManager()->getRayFromScreenCoordinates(*pos,camera);
+
+		scene::ISceneNode *nodeline = game->sceneManager->getSceneCollisionManager()->getSceneNodeFromRayBB(*line3d_trace,0x1,false);
+		
+		
+
+		if (nodeline){
+			//nodeline->setVisible(false);
+			nodeline->setMaterialTexture( 0, game->videoDriver->getTexture("res/tileGrassTexture_invert.png") );
+		};
+		
+
 }

@@ -20,6 +20,7 @@ public:
 	void turn();
 	void update();
 	void updateMouse();
+	void mouseRay();
 	
 private:
 	void moveCamera(float x, float y, float z);
