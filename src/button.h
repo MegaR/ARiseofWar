@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string.h>
 #include "Game.h"
 
@@ -6,7 +7,7 @@ class Button
 {
 public:
 	Button(int x, int y, int w, int h, std::string t);
-	~Button(void);
+	~Button();
 
 	IGUIButton* btn;
 	bool pressed;

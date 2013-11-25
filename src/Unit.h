@@ -1,20 +1,19 @@
 #pragma once
+
 #include "Entity.h"
-class Unit :
-	public Entity
+
+class Unit: public Entity
 {
 public:
 	Unit(void);
-	~Unit(void);
+	virtual ~Unit();
 
 	int attack;
-	int defence;
 	int maxDistance;
 	int attackDistance;
 	// moveAnimation
-	// attackanimation
+	// attackAnimation
 
-	void move();
-	//void attack(Entity tartget);
+	void moveTo(int _tileX, int _tileY);
+	void attackTarget(Entity* target);
 };
-

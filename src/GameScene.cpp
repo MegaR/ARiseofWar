@@ -1,7 +1,9 @@
 #include "GameScene.h"
+#include "UnitKnight.h"
 
 Button* returnToMenuButton;
 Button* exitGameButton;
+UnitKnight* testfaggot;
 
 GameScene::GameScene() {
 	moveCamera(0,0,0);
@@ -18,11 +20,13 @@ GameScene::GameScene() {
 
 	returnToMenuButton = new Button(bX-100, bY, bW, bH, "Return to Menu");
 	exitGameButton = new Button(bX, bY, bW, bH, "Exit Game");
+	testfaggot = new UnitKnight(2,2,0);
 }
 
 GameScene::~GameScene() {
 	delete returnToMenuButton;
 	delete exitGameButton;
+	delete testfaggot;
 }
 
 void GameScene::update() {
@@ -33,19 +37,19 @@ void GameScene::update() {
 	//Button handlers enzo
 	if (returnToMenuButton->pressed == true)
 	{
-		Game::getInstance().changeScene(new MenuScene());
+		Game* game = &Game::getInstance();
+		game->changeScene(new MenuScene());
 	}
 
 	if (exitGameButton->pressed == true)
 	{
-		Game* game = &Game::getInstance();
-		
-		game->device->closeDevice();
+		Game::getInstance().device->closeDevice();
 		exit (1);
 	}
 }
 
-void GameScene::turn(){
+void GameScene::turn()
+{
 
 }
 
@@ -90,7 +94,7 @@ void GameScene::updateMouse() {
 		scene::ISceneNode *nodeline = game->sceneManager->getSceneCollisionManager()->getSceneNodeFromRayBB(*line3d_trace,0x1,false);
 		
 		if (nodeline){
-		nodeline->setVisible(false);
+		//nodeline->setVisible(false);
 		};
 }
 

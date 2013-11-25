@@ -1,6 +1,7 @@
 #include "Button.h"
 
 Button::Button(int x, int y, int w, int h, std::string t)
+//Button::Button(int x, int y, int w, int h, std::string t, ITexture* img)
 {
 	wstring ws;
 	ws.assign(t.begin(), t.end());
@@ -12,6 +13,10 @@ Button::Button(int x, int y, int w, int h, std::string t)
 	int y2 = y+h;
 
 	btn = game->gui->addButton(rect<s32>(x, y, x2, y2), 0, -1, btnText);
+
+	/*if (!img){ }
+	else { btn->setImage(img, rect<s32>(x,y,x2,y2)); }*/
+	
 	pressed = false;
 }
 
