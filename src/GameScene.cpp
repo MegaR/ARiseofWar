@@ -1,15 +1,38 @@
 #include "GameScene.h"
 
+Button* returnToMenuButton;
+Button* exitGameButton;
+
 GameScene::GameScene() {
 	moveCamera(0,0,0);
+	returnToMenuButton = new Button(600, 500, 100, 100, "Return to Menu");
+	exitGameButton = new Button(700, 500, 100, 100, "Exit Game");
 }
 
 GameScene::~GameScene() {
-
+	delete returnToMenuButton;
+	delete exitGameButton;
 }
 
 void GameScene::update() {
 	updateMouse();
+	returnToMenuButton->update();
+	exitGameButton->update();
+	
+	//Button handlers enzo
+	if (returnToMenuButton->pressed == true)
+	{
+		Game::getInstance().changeScene(new MenuScene());
+		cout << "???" << endl;
+	}
+
+	if (exitGameButton->pressed == true)
+	{
+		Game* game = &Game::getInstance();
+		
+		game->device->closeDevice();
+		exit (1);
+	}
 }
 
 void GameScene::turn(){

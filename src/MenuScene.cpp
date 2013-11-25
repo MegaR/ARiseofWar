@@ -8,12 +8,16 @@ MenuScene::MenuScene(void):Scene()
 {
 	Game* game = &Game::getInstance();
 	
-	int w = game->screenWidth;
-	int h = game->screenHeight;
+	int sW = game->screenWidth;
+	int sH = game->screenHeight;
+	int bW = 250, 
+		bH = 100;
+	int bX, bY;
+	bX = (sW/2) - (bW/2);
+	bY = (sH/2) - (bH/2);
 
-	
-	playButton = new Button(275, 150, 250, 100, "Play");
-	exitButton = new Button(275, 300, 250, 100, "Exit");
+	playButton = new Button(bX, bY-75, bW, bH, "Play");
+	exitButton = new Button(bX, bY+75, bW, bH, "Exit");
 }
 
 MenuScene::~MenuScene()
@@ -22,9 +26,6 @@ MenuScene::~MenuScene()
 	delete exitButton;
 	cout << "MenuScene destructor" << endl;
 }
-
-//playButton::onClick(){ do this }
-//exitButton::onClick(){ ... }
 
 void MenuScene::update()
 {
@@ -39,6 +40,9 @@ void MenuScene::update()
 
 	if (exitButton->pressed == true)
 	{
-		//Game.device->closeDevice();
+		Game* game = &Game::getInstance();
+		
+		game->device->closeDevice();
+		exit (1);
 	}
 }
