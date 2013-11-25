@@ -16,8 +16,8 @@ MenuScene::MenuScene(void):Scene()
 	bX = (sW/2) - (bW/2);
 	bY = (sH/2) - (bH/2);
 
-	playButton = new Button(bX, bY-75, bW, bH, "Play");
-	exitButton = new Button(bX, bY+75, bW, bH, "Exit");
+	playButton = new Button(bX, bY-75, bW, bH, "Play", NULL);
+	exitButton = new Button(bX, bY+75, bW, bH, "Exit", NULL);
 }
 
 MenuScene::~MenuScene()

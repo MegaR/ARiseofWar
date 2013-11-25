@@ -18,8 +18,11 @@ GameScene::GameScene() {
 	bX = sW - bW;
 	bY = sH - bH;
 
-	returnToMenuButton = new Button(bX-100, bY, bW, bH, "Return to Menu");
-	exitGameButton = new Button(bX, bY, bW, bH, "Exit Game");
+	ITexture* rtmT = Game::getInstance().videoDriver->getTexture("C:/irrlicht-1.8/source/Irrlicht/jpeglib/testimg.jpg");
+	ITexture* egT = Game::getInstance().videoDriver->getTexture("res/btnTest.png");
+
+	returnToMenuButton = new Button(bX-100, bY, bW, bH, "Return to Menu", rtmT);
+	exitGameButton = new Button(bX, bY, bW, bH, "Exit Game", egT);
 	testfaggot = new UnitKnight(2,2,0);
 }
 
