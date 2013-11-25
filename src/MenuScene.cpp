@@ -24,7 +24,6 @@ MenuScene::~MenuScene()
 {
 	delete playButton;
 	delete exitButton;
-	cout << "MenuScene destructor" << endl;
 }
 
 void MenuScene::update()

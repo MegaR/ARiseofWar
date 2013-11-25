@@ -5,7 +5,7 @@ Scene::Scene() {
 }
 
 Scene::~Scene() {
-	//cout << "Scene dest" << endl;
+
 }
 
 

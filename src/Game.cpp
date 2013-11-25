@@ -33,7 +33,6 @@ void Game::start() {
 	sceneManager->setAmbientLight(SColorf(.25f, .25f, .25f));
 
 	changeScene(new MenuScene());
-	//changeScene(new GameScene());
 
 	loop();
 	device->drop();
@@ -41,16 +40,9 @@ void Game::start() {
 }
 
 void Game::changeScene(Scene* newScene) {
-	//cout << "current scene: " << currentScene << endl;
-	//cout << "new scene: " << newScene << endl;
-
 	delete currentScene;
-	//cout << "deleted currentScene" << endl;
-
 	currentScene = newScene;
 	currentScene->start();
-
-	//cout << "new current scene: " << currentScene << endl;
 }
 
 void Game::loop() {

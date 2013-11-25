@@ -5,8 +5,19 @@ Button* exitGameButton;
 
 GameScene::GameScene() {
 	moveCamera(0,0,0);
-	returnToMenuButton = new Button(600, 500, 100, 100, "Return to Menu");
-	exitGameButton = new Button(700, 500, 100, 100, "Exit Game");
+
+	Game* game = &Game::getInstance();
+	
+	int sW = game->screenWidth;
+	int sH = game->screenHeight;
+	int bW = 100, 
+		bH = 100;
+	int bX, bY;
+	bX = sW - bW;
+	bY = sH - bH;
+
+	returnToMenuButton = new Button(bX-100, bY, bW, bH, "Return to Menu");
+	exitGameButton = new Button(bX, bY, bW, bH, "Exit Game");
 }
 
 GameScene::~GameScene() {
@@ -23,7 +34,6 @@ void GameScene::update() {
 	if (returnToMenuButton->pressed == true)
 	{
 		Game::getInstance().changeScene(new MenuScene());
-		cout << "???" << endl;
 	}
 
 	if (exitGameButton->pressed == true)
