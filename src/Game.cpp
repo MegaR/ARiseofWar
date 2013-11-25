@@ -32,8 +32,8 @@ void Game::start() {
 	camera = sceneManager->addCameraSceneNode(0, vector3df(0, 50, -40));
 	sceneManager->setAmbientLight(SColorf(.25f, .25f, .25f));
 
-	//changeScene(new MenuScene());
-	changeScene(new GameScene());
+	changeScene(new MenuScene());
+	//changeScene(new GameScene());
 
 	loop();
 	device->drop();

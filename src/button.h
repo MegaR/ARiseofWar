@@ -1,17 +1,16 @@
 #pragma once
 #include <string.h>
+#include "Game.h"
 
-
-class button
+class Button
 {
 public:
-	button(void);
-	~button(void);
+	Button(int x, int y, int w, int h, std::string t);
+	~Button(void);
 
-	//string name;
+	IGUIButton* btn;
+	bool pressed;
 
-	void onClick();
-
-
+	void update();
+	//virtual void onClick(){};
 };
-

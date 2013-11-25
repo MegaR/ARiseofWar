@@ -1,14 +1,34 @@
 #include "MenuScene.h"
+#include "Game.h"
+	
+	Button* playButton;
+	Button* exitButton;
 
-
-MenuScene::MenuScene(void)
+MenuScene::MenuScene(void):Scene()
 {
-	Game* game = &Game::getInstance();
-	game->gui->addStaticText(L"W00T this is a test", rect<s32>(10,10,260,22), true);
-	IGUIButton* button = game->gui->addButton(rect<s32>(50,50,120,100), 0, -1, L"QQQQQQQ");
+	playButton = new Button(50, 50, 250, 100, "Play");
+	exitButton = new Button(50, 200, 250, 100, "Exit");
 }
-
 
 MenuScene::~MenuScene(void)
 {
+	delete playButton;
+	delete exitButton;
+}
+
+void MenuScene::update()
+{
+	playButton->update();
+	exitButton->update();
+	
+	if (playButton->pressed == true)
+	{
+		//button* poop = new button(1, 1, 50, 50, "POOP");
+		Game::getInstance().changeScene(new GameScene());
+	}
+
+	if (exitButton->pressed == true)
+	{
+		//Game.device->closeDevice();
+	}
 }
