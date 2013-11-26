@@ -138,13 +138,15 @@ void GameScene::mouseRay(){
 		line3d<f32> *line3d_trace = new line3d<f32>;
 		*line3d_trace=game->sceneManager->getSceneCollisionManager()->getRayFromScreenCoordinates(*pos,camera);
 
-		scene::ISceneNode *nodeline = game->sceneManager->getSceneCollisionManager()->getSceneNodeFromRayBB(*line3d_trace,0x1,false);
+		scene::ISceneNode *nodeline = game->sceneManager->getSceneCollisionManager()->getSceneNodeFromRayBB(*line3d_trace,1,false);
 		
 		
 
 		if (nodeline){
+			
 			//nodeline->setVisible(false);
 			nodeline->setMaterialTexture( 0, game->videoDriver->getTexture("res/tileGrassTexture_invert.png") );
+			
 		};
 		
 
