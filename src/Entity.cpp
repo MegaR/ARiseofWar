@@ -1,31 +1,34 @@
 #include "Entity.h"
 
+#include <iostream>
+using namespace std;
 
 Entity::Entity(void)
 {
 }
 
-
-Entity::~Entity(void)
+Entity::~Entity()
 {
+	cout << "destroying Entity" << endl;
 }
 
-void Entity::startTurn(){
 
-
-}
-
-void Entity::render(){
-
+void Entity::startTurn()
+{
 
 }
 
-void Entity::endTurn(){
-
+void Entity::endTurn()
+{
 
 }
 
-void Entity::update(){
+void Entity::render()
+{
 
+}
 
+void Entity::update()
+{
+	
 }

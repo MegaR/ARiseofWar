@@ -1,23 +1,35 @@
 #pragma once
+
+#include <irrlicht.h>
+using namespace irr;
+using namespace core;
+using namespace scene;
+using namespace video;
+using namespace io;
+using namespace gui;
+
 class Entity
 {
 public:
 	Entity(void);
-	~Entity(void);
+	virtual ~Entity();
 
 	int tileX;
 	int tileY;
 	int player;
-	//model
 	int hp;
+	int defense;
+
+	IAnimatedMesh* model;
+	IAnimatedMeshSceneNode* modelNode;
 	bool selected;
 
 	void startTurn();
-	void render();
 	void endTurn();
+
+	void render();
 	void update();
 
-
-
+//protected:
+	float x, y, z;
 };
-

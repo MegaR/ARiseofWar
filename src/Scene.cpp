@@ -23,7 +23,7 @@ void Scene::Click (){
 	*line3d_trace=game->sceneManager->getSceneCollisionManager()->getRayFromScreenCoordinates(*pos,camera);
 
 	scene::ISceneNode *nodeline = game->sceneManager->getSceneCollisionManager()->getSceneNodeFromRayBB(*line3d_trace,0x1,false);
-
+	cout << "i was here" << endl;
 }
 
 void Scene::start(){
@@ -32,7 +32,7 @@ void Scene::start(){
 }
 
 void Scene::update(){
-
+	
 
 }
 
