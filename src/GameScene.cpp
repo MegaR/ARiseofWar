@@ -1,20 +1,63 @@
 #include "GameScene.h"
+#include "UnitKnight.h"
+
+Button* returnToMenuButton;
+Button* exitGameButton;
+UnitKnight* testfaggot;
 
 GameScene::GameScene() {
 	moveCamera(0,0,0);
+
+	Game* game = &Game::getInstance();
+	
+	int sW = game->screenWidth;
+	int sH = game->screenHeight;
+	int bW = 100, 
+		bH = 100;
+	int bX, bY;
+	bX = sW - bW;
+	bY = sH - bH;
+
+	ITexture* rtmT = Game::getInstance().videoDriver->getTexture("C:/irrlicht-1.8/source/Irrlicht/jpeglib/testimg.jpg");
+	ITexture* egT = Game::getInstance().videoDriver->getTexture("res/btnTest.png");
+
+	returnToMenuButton = new Button(bX-100, bY, bW, bH, "Return to Menu", rtmT);
+	exitGameButton = new Button(bX, bY, bW, bH, "Exit Game", egT);
+	testfaggot = new UnitKnight(2,2,0);
 }
 
 GameScene::~GameScene() {
-
+	delete returnToMenuButton;
+	delete exitGameButton;
+	delete testfaggot;
 }
 
 void GameScene::update() {
 	mouseRay();
 	updateMouse();
+<<<<<<< HEAD
 	
+=======
+	returnToMenuButton->update();
+	exitGameButton->update();
+	
+	//Button handlers enzo
+	if (returnToMenuButton->pressed == true)
+	{
+		Game* game = &Game::getInstance();
+		game->changeScene(new MenuScene());
+	}
+
+	if (exitGameButton->pressed == true)
+	{
+		Game::getInstance().device->closeDevice();
+		exit (1);
+	}
+>>>>>>> 2e56fed59236780b20241ff117e46947bf93bc75
 }
 
-void GameScene::turn(){
+void GameScene::turn()
+{
 
 }
 
@@ -45,7 +88,13 @@ void GameScene::updateMouse() {
 	}
 
 		
+<<<<<<< HEAD
 		
+=======
+		if (nodeline){
+		//nodeline->setVisible(false);
+		};
+>>>>>>> 2e56fed59236780b20241ff117e46947bf93bc75
 }
 
 void GameScene::moveCamera(float x, float y, float z) {

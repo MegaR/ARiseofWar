@@ -33,7 +33,6 @@ void Game::start() {
 	sceneManager->setAmbientLight(SColorf(.25f, .25f, .25f));
 
 	changeScene(new MenuScene());
-	//changeScene(new GameScene());
 
 	loop();
 	device->drop();
@@ -41,10 +40,7 @@ void Game::start() {
 }
 
 void Game::changeScene(Scene* newScene) {
-	if(currentScene) {
-		delete currentScene;
-	}
-
+	delete currentScene;
 	currentScene = newScene;
 	currentScene->start();
 }
@@ -56,7 +52,7 @@ void Game::loop() {
 		delta = (f32)(device->getTimer()->getTime() - prevTime) / 1000.f;
 		prevTime = device->getTimer()->getTime();
 
-		videoDriver->beginScene(true, true, SColor(255,100,101,140));
+		videoDriver->beginScene(true, true, SColor(255,253,246,250));
 		currentScene->update();
 		sceneManager->drawAll();
 		gui->drawAll();
