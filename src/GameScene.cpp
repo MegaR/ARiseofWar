@@ -118,10 +118,6 @@ void GameScene::moveCamera(float x, float y, float z) {
 	position.Y += y;
 	position.Z += z;
 	camera->setPosition(position);
-<<<<<<< HEAD
-=======
-	//cout << position.Z << endl;
->>>>>>> 3d373961d481742391cedf3a6e0c00a22f5e1eff
 	position.Y += -1;
 	position.Z += 0.5f;
 	camera->setTarget(position);
