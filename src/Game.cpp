@@ -30,6 +30,7 @@ void Game::start() {
 	gui = device->getGUIEnvironment();
 
 	camera = sceneManager->addCameraSceneNode(0, vector3df(0, 50, -40));
+	camera->setID(0);
 	sceneManager->setAmbientLight(SColorf(.25f, .25f, .25f));
 
 	changeScene(new MenuScene());

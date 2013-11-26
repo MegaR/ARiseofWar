@@ -67,8 +67,6 @@ void GameScene::updateMouse() {
 	if (y < 0) {y = 0;}
 	if (y >	game->screenHeight) {y = game->screenHeight;}
 
-	
-	
 	if(x < 10) {
 		moveCamera(-100 * game->delta, 0, 0);
 	}
@@ -91,7 +89,6 @@ void GameScene::moveCamera(float x, float y, float z) {
 	position.Y += y;
 	position.Z += z;
 	camera->setPosition(position);
-	cout << position.Z << endl;
 	position.Y += -1;
 	position.Z += 0.5f;
 	camera->setTarget(position);
@@ -101,7 +98,7 @@ void GameScene::moveCamera(float x, float y, float z) {
 void GameScene::mouseRay(){
 	Game* game = &Game::getInstance();
 	vector2d<s32> mousePosition = game->device->getCursorControl()->getPosition();
-	
+	vector3df posTile;
 	position2d<s32> *pos = new position2d<s32>(mousePosition.X,mousePosition.Y);
 
 		ICameraSceneNode* camera = Game::getInstance().camera;
@@ -110,14 +107,15 @@ void GameScene::mouseRay(){
 		*line3d_trace=game->sceneManager->getSceneCollisionManager()->getRayFromScreenCoordinates(*pos,camera);
 
 		scene::ISceneNode *nodeline = game->sceneManager->getSceneCollisionManager()->getSceneNodeFromRayBB(*line3d_trace,1,false);
-		
-		
-
+				
 		if (nodeline){
-			
 			//nodeline->setVisible(false);
 			nodeline->setMaterialTexture( 0, game->videoDriver->getTexture("res/tileGrassTexture_invert.png") );
 			
+			posTile = nodeline->getPosition();
+			//cout << posTile.X << endl;
+
+
 		};
 		
 
