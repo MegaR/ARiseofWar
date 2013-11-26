@@ -18,6 +18,7 @@ Button::Button(int x, int y, int w, int h, std::string t, ITexture* _img)
 	}
 
 	pressed = false;
+	updated = false;
 }
 
 Button::~Button()
@@ -27,6 +28,22 @@ Button::~Button()
 
 void Button::update()
 {
-	if (btn->isPressed()) { pressed = true; }
-	else { pressed = false; }
+	if (pressed)
+	{
+		updated = true;
+	}
+
+	if (btn->isPressed()) 
+	{ 
+		if (!updated)
+		{
+			pressed = true;
+		} 
+		else pressed = false;
+	}
+	else //btn released
+	{ 
+		pressed = false; 
+		updated = false; 
+	}
 }

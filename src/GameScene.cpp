@@ -3,10 +3,15 @@
 
 Button* returnToMenuButton;
 Button* exitGameButton;
+Button* nextTurnButton;
 UnitKnight* testfaggot;
 
 GameScene::GameScene() {
 	moveCamera(0,0,0);
+	players[0] = new Player();
+	players[1] = new EnemyPlayer();
+	currentPlayer = 0;
+	turnCount = 0;
 
 	Game* game = &Game::getInstance();
 	
@@ -23,10 +28,14 @@ GameScene::GameScene() {
 
 	returnToMenuButton = new Button(bX-100, bY, bW, bH, "Return to Menu", rtmT);
 	exitGameButton = new Button(bX, bY, bW, bH, "Exit Game", egT);
+	nextTurnButton = new Button(bX-200, bY, bW, bH, "Next Turn", rtmT);
 	testfaggot = new UnitKnight(2,2,0);
+	entities.push_back(testfaggot);
 }
 
 GameScene::~GameScene() {
+	delete players[0];
+	delete players[1];
 	delete returnToMenuButton;
 	delete exitGameButton;
 	delete testfaggot;
@@ -37,6 +46,7 @@ void GameScene::update() {
 	updateMouse();
 	returnToMenuButton->update();
 	exitGameButton->update();
+	nextTurnButton->update();
 	
 	//Button handlers enzo
 	if (returnToMenuButton->pressed == true)
@@ -50,10 +60,29 @@ void GameScene::update() {
 		Game::getInstance().device->closeDevice();
 		exit (1);
 	}
+
+	if (nextTurnButton->pressed == true) {
+		nextTurn();
+	}
 }
 
 void GameScene::nextTurn() {
+	players[currentPlayer]->endTurn();
+	for(int i = 0; i < entities.size(); i++) {
+		if(entities[i]->player == currentPlayer) {
+			entities[i]->endTurn();
+		}
+	}
 
+	currentPlayer = currentPlayer == 1 ? 0 : 1;
+	players[currentPlayer]->startTurn();
+	for(int i = 0; i < entities.size(); i++) {
+		if(entities[i]->player == currentPlayer) {
+			entities[i]->startTurn();
+		}
+	}
+
+	turnCount++;
 }
 
 void GameScene::updateMouse() {
@@ -89,6 +118,10 @@ void GameScene::moveCamera(float x, float y, float z) {
 	position.Y += y;
 	position.Z += z;
 	camera->setPosition(position);
+<<<<<<< HEAD
+=======
+	//cout << position.Z << endl;
+>>>>>>> 3d373961d481742391cedf3a6e0c00a22f5e1eff
 	position.Y += -1;
 	position.Z += 0.5f;
 	camera->setTarget(position);
@@ -119,6 +152,16 @@ void GameScene::mouseRay(){
 		};
 		
 
+}
+
+Entity* GameScene::getEntity(int x, int y) {
+	for(int i = 0; i < entities.size(); i++) {
+		if(entities[i]->tileX == x && entities[i]->tileY) {
+			return entities[i];
+		}
+	}
+	
+	return NULL;
 }
 
 std::vector<vector2d<int>>* GameScene::findPath(vector2d<int> start, vector2d<int> end) {
