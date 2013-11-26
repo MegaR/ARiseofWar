@@ -26,7 +26,7 @@ GameScene::GameScene() {
 	ITexture* rtmT = Game::getInstance().videoDriver->getTexture("C:/irrlicht-1.8/source/Irrlicht/jpeglib/testimg.jpg");
 	ITexture* egT = Game::getInstance().videoDriver->getTexture("res/btnTest.png");
 
-	returnToMenuButton = new Button(bX-100, bY, bW, bH, "Return to Menu", rtmT);
+	returnToMenuButton = new Button(bX-100, bY, bW, bH, "Return to Menu");
 	exitGameButton = new Button(bX, bY, bW, bH, "Exit Game", egT);
 	nextTurnButton = new Button(bX-200, bY, bW, bH, "Next Turn", rtmT);
 	testfaggot = new UnitKnight(2,2,0);

@@ -6,12 +6,12 @@
 class Button
 {
 public:
-	Button(int x, int y, int w, int h, std::string t, ITexture* _img);
+	Button(int x, int y, int w, int h, std::string t, ITexture* _img = NULL);
 	~Button();
 
 	IGUIButton* btn;
 	ITexture* img;
-	bool pressed;
+	bool pressed, updated;
 
 	void update();
 	//virtual void onClick(){};
