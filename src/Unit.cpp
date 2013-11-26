@@ -13,41 +13,41 @@ Unit::~Unit()
 }
 
 
-void Unit::moveTo(int _tileX, int _tileY)
+void Unit::moveTo(int desX, int desY)
 {
-	/*int distanceX = _tileX - tileX, 
-		distanceY = _tileY - tileY;*/
+	/*int distanceX = desX - tileX, 
+		distanceY = desY - tileY;*/
 
-	if (tileX < _tileX)
+	if (tileX < desX)
 	{
 		//moveAnimation
 		tileX++;
 	}
-	else if (tileX > _tileX)
+	else if (tileX > desX)
 	{
 		//moveAnimation
 		tileX--;
 	}
-	else //tileX == _tileX (unit is at target)
+	else //tileX == desX (unit is at target)
 	{
 		//idleAnimation
-		tileX = _tileX;
+		tileX = desX;
 	}
 	
-	if (tileY < _tileY)
+	if (tileY < desY)
 	{
 		//moveAnimation
 		tileY++;
 	}
-	else if (tileY > _tileY)
+	else if (tileY > desY)
 	{
 		//moveAnimation
 		tileY--;
 	}
-	else //tileY == _tileY (unit is at target)
+	else //tileY == desY (unit is at target)
 	{
 		//idleAnimation
-		tileY = _tileY;
+		tileY = desY;
 	}
 }
 
