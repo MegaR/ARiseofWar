@@ -53,7 +53,7 @@ void Game::loop() {
 		delta = (f32)(device->getTimer()->getTime() - prevTime) / 1000.f;
 		prevTime = device->getTimer()->getTime();
 
-		videoDriver->beginScene(true, true, SColor(255,253,246,250));
+		videoDriver->beginScene(true, true, SColor(255,0,0,0));
 		currentScene->update();
 		sceneManager->drawAll();
 		gui->drawAll();
