@@ -26,7 +26,7 @@ GameScene::GameScene() {
 	ITexture* rtmT = Game::getInstance().videoDriver->getTexture("C:/irrlicht-1.8/source/Irrlicht/jpeglib/testimg.jpg");
 	ITexture* egT = Game::getInstance().videoDriver->getTexture("res/btnTest.png");
 
-	returnToMenuButton = new Button(bX-100, bY, bW, bH, "Return to Menu");
+	returnToMenuButton = new Button(bX-100, bY, bW, bH, "Return to Menu", rtmT);
 	exitGameButton = new Button(bX, bY, bW, bH, "Exit Game", egT);
 	nextTurnButton = new Button(bX-200, bY, bW, bH, "Next Turn", rtmT);
 	testfaggot = new UnitKnight(2,2,0);
@@ -120,7 +120,7 @@ void GameScene::moveCamera(float x, float y, float z) {
 	position.Y += y;
 	position.Z += z;
 	camera->setPosition(position);
-	cout << position.Z << endl;
+	//cout << position.Z << endl;
 	position.Y += -1;
 	position.Z += 0.5f;
 	camera->setTarget(position);
@@ -150,6 +150,16 @@ void GameScene::mouseRay(){
 		};
 		
 
+}
+
+Entity* GameScene::getEntity(int x, int y) {
+	for(int i = 0; i < entities.size(); i++) {
+		if(entities[i]->tileX == x && entities[i]->tileY) {
+			return entities[i];
+		}
+	}
+	
+	return NULL;
 }
 
 std::vector<vector2d<int>>* GameScene::findPath(vector2d<int> start, vector2d<int> end) {
