@@ -35,9 +35,6 @@ GameScene::~GameScene() {
 void GameScene::update() {
 	mouseRay();
 	updateMouse();
-<<<<<<< HEAD
-	
-=======
 	returnToMenuButton->update();
 	exitGameButton->update();
 	
@@ -53,7 +50,6 @@ void GameScene::update() {
 		Game::getInstance().device->closeDevice();
 		exit (1);
 	}
->>>>>>> 2e56fed59236780b20241ff117e46947bf93bc75
 }
 
 void GameScene::turn()
@@ -87,14 +83,6 @@ void GameScene::updateMouse() {
 		moveCamera(0,0,-100 * game->delta);
 	}
 
-		
-<<<<<<< HEAD
-		
-=======
-		if (nodeline){
-		//nodeline->setVisible(false);
-		};
->>>>>>> 2e56fed59236780b20241ff117e46947bf93bc75
 }
 
 void GameScene::moveCamera(float x, float y, float z) {
