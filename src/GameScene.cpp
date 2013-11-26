@@ -1,51 +1,17 @@
 #include "GameScene.h"
 
-Button* returnToMenuButton;
-Button* exitGameButton;
-
 GameScene::GameScene() {
 	moveCamera(0,0,0);
-
-	Game* game = &Game::getInstance();
-	
-	int sW = game->screenWidth;
-	int sH = game->screenHeight;
-	int bW = 100, 
-		bH = 100;
-	int bX, bY;
-	bX = sW - bW;
-	bY = sH - bH;
-
-	returnToMenuButton = new Button(bX-100, bY, bW, bH, "Return to Menu");
-	exitGameButton = new Button(bX, bY, bW, bH, "Exit Game");
 }
 
 GameScene::~GameScene() {
-	delete returnToMenuButton;
-	delete exitGameButton;
+
 }
 
 void GameScene::update() {
 	mouseRay();
 	updateMouse();
-
-	returnToMenuButton->update();
-	exitGameButton->update();
 	
-	//Button handlers enzo
-	if (returnToMenuButton->pressed == true)
-	{
-		Game::getInstance().changeScene(new MenuScene());
-	}
-
-	if (exitGameButton->pressed == true)
-	{
-		Game* game = &Game::getInstance();
-		
-		game->device->closeDevice();
-		exit (1);
-	}
-
 }
 
 void GameScene::turn(){
@@ -78,6 +44,7 @@ void GameScene::updateMouse() {
 		moveCamera(0,0,-100 * game->delta);
 	}
 
+		
 		
 }
 
@@ -112,7 +79,6 @@ void GameScene::mouseRay(){
 
 		if (nodeline){
 			//nodeline->setVisible(false);
-			
 			nodeline->setMaterialTexture( 0, game->videoDriver->getTexture("res/tileGrassTexture_invert.png") );
 		};
 		

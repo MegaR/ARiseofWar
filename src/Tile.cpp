@@ -10,5 +10,4 @@ Tile::Tile(int x, int y)
 
 Tile::~Tile(void)
 {
-	node->remove();
 }

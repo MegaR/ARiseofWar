@@ -9,7 +9,7 @@ class MenuScene : public Scene
 {
 public:
 	MenuScene(void);
-	~MenuScene();
+	~MenuScene(void);
 
 	void update();
 };

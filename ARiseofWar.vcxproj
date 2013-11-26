@@ -84,7 +84,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Button.cpp" />
+    <ClCompile Include="src\button.cpp" />
     <ClCompile Include="src\EnemyPlayer.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -99,7 +99,7 @@
     <ClCompile Include="src\UnitKnight.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Button.h" />
+    <ClInclude Include="src\button.h" />
     <ClInclude Include="src\EnemyPlayer.h" />
     <ClInclude Include="src\Entity.h" />
     <ClInclude Include="src\Game.h" />

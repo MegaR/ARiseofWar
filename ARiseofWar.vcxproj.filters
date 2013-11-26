@@ -51,7 +51,7 @@
     <ClCompile Include="src\TileSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Button.cpp">
+    <ClCompile Include="src\button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -92,7 +92,7 @@
     <ClInclude Include="src\TileSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Button.h">
+    <ClInclude Include="src\button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

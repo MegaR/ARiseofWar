@@ -7,7 +7,7 @@ class Scene
 {
 public:
 	Scene(void);
-	virtual ~Scene(void);
+	~Scene(void);
 
 	virtual void Click();
 	virtual void start();

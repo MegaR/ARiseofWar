@@ -1,26 +1,16 @@
 #include "MenuScene.h"
 #include "Game.h"
 	
-Button* playButton;
-Button* exitButton;
+	Button* playButton;
+	Button* exitButton;
 
 MenuScene::MenuScene(void):Scene()
 {
-	Game* game = &Game::getInstance();
-	
-	int sW = game->screenWidth;
-	int sH = game->screenHeight;
-	int bW = 250, 
-		bH = 100;
-	int bX, bY;
-	bX = (sW/2) - (bW/2);
-	bY = (sH/2) - (bH/2);
-
-	playButton = new Button(bX, bY-75, bW, bH, "Play");
-	exitButton = new Button(bX, bY+75, bW, bH, "Exit");
+	playButton = new Button(50, 50, 250, 100, "Play");
+	exitButton = new Button(50, 200, 250, 100, "Exit");
 }
 
-MenuScene::~MenuScene()
+MenuScene::~MenuScene(void)
 {
 	delete playButton;
 	delete exitButton;
@@ -39,9 +29,6 @@ void MenuScene::update()
 
 	if (exitButton->pressed == true)
 	{
-		Game* game = &Game::getInstance();
-		
-		game->device->closeDevice();
-		exit (1);
+		//Game.device->closeDevice();
 	}
 }
