@@ -25,6 +25,7 @@ UnitKnight::UnitKnight(int _x, int _y, int _player)
         modelNode->setMD2Animation(scene::EMAT_STAND);
 		modelNode->setMaterialTexture( 0, game->videoDriver->getTexture("C:/irrlicht-1.8/media/sydney.bmp") );
 		modelNode->setID(0);
+		modelNode->setPosition(vector3df(tileX * 10, 0, tileY * 10));
     }
 
 	selected = false;

@@ -4,7 +4,7 @@
 Button* returnToMenuButton;
 Button* exitGameButton;
 Button* nextTurnButton;
-UnitKnight* testfaggot;
+UnitKnight* testKnight;
 
 GameScene::GameScene() {
 	moveCamera(0,0,0);
@@ -29,8 +29,8 @@ GameScene::GameScene() {
 	returnToMenuButton = new Button(bX-100, bY, bW, bH, "Return to Menu", rtmT);
 	exitGameButton = new Button(bX, bY, bW, bH, "Exit Game", egT);
 	nextTurnButton = new Button(bX-200, bY, bW, bH, "Next Turn", rtmT);
-	testfaggot = new UnitKnight(2,2,0);
-	entities.push_back(testfaggot);
+	testKnight = new UnitKnight(0,0,0);
+	entities.push_back(testKnight);
 
 	
 	IAnimatedMesh* mesh = game->sceneManager->getMesh("res/selected.3DS");
@@ -47,13 +47,16 @@ GameScene::~GameScene() {
 	delete players[1];
 	delete returnToMenuButton;
 	delete exitGameButton;
-	delete testfaggot;
+	delete testKnight;
 	
 	
 }
 
 void GameScene::update() {
+	
+	
 	mouseRay();
+
 	updateMouse();
 	returnToMenuButton->update();
 	exitGameButton->update();
@@ -139,8 +142,10 @@ void GameScene::mouseRay(){
 	Game* game = &Game::getInstance();
 	vector2d<s32> mousePosition = game->device->getCursorControl()->getPosition();
 	vector3df posTile;
+	Entity *selectedUnit;
 	position2d<s32> *pos = new position2d<s32>(mousePosition.X,mousePosition.Y);
-
+	
+	if(game->eventReceiver->isLeftMousePressed()){
 		ICameraSceneNode* camera = Game::getInstance().camera;
 	
 		line3d<f32> *line3d_trace = new line3d<f32>;
@@ -151,14 +156,21 @@ void GameScene::mouseRay(){
 		if (nodeline){
 			posTile = nodeline->getPosition();
 			selectedNode->setPosition(posTile);
+			// just return x- y coord
+
+			if(getEntity(posTile.X,posTile.Z)){
+				selectedUnit = getEntity(posTile.X,posTile.Z);
+				((Unit*)selectedUnit)->moveTo(posTile.X + 1, posTile.Z);
+			};
+
 		};
-		
+	};	
 
 }
 
 Entity* GameScene::getEntity(int x, int y) {
 	for(int i = 0; i < entities.size(); i++) {
-		if(entities[i]->tileX == x && entities[i]->tileY) {
+		if(entities[i]->tileX == x && entities[i]->tileY== y) {
 			return entities[i];
 		}
 	}

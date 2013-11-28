@@ -17,7 +17,7 @@ void Unit::moveTo(int desX, int desY)
 {
 	/*int distanceX = desX - tileX, 
 		distanceY = desY - tileY;*/
-
+	/*
 	if (tileX < desX)
 	{
 		//moveAnimation
@@ -49,6 +49,8 @@ void Unit::moveTo(int desX, int desY)
 		//idleAnimation
 		tileY = desY;
 	}
+	*/
+	modelNode->setPosition(vector3df(tileX * 10, 0, tileY * 10));
 }
 
 void Unit::attackTarget(Entity* target)
