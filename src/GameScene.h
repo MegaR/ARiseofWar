@@ -37,6 +37,8 @@ private:
 	int heuristic_cost_estimate(vector2d<int> current, vector2d<int> goal);
 	std::vector<vector2d<int>>* reconstructed_path(vector2d<int> came_from[][MAPSIZE], vector2d<int> end, vector2d<int> start);
 
+	IMeshSceneNode *selectedNode;
+
 	Player* players[2];
 	int currentPlayer;
 };

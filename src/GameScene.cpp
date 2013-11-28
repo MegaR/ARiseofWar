@@ -31,6 +31,15 @@ GameScene::GameScene() {
 	nextTurnButton = new Button(bX-200, bY, bW, bH, "Next Turn", rtmT);
 	testfaggot = new UnitKnight(2,2,0);
 	entities.push_back(testfaggot);
+
+	
+	IAnimatedMesh* mesh = game->sceneManager->getMesh("res/selected.3DS");
+	selectedNode = game->sceneManager->addMeshSceneNode(mesh);
+	selectedNode->setMaterialFlag(EMF_LIGHTING, false);
+	selectedNode->setMaterialType(video::EMT_TRANSPARENT_ALPHA_CHANNEL);
+	selectedNode->setMaterialTexture( 0, game->videoDriver->getTexture("res/selectedTexture.png") );
+	selectedNode->setPosition(vector3d<f32>(50, 0, 50) );
+	selectedNode->setID(0);
 }
 
 GameScene::~GameScene() {
@@ -39,6 +48,8 @@ GameScene::~GameScene() {
 	delete returnToMenuButton;
 	delete exitGameButton;
 	delete testfaggot;
+	
+	
 }
 
 void GameScene::update() {
@@ -138,13 +149,8 @@ void GameScene::mouseRay(){
 		scene::ISceneNode *nodeline = game->sceneManager->getSceneCollisionManager()->getSceneNodeFromRayBB(*line3d_trace,1,false);
 				
 		if (nodeline){
-			//nodeline->setVisible(false);
-			nodeline->setMaterialTexture( 0, game->videoDriver->getTexture("res/tileGrassTexture_invert.png") );
-			
 			posTile = nodeline->getPosition();
-			//cout << posTile.X << endl;
-
-
+			selectedNode->setPosition(posTile);
 		};
 		
 
