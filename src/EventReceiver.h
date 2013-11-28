@@ -32,6 +32,11 @@ public:
 	bool isKeyPressed(int key);
 	bool isKeyReleased(int key);
 
+	float getScroll();
+	int getMouseX();
+	int getMouseY();
+	vector2d<int> getMousePosition();
+
 private:
 	void handleKeys(const SEvent& event);
 	void handleMouse(const SEvent& event);
@@ -40,6 +45,10 @@ private:
 	keyState keyStates[KEY_KEY_CODES_COUNT];
 	keyState nextMouseStates[2];
 	keyState nextKeyStates[KEY_KEY_CODES_COUNT];
+	int mouseX;
+	int mouseY;
+	float scroll;
+	float nextScroll;
 };
 
 
