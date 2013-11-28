@@ -87,6 +87,7 @@
     <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\EnemyPlayer.cpp" />
     <ClCompile Include="src\Entity.cpp" />
+    <ClCompile Include="src\EventReceiver.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameScene.cpp" />
     <ClCompile Include="src\MenuScene.cpp" />
@@ -102,6 +103,7 @@
     <ClInclude Include="src\Button.h" />
     <ClInclude Include="src\EnemyPlayer.h" />
     <ClInclude Include="src\Entity.h" />
+    <ClInclude Include="src\EventReceiver.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\GameScene.h" />
     <ClInclude Include="src\MenuScene.h" />

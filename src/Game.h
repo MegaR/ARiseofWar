@@ -14,6 +14,7 @@ using namespace gui;
 #include "Scene.h"
 #include "MenuScene.h"
 #include "GameScene.h"
+#include "EventReceiver.h"
 
 class Game {
 public:
@@ -30,6 +31,7 @@ public:
 
 	Scene* currentScene;
 	ICameraSceneNode* camera;
+	EventReceiver* eventReceiver;
 
 	int screenWidth;
 	int screenHeight;

@@ -7,10 +7,11 @@ Game& Game::getInstance() {
 }
 
 void Game::start() {
+	eventReceiver = new EventReceiver();
 
 	#ifdef _DEBUG
 	device = createDevice( video::EDT_OPENGL, dimension2d<u32>(800, 600), 16,
-        false, false, false, 0);
+        false, false, false, eventReceiver);
 	screenWidth = 800;
 	screenHeight = 600;
 	#else
@@ -37,6 +38,7 @@ void Game::start() {
 
 	loop();
 	device->drop();
+	delete eventReceiver;
 	return;
 }
 
@@ -52,6 +54,7 @@ void Game::loop() {
 	while(device->run()) {
 		delta = (f32)(device->getTimer()->getTime() - prevTime) / 1000.f;
 		prevTime = device->getTimer()->getTime();
+		eventReceiver->update();
 
 		videoDriver->beginScene(true, true, SColor(255,0,0,0));
 		currentScene->update();
