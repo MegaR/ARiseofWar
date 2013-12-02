@@ -32,7 +32,7 @@ void Game::start() {
 
 	setGuiTheme();
 
-	camera = sceneManager->addCameraSceneNode(0, vector3df(0, 50, -40));
+	camera = sceneManager->addCameraSceneNode(0);
 	camera->setID(0);
 	sceneManager->setAmbientLight(SColorf(.25f, .25f, .25f));
 
