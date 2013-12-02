@@ -12,5 +12,7 @@ public:
 	~MenuScene();
 
 	void update();
+private:
+	IGUIImage* background;
 };
 
