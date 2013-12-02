@@ -138,34 +138,31 @@ void GameScene::moveCamera(float x, float y, float z) {
 	
 }
 
-void GameScene::mouseRay(){
+vector2d<int> GameScene::mouseRay(){
+	
 	Game* game = &Game::getInstance();
 	vector2d<s32> mousePosition = game->device->getCursorControl()->getPosition();
 	vector3df posTile;
-	Entity *selectedUnit;
 	position2d<s32> *pos = new position2d<s32>(mousePosition.X,mousePosition.Y);
 	
 	if(game->eventReceiver->isLeftMousePressed()){
+		//get camera
 		ICameraSceneNode* camera = Game::getInstance().camera;
-	
+		//create line from scrren coords
 		line3d<f32> *line3d_trace = new line3d<f32>;
 		*line3d_trace=game->sceneManager->getSceneCollisionManager()->getRayFromScreenCoordinates(*pos,camera);
 
+		//use line to get scene node
 		scene::ISceneNode *nodeline = game->sceneManager->getSceneCollisionManager()->getSceneNodeFromRayBB(*line3d_trace,1,false);
-				
+		
 		if (nodeline){
 			posTile = nodeline->getPosition();
-			selectedNode->setPosition(posTile);
-			// just return x- y coord
-
-			if(getEntity(posTile.X,posTile.Z)){
-				selectedUnit = getEntity(posTile.X,posTile.Z);
-				((Unit*)selectedUnit)->moveTo(posTile.X + 1, posTile.Z);
-			};
-
+			return vector2d<int>(posTile.X,posTile.Z);
+			// return x, y coords if not empty			
 		};
+		return vector2d<int>(-1,-1);
 	};	
-
+	return vector2d<int>(-1,-1);
 }
 
 Entity* GameScene::getEntity(int x, int y) {
