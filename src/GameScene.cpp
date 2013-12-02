@@ -6,6 +6,7 @@ Button* exitGameButton;
 Button* nextTurnButton;
 UnitKnight* testKnight;
 
+
 GameScene::GameScene() {
 	Game* game = &Game::getInstance();
 
@@ -15,6 +16,7 @@ GameScene::GameScene() {
 	players[1] = new EnemyPlayer();
 	currentPlayer = 0;
 	turnCount = 0;
+	storedEntity = (Entity*)NULL;
 
 	
 	int sW = game->screenWidth;
@@ -184,7 +186,12 @@ void GameScene::clickEntity(){
 		if(hit != vector2d<int>(-1, -1) ) {
 			if(getEntity(hit.X,hit.Y)) {
 				ent = getEntity(hit.X,hit.Y);
-				((Unit*)ent)->moveTo(hit.X+1,hit.Y+1);
+				selectedNode->setPosition(vector3df(hit.X*10,0,hit.Y*10));
+				storedEntity = ent;
+				ent = (Entity*)NULL;
+			}else if(storedEntity){
+				((Unit*)storedEntity)->moveTo(hit.X,hit.Y);
+				storedEntity= (Entity*)NULL;
 			}
 		}
 
