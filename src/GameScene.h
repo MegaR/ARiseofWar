@@ -23,7 +23,7 @@ public:
 	void nextTurn();
 	void update();
 	void updateMouse();
-	void mouseRay();
+	vector2d<int> mouseRay();
 	Entity* getEntity(int x, int y);
 	std::vector<vector2d<int>>* findPath(vector2d<int> start, vector2d<int> end);
 	
