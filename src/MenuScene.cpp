@@ -16,6 +16,10 @@ MenuScene::MenuScene(void):Scene()
 	bX = (sW/2) - (bW/2);
 	bY = (sH/2) - (bH/2);
 
+	background = game->gui->addImage(rect<s32>(0,0, game->screenWidth, game->screenHeight));
+	background->setImage(game->videoDriver->getTexture("res/background.png"));
+	background->setScaleImage(true);
+
 	playButton = new Button(bX, bY-75, bW, bH, "Play");
 	exitButton = new Button(bX, bY+75, bW, bH, "Exit");
 }
@@ -24,6 +28,7 @@ MenuScene::~MenuScene()
 {
 	delete playButton;
 	delete exitButton;
+	background->remove();
 }
 
 void MenuScene::update()
