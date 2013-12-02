@@ -25,44 +25,44 @@ Unit::~Unit()
 
 void Unit::moveTo(int desX, int desY)
 {
-	/*int distanceX = desX - tileX, 
-		distanceY = desY - tileY;*/
-	/*
-	if (tileX < desX)
-	{
-		//moveAnimation
-		tileX++;
+	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
+	vector<vector2d<int>>* newPath = scene->findPath(vector2d<s32>(tileX, tileY), vector2d<s32>(desX, desY) );
+	if(!newPath) return;
+
+	while(newPath->size() > 0) {
+		path.push_back( newPath->at(newPath->size()-1) );
+		newPath->pop_back();
 	}
-	else if (tileX > desX)
-	{
-		//moveAnimation
-		tileX--;
-	}
-	else //tileX == desX (unit is at target)
-	{
-		//idleAnimation
-		tileX = desX;
-	}
-	
-	if (tileY < desY)
-	{
-		//moveAnimation
-		tileY++;
-	}
-	else if (tileY > desY)
-	{
-		//moveAnimation
-		tileY--;
-	}
-	else //tileY == desY (unit is at target)
-	{
-		//idleAnimation
-		tileY = desY;
-	}
-	*/
+	delete newPath;
+
 	tileX = desX;
 	tileY = desY;
-	node->setPosition(vector3df(tileX * 10, 0, tileY * 10));
+}
+
+void Unit::update() {
+	if(path.size() > 0) {
+		followPath();
+	}
+}
+
+void Unit::followPath() {
+	vector3df position = node->getPosition();
+	vector3df destination;
+	destination.X = path[0].X * 10;
+	destination.Z = path[0].Y * 10;
+
+	if(position.getDistanceFrom(destination) < 1) {
+		node->setPosition(destination);
+		path.erase(path.begin());
+		return;
+	}
+
+	destination -= position;
+	destination = destination.normalize();
+	destination *= WALKSPEED;
+	position += destination;
+
+	node->setPosition(position);
 }
 
 void Unit::attackTarget(Entity* target)
