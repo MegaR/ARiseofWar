@@ -30,8 +30,11 @@ GameScene::GameScene() {
 	returnToMenuButton = new Button(bX-100, bY, bW, bH, "Return\nto Menu", buttonTexture);
 	exitGameButton = new Button(bX, bY, bW, bH, "Exit\nGame", buttonTexture);
 	nextTurnButton = new Button(bX-200, bY, bW, bH, "Next\nTurn", buttonTexture);
-	testKnight = new UnitKnight(1,0,0);
-	entities.push_back(testKnight);
+
+	entities.push_back(new UnitKnight(1,0,0));
+	entities.push_back(new UnitKnight(1,1,0));
+	entities.push_back(new UnitKnight(5,0,1));
+	entities.push_back(new UnitKnight(0,5,1));
 
 	
 	IAnimatedMesh* mesh = game->sceneManager->getMesh("res/selected.3DS");
