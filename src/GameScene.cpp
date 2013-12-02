@@ -53,25 +53,22 @@ GameScene::~GameScene() {
 
 void GameScene::update() {
 	
-	vector2d<int> hit = mouseRay();
-	Entity *ent;
-	if(hit == vector2d<int>(0, 0) ) {
-		if(getEntity(hit.X,hit.Y)) {
-			cout << "gotdamm it entity" << endl;
-			ent = getEntity(hit.X,hit.Y);
-			((Unit*)ent)->moveTo(1,2);
-		}
-	}
-
+	
+	Game* game = &Game::getInstance();
 	updateMouse();
 	returnToMenuButton->update();
 	exitGameButton->update();
 	nextTurnButton->update();
-	
+	//left click
+	if(game->eventReceiver->isLeftMousePressed()){
+		clickEntity();
+
+	}
+
 	//Button handlers enzo
 	if (returnToMenuButton->pressed == true)
 	{
-		Game* game = &Game::getInstance();
+		
 		game->changeScene(new MenuScene());
 	}
 
@@ -162,11 +159,25 @@ vector2d<int> GameScene::mouseRay(){
 		
 		if (nodeline){
 			posTile = nodeline->getPosition();
-			return vector2d<int>(posTile.X,posTile.Z);
+			return vector2d<int>((posTile.X/10), (posTile.Z/10));
 			
 			// return x, y coords if not empty			
 		};
 		return vector2d<int>(-1,-1);
+}
+
+void GameScene::clickEntity(){
+	
+	vector2d<int> hit = mouseRay();
+	Entity *ent;
+
+		if(hit != vector2d<int>(-1, -1) ) {
+			if(getEntity(hit.X,hit.Y)) {
+				ent = getEntity(hit.X,hit.Y);
+				((Unit*)ent)->moveTo(hit.X+1,hit.Y+1);
+			}
+		}
+
 }
 
 Entity* GameScene::getEntity(int x, int y) {
