@@ -8,6 +8,9 @@ UnitKnight* testKnight;
 
 
 GameScene::GameScene() {
+	Game* game = &Game::getInstance();
+
+	game->camera->setPosition( vector3df(0, 35, -40));
 	moveCamera(0,0,0);
 	players[0] = new Player();
 	players[1] = new EnemyPlayer();
@@ -15,7 +18,6 @@ GameScene::GameScene() {
 	turnCount = 0;
 	storedEntity = (Entity*)NULL;
 
-	Game* game = &Game::getInstance();
 	
 	int sW = game->screenWidth;
 	int sH = game->screenHeight;
@@ -116,17 +118,20 @@ void GameScene::updateMouse() {
 	if (y >	game->screenHeight) {y = game->screenHeight;}
 
 	if(x < 10) {
-		moveCamera(-100 * game->delta, 0, 0);
+		moveCamera(-CAMERASPEED * game->delta, 0, 0);
 	}
 	if(x > game->screenWidth-10) {
-		moveCamera(100 * game->delta, 0, 0);
+		moveCamera(CAMERASPEED * game->delta, 0, 0);
 	}
 	if(y < 10) {
-		moveCamera(0,0,100 * game->delta);
+		moveCamera(0,0,CAMERASPEED * game->delta);
 	}
 	if(y > game->screenHeight-10) {
-		moveCamera(0,0,-100 * game->delta);
+		moveCamera(0,0,-CAMERASPEED * game->delta);
 	}
+
+	int height = -game->eventReceiver->getScroll() * ZOOMSPEED;
+	moveCamera(0, height, 0);
 
 }
 
@@ -135,6 +140,8 @@ void GameScene::moveCamera(float x, float y, float z) {
 	vector3df position = camera->getPosition();
 	position.X += x;
 	position.Y += y;
+	if(position.Y > CAMERAMAX) position.Y = CAMERAMAX;
+	if(position.Y < CAMERAMIN) position.Y = CAMERAMIN;
 	position.Z += z;
 	camera->setPosition(position);
 	position.Y += -1;
