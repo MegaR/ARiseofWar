@@ -22,7 +22,6 @@ GameScene::GameScene() {
 	int bX, bY;
 	bX = sW - bW;
 	bY = sH - bH;
-
 	ITexture* rtmT = Game::getInstance().videoDriver->getTexture("C:/irrlicht-1.8/source/Irrlicht/jpeglib/testimg.jpg");
 	ITexture* egT = Game::getInstance().videoDriver->getTexture("res/btnTest.png");
 
@@ -54,8 +53,10 @@ GameScene::~GameScene() {
 
 void GameScene::update() {
 	
-	
-	mouseRay();
+	vector2d<int> hit = mouseRay();
+	if(hit == vector2d<int>(0, 0) ) {
+		
+	}
 
 	updateMouse();
 	returnToMenuButton->update();
@@ -144,8 +145,7 @@ vector2d<int> GameScene::mouseRay(){
 	vector2d<s32> mousePosition = game->device->getCursorControl()->getPosition();
 	vector3df posTile;
 	position2d<s32> *pos = new position2d<s32>(mousePosition.X,mousePosition.Y);
-	
-	if(game->eventReceiver->isLeftMousePressed()){
+
 		//get camera
 		ICameraSceneNode* camera = Game::getInstance().camera;
 		//create line from scrren coords
@@ -158,11 +158,10 @@ vector2d<int> GameScene::mouseRay(){
 		if (nodeline){
 			posTile = nodeline->getPosition();
 			return vector2d<int>(posTile.X,posTile.Z);
+			
 			// return x, y coords if not empty			
 		};
 		return vector2d<int>(-1,-1);
-	};	
-	return vector2d<int>(-1,-1);
 }
 
 Entity* GameScene::getEntity(int x, int y) {
