@@ -54,8 +54,13 @@ GameScene::~GameScene() {
 void GameScene::update() {
 	
 	vector2d<int> hit = mouseRay();
+	Entity *ent;
 	if(hit == vector2d<int>(0, 0) ) {
-		
+		if(getEntity(hit.X,hit.Y)) {
+			cout << "gotdamm it entity" << endl;
+			ent = getEntity(hit.X,hit.Y);
+			((Unit*)ent)->moveTo(1,2);
+		}
 	}
 
 	updateMouse();
