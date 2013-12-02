@@ -30,6 +30,8 @@ void Game::start() {
 	sceneManager = device->getSceneManager();
 	gui = device->getGUIEnvironment();
 
+	setGuiTheme();
+
 	camera = sceneManager->addCameraSceneNode(0, vector3df(0, 50, -40));
 	camera->setID(0);
 	sceneManager->setAmbientLight(SColorf(.25f, .25f, .25f));
@@ -40,6 +42,16 @@ void Game::start() {
 	device->drop();
 	delete eventReceiver;
 	return;
+}
+
+void Game::setGuiTheme() {
+	IGUISkin* skin = gui->getSkin();
+	IGUIFont* font = gui->getFont("res/font.bmp");
+	skin->setColor(EGDC_BUTTON_TEXT, SColor(255,255,255,255) );
+	
+	font->setKerningWidth(2);
+	font->setKerningHeight(2);
+	skin->setFont(font);
 }
 
 void Game::changeScene(Scene* newScene) {

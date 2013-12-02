@@ -41,4 +41,6 @@ private:
 	Game();
 	Game(Game const&);
 	void operator=(Game const&);
+
+	void setGuiTheme();
 };

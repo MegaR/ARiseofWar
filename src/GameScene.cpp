@@ -23,13 +23,12 @@ GameScene::GameScene() {
 	bX = sW - bW;
 	bY = sH - bH;
 
-	ITexture* rtmT = Game::getInstance().videoDriver->getTexture("C:/irrlicht-1.8/source/Irrlicht/jpeglib/testimg.jpg");
-	ITexture* egT = Game::getInstance().videoDriver->getTexture("res/btnTest.png");
+	ITexture* buttonTexture = Game::getInstance().videoDriver->getTexture("res/buttonSmall.png");
 
-	returnToMenuButton = new Button(bX-100, bY, bW, bH, "Return to Menu", rtmT);
-	exitGameButton = new Button(bX, bY, bW, bH, "Exit Game", egT);
-	nextTurnButton = new Button(bX-200, bY, bW, bH, "Next Turn", rtmT);
-	testKnight = new UnitKnight(0,0,0);
+	returnToMenuButton = new Button(bX-100, bY, bW, bH, "Return\nto Menu", buttonTexture);
+	exitGameButton = new Button(bX, bY, bW, bH, "Exit\nGame", buttonTexture);
+	nextTurnButton = new Button(bX-200, bY, bW, bH, "Next\nTurn", buttonTexture);
+	testKnight = new UnitKnight(1,0,0);
 	entities.push_back(testKnight);
 
 	

@@ -21,7 +21,6 @@ public:
 	int defense;
 
 	IAnimatedMesh* model;
-	IAnimatedMeshSceneNode* modelNode;
 	bool selected;
 
 	void startTurn();

@@ -5,11 +5,8 @@
 #include <iostream>
 using namespace std;
 
-UnitKnight::UnitKnight(int _x, int _y, int _player)
+UnitKnight::UnitKnight(int _x, int _y, int _player) : Unit(_x, _y, _player)
 {
-	tileX = _x;
-	tileY = _y;
-	player = _player; 
 	hp = 10;
 	attack = 4;
 	defense = 3;
@@ -18,22 +15,17 @@ UnitKnight::UnitKnight(int _x, int _y, int _player)
 	
 	Game* game = &Game::getInstance();
 	model = game->sceneManager->getMesh("C:/irrlicht-1.8/media/sydney.md2");
-	modelNode = game->sceneManager->addAnimatedMeshSceneNode( model );
-	if (modelNode)
-    {
-        modelNode->setMaterialFlag(EMF_LIGHTING, false);
-        modelNode->setMD2Animation(scene::EMAT_STAND);
-		modelNode->setMaterialTexture( 0, game->videoDriver->getTexture("C:/irrlicht-1.8/media/sydney.bmp") );
-		modelNode->setID(0);
-		modelNode->setPosition(vector3df(tileX * 10, 0, tileY * 10));
-    }
+	
+	addModel();
+	addModel();
+	addModel();
+	addModel();
+	addModel();
 
 	selected = false;
 }
 
 UnitKnight::~UnitKnight()
 {
-	//Game::getInstance().sceneManager->addToDeletionQueue(model);
-	Game::getInstance().sceneManager->addToDeletionQueue(modelNode);
 	cout << "destroyed Knight" << endl;
 }
