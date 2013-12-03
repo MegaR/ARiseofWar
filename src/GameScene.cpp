@@ -195,7 +195,7 @@ void GameScene::clickEntity(){
 			selectedNode->setPosition(vector3df(hit.X*10,0,hit.Y*10));
 			ent = getEntity(hit.X,hit.Y);
 			if(ent) {
-				if(storedEntity) storedEntity->deselected();
+				deselectEntity();
 				storedEntity = ent;
 				storedEntity->selected();
 				ent = (Entity*)NULL;
@@ -203,13 +203,15 @@ void GameScene::clickEntity(){
 				if(storedEntity->player == 0) {
 					((Unit*)storedEntity)->moveTo(hit.X,hit.Y);
 				}
-				storedEntity->deselected();
-				storedEntity= (Entity*)NULL;
+				deselectEntity();
 			}
 		}
 }
 
 void GameScene::deselectEntity(){
+	if(storedEntity) {
+		storedEntity->deselected();
+	}
 	storedEntity= (Entity*)NULL;
 }
 
