@@ -68,6 +68,10 @@ void GameScene::update() {
 		clickEntity();
 
 	}
+	//right click
+	if(game->eventReceiver->isRightMousePressed()){
+		deselectEntity();
+	}
 
 	//Button handlers enzo
 	if (returnToMenuButton->pressed == true)
@@ -191,8 +195,12 @@ void GameScene::clickEntity(){
 				storedEntity= (Entity*)NULL;
 			}
 		}
-
 }
+
+void GameScene::deselectEntity(){
+	storedEntity= (Entity*)NULL;
+}
+
 
 Entity* GameScene::getEntity(int x, int y) {
 	for(int i = 0; i < entities.size(); i++) {
