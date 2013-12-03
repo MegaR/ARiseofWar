@@ -191,12 +191,14 @@ void GameScene::clickEntity(){
 
 		if(hit != vector2d<int>(-1, -1) ) {
 			selectedNode->setPosition(vector3df(hit.X*10,0,hit.Y*10));
-			if(getEntity(hit.X,hit.Y)) {
-				ent = getEntity(hit.X,hit.Y);
+			ent = getEntity(hit.X,hit.Y);
+			if(ent) {
 				storedEntity = ent;
 				ent = (Entity*)NULL;
 			}else if(storedEntity){
-				((Unit*)storedEntity)->moveTo(hit.X,hit.Y);
+				if(storedEntity->player == 0) {
+					((Unit*)storedEntity)->moveTo(hit.X,hit.Y);
+				}
 				storedEntity= (Entity*)NULL;
 			}
 		}
