@@ -138,7 +138,9 @@ void GameScene::updateMouse() {
 	}
 
 	int height = -game->eventReceiver->getScroll() * ZOOMSPEED;
-	moveCamera(0, height, 0);
+	if(height) {
+		moveCamera(0, height, 0);
+	}
 
 }
 
@@ -321,7 +323,7 @@ std::vector<vector2d<int>>* GameScene::get_neighbors(vector2d<int> current) {
 		}*/
 	}
 
-	if(current.X < MAPSIZE) {
+	if(current.X < MAPSIZE-1) {
 		if(!getEntity(current.X+1, current.Y) ) {
 			list->push_back(vector2d<int>(current.X+1, current.Y));
 		}
@@ -338,7 +340,7 @@ std::vector<vector2d<int>>* GameScene::get_neighbors(vector2d<int> current) {
 			list->push_back(vector2d<int>(current.X, current.Y-1));
 		}
 	}
-	if(current.Y < MAPSIZE) {
+	if(current.Y < MAPSIZE-1) {
 		if(!getEntity(current.X, current.Y+1) ) {
 			list->push_back(vector2d<int>(current.X, current.Y+1));
 		}

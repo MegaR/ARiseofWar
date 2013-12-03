@@ -5,7 +5,7 @@
 #include <time.h>
 #include <stdlib.h>
 
-#define WALKSPEED 1
+#define WALKSPEED 50
 
 class Unit: public Entity
 {

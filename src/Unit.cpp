@@ -51,7 +51,7 @@ void Unit::followPath() {
 	destination.X = path[0].X * 10;
 	destination.Z = path[0].Y * 10;
 
-	if(position.getDistanceFrom(destination) < 1) {
+	if(position.getDistanceFrom(destination) < .5f) {
 		node->setPosition(destination);
 		path.erase(path.begin());
 		return;
@@ -60,6 +60,7 @@ void Unit::followPath() {
 	destination -= position;
 	destination = destination.normalize();
 	destination *= WALKSPEED;
+	destination *= Game::getInstance().delta;
 	position += destination;
 
 	node->setPosition(position);
@@ -88,13 +89,13 @@ void Unit::addModel() {
         modelNode->setMD2Animation(scene::EMAT_STAND);
 		modelNode->setMaterialTexture( 0, Game::getInstance().videoDriver->getTexture("C:/irrlicht-1.8/media/sydney.bmp") );
 		modelNode->setID(0);
-		modelNode->setScale(vector3df(0.2f, 0.2f, 0.2f) );
+		modelNode->setScale(vector3df(0.15f, 0.15f, 0.15f) );
 		
 		srand(time(NULL)+randSeedCount++);
 		float randX = rand() % 8 - 4;
 		srand(time(NULL)+randSeedCount++);
 		float randZ =rand() % 8 - 4;
-		modelNode->setPosition(vector3df(randX, 5, randZ));
+		modelNode->setPosition(vector3df(randX, 2.5f, randZ));
     }
 
 	modelNodes.push_back(modelNode);
