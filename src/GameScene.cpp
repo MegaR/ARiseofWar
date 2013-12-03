@@ -190,9 +190,9 @@ void GameScene::clickEntity(){
 	Entity *ent;
 
 		if(hit != vector2d<int>(-1, -1) ) {
+			selectedNode->setPosition(vector3df(hit.X*10,0,hit.Y*10));
 			if(getEntity(hit.X,hit.Y)) {
 				ent = getEntity(hit.X,hit.Y);
-				selectedNode->setPosition(vector3df(hit.X*10,0,hit.Y*10));
 				storedEntity = ent;
 				ent = (Entity*)NULL;
 			}else if(storedEntity){
