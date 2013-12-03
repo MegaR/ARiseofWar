@@ -71,7 +71,9 @@ void GameScene::update() {
 	}
 	//right click
 	if(game->eventReceiver->isRightMousePressed()){
-		deselectEntity();
+		if(storedEntity) {
+			actionEntity();
+		}
 	}
 
 	//Button handlers enzo
@@ -186,11 +188,37 @@ vector2d<int> GameScene::mouseRay(){
 		return vector2d<int>(-1,-1);
 }
 
-void GameScene::clickEntity(){
-	
+void GameScene::actionEntity() {
 	vector2d<int> hit = mouseRay();
 	Entity *ent;
 
+	if(hit == vector2d<int>(-1, -1) ) return;
+	ent = getEntity(hit.X, hit.Y);
+
+	if(storedEntity->player == 0) {
+		((Unit*)storedEntity)->moveTo(hit.X, hit.Y);
+		clickEntity();
+	}
+
+	if(ent) {
+		//attack or somethin
+	}
+}
+
+void GameScene::clickEntity(){
+	vector2d<int> hit = mouseRay();
+	Entity *ent;
+
+	if(hit == vector2d<int>(-1, -1) ) return;
+	
+	selectedNode->setPosition(vector3df(hit.X*10,0,hit.Y*10));
+	deselectEntity();
+	ent = getEntity(hit.X,hit.Y);
+	if(ent) {
+		selectEntity(ent);
+	}
+
+	/*
 		if(hit != vector2d<int>(-1, -1) ) {
 			selectedNode->setPosition(vector3df(hit.X*10,0,hit.Y*10));
 			ent = getEntity(hit.X,hit.Y);
@@ -205,7 +233,7 @@ void GameScene::clickEntity(){
 				}
 				deselectEntity();
 			}
-		}
+		}*/
 }
 
 void GameScene::deselectEntity(){
@@ -213,6 +241,11 @@ void GameScene::deselectEntity(){
 		storedEntity->deselected();
 	}
 	storedEntity= (Entity*)NULL;
+}
+
+void GameScene::selectEntity(Entity* ent) {
+	storedEntity = ent;
+	storedEntity->selected();
 }
 
 

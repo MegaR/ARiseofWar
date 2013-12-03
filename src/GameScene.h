@@ -31,6 +31,8 @@ public:
 	void update();
 	void updateMouse();
 	void clickEntity();
+	void selectEntity(Entity* ent);
+	void actionEntity();
 	void deselectEntity();
 	vector2d<int> mouseRay();
 	Entity* getEntity(int x, int y);
