@@ -22,6 +22,73 @@ Unit::~Unit()
 	}
 }
 
+void Unit::selected() {
+	
+	if(player == 0) {
+		addDistanceTiles(tileX, tileY, maxDistance);
+	}
+}
+
+void Unit::addDistanceTiles(int x, int y, int distance) {
+	Game* game = &Game::getInstance();
+	GameScene* scene = (GameScene*)game->currentScene;
+
+	if(distance < 0) return;
+	if(x < 0 || x > MAPSIZE-1) {
+		return;
+	}
+	if(y < 0 || y > MAPSIZE-1) {
+		return;
+	}
+
+	Entity* entity = scene->getEntity(x,y);
+	if( entity != NULL && entity != this ) {
+		return;
+	}
+
+	bool alreadyThere = false;
+	for(int i = 0; i < distanceTiles.size(); i++) {
+		if(distanceTiles.at(i)->getPosition().X == x*10 
+			&& distanceTiles.at(i)->getPosition().Z == y*10) {
+				alreadyThere = true;
+		}
+	}
+
+	bool inAttackRange = false;
+	for(int i = 0; i < scene->entities.size(); i++) {
+		if(scene->entities.at(i)->player == 0) continue;
+		if(scene->entities.at(i)->inAttackRange(x, y, attackDistance) ) {
+			inAttackRange = true;
+		}
+	}
+
+	if(!alreadyThere) {
+		IAnimatedMesh* model = game->sceneManager->getMesh("res/distance_Tile.3ds");
+		ISceneNode* node = game->sceneManager->addMeshSceneNode(model);
+		node->setMaterialFlag(EMF_LIGHTING, false);
+		node->setMaterialType(video::EMT_TRANSPARENT_ALPHA_CHANNEL);
+		if(inAttackRange) {
+			node->setMaterialTexture( 0, game->videoDriver->getTexture("res/distance_Tile_red.png") );
+		} else {
+			node->setMaterialTexture( 0, game->videoDriver->getTexture("res/distance_Tile_blue.png") );
+		}
+		node->setPosition(vector3d<f32>(x*10, 0, y*10) );
+		node->setID(0);
+		distanceTiles.push_back(node);
+	}
+
+	addDistanceTiles(x-1, y, distance-1);
+	addDistanceTiles(x+1, y, distance-1);
+	addDistanceTiles(x, y-1, distance-1);
+	addDistanceTiles(x, y+1, distance-1);
+}
+
+void Unit::deselected() {
+	while(distanceTiles.size() > 0) {
+		distanceTiles.at(distanceTiles.size()-1)->remove();
+		distanceTiles.pop_back();
+	}
+}
 
 void Unit::moveTo(int desX, int desY)
 {

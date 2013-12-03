@@ -21,13 +21,17 @@ public:
 	int defense;
 
 	IAnimatedMesh* model;
-	bool selected;
 
 	void startTurn();
 	void endTurn();
 
+	virtual void selected();
+	virtual void deselected();
+
 	void render();
 	virtual void update();
+
+	bool inAttackRange(int x, int y, int attackDistance);
 
 //protected:
 	float x, y, z;

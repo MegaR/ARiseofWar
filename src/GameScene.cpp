@@ -59,8 +59,6 @@ GameScene::~GameScene() {
 }
 
 void GameScene::update() {
-	
-	
 	Game* game = &Game::getInstance();
 	updateMouse();
 	returnToMenuButton->update();
@@ -193,12 +191,15 @@ void GameScene::clickEntity(){
 			selectedNode->setPosition(vector3df(hit.X*10,0,hit.Y*10));
 			ent = getEntity(hit.X,hit.Y);
 			if(ent) {
+				if(storedEntity) storedEntity->deselected();
 				storedEntity = ent;
+				storedEntity->selected();
 				ent = (Entity*)NULL;
 			}else if(storedEntity){
 				if(storedEntity->player == 0) {
 					((Unit*)storedEntity)->moveTo(hit.X,hit.Y);
 				}
+				storedEntity->deselected();
 				storedEntity= (Entity*)NULL;
 			}
 		}

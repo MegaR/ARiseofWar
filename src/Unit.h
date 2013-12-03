@@ -23,10 +23,19 @@ public:
 	std::vector<vector2d<int>> path;
 	ISceneNode* node;
 
+
 	void moveTo(int _tileX, int _tileY);
 	void update();
 	void attackTarget(Entity* target);
 	void addModel();
 	void removeModel();
 	void followPath();
+	void selected();
+	void deselected();
+	bool inAttackRange(int x, int y, int attackDistance);
+
+private:
+	void addDistanceTiles(int x, int y, int distance);
+
+	std::vector<ISceneNode*> distanceTiles;
 };

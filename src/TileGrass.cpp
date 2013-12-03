@@ -7,7 +7,7 @@ TileGrass::TileGrass(int x, int y) : Tile(x, y) {
 	node = game->sceneManager->addMeshSceneNode(mesh);
 	node->setMaterialFlag(EMF_LIGHTING, false);
 	node->setMaterialTexture( 0, game->videoDriver->getTexture("res/tileGrassTexture.png") );
-	node->setPosition(vector3d<f32>(x*10, 0, y*10) );
+	node->setPosition(vector3df(x*10, 0, y*10) );
 	node->setID(1);
 }
 
