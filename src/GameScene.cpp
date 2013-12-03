@@ -32,8 +32,11 @@ GameScene::GameScene() {
 	returnToMenuButton = new Button(bX-100, bY, bW, bH, "Return\nto Menu", buttonTexture);
 	exitGameButton = new Button(bX, bY, bW, bH, "Exit\nGame", buttonTexture);
 	nextTurnButton = new Button(bX-200, bY, bW, bH, "Next\nTurn", buttonTexture);
-	testKnight = new UnitKnight(1,0,0);
-	entities.push_back(testKnight);
+
+	entities.push_back(new UnitKnight(1,0,0));
+	entities.push_back(new UnitKnight(1,1,0));
+	entities.push_back(new UnitKnight(5,0,1));
+	entities.push_back(new UnitKnight(0,5,1));
 
 	
 	IAnimatedMesh* mesh = game->sceneManager->getMesh("res/selected.3DS");
@@ -89,6 +92,10 @@ void GameScene::update() {
 	if (nextTurnButton->pressed == true) {
 		nextTurn();
 	}
+
+	for(int i = 0; i < entities.size(); i++) {
+		entities.at(i)->update();
+	}
 }
 
 void GameScene::nextTurn() {
@@ -135,7 +142,9 @@ void GameScene::updateMouse() {
 	}
 
 	int height = -game->eventReceiver->getScroll() * ZOOMSPEED;
-	moveCamera(0, height, 0);
+	if(height) {
+		moveCamera(0, height, 0);
+	}
 
 }
 
@@ -185,13 +194,15 @@ void GameScene::clickEntity(){
 	Entity *ent;
 
 		if(hit != vector2d<int>(-1, -1) ) {
-			if(getEntity(hit.X,hit.Y)) {
-				ent = getEntity(hit.X,hit.Y);
-				selectedNode->setPosition(vector3df(hit.X*10,0,hit.Y*10));
+			selectedNode->setPosition(vector3df(hit.X*10,0,hit.Y*10));
+			ent = getEntity(hit.X,hit.Y);
+			if(ent) {
 				storedEntity = ent;
 				ent = (Entity*)NULL;
 			}else if(storedEntity){
-				((Unit*)storedEntity)->moveTo(hit.X,hit.Y);
+				if(storedEntity->player == 0) {
+					((Unit*)storedEntity)->moveTo(hit.X,hit.Y);
+				}
 				storedEntity= (Entity*)NULL;
 			}
 		}
@@ -311,7 +322,9 @@ std::vector<vector2d<int>>* GameScene::get_neighbors(vector2d<int> current) {
 	std::vector<vector2d<int>> *list = new std::vector<vector2d<int>>();
 
 	if(current.X > 0) {
-		list->push_back(vector2d<int>(current.X-1, current.Y));
+		if(!getEntity(current.X-1, current.Y) ) {
+			list->push_back(vector2d<int>(current.X-1, current.Y));
+		}
 		/*if(current.Y > 0) {
 			list->push_back(vector2d<int>(current.X-1, current.Y-1));
 		}
@@ -320,8 +333,10 @@ std::vector<vector2d<int>>* GameScene::get_neighbors(vector2d<int> current) {
 		}*/
 	}
 
-	if(current.X < MAPSIZE) {
-		list->push_back(vector2d<int>(current.X+1, current.Y));
+	if(current.X < MAPSIZE-1) {
+		if(!getEntity(current.X+1, current.Y) ) {
+			list->push_back(vector2d<int>(current.X+1, current.Y));
+		}
 		/*if(current.Y > 0) {
 			list->push_back(vector2d<int>(current.X+1, current.Y-1));
 		}
@@ -331,10 +346,14 @@ std::vector<vector2d<int>>* GameScene::get_neighbors(vector2d<int> current) {
 	}
 
 	if(current.Y > 0) {
-		list->push_back(vector2d<int>(current.X, current.Y-1));
+		if(!getEntity(current.X, current.Y-1) ) {
+			list->push_back(vector2d<int>(current.X, current.Y-1));
+		}
 	}
-	if(current.Y < MAPSIZE) {
-		list->push_back(vector2d<int>(current.X, current.Y+1));
+	if(current.Y < MAPSIZE-1) {
+		if(!getEntity(current.X, current.Y+1) ) {
+			list->push_back(vector2d<int>(current.X, current.Y+1));
+		}
 	}
 
 	return list;

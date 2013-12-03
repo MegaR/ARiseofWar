@@ -27,7 +27,7 @@ public:
 	void endTurn();
 
 	void render();
-	void update();
+	virtual void update();
 
 //protected:
 	float x, y, z;

@@ -5,6 +5,8 @@
 #include <time.h>
 #include <stdlib.h>
 
+#define WALKSPEED 50
+
 class Unit: public Entity
 {
 public:
@@ -18,10 +20,13 @@ public:
 	// attackAnimation
 
 	std::vector<IAnimatedMeshSceneNode*> modelNodes;
+	std::vector<vector2d<int>> path;
 	ISceneNode* node;
 
 	void moveTo(int _tileX, int _tileY);
+	void update();
 	void attackTarget(Entity* target);
 	void addModel();
 	void removeModel();
+	void followPath();
 };

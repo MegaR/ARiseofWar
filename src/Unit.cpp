@@ -25,44 +25,46 @@ Unit::~Unit()
 
 void Unit::moveTo(int desX, int desY)
 {
-	/*int distanceX = desX - tileX, 
-		distanceY = desY - tileY;*/
-	/*
-	if (tileX < desX)
-	{
-		//moveAnimation
-		tileX++;
+	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
+	vector<vector2d<int>>* newPath = scene->findPath(vector2d<s32>(tileX, tileY), vector2d<s32>(desX, desY) );
+	if(!newPath) return;
+	if(newPath->size() > maxDistance) return;
+
+	while(newPath->size() > 0) {
+		path.push_back( newPath->at(newPath->size()-1) );
+		newPath->pop_back();
 	}
-	else if (tileX > desX)
-	{
-		//moveAnimation
-		tileX--;
-	}
-	else //tileX == desX (unit is at target)
-	{
-		//idleAnimation
-		tileX = desX;
-	}
-	
-	if (tileY < desY)
-	{
-		//moveAnimation
-		tileY++;
-	}
-	else if (tileY > desY)
-	{
-		//moveAnimation
-		tileY--;
-	}
-	else //tileY == desY (unit is at target)
-	{
-		//idleAnimation
-		tileY = desY;
-	}
-	*/
+	delete newPath;
+
 	tileX = desX;
 	tileY = desY;
-	node->setPosition(vector3df(tileX * 10, 0, tileY * 10));
+}
+
+void Unit::update() {
+	if(path.size() > 0) {
+		followPath();
+	}
+}
+
+void Unit::followPath() {
+	vector3df position = node->getPosition();
+	vector3df destination;
+	destination.X = path[0].X * 10;
+	destination.Z = path[0].Y * 10;
+
+	if(position.getDistanceFrom(destination) < .5f) {
+		node->setPosition(destination);
+		path.erase(path.begin());
+		return;
+	}
+
+	destination -= position;
+	destination = destination.normalize();
+	destination *= WALKSPEED;
+	destination *= Game::getInstance().delta;
+	position += destination;
+
+	node->setPosition(position);
 }
 
 void Unit::attackTarget(Entity* target)
@@ -88,13 +90,13 @@ void Unit::addModel() {
         modelNode->setMD2Animation(scene::EMAT_STAND);
 		modelNode->setMaterialTexture( 0, Game::getInstance().videoDriver->getTexture("C:/irrlicht-1.8/media/sydney.bmp") );
 		modelNode->setID(0);
-		modelNode->setScale(vector3df(0.2f, 0.2f, 0.2f) );
+		modelNode->setScale(vector3df(0.15f, 0.15f, 0.15f) );
 		
 		srand(time(NULL)+randSeedCount++);
 		float randX = rand() % 8 - 4;
 		srand(time(NULL)+randSeedCount++);
 		float randZ =rand() % 8 - 4;
-		modelNode->setPosition(vector3df(randX, 5, randZ));
+		modelNode->setPosition(vector3df(randX, 2.5f, randZ));
     }
 
 	modelNodes.push_back(modelNode);
