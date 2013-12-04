@@ -63,7 +63,7 @@ void Unit::updateAnimations()
 				isAnimating[WALKING_ANIMATION] = false;
 				isAnimating[ATTACKING_ANIMATION] = false;
 				isAnimating[DEATH_ANIMATION] = false;
-				cout << "Turned on Idle Animation" << endl;
+				//cout << "Turned on Idle Animation" << endl;
 			}
 		}break;
 
@@ -80,7 +80,7 @@ void Unit::updateAnimations()
 				isAnimating[WALKING_ANIMATION] = true;
 				isAnimating[ATTACKING_ANIMATION] = false;
 				isAnimating[DEATH_ANIMATION] = false;
-				cout << "Turned on Walking Animation" << endl;
+				//cout << "Turned on Walking Animation" << endl;
 			}
 		}break;
 
@@ -97,7 +97,7 @@ void Unit::updateAnimations()
 				isAnimating[WALKING_ANIMATION] = false;
 				isAnimating[ATTACKING_ANIMATION] = true;
 				isAnimating[DEATH_ANIMATION] = false;
-				cout << "Turned on Attacking Animation" << endl;
+				//cout << "Turned on Attacking Animation" << endl;
 			}
 
 			int currentAnimationFrame;
@@ -109,7 +109,7 @@ void Unit::updateAnimations()
 		}break;
 
 		case DEATH_ANIMATION:{
-			cout << "No death animation yet, sorry!" << endl;
+			cout << "Please purchase the premium version for the death animation!" << endl;
 			/*if (!isAnimating[currentAnimation])
 			{
 				for (int i = 0; i < modelNodes.size(); i++) 
@@ -234,6 +234,7 @@ void Unit::moveTo(int desX, int desY)
 void Unit::followPath() {
 	vector3df position = node->getPosition();
 	vector3df destination;
+	vector3df targetRotation;
 	destination.X = path[0].X * 10;
 	destination.Z = path[0].Y * 10;
 
@@ -269,8 +270,14 @@ void Unit::followPath() {
 			position.Z = path[0].Y*10;
 	}
 
-	position += destination;
+	if (position.X > (position.X+destination.X)) targetRotation.Y = 90.0; //Left
+	if (position.X < (position.X+destination.X)) targetRotation.Y = 270.0; //Right
+	if (position.Z < (position.Z+destination.Z)) targetRotation.Y = 180.0; //Up
+	if (position.Z > (position.Z+destination.Z)) targetRotation.Y = 360.0; //Down
 
+	position += destination;
+	
+	node->setRotation(targetRotation);
 	node->setPosition(position);
 }
 
