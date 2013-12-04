@@ -233,17 +233,21 @@ void Unit::moveTo(int desX, int desY)
 	hasMoved = true;
 }
 
-void Unit::followPath() {
+void Unit::followPath() 
+{
 	vector3df position = node->getPosition();
 	vector3df destination;
 	vector3df targetRotation;
 	destination.X = path[0].X * 10;
 	destination.Z = path[0].Y * 10;
 
-	if(position.getDistanceFrom(destination) < .5f) {
-		if(path.size() == 1) {
+	if(position.getDistanceFrom(destination) < .5f) 
+	{
+		if(path.size() == 1) 
+		{
 			node->setPosition(destination);
 		}
+
 		path.erase(path.begin());
 		return;
 	}
@@ -273,12 +277,36 @@ void Unit::followPath() {
 	if(position.Z > path[0].Y * 10 && 
 		position.Z + destination.Z < path[0].Y * 10) {
 			position.Z = path[0].Y*10;
-	}
-
-	if (position.X > (position.X+destination.X)) targetRotation.Y = 90.0; //Left
+	}	
+	
+	/*if (position.X > (position.X+destination.X)) targetRotation.Y = 90.0; //Left
 	if (position.X < (position.X+destination.X)) targetRotation.Y = 270.0; //Right
 	if (position.Z < (position.Z+destination.Z)) targetRotation.Y = 180.0; //Up
-	if (position.Z > (position.Z+destination.Z)) targetRotation.Y = 360.0; //Down
+	if (position.Z > (position.Z+destination.Z)) targetRotation.Y = 360.0; //Down*/
+
+	if (position.X > (position.X+destination.X)) //Left
+	{ 
+		targetRotation.Y = 90.0; 
+		cout << "Moving Left: " << targetRotation.Y << endl;
+	}
+
+	if (position.X < (position.X+destination.X)) //Right
+	{ 
+		targetRotation.Y = 270.0;
+		cout << "Moving Right: " << targetRotation.Y << endl;
+	}
+
+	if (position.Z < (position.Z+destination.Z)) //Up
+	{ 
+		targetRotation.Y = 180.0; 
+		cout << "Moving Up: " << targetRotation.Y << endl;
+	}
+
+	if (position.Z > (position.Z+destination.Z)) //Down
+	{ 
+		targetRotation.Y = 360.0; 
+		cout << "Moving Down: " << targetRotation.Y << endl;
+	}
 
 	position += destination;
 	
