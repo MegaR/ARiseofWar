@@ -46,3 +46,7 @@ bool Entity::inAttackRange(int x, int y, int attackDistance) {
 	y = abs(tileY-y);
 	return ((x+y)<=attackDistance);
 }
+
+void Entity::handleDamage(int damage){
+	hp -= damage;
+}

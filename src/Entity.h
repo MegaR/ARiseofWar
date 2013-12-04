@@ -30,6 +30,8 @@ public:
 	virtual void selected();
 	virtual void deselected();
 
+	virtual void handleDamage(int damage);
+
 	void render();
 	virtual void update();
 

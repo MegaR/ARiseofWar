@@ -199,13 +199,13 @@ void GameScene::actionEntity() {
 	if(storedEntity->player == 0) {
 		if(!ent) {
 			((Unit*)storedEntity)->moveTo(hit.X, hit.Y);
+			clickEntity();
 		}
-		clickEntity();
 	}
 
 	if(ent) {
 		//attack or somethin
-		//((Unit*)storedEntity)->attackTarget(ent);
+		((Unit*)storedEntity)->attackTarget(ent);
 		
 	}
 }
