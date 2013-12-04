@@ -185,7 +185,7 @@ void Unit::addModel() {
     {
         modelNode->setMaterialFlag(EMF_LIGHTING, false);
         modelNode->setMD2Animation(scene::EMAT_STAND);
-		modelNode->setMaterialTexture( 0, Game::getInstance().videoDriver->getTexture("C:/irrlicht-1.8/media/sydney.bmp") );
+		modelNode->setMaterialTexture( 0, Game::getInstance().videoDriver->getTexture("res/knight.png") );
 		modelNode->setID(0);
 		modelNode->setScale(vector3df(0.15f, 0.15f, 0.15f) );
 		
@@ -193,7 +193,7 @@ void Unit::addModel() {
 		float randX = rand() % 8 - 4;
 		srand(time(NULL)+randSeedCount++);
 		float randZ =rand() % 8 - 4;
-		modelNode->setPosition(vector3df(randX, 2.5f, randZ));
+		modelNode->setPosition(vector3df(randX, 0.0f, randZ));
     }
 
 	modelNodes.push_back(modelNode);
