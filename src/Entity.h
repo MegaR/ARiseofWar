@@ -21,6 +21,7 @@ public:
 	int defense;
 
 	IAnimatedMesh* model;
+	ISceneNode* node;
 
 	virtual void startTurn();
 	virtual void endTurn();
