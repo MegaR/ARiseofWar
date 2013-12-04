@@ -143,20 +143,20 @@ void Unit::followPath() {
 	//overshoot fix
 	if(position.X < path[0].X * 10 && 
 		position.X + destination.X > path[0].X * 10) {
-			position.X = path[0].X;
+			position.X = path[0].X*10;
 	}
 	if(position.X > path[0].X * 10 && 
 		position.X + destination.X < path[0].X * 10) {
-			position.X = path[0].X;
+			position.X = path[0].X*10;
 	}
 
 	if(position.Z < path[0].Y * 10 && 
 		position.Z + destination.Z > path[0].Y * 10) {
-			position.Y = path[0].Y;
+			position.Z = path[0].Y*10;
 	}
 	if(position.Z > path[0].Y * 10 && 
 		position.Z + destination.Z < path[0].Y * 10) {
-			position.X = path[0].Y;
+			position.Z = path[0].Y*10;
 	}
 
 	position += destination;
