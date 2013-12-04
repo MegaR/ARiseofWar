@@ -139,6 +139,26 @@ void Unit::followPath() {
 	destination = destination.normalize();
 	destination *= WALKSPEED;
 	destination *= Game::getInstance().delta;
+
+	//overshoot fix
+	if(position.X < path[0].X * 10 && 
+		position.X + destination.X > path[0].X * 10) {
+			position.X = path[0].X;
+	}
+	if(position.X > path[0].X * 10 && 
+		position.X + destination.X < path[0].X * 10) {
+			position.X = path[0].X;
+	}
+
+	if(position.Y < path[0].Y * 10 && 
+		position.Y + destination.Y > path[0].Y * 10) {
+			position.Y = path[0].Y;
+	}
+	if(position.Y > path[0].Y * 10 && 
+		position.Y + destination.Y < path[0].Y * 10) {
+			position.X = path[0].Y;
+	}
+
 	position += destination;
 
 	node->setPosition(position);
