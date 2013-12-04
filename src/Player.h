@@ -5,8 +5,8 @@ public:
 	Player(void);
 	~Player(void);
 
-	void startTurn();
-	void endTurn();
+	virtual void startTurn();
+	virtual void endTurn();
 
 };
 

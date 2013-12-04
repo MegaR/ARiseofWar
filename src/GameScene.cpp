@@ -115,6 +115,10 @@ void GameScene::nextTurn() {
 		}
 	}
 
+	if(currentPlayer == 1) {
+		((EnemyPlayer*)players[1])->turn();
+	}
+
 	turnCount++;
 }
 
@@ -193,14 +197,15 @@ void GameScene::actionEntity() {
 	vector2d<int> hit = mouseRay();
 	Entity *ent;
 
+	if(currentPlayer != 0) return;
+	if(storedEntity->player != 0) return;
+
 	if(hit == vector2d<int>(-1, -1) ) return;
 	ent = getEntity(hit.X, hit.Y);
 
-	if(storedEntity->player == 0) {
-		if(!ent) {
-			((Unit*)storedEntity)->moveTo(hit.X, hit.Y);
-			clickEntity();
-		}
+	if(!ent) {
+		((Unit*)storedEntity)->moveTo(hit.X, hit.Y);
+		clickEntity();
 	}
 
 	if(ent) {
