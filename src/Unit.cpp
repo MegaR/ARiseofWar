@@ -12,6 +12,13 @@ Unit::Unit(int tileX, int tileY, int player)
 	hasAttacked = false;
 	hasMoved = false;
 
+	currentAnimation = IDLE_ANIMATION;
+
+	isAnimating[IDLE_ANIMATION] = false;
+	isAnimating[WALKING_ANIMATION] = false;
+	isAnimating[ATTACKING_ANIMATION] = false;
+	isAnimating[DEATH_ANIMATION] = false;
+
 	node = Game::getInstance().sceneManager->addEmptySceneNode(0, 0);
 	node->setPosition(vector3df(tileX * 10, 0, tileY * 10) );
 }
@@ -21,6 +28,113 @@ Unit::~Unit()
 	cout << "destroying Unit" << endl;
 	while(modelNodes.size() > 0) {
 		removeModel();
+	}
+}
+
+void Unit::update() 
+{
+	updateAnimations();
+
+	if(path.size() > 0) 
+	{
+		followPath();
+		currentAnimation = WALKING_ANIMATION;
+	}
+	else 
+	{
+		if (currentAnimation == WALKING_ANIMATION) currentAnimation = IDLE_ANIMATION;
+	}
+}
+
+void Unit::updateAnimations()
+{
+	switch(currentAnimation)
+	{
+		case IDLE_ANIMATION:{
+			if (!isAnimating[currentAnimation])
+			{
+				for (int i = 0; i < modelNodes.size(); i++) 
+				{
+					modelNodes[i]->setFrameLoop(0, 52);
+					modelNodes[i]->setAnimationSpeed(15);
+				}
+			
+				isAnimating[IDLE_ANIMATION] = true;
+				isAnimating[WALKING_ANIMATION] = false;
+				isAnimating[ATTACKING_ANIMATION] = false;
+				isAnimating[DEATH_ANIMATION] = false;
+				cout << "Turned on Idle Animation" << endl;
+			}
+		}break;
+
+		case WALKING_ANIMATION:{
+			if (!isAnimating[currentAnimation])
+			{
+				for (int i = 0; i < modelNodes.size(); i++) 
+				{
+					modelNodes[i]->setFrameLoop(105, 183);
+					modelNodes[i]->setAnimationSpeed(30);
+				}
+			
+				isAnimating[IDLE_ANIMATION] = false;
+				isAnimating[WALKING_ANIMATION] = true;
+				isAnimating[ATTACKING_ANIMATION] = false;
+				isAnimating[DEATH_ANIMATION] = false;
+				cout << "Turned on Walking Animation" << endl;
+			}
+		}break;
+
+		case ATTACKING_ANIMATION:{
+			if (!isAnimating[currentAnimation])
+			{
+				for (int i = 0; i < modelNodes.size(); i++) 
+				{
+					modelNodes[i]->setFrameLoop(53, 104);
+					modelNodes[i]->setAnimationSpeed(30);
+				}
+			
+				isAnimating[IDLE_ANIMATION] = false;
+				isAnimating[WALKING_ANIMATION] = false;
+				isAnimating[ATTACKING_ANIMATION] = true;
+				isAnimating[DEATH_ANIMATION] = false;
+				cout << "Turned on Attacking Animation" << endl;
+			}
+
+			int currentAnimationFrame;
+			for (int i = 0; i < modelNodes.size(); i++) 
+			{
+				currentAnimationFrame = modelNodes[i]->getFrameNr();
+				if (currentAnimationFrame == 103) currentAnimation = IDLE_ANIMATION;
+			}
+		}break;
+
+		case DEATH_ANIMATION:{
+			cout << "No death animation yet, sorry!" << endl;
+			/*if (!isAnimating[currentAnimation])
+			{
+				for (int i = 0; i < modelNodes.size(); i++) 
+				{
+					modelNodes[i]->setFrameLoop(184, );
+					modelNodes[i]->setAnimationSpeed(25);
+				}
+			
+				isAnimating[IDLE_ANIMATION] = false;
+				isAnimating[WALKING_ANIMATION] = false;
+				isAnimating[ATTACKING_ANIMATION] = false;
+				isAnimating[DEATH_ANIMATION] = true;
+			}
+
+			int currentAnimationFrame;
+			for (int i = 0; i < modelNodes.size(); i++) 
+			{
+				currentAnimationFrame = modelNodes[i]->getFrameNr();
+				if (currentAnimationFrame == ) currentAnimation = IDLE_ANIMATION;
+			}*/
+		}break;
+
+		default:{ 
+			cout << "Unknown animation ID!" << endl;
+		}break;
 	}
 }
 
@@ -117,12 +231,6 @@ void Unit::moveTo(int desX, int desY)
 	hasMoved = true;
 }
 
-void Unit::update() {
-	if(path.size() > 0) {
-		followPath();
-	}
-}
-
 void Unit::followPath() {
 	vector3df position = node->getPosition();
 	vector3df destination;
@@ -168,16 +276,14 @@ void Unit::followPath() {
 
 void Unit::attackTarget(Entity* target)
 {
-	if(player == target->player){ return;}
-	if(hasAttacked == true){ return;}
-	cout << "remove da knight ploxz" << endl; 
-	if(!target->inAttackRange(tileX, tileY, attackDistance)) {
-		return;
-	}
+	if(player == target->player) { return; }
+	if(hasAttacked == true) { return; }
+	if(!target->inAttackRange(tileX, tileY, attackDistance)) { return; }
 
 	int damage = attack - target->defense;
 	target->handleDamage(damage);
 
+	currentAnimation = ATTACKING_ANIMATION;
 	hasAttacked = true;
 }
 
@@ -191,6 +297,8 @@ void Unit::addModel() {
 		modelNode->setMaterialTexture( 0, texture );
 		modelNode->setID(0);
 		modelNode->setScale(vector3df(0.15f, 0.15f, 0.15f) );
+
+		currentAnimation = IDLE_ANIMATION;
 		
 		srand(time(NULL)+randSeedCount++);
 		float randX = rand() % 8 - 4;
