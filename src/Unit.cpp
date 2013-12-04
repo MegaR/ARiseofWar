@@ -12,6 +12,13 @@ Unit::Unit(int tileX, int tileY, int player)
 	hasAttacked = false;
 	hasMoved = false;
 
+	currentAnimation = IDLE_ANIMATION;
+
+	isAnimating[IDLE_ANIMATION] = false;
+	isAnimating[WALKING_ANIMATION] = false;
+	isAnimating[ATTACKING_ANIMATION] = false;
+	isAnimating[DEATH_ANIMATION] = false;
+
 	node = Game::getInstance().sceneManager->addEmptySceneNode(0, 0);
 	node->setPosition(vector3df(tileX * 10, 0, tileY * 10) );
 }
@@ -21,6 +28,113 @@ Unit::~Unit()
 	cout << "destroying Unit" << endl;
 	while(modelNodes.size() > 0) {
 		removeModel();
+	}
+}
+
+void Unit::update() 
+{
+	updateAnimations();
+
+	if(path.size() > 0) 
+	{
+		followPath();
+		currentAnimation = WALKING_ANIMATION;
+	}
+	else 
+	{
+		if (currentAnimation == WALKING_ANIMATION) currentAnimation = IDLE_ANIMATION;
+	}
+}
+
+void Unit::updateAnimations()
+{
+	switch(currentAnimation)
+	{
+		case IDLE_ANIMATION:{
+			if (!isAnimating[currentAnimation])
+			{
+				for (int i = 0; i < modelNodes.size(); i++) 
+				{
+					modelNodes[i]->setFrameLoop(0, 52);
+					modelNodes[i]->setAnimationSpeed(15);
+				}
+			
+				isAnimating[IDLE_ANIMATION] = true;
+				isAnimating[WALKING_ANIMATION] = false;
+				isAnimating[ATTACKING_ANIMATION] = false;
+				isAnimating[DEATH_ANIMATION] = false;
+				//cout << "Turned on Idle Animation" << endl;
+			}
+		}break;
+
+		case WALKING_ANIMATION:{
+			if (!isAnimating[currentAnimation])
+			{
+				for (int i = 0; i < modelNodes.size(); i++) 
+				{
+					modelNodes[i]->setFrameLoop(105, 183);
+					modelNodes[i]->setAnimationSpeed(30);
+				}
+			
+				isAnimating[IDLE_ANIMATION] = false;
+				isAnimating[WALKING_ANIMATION] = true;
+				isAnimating[ATTACKING_ANIMATION] = false;
+				isAnimating[DEATH_ANIMATION] = false;
+				//cout << "Turned on Walking Animation" << endl;
+			}
+		}break;
+
+		case ATTACKING_ANIMATION:{
+			if (!isAnimating[currentAnimation])
+			{
+				for (int i = 0; i < modelNodes.size(); i++) 
+				{
+					modelNodes[i]->setFrameLoop(53, 104);
+					modelNodes[i]->setAnimationSpeed(30);
+				}
+			
+				isAnimating[IDLE_ANIMATION] = false;
+				isAnimating[WALKING_ANIMATION] = false;
+				isAnimating[ATTACKING_ANIMATION] = true;
+				isAnimating[DEATH_ANIMATION] = false;
+				//cout << "Turned on Attacking Animation" << endl;
+			}
+
+			int currentAnimationFrame;
+			for (int i = 0; i < modelNodes.size(); i++) 
+			{
+				currentAnimationFrame = modelNodes[i]->getFrameNr();
+				if (currentAnimationFrame == 103) currentAnimation = IDLE_ANIMATION;
+			}
+		}break;
+
+		case DEATH_ANIMATION:{
+			cout << "Please purchase the premium version for the death animation!" << endl;
+			/*if (!isAnimating[currentAnimation])
+			{
+				for (int i = 0; i < modelNodes.size(); i++) 
+				{
+					modelNodes[i]->setFrameLoop(184, );
+					modelNodes[i]->setAnimationSpeed(25);
+				}
+			
+				isAnimating[IDLE_ANIMATION] = false;
+				isAnimating[WALKING_ANIMATION] = false;
+				isAnimating[ATTACKING_ANIMATION] = false;
+				isAnimating[DEATH_ANIMATION] = true;
+			}
+
+			int currentAnimationFrame;
+			for (int i = 0; i < modelNodes.size(); i++) 
+			{
+				currentAnimationFrame = modelNodes[i]->getFrameNr();
+				if (currentAnimationFrame == ) currentAnimation = IDLE_ANIMATION;
+			}*/
+		}break;
+
+		default:{ 
+			cout << "Unknown animation ID!" << endl;
+		}break;
 	}
 }
 
@@ -104,7 +218,9 @@ void Unit::moveTo(int desX, int desY)
 	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
 	vector<vector2d<int>>* newPath = scene->findPath(vector2d<s32>(tileX, tileY), vector2d<s32>(desX, desY) );
 	if(!newPath) return;
-	if(newPath->size() > maxDistance) return;
+	while(newPath->size() > maxDistance) {
+		newPath->erase(newPath->begin());
+	}
 
 	while(newPath->size() > 0) {
 		path.push_back( newPath->at(newPath->size()-1) );
@@ -117,22 +233,21 @@ void Unit::moveTo(int desX, int desY)
 	hasMoved = true;
 }
 
-void Unit::update() {
-	if(path.size() > 0) {
-		followPath();
-	}
-}
-
-void Unit::followPath() {
+void Unit::followPath() 
+{
 	vector3df position = node->getPosition();
 	vector3df destination;
+	vector3df targetRotation;
 	destination.X = path[0].X * 10;
 	destination.Z = path[0].Y * 10;
 
-	if(position.getDistanceFrom(destination) < .5f) {
-		if(path.size() == 1) {
+	if(position.getDistanceFrom(destination) < .5f) 
+	{
+		if(path.size() == 1) 
+		{
 			node->setPosition(destination);
 		}
+
 		path.erase(path.begin());
 		return;
 	}
@@ -141,6 +256,9 @@ void Unit::followPath() {
 	destination = destination.normalize();
 	destination *= WALKSPEED;
 	destination *= Game::getInstance().delta;
+	if(destination.getLength() > 5) {
+		destination.setLength(5);
+	}
 
 	//overshoot fix
 	if(position.X < path[0].X * 10 && 
@@ -159,25 +277,53 @@ void Unit::followPath() {
 	if(position.Z > path[0].Y * 10 && 
 		position.Z + destination.Z < path[0].Y * 10) {
 			position.Z = path[0].Y*10;
+	}	
+	
+	/*if (position.X > (position.X+destination.X)) targetRotation.Y = 90.0; //Left
+	if (position.X < (position.X+destination.X)) targetRotation.Y = 270.0; //Right
+	if (position.Z < (position.Z+destination.Z)) targetRotation.Y = 180.0; //Up
+	if (position.Z > (position.Z+destination.Z)) targetRotation.Y = 360.0; //Down*/
+
+	if (position.X > (position.X+destination.X)) //Left
+	{ 
+		targetRotation.Y = 90.0; 
+		cout << "Moving Left: " << targetRotation.Y << endl;
+	}
+
+	if (position.X < (position.X+destination.X)) //Right
+	{ 
+		targetRotation.Y = 270.0;
+		cout << "Moving Right: " << targetRotation.Y << endl;
+	}
+
+	if (position.Z < (position.Z+destination.Z)) //Up
+	{ 
+		targetRotation.Y = 180.0; 
+		cout << "Moving Up: " << targetRotation.Y << endl;
+	}
+
+	if (position.Z > (position.Z+destination.Z)) //Down
+	{ 
+		targetRotation.Y = 360.0; 
+		cout << "Moving Down: " << targetRotation.Y << endl;
 	}
 
 	position += destination;
-
+	
+	node->setRotation(targetRotation);
 	node->setPosition(position);
 }
 
 void Unit::attackTarget(Entity* target)
 {
-	if(player == target->player){ return;}
-	if(hasAttacked == true){ return;}
-	cout << "remove da knight ploxz" << endl; 
-	if(!target->inAttackRange(tileX, tileY, attackDistance)) {
-		return;
-	}
+	if(player == target->player) { return; }
+	if(hasAttacked == true) { return; }
+	if(!target->inAttackRange(tileX, tileY, attackDistance)) { return; }
 
 	int damage = attack - target->defense;
 	target->handleDamage(damage);
 
+	currentAnimation = ATTACKING_ANIMATION;
 	hasAttacked = true;
 }
 
@@ -191,6 +337,8 @@ void Unit::addModel() {
 		modelNode->setMaterialTexture( 0, texture );
 		modelNode->setID(0);
 		modelNode->setScale(vector3df(0.15f, 0.15f, 0.15f) );
+
+		currentAnimation = IDLE_ANIMATION;
 		
 		srand(time(NULL)+randSeedCount++);
 		float randX = rand() % 8 - 4;

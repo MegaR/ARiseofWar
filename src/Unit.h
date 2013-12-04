@@ -5,7 +5,12 @@
 #include <time.h>
 #include <stdlib.h>
 
-#define WALKSPEED 50
+#define WALKSPEED 10
+
+#define IDLE_ANIMATION 0
+#define WALKING_ANIMATION 1
+#define ATTACKING_ANIMATION 2
+#define DEATH_ANIMATION 3
 
 class Unit: public Entity
 {
@@ -20,6 +25,9 @@ public:
 	bool hasAttacked;
 	bool hasMoved;
 
+	short currentAnimation;
+	bool isAnimating[4];
+
 	virtual void startTurn();
 	virtual void endTurn();
 	// moveAnimation
@@ -28,9 +36,9 @@ public:
 	std::vector<IAnimatedMeshSceneNode*> modelNodes;
 	std::vector<vector2d<int>> path;
 
-
 	void moveTo(int _tileX, int _tileY);
 	void update();
+	void updateAnimations();
 	void attackTarget(Entity* target);
 	void addModel();
 	void removeModel();
