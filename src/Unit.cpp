@@ -168,7 +168,17 @@ void Unit::followPath() {
 
 void Unit::attackTarget(Entity* target)
 {
-	
+	if(player == target->player){ return;}
+	if(hasAttacked == true){ return;}
+	cout << "remove da knight ploxz" << endl; 
+	if(!target->inAttackRange(tileX, tileY, attackDistance)) {
+		return;
+	}
+
+	int damage = attack - target->defense;
+	target->handleDamage(damage);
+
+	hasAttacked = true;
 }
 
 int randSeedCount = 0;
@@ -195,7 +205,8 @@ void Unit::addModel() {
 void Unit::removeModel() {
 	IAnimatedMeshSceneNode* modelNode = modelNodes[modelNodes.size()-1];
 	modelNodes.pop_back();
-	Game::getInstance().sceneManager->addToDeletionQueue(modelNode);
+	//Game::getInstance().sceneManager->addToDeletionQueue(modelNode);
+	modelNode->remove();
 }
 
 void Unit::startTurn() {
