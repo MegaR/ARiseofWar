@@ -27,7 +27,6 @@ public:
 
 	std::vector<IAnimatedMeshSceneNode*> modelNodes;
 	std::vector<vector2d<int>> path;
-	ISceneNode* node;
 
 
 	void moveTo(int _tileX, int _tileY);

@@ -4,8 +4,6 @@
 Button* returnToMenuButton;
 Button* exitGameButton;
 Button* nextTurnButton;
-UnitKnight* testKnight;
-
 
 GameScene::GameScene() {
 	Game* game = &Game::getInstance();
@@ -53,9 +51,12 @@ GameScene::~GameScene() {
 	delete players[1];
 	delete returnToMenuButton;
 	delete exitGameButton;
-	delete testKnight;
 	
+	for(int i = 0; i < entities.size(); i++) {
+		delete entities.at(i);
+	}
 	
+	selectedNode->remove();
 }
 
 void GameScene::update() {

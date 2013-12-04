@@ -14,7 +14,8 @@ UnitKnight::UnitKnight(int _x, int _y, int _player) : Unit(_x, _y, _player)
 	attackDistance = 1;
 	
 	Game* game = &Game::getInstance();
-	model = game->sceneManager->getMesh("C:/irrlicht-1.8/media/sydney.md2");
+	model = game->sceneManager->getMesh("res/knightdesu.3ds");
+
 	
 	addModel();
 	addModel();
