@@ -196,12 +196,16 @@ void GameScene::actionEntity() {
 	ent = getEntity(hit.X, hit.Y);
 
 	if(storedEntity->player == 0) {
-		((Unit*)storedEntity)->moveTo(hit.X, hit.Y);
+		if(!ent) {
+			((Unit*)storedEntity)->moveTo(hit.X, hit.Y);
+		}
 		clickEntity();
 	}
 
 	if(ent) {
 		//attack or somethin
+		//((Unit*)storedEntity)->attackTarget(ent);
+		
 	}
 }
 
@@ -217,23 +221,6 @@ void GameScene::clickEntity(){
 	if(ent) {
 		selectEntity(ent);
 	}
-
-	/*
-		if(hit != vector2d<int>(-1, -1) ) {
-			selectedNode->setPosition(vector3df(hit.X*10,0,hit.Y*10));
-			ent = getEntity(hit.X,hit.Y);
-			if(ent) {
-				deselectEntity();
-				storedEntity = ent;
-				storedEntity->selected();
-				ent = (Entity*)NULL;
-			}else if(storedEntity){
-				if(storedEntity->player == 0) {
-					((Unit*)storedEntity)->moveTo(hit.X,hit.Y);
-				}
-				deselectEntity();
-			}
-		}*/
 }
 
 void GameScene::deselectEntity(){

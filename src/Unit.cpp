@@ -145,16 +145,7 @@ void Unit::followPath() {
 
 void Unit::attackTarget(Entity* target)
 {
-	if (target->defense >= attack)
-	{
-		//attackAnimation
-		target->hp--;
-	}
-	else
-	{
-		//attackAnimation
-		target->hp -= (attack - target->defense);
-	}
+	
 }
 
 int randSeedCount = 0;
