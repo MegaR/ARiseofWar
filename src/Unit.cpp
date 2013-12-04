@@ -218,7 +218,9 @@ void Unit::moveTo(int desX, int desY)
 	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
 	vector<vector2d<int>>* newPath = scene->findPath(vector2d<s32>(tileX, tileY), vector2d<s32>(desX, desY) );
 	if(!newPath) return;
-	if(newPath->size() > maxDistance) return;
+	while(newPath->size() > maxDistance) {
+		newPath->erase(newPath->begin());
+	}
 
 	while(newPath->size() > 0) {
 		path.push_back( newPath->at(newPath->size()-1) );
@@ -249,6 +251,9 @@ void Unit::followPath() {
 	destination = destination.normalize();
 	destination *= WALKSPEED;
 	destination *= Game::getInstance().delta;
+	if(destination.getLength() > 5) {
+		destination.setLength(5);
+	}
 
 	//overshoot fix
 	if(position.X < path[0].X * 10 && 
