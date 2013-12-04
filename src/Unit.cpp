@@ -9,6 +9,8 @@ Unit::Unit(int tileX, int tileY, int player)
 	this->tileX = tileX;
 	this->tileY = tileY;
 	this->player = player;
+	hasAttacked = false;
+	hasMoved = false;
 
 	node = Game::getInstance().sceneManager->addEmptySceneNode(0, 0);
 	node->setPosition(vector3df(tileX * 10, 0, tileY * 10) );
@@ -25,7 +27,9 @@ Unit::~Unit()
 void Unit::selected() {
 	
 	if(player == 0) {
-		addDistanceTiles(tileX, tileY, maxDistance);
+		if(!hasMoved && !hasAttacked) {
+			addDistanceTiles(tileX, tileY, maxDistance);
+		}
 	}
 }
 
@@ -62,6 +66,8 @@ void Unit::addDistanceTiles(int x, int y, int distance) {
 		}
 	}
 
+	if(!inAttackRange && hasMoved) return;
+
 	if(!alreadyThere) {
 		IAnimatedMesh* model = game->sceneManager->getMesh("res/distance_Tile.3ds");
 		ISceneNode* node = game->sceneManager->addMeshSceneNode(model);
@@ -92,6 +98,8 @@ void Unit::deselected() {
 
 void Unit::moveTo(int desX, int desY)
 {
+	if(hasMoved) return;
+
 	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
 	vector<vector2d<int>>* newPath = scene->findPath(vector2d<s32>(tileX, tileY), vector2d<s32>(desX, desY) );
 	if(!newPath) return;
@@ -105,6 +113,7 @@ void Unit::moveTo(int desX, int desY)
 
 	tileX = desX;
 	tileY = desY;
+	hasMoved = true;
 }
 
 void Unit::update() {
@@ -173,4 +182,14 @@ void Unit::removeModel() {
 	IAnimatedMeshSceneNode* modelNode = modelNodes[modelNodes.size()-1];
 	modelNodes.pop_back();
 	Game::getInstance().sceneManager->addToDeletionQueue(modelNode);
+}
+
+void Unit::startTurn() {
+	cout << "start unit" << endl;
+	hasAttacked = false;
+	hasMoved = false;
+}
+
+void Unit::endTurn() {
+
 }

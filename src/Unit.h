@@ -16,6 +16,12 @@ public:
 	int attack;
 	int maxDistance;
 	int attackDistance;
+
+	bool hasAttacked;
+	bool hasMoved;
+
+	virtual void startTurn();
+	virtual void endTurn();
 	// moveAnimation
 	// attackAnimation
 

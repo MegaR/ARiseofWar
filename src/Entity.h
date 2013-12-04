@@ -22,8 +22,8 @@ public:
 
 	IAnimatedMesh* model;
 
-	void startTurn();
-	void endTurn();
+	virtual void startTurn();
+	virtual void endTurn();
 
 	virtual void selected();
 	virtual void deselected();
