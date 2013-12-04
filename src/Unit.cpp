@@ -178,7 +178,7 @@ void Unit::addModel() {
     {
         modelNode->setMaterialFlag(EMF_LIGHTING, false);
         //modelNode->setMD2Animation(scene::EMAT_STAND);
-		modelNode->setMaterialTexture( 0, Game::getInstance().videoDriver->getTexture("res/knight.png") );
+		modelNode->setMaterialTexture( 0, texture );
 		modelNode->setID(0);
 		modelNode->setScale(vector3df(0.15f, 0.15f, 0.15f) );
 		

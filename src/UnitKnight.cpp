@@ -15,7 +15,11 @@ UnitKnight::UnitKnight(int _x, int _y, int _player) : Unit(_x, _y, _player)
 	
 	Game* game = &Game::getInstance();
 	model = game->sceneManager->getMesh("res/knightdesu.3ds");
-
+	if(player == 0) {
+		texture = game->videoDriver->getTexture("res/knight.png");
+	} else {
+		texture = game->videoDriver->getTexture("res/knightEnemy.png");
+	}
 	
 	addModel();
 	addModel();
