@@ -15,6 +15,8 @@ GameScene::GameScene() {
 	currentPlayer = 0;
 	turnCount = 0;
 	storedEntity = (Entity*)NULL;
+	playerunits = true;
+	enemyunits = true;
 
 	
 	int sW = game->screenWidth;
@@ -25,6 +27,9 @@ GameScene::GameScene() {
 	bX = sW - bW;
 	bY = sH - bH;
 
+	background = game->gui->addImage(rect<s32>(0,0, game->screenWidth, game->screenHeight));
+	background->setVisible(false);
+	background->setScaleImage(true);
 	ITexture* buttonTexture = Game::getInstance().videoDriver->getTexture("res/buttonSmall.png");
 
 	returnToMenuButton = new Button(bX-100, bY, bW, bH, "Return\nto Menu", buttonTexture);
@@ -55,7 +60,7 @@ GameScene::~GameScene() {
 	for(int i = 0; i < entities.size(); i++) {
 		delete entities.at(i);
 	}
-	
+	background->setVisible(false);
 	selectedNode->remove();
 }
 
@@ -97,13 +102,35 @@ void GameScene::update() {
 	for(int i = 0; i < entities.size(); i++) {
 		entities.at(i)->update();
 	}
+
+	if(enemyunits == false){
+		background->setImage(game->videoDriver->getTexture("res/WinScreenEmpty.png"));
+		background->setVisible(true);
+		nextTurnButton->btn->setVisible(false);
+	}
+
+	if(playerunits == false){
+		background->setImage(game->videoDriver->getTexture("res/LoseScreenEmpty.png"));
+		background->setVisible(true);
+		nextTurnButton->btn->setVisible(false);
+	}
 }
 
 void GameScene::nextTurn() {
 	players[currentPlayer]->endTurn();
+	playerunits = false;
+	enemyunits = false;
 	for(int i = 0; i < entities.size(); i++) {
 		if(entities[i]->player == currentPlayer) {
 			entities[i]->endTurn();
+		}
+		
+		if(entities[i]->player == 1){
+			enemyunits = true;
+		}
+
+		if(entities[i]->player == 0){
+			playerunits = true;
 		}
 	}
 

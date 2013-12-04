@@ -39,10 +39,12 @@ public:
 	Entity* getEntity(int x, int y);
 	std::vector<vector2d<int>>* findPath(vector2d<int> start, vector2d<int> end);
 	
+	bool playerunits;
+	bool enemyunits;
 
 private:
 	void moveCamera(float x, float y, float z);
-
+	IGUIImage* background;
 	//pathfinding
 	int findElement(std::vector<vector2d<int>> list, vector2d<int> element); 
 	vector2d<int> lowest(int list[][MAPSIZE]);
