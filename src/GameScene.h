@@ -34,6 +34,7 @@ public:
 	void selectEntity(Entity* ent);
 	void actionEntity();
 	void deselectEntity();
+	void removeEntity(Entity* ent);
 	vector2d<int> mouseRay();
 	Entity* getEntity(int x, int y);
 	std::vector<vector2d<int>>* findPath(vector2d<int> start, vector2d<int> end);

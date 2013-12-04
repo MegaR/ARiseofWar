@@ -38,6 +38,7 @@ public:
 	void selected();
 	void deselected();
 	bool inAttackRange(int x, int y, int attackDistance);
+	virtual void handleDamage(int damage);
 
 private:
 	void addDistanceTiles(int x, int y, int distance);

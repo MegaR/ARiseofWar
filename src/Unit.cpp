@@ -203,6 +203,7 @@ void Unit::addModel() {
 }
 
 void Unit::removeModel() {
+	if(modelNodes.size() < 1) return;
 	IAnimatedMeshSceneNode* modelNode = modelNodes[modelNodes.size()-1];
 	modelNodes.pop_back();
 	//Game::getInstance().sceneManager->addToDeletionQueue(modelNode);
@@ -217,4 +218,11 @@ void Unit::startTurn() {
 
 void Unit::endTurn() {
 
+}
+
+void Unit::handleDamage(int damage){
+	Entity::handleDamage(damage);
+	for(int i = 0; i < damage; i++){
+		removeModel();
+	}
 }

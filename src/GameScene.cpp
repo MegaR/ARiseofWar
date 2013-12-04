@@ -247,6 +247,16 @@ Entity* GameScene::getEntity(int x, int y) {
 	return NULL;
 }
 
+void GameScene::removeEntity(Entity* ent){
+	for(int i = 0; i < entities.size(); i++){
+		if(ent == entities[i]){
+			delete entities[i];
+			entities.erase(entities.begin()+i);
+			return;
+		}
+	}
+}
+
 std::vector<vector2d<int>>* GameScene::findPath(vector2d<int> start, vector2d<int> end) {
 	std::vector<vector2d<int>> closedset;
 	std::vector<vector2d<int>> openset;

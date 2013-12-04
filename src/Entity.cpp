@@ -1,5 +1,5 @@
 #include "Entity.h"
-
+#include "game.h"
 #include <iostream>
 using namespace std;
 
@@ -49,4 +49,10 @@ bool Entity::inAttackRange(int x, int y, int attackDistance) {
 
 void Entity::handleDamage(int damage){
 	hp -= damage;
+
+	if( hp < 0){
+		GameScene* scene = (GameScene*)Game::getInstance().currentScene;
+		scene->removeEntity(this);
+		return;
+	}
 }
