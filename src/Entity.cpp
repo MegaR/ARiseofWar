@@ -9,7 +9,7 @@ Entity::Entity(void)
 
 Entity::~Entity()
 {
-	cout << "destroying Entity" << endl;
+	node->removeAll();
 }
 
 
