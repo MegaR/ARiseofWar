@@ -56,3 +56,11 @@ void Entity::handleDamage(int damage){
 		return;
 	}
 }
+
+vector2d<int> Entity::getVector() {
+	return vector2d<int>(tileX, tileY);
+}
+
+float Entity::distance(Entity* other) {
+	return getVector().getDistanceFrom(other->getVector());
+}

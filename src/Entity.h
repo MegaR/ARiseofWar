@@ -35,6 +35,9 @@ public:
 	void render();
 	virtual void update();
 
+	vector2d<int> getVector();
+	float distance(Entity* other);
+
 	bool inAttackRange(int x, int y, int attackDistance);
 
 //protected:

@@ -16,8 +16,8 @@ public:
 	void turn();
 private:
 	void entityTurn(Entity* entity);
-	Entity* findNearestTarget(int tileX, int tileY);
-	vector2d<int> nearestTile(int tileX, int tileY, int originX, int originY);
-	bool possibleDestination( int tileX, int tileY);
+	vector<Entity*>* findTargets(Entity* current);
+	bool attemptTarget(Entity* current, Entity* target);
+	vector2d<int> availableTile(Entity* current, Entity* target);
 };
 

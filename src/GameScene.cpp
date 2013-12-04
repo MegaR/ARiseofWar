@@ -255,6 +255,9 @@ Entity* GameScene::getEntity(int x, int y) {
 void GameScene::removeEntity(Entity* ent){
 	for(int i = 0; i < entities.size(); i++){
 		if(ent == entities[i]){
+			if(storedEntity == entities[i]) {
+				deselectEntity();
+			}
 			delete entities[i];
 			entities.erase(entities.begin()+i);
 			return;

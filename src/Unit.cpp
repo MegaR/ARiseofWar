@@ -228,8 +228,8 @@ void Unit::moveTo(int desX, int desY)
 	}
 	delete newPath;
 
-	tileX = desX;
-	tileY = desY;
+	tileX = path[path.size()-1].X;
+	tileY = path[path.size()-1].Y;
 	hasMoved = true;
 }
 
