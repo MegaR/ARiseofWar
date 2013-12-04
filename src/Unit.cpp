@@ -99,6 +99,7 @@ void Unit::deselected() {
 void Unit::moveTo(int desX, int desY)
 {
 	if(hasMoved) return;
+	if(desX == tileX && desY == tileY) return;
 
 	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
 	vector<vector2d<int>>* newPath = scene->findPath(vector2d<s32>(tileX, tileY), vector2d<s32>(desX, desY) );
