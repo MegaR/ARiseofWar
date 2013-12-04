@@ -130,7 +130,9 @@ void Unit::followPath() {
 	destination.Z = path[0].Y * 10;
 
 	if(position.getDistanceFrom(destination) < .5f) {
-		node->setPosition(destination);
+		if(path.size() == 1) {
+			node->setPosition(destination);
+		}
 		path.erase(path.begin());
 		return;
 	}
@@ -175,7 +177,7 @@ void Unit::addModel() {
 	if (modelNode)
     {
         modelNode->setMaterialFlag(EMF_LIGHTING, false);
-        modelNode->setMD2Animation(scene::EMAT_STAND);
+        //modelNode->setMD2Animation(scene::EMAT_STAND);
 		modelNode->setMaterialTexture( 0, Game::getInstance().videoDriver->getTexture("res/knight.png") );
 		modelNode->setID(0);
 		modelNode->setScale(vector3df(0.15f, 0.15f, 0.15f) );
