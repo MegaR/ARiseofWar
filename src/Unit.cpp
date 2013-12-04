@@ -150,12 +150,12 @@ void Unit::followPath() {
 			position.X = path[0].X;
 	}
 
-	if(position.Y < path[0].Y * 10 && 
-		position.Y + destination.Y > path[0].Y * 10) {
+	if(position.Z < path[0].Y * 10 && 
+		position.Z + destination.Z > path[0].Y * 10) {
 			position.Y = path[0].Y;
 	}
-	if(position.Y > path[0].Y * 10 && 
-		position.Y + destination.Y < path[0].Y * 10) {
+	if(position.Z > path[0].Y * 10 && 
+		position.Z + destination.Z < path[0].Y * 10) {
 			position.X = path[0].Y;
 	}
 
