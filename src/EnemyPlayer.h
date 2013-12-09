@@ -15,9 +15,4 @@ public:
 
 	void turn();
 private:
-	void entityTurn(Entity* entity);
-	vector<Entity*>* findTargets(Entity* current);
-	bool attemptTarget(Entity* current, Entity* target);
-	vector2d<int> availableTile(Entity* current, Entity* target);
 };
-

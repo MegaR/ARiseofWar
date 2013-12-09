@@ -395,6 +395,7 @@ bool Unit::attemptTarget(Entity* target) {
 		target->inAttackRange(tileX, tileY, attackDistance) ) {
 		attackTarget(target);
 		cout << "attacked" << endl;
+		return true;
 	}
 
 
@@ -402,9 +403,7 @@ bool Unit::attemptTarget(Entity* target) {
 		vector2d<int> destination = availableTile(target);
 		if(destination != vector2d<int>(-1, -1) ) {
 			moveTo(destination.X, destination.Y);
-			cout << "moved?" << endl;
 			if(!hasMoved) return false;
-			cout << "moved!" << endl;
 			attemptTarget(target);
 			return true;
 		} else {
