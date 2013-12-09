@@ -25,6 +25,7 @@ public:
 	ISceneNode* node;
 
 	virtual void startTurn();
+	virtual void enemyTurn();
 	virtual void endTurn();
 
 	virtual void selected();

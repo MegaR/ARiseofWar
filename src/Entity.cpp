@@ -64,3 +64,6 @@ vector2d<int> Entity::getVector() {
 float Entity::distance(Entity* other) {
 	return getVector().getDistanceFrom(other->getVector());
 }
+
+void Entity::enemyTurn() {
+}

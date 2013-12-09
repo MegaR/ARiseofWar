@@ -29,6 +29,7 @@ public:
 	bool isAnimating[4];
 
 	virtual void startTurn();
+	virtual void enemyTurn();
 	virtual void endTurn();
 	// moveAnimation
 	// attackAnimation
@@ -50,6 +51,9 @@ public:
 
 private:
 	void addDistanceTiles(int x, int y, int distance);
-
 	std::vector<ISceneNode*> distanceTiles;
+
+	std::vector<Entity*>* findTargets();
+	bool attemptTarget(Entity* target);
+	vector2d<int> availableTile(Entity* target);
 };
