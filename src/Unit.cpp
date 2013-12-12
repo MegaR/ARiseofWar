@@ -141,7 +141,7 @@ void Unit::updateAnimations()
 void Unit::selected() {
 	
 	if(player == 0) {
-		if(!hasMoved && !hasAttacked) {
+		if(!hasMoved) {
 			addDistanceTiles(tileX, tileY, maxDistance);
 		}
 	}
