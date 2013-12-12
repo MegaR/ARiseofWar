@@ -40,6 +40,7 @@ GameScene::GameScene() {
 	entities.push_back(new UnitKnight(1,1,0));
 	entities.push_back(new UnitKnight(5,0,1));
 	entities.push_back(new UnitKnight(0,5,1));
+	entities.push_back(new UnitKnight(7,5,1));
 
 	
 	IAnimatedMesh* mesh = game->sceneManager->getMesh("res/selected.3DS");
