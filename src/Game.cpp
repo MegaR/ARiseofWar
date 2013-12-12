@@ -19,7 +19,7 @@ void Game::start() {
 	IrrlichtDevice *nulldevice = createDevice(video::EDT_NULL);
 	core::dimension2d<u32> deskres = nulldevice->getVideoModeList()->getDesktopResolution();
 	nulldevice -> drop();
-	device = createDevice(video::EDT_OPENGL, deskres, 32, true, false, true, eventReceiver);
+	device = createDevice(video::EDT_OPENGL, deskres, 32, true, true, true, eventReceiver);
 	screenWidth = deskres.Width;
 	screenHeight = deskres.Height;
 	#endif
