@@ -56,4 +56,6 @@ private:
 	std::vector<Entity*>* findTargets();
 	bool attemptTarget(Entity* target);
 	vector2d<int> availableTile(Entity* target);
+
+	float getAngleBetween(const vector3df& vec1, const vector3df& vec2);
 };

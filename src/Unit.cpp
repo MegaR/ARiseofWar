@@ -252,6 +252,16 @@ void Unit::followPath()
 		return;
 	}
 
+	float cos = (destination-position).dotProduct(vector3df(100,0,0)) / ((destination-position).getLength() * vector3df(100,0,0).getLength());
+	float angle = (acos(cos) / PI) * 180;
+	if(destination.Z < position.Z) angle = -angle;
+
+	targetRotation.Y = -angle + 270;
+	cout << targetRotation.Y << endl;
+	for(int i = 0; i < modelNodes.size(); i++) {
+		modelNodes[i]->setRotation(targetRotation);
+	}
+
 	destination -= position;
 	destination = destination.normalize();
 	destination *= WALKSPEED;
@@ -260,29 +270,8 @@ void Unit::followPath()
 		destination.setLength(5);
 	}
 
-	//overshoot fix
-	if(position.X < path[0].X * 10 && 
-		position.X + destination.X > path[0].X * 10) {
-			position.X = path[0].X*10;
-	}
-	if(position.X > path[0].X * 10 && 
-		position.X + destination.X < path[0].X * 10) {
-			position.X = path[0].X*10;
-	}
-
-	if(position.Z < path[0].Y * 10 && 
-		position.Z + destination.Z > path[0].Y * 10) {
-			position.Z = path[0].Y*10;
-	}
-	if(position.Z > path[0].Y * 10 && 
-		position.Z + destination.Z < path[0].Y * 10) {
-			position.Z = path[0].Y*10;
-	}	
 	
-	/*if (position.X > (position.X+destination.X)) targetRotation.Y = 90.0; //Left
-	if (position.X < (position.X+destination.X)) targetRotation.Y = 270.0; //Right
-	if (position.Z < (position.Z+destination.Z)) targetRotation.Y = 180.0; //Up
-	if (position.Z > (position.Z+destination.Z)) targetRotation.Y = 360.0; //Down*/
+	/*
 
 	if (position.X > (position.X+destination.X)) //Left
 	{ 
@@ -306,12 +295,39 @@ void Unit::followPath()
 	{ 
 		targetRotation.Y = 360.0; 
 		cout << "Moving Down: " << targetRotation.Y << endl;
+	}*/
+
+	//overshoot fix
+	if(position.X < path[0].X * 10 && 
+		position.X + destination.X > path[0].X * 10) {
+			position.X = path[0].X*10;
+	}
+	if(position.X > path[0].X * 10 && 
+		position.X + destination.X < path[0].X * 10) {
+			position.X = path[0].X*10;
+	}
+
+	if(position.Z < path[0].Y * 10 && 
+		position.Z + destination.Z > path[0].Y * 10) {
+			position.Z = path[0].Y*10;
+	}
+	if(position.Z > path[0].Y * 10 && 
+		position.Z + destination.Z < path[0].Y * 10) {
+			position.Z = path[0].Y*10;
 	}
 
 	position += destination;
-	
-	node->setRotation(targetRotation);
 	node->setPosition(position);
+}
+
+float Unit::getAngleBetween (const vector3df& vec1, const vector3df& vec2)
+{
+   const float dotProduct = vec1.X * vec2.X + vec1.Y * vec2.Y + vec1.Z * vec2.Z;
+   const float length1 = sqrt (vec1.X * vec1.X + vec1.Y * vec1.Y + vec1.Z * vec1.Z);
+   const float length2 = sqrt (vec2.X * vec2.X + vec2.Y * vec2.Y + vec2.Z * vec2.Z);
+   
+   const float cosAngle = dotProduct / (length1 * length2);
+   return acos (cosAngle);
 }
 
 void Unit::attackTarget(Entity* target)

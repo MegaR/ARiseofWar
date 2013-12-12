@@ -12,7 +12,7 @@
 
 #define CAMERAMIN 10
 #define CAMERAMAX 70
-#define CAMERASPEED 100
+#define CAMERASPEED 50
 #define ZOOMSPEED 5
 
 class GameScene : public Scene
