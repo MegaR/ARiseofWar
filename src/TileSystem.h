@@ -1,6 +1,7 @@
 #pragma once
 #include "Tile.h"
 #include "TileGrass.h"
+#include "tileRocks.h"
 
 #include <vector>
 #include <iostream>

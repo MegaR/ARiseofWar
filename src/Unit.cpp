@@ -327,22 +327,19 @@ void Unit::attackTarget(Entity* target)
 	hasAttacked = true;
 }
 
-int randSeedCount = 0;
 void Unit::addModel() {
 	IAnimatedMeshSceneNode* modelNode = Game::getInstance().sceneManager->addAnimatedMeshSceneNode( model, node );
 	if (modelNode)
     {
-        modelNode->setMaterialFlag(EMF_LIGHTING, false);
-        //modelNode->setMD2Animation(scene::EMAT_STAND);
 		modelNode->setMaterialTexture( 0, texture );
-		modelNode->setID(0);
+		modelNode->getMaterial(0).Shininess = 0;
 		modelNode->setScale(vector3df(0.15f, 0.15f, 0.15f) );
+		modelNode->addShadowVolumeSceneNode(0, 0, false);
+		modelNode->setID(0);
 
 		currentAnimation = IDLE_ANIMATION;
 		
-		srand(time(NULL)+randSeedCount++);
 		float randX = rand() % 8 - 4;
-		srand(time(NULL)+randSeedCount++);
 		float randZ =rand() % 8 - 4;
 		modelNode->setPosition(vector3df(randX, 0.0f, randZ));
     }
@@ -354,7 +351,6 @@ void Unit::removeModel() {
 	if(modelNodes.size() < 1) return;
 	IAnimatedMeshSceneNode* modelNode = modelNodes[modelNodes.size()-1];
 	modelNodes.pop_back();
-	//Game::getInstance().sceneManager->addToDeletionQueue(modelNode);
 	modelNode->remove();
 }
 

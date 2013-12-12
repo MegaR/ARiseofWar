@@ -3,12 +3,22 @@
 
 Tile::Tile(int x, int y)
 {
-	//IMeshSceneNode* cube = Game::getInstance().sceneManager->addCubeSceneNode(10, 0, -1, vector3df(x*11,0,y*11) );
-	//cout << "x=" << x << " y=" << y << endl;
 }
 
 
 Tile::~Tile(void)
 {
 	node->remove();
+}
+
+void Tile::createModel(const path model, const path texture, int x, int y) {
+	Game* game = &Game::getInstance();
+	IAnimatedMesh* mesh = game->sceneManager->getMesh(model);
+	node = game->sceneManager->addMeshSceneNode(mesh);
+	//node->setMaterialFlag(EMF_LIGHTING, false);
+	node->setMaterialTexture( 0, game->videoDriver->getTexture(texture) );
+	node->getMaterial(0).Shininess = 0;
+	node->setPosition(vector3df(x*10, 0, y*10) );
+	node->setRotation(vector3df(0,rand()%3*90,0));
+	node->setID(1);
 }

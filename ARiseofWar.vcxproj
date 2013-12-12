@@ -95,6 +95,7 @@
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\Tile.cpp" />
     <ClCompile Include="src\TileGrass.cpp" />
+    <ClCompile Include="src\TileRocks.cpp" />
     <ClCompile Include="src\TileSystem.cpp" />
     <ClCompile Include="src\Unit.cpp" />
     <ClCompile Include="src\UnitKnight.cpp" />
@@ -111,6 +112,7 @@
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\Tile.h" />
     <ClInclude Include="src\TileGrass.h" />
+    <ClInclude Include="src\TileRocks.h" />
     <ClInclude Include="src\TileSystem.h" />
     <ClInclude Include="src\Unit.h" />
     <ClInclude Include="src\UnitKnight.h" />

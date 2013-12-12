@@ -4,13 +4,17 @@
 using namespace irr;
 using namespace scene;
 
+#include <time.h>
+#include <stdlib.h>
+
 class Tile
 {
 public:
 	Tile(int x = 0, int y = 0);
 	~Tile(void);
 
-	//Model model;
 	IMeshSceneNode* node;
 
+protected:
+	void createModel(const irr::io::path model, const irr::io::path texture, int x, int y);
 };

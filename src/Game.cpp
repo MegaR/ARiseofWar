@@ -7,6 +7,7 @@ Game& Game::getInstance() {
 }
 
 void Game::start() {
+	srand(time(NULL));
 	eventReceiver = new EventReceiver();
 
 	#ifdef _DEBUG
@@ -35,6 +36,10 @@ void Game::start() {
 	camera = sceneManager->addCameraSceneNode(0);
 	camera->setID(0);
 	sceneManager->setAmbientLight(SColorf(.25f, .25f, .25f));
+	sceneManager->setShadowColor(SColor(150,0,0,0));
+
+	ILightSceneNode* light = sceneManager->addLightSceneNode(0, vector3df(-50,100, -50), SColorf(1,1,1), 150.f);
+	camera->addChild(light);
 
 	changeScene(new MenuScene());
 
