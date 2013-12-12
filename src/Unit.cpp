@@ -257,7 +257,6 @@ void Unit::followPath()
 	if(destination.Z < position.Z) angle = -angle;
 
 	targetRotation.Y = -angle + 270;
-	cout << targetRotation.Y << endl;
 	for(int i = 0; i < modelNodes.size(); i++) {
 		modelNodes[i]->setRotation(targetRotation);
 	}
@@ -269,33 +268,6 @@ void Unit::followPath()
 	if(destination.getLength() > 5) {
 		destination.setLength(5);
 	}
-
-	
-	/*
-
-	if (position.X > (position.X+destination.X)) //Left
-	{ 
-		targetRotation.Y = 90.0; 
-		cout << "Moving Left: " << targetRotation.Y << endl;
-	}
-
-	if (position.X < (position.X+destination.X)) //Right
-	{ 
-		targetRotation.Y = 270.0;
-		cout << "Moving Right: " << targetRotation.Y << endl;
-	}
-
-	if (position.Z < (position.Z+destination.Z)) //Up
-	{ 
-		targetRotation.Y = 180.0; 
-		cout << "Moving Up: " << targetRotation.Y << endl;
-	}
-
-	if (position.Z > (position.Z+destination.Z)) //Down
-	{ 
-		targetRotation.Y = 360.0; 
-		cout << "Moving Down: " << targetRotation.Y << endl;
-	}*/
 
 	//overshoot fix
 	if(position.X < path[0].X * 10 && 
