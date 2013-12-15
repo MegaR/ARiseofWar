@@ -5,7 +5,7 @@
 #include <time.h>
 #include <stdlib.h>
 
-#define WALKSPEED 10
+#define WALKSPEED 500
 
 #define IDLE_ANIMATION 0
 #define WALKING_ANIMATION 1
@@ -56,6 +56,7 @@ private:
 	std::vector<Entity*>* findTargets();
 	bool attemptTarget(Entity* target);
 	vector2d<int> availableTile(Entity* target);
-
+	
+	ISceneNodeAnimator* moveAnimator;
 	float getAngleBetween(const vector3df& vec1, const vector3df& vec2);
 };

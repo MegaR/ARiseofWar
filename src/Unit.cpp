@@ -12,6 +12,7 @@ Unit::Unit(int tileX, int tileY, int player)
 	hasAttacked = false;
 	hasMoved = false;
 
+	moveAnimator = NULL;
 	currentAnimation = IDLE_ANIMATION;
 
 	isAnimating[IDLE_ANIMATION] = false;
@@ -235,61 +236,36 @@ void Unit::moveTo(int desX, int desY)
 
 void Unit::followPath() 
 {
-	vector3df position = node->getPosition();
-	vector3df destination;
-	vector3df targetRotation;
-	destination.X = path[0].X * 10;
-	destination.Z = path[0].Y * 10;
-
-	if(position.getDistanceFrom(destination) < .5f) 
-	{
-		if(path.size() == 1) 
-		{
-			node->setPosition(destination);
-		}
-
-		path.erase(path.begin());
+	if(moveAnimator && !moveAnimator->hasFinished()) {
 		return;
 	}
 
-	float cos = (destination-position).dotProduct(vector3df(100,0,0)) / ((destination-position).getLength() * vector3df(100,0,0).getLength());
-	float angle = (acos(cos) / PI) * 180;
-	if(destination.Z < position.Z) angle = -angle;
+	if(moveAnimator) {
+		node->removeAnimators();
+		delete moveAnimator;
+	}
 
+	if(path.size() == 0) return;
+
+	Game* game = &Game::getInstance();
+	vector3df destination;
+	destination.X = path[0].X * 10;
+	destination.Z = path[0].Y * 10;
+
+	vector3df targetRotation;
+	float cos = (destination-node->getPosition()).dotProduct(vector3df(100,0,0)) / ((destination-node->getPosition()).getLength() * vector3df(100,0,0).getLength());
+	float angle = (acos(cos) / PI) * 180;
+	if(destination.Z < node->getPosition().Z) angle = -angle;
 	targetRotation.Y = -angle + 270;
 	for(int i = 0; i < modelNodes.size(); i++) {
 		modelNodes[i]->setRotation(targetRotation);
 	}
+	
 
-	destination -= position;
-	destination = destination.normalize();
-	destination *= WALKSPEED;
-	destination *= Game::getInstance().delta;
-	if(destination.getLength() > 5) {
-		destination.setLength(5);
-	}
+	moveAnimator = game->sceneManager->createFlyStraightAnimator(node->getPosition(), destination, WALKSPEED);
+	node->addAnimator(moveAnimator);
 
-	//overshoot fix
-	if(position.X < path[0].X * 10 && 
-		position.X + destination.X > path[0].X * 10) {
-			position.X = path[0].X*10;
-	}
-	if(position.X > path[0].X * 10 && 
-		position.X + destination.X < path[0].X * 10) {
-			position.X = path[0].X*10;
-	}
-
-	if(position.Z < path[0].Y * 10 && 
-		position.Z + destination.Z > path[0].Y * 10) {
-			position.Z = path[0].Y*10;
-	}
-	if(position.Z > path[0].Y * 10 && 
-		position.Z + destination.Z < path[0].Y * 10) {
-			position.Z = path[0].Y*10;
-	}
-
-	position += destination;
-	node->setPosition(position);
+	path.erase(path.begin());
 }
 
 float Unit::getAngleBetween (const vector3df& vec1, const vector3df& vec2)
