@@ -2,6 +2,7 @@
 #include "Tile.h"
 #include "TileGrass.h"
 #include "tileRocks.h"
+#include "TileWheat.h"
 #include "scene.h"
 
 #include <vector>
