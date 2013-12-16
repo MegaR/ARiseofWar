@@ -4,7 +4,7 @@
 class Building : public Entity
 {
 public:
-	Building(int tileX, int tileY);
+	Building(int tileX, int tileY, int player);
 	~Building(void);
 	void createModel();
 

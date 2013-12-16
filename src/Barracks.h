@@ -3,7 +3,7 @@
 class Barracks : public Building
 {
 public:
-	Barracks(int tileX, int tileY);
+	Barracks(int tileX, int tileY, int player);
 	~Barracks(void);
 };
 
