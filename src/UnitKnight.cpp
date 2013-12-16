@@ -30,5 +30,4 @@ UnitKnight::UnitKnight(int _x, int _y, int _player) : Unit(_x, _y, _player)
 
 UnitKnight::~UnitKnight()
 {
-	cout << "destroyed Knight" << endl;
 }

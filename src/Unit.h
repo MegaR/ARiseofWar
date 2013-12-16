@@ -2,7 +2,6 @@
 
 #include "Entity.h"
 #include <vector>
-#include <time.h>
 #include <stdlib.h>
 
 #define WALKSPEED 300

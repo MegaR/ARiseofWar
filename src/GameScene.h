@@ -7,6 +7,7 @@
 #include "Button.h"
 #include "Player.h"
 #include "EnemyPlayer.h"
+#include "Barracks.h"
 
 #include "Game.h"
 

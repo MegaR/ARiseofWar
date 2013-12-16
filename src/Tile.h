@@ -13,6 +13,7 @@ public:
 	Tile(int x = 0, int y = 0);
 	~Tile(void);
 
+	bool walkable;
 	IMeshSceneNode* node;
 
 protected:

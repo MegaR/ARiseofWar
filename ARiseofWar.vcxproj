@@ -84,6 +84,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Barracks.cpp" />
+    <ClCompile Include="src\Building.cpp" />
     <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\EnemyPlayer.cpp" />
     <ClCompile Include="src\Entity.cpp" />
@@ -101,6 +103,8 @@
     <ClCompile Include="src\UnitKnight.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Barracks.h" />
+    <ClInclude Include="src\Building.h" />
     <ClInclude Include="src\Button.h" />
     <ClInclude Include="src\EnemyPlayer.h" />
     <ClInclude Include="src\Entity.h" />
