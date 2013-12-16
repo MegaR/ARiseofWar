@@ -252,7 +252,15 @@ void GameScene::clickEntity(){
 
 	if(hit == vector2d<int>(-1, -1) ) return;
 	
-	selectedNode->setPosition(vector3df(hit.X*10,0,hit.Y*10));
+	Building* building = dynamic_cast<Building*>(getEntity(hit.X, hit.Y) );
+	if(!building) {
+		selectedNode->setPosition(vector3df(hit.X*10,0,hit.Y*10));
+		selectedNode->setScale(vector3df(1,1,1));
+	} else {
+		selectedNode->setScale(vector3df(building->sizeX+0.25, 1, building->sizeY+0.25) );
+		selectedNode->setPosition(vector3df(building->tileX*10+(5*(building->sizeX/2)), 0.0f, building->tileY*10+(5*(building->sizeY/2))));
+	}
+	
 	deselectEntity();
 	ent = getEntity(hit.X,hit.Y);
 	if(ent) {
