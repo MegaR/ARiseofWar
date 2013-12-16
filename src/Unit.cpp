@@ -74,7 +74,8 @@ void Unit::updateAnimations()
 				for (int i = 0; i < modelNodes.size(); i++) 
 				{
 					modelNodes[i]->setFrameLoop(105, 183);
-					modelNodes[i]->setAnimationSpeed(30);
+					modelNodes[i]->setCurrentFrame(rand() % (183 - 105) + 105);
+					modelNodes[i]->setAnimationSpeed(60);
 				}
 			
 				isAnimating[IDLE_ANIMATION] = false;
@@ -91,6 +92,7 @@ void Unit::updateAnimations()
 				for (int i = 0; i < modelNodes.size(); i++) 
 				{
 					modelNodes[i]->setFrameLoop(53, 104);
+					modelNodes[i]->setCurrentFrame(rand() % 25 +53);
 					modelNodes[i]->setAnimationSpeed(30);
 				}
 			
@@ -260,7 +262,6 @@ void Unit::followPath()
 	for(int i = 0; i < modelNodes.size(); i++) {
 		modelNodes[i]->setRotation(targetRotation);
 	}
-	
 
 	moveAnimator = game->sceneManager->createFlyStraightAnimator(node->getPosition(), destination, WALKSPEED);
 	node->addAnimator(moveAnimator);

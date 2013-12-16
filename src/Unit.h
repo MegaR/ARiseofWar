@@ -5,7 +5,7 @@
 #include <time.h>
 #include <stdlib.h>
 
-#define WALKSPEED 500
+#define WALKSPEED 300
 
 #define IDLE_ANIMATION 0
 #define WALKING_ANIMATION 1
