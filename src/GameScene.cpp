@@ -1,5 +1,6 @@
 #include "GameScene.h"
 #include "UnitKnight.h"
+#include "UnitPeasant.h"
 
 Button* returnToMenuButton;
 Button* exitGameButton;
@@ -36,10 +37,10 @@ GameScene::GameScene() {
 	exitGameButton = new Button(bX, bY, bW, bH, "Exit\nGame", buttonTexture);
 	nextTurnButton = new Button(bX-200, bY, bW, bH, "Next\nTurn", buttonTexture);
 
-	entities.push_back(new UnitKnight(1,0,0));
+	entities.push_back(new UnitPeasant(1,0,0));
 	entities.push_back(new UnitKnight(1,1,0));
-	entities.push_back(new UnitKnight(5,0,1));
-	entities.push_back(new UnitKnight(0,5,1));
+	entities.push_back(new UnitPeasant(5,0,1));
+	entities.push_back(new UnitPeasant(0,5,1));
 	entities.push_back(new UnitKnight(7,5,1));
 	entities.push_back(new Barracks(5,5, 1));
 
