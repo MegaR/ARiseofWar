@@ -8,7 +8,7 @@ using namespace std;
 UnitPeasant::UnitPeasant(int _x, int _y, int _player) : Unit(_x, _y, _player)
 {
 	hp = 1;
-	attack = 1;
+	attack = 2;
 	defense = 1;
 	maxDistance = 7;
 	attackDistance = 1;
