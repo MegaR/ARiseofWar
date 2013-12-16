@@ -1,6 +1,8 @@
 #include "Barracks.h"
 #include "Game.h"
 
+Button* knightButton;
+
 Barracks::Barracks(int tileX, int tileY, int player) : Building(tileX, tileY, player)
 {
 	Game* game = &Game::getInstance();
@@ -10,7 +12,10 @@ Barracks::Barracks(int tileX, int tileY, int player) : Building(tileX, tileY, pl
 	sizeY = 2;
 	createModel();
 	GUI = game->gui->addImage(rect<s32>(0,0, 200, 100));
-	GUI->setImage(game->videoDriver->getTexture("res/background.png"));
+	GUI->setVisible(false);
+
+	knightButton = new Button(10, 10, 75, 75, "knight", game->videoDriver->getTexture("res/guiButtonWide.png") );
+	knightButton->btn->setVisible(false);
 }
 
 
@@ -25,7 +30,7 @@ void Barracks::update(){
 
 void Barracks::createUnit(){
 	Game* game = &Game::getInstance();
-	if(game->eventReceiver->isKeyPressed(KEY_KEY_K)){
+	if(game->eventReceiver->isKeyPressed(KEY_KEY_K) || knightButton->pressed){
 		std::vector<vector2d<int>> *list = new std::vector<vector2d<int>>();
 
 		list = ((GameScene*)game->currentScene)->get_neighbors(vector2d<s32>(tileX,tileY));
@@ -40,11 +45,13 @@ void Barracks::selected(){
 	Game* game = &Game::getInstance();
 	
 	if(((GameScene*)game->currentScene)->storedEntity  == this){
-		
+		GUI->setImage(game->videoDriver->getTexture("res/guiBackgroundMenu.png"));
 		GUI->setVisible(true);
+		knightButton->btn->setVisible(true);
 	}
 }
 
 void Barracks::deselected(){
 		GUI->setVisible(false);
+		knightButton->btn->setVisible(false);
 }

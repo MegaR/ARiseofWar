@@ -1,6 +1,8 @@
 #pragma once
 #include "building.h"
 #include "UnitKnight.h"
+#include "Button.h"
+
 class Barracks : public Building
 {
 public:
