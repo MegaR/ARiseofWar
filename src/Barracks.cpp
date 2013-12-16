@@ -1,7 +1,7 @@
 #include "Barracks.h"
 #include "Game.h"
 
-Barracks::Barracks(int tileX, int tileY) : Building(tileX, tileY)
+Barracks::Barracks(int tileX, int tileY, int player) : Building(tileX, tileY, player)
 {
 	Game* game = &Game::getInstance();
 	model = game->sceneManager->getMesh("res/barracks.3DS");

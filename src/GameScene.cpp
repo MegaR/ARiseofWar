@@ -281,7 +281,7 @@ Entity* GameScene::getEntity(int x, int y) {
 				return entities[i];
 			}
 		} else { // entity is a building
-			if(x >= building->tileX && x <= building->tileX + building->sizeX && y >= building->tileY && y <= building->tileY + building->sizeY) {
+			if(x >= building->tileX && x < building->tileX + building->sizeX && y >= building->tileY && y < building->tileY + building->sizeY) {
 				return entities[i];
 			}
 		}
