@@ -41,7 +41,7 @@ GameScene::GameScene() {
 	entities.push_back(new UnitKnight(5,0,1));
 	entities.push_back(new UnitKnight(0,5,1));
 	entities.push_back(new UnitKnight(7,5,1));
-	entities.push_back(new Barracks(10,10));
+	entities.push_back(new Barracks(5,5, 1));
 
 
 	tilesystem.create(this);
@@ -275,8 +275,15 @@ void GameScene::selectEntity(Entity* ent) {
 
 Entity* GameScene::getEntity(int x, int y) {
 	for(int i = 0; i < entities.size(); i++) {
-		if(entities[i]->tileX == x && entities[i]->tileY== y) {
-			return entities[i];
+		Building* building = dynamic_cast<Building*>(entities[i]);
+		if( !building ) {
+			if(entities[i]->tileX == x && entities[i]->tileY== y) {
+				return entities[i];
+			}
+		} else { // entity is a building
+			if(x >= building->tileX && x <= building->tileX + building->sizeX && y >= building->tileY && y <= building->tileY + building->sizeY) {
+				return entities[i];
+			}
 		}
 	}
 	

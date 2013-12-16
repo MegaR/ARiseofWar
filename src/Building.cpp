@@ -1,10 +1,11 @@
 #include "Building.h"
 #include "Game.h"
 
-Building::Building(int tileX, int tileY) : Entity()
+Building::Building(int tileX, int tileY, int player) : Entity()
 {
 	this->tileX = tileX;
 	this->tileY = tileY;
+	this->player = player;
 }
 
 
@@ -19,6 +20,6 @@ void Building::createModel() {
 	meshNode->addShadowVolumeSceneNode(0, 0, false);
 	meshNode->setID(0);
 		
-	meshNode->setPosition(vector3df(tileX*10-(5*(sizeX/2)), 0.0f, tileY*10-(5*(sizeY/2))));
+	meshNode->setPosition(vector3df(tileX*10+(5*(sizeX/2)), 0.0f, tileY*10+(5*(sizeY/2))));
 	node = meshNode;
 }
