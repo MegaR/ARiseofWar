@@ -190,14 +190,14 @@ void Unit::addDistanceTiles(int x, int y, int distance) {
 	if(!inAttackRange && hasMoved) return;
 
 	if(!alreadyThere) {
-		IAnimatedMesh* model = game->sceneManager->getMesh("res/distance_Tile.3ds");
+		IAnimatedMesh* model = game->sceneManager->getMesh("res/tileDistance.3ds");
 		ISceneNode* node = game->sceneManager->addMeshSceneNode(model);
 		node->setMaterialFlag(EMF_LIGHTING, false);
 		node->setMaterialType(video::EMT_TRANSPARENT_ALPHA_CHANNEL);
 		if(inAttackRange) {
-			node->setMaterialTexture( 0, game->videoDriver->getTexture("res/distance_Tile_red.png") );
+			node->setMaterialTexture( 0, game->videoDriver->getTexture("res/tileDistanceRed.png") );
 		} else {
-			node->setMaterialTexture( 0, game->videoDriver->getTexture("res/distance_Tile_blue.png") );
+			node->setMaterialTexture( 0, game->videoDriver->getTexture("res/tileDistanceBlue.png") );
 		}
 		node->setPosition(vector3d<f32>(x*10, 0, y*10) );
 		node->setID(0);
