@@ -42,6 +42,7 @@ GameScene::GameScene() {
 	entities.push_back(new UnitKnight(0,5,1));
 	entities.push_back(new UnitKnight(7,5,1));
 	entities.push_back(new Barracks(5,5, 1));
+	entities.push_back(new TownCenter(3,3, 1));
 
 
 	tilesystem.create(this);

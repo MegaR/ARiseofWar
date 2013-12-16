@@ -35,10 +35,10 @@ void Game::start() {
 
 	camera = sceneManager->addCameraSceneNode(0);
 	camera->setID(0);
-	sceneManager->setAmbientLight(SColorf(.25f, .25f, .25f));
+	sceneManager->setAmbientLight(SColorf(.05f, .05f, .05f));
 	sceneManager->setShadowColor(SColor(150,0,0,0));
 
-	ILightSceneNode* light = sceneManager->addLightSceneNode(0, vector3df(-50,100, -50), SColorf(1,1,1), 150.f);
+	ILightSceneNode* light = sceneManager->addLightSceneNode(0, vector3df(-50,75, -50), SColorf(.75f,.75f,.75f), 150.f);
 	camera->addChild(light);
 
 	changeScene(new MenuScene());

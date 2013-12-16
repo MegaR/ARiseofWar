@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "EnemyPlayer.h"
 #include "Barracks.h"
+#include "TownCenter.h"
 
 #include "Game.h"
 

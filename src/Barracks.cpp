@@ -9,6 +9,8 @@ Barracks::Barracks(int tileX, int tileY, int player) : Building(tileX, tileY, pl
 	sizeX = 2;
 	sizeY = 2;
 	createModel();
+	node->setScale(vector3df(0.5f,0.5f,0.5f));
+	node->setRotation(vector3df(0,30,0));
 }
 
 
