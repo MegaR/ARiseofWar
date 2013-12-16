@@ -17,11 +17,11 @@ MenuScene::MenuScene(void):Scene()
 	bY = (sH/2) - (bH/2);
 
 	background = game->gui->addImage(rect<s32>(0,0, game->screenWidth, game->screenHeight));
-	background->setImage(game->videoDriver->getTexture("res/background.png"));
+	background->setImage(game->videoDriver->getTexture("res/guiBackgroundMenu.png"));
 	background->setScaleImage(true);
 
-	playButton = new Button(bX, bY-75, bW, bH, "Play", game->videoDriver->getTexture("res/buttonWide.png") );
-	exitButton = new Button(bX, bY+75, bW, bH, "Exit", game->videoDriver->getTexture("res/buttonWide.png") );
+	playButton = new Button(bX, bY-75, bW, bH, "Play", game->videoDriver->getTexture("res/guiButtonWide.png") );
+	exitButton = new Button(bX, bY+75, bW, bH, "Exit", game->videoDriver->getTexture("res/guiButtonWide.png") );
 }
 
 MenuScene::~MenuScene()

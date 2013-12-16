@@ -51,7 +51,7 @@ void Game::start() {
 
 void Game::setGuiTheme() {
 	IGUISkin* skin = gui->getSkin();
-	IGUIFont* font = gui->getFont("res/font.bmp");
+	IGUIFont* font = gui->getFont("res/Font.bmp");
 	skin->setColor(EGDC_BUTTON_TEXT, SColor(255,255,255,255) );
 	
 	font->setKerningWidth(2);

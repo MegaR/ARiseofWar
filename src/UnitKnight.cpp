@@ -14,11 +14,11 @@ UnitKnight::UnitKnight(int _x, int _y, int _player) : Unit(_x, _y, _player)
 	attackDistance = 1;
 	
 	Game* game = &Game::getInstance();
-	model = game->sceneManager->getMesh("res/knight.md2");
+	model = game->sceneManager->getMesh("res/unitKnight.md2");
 	if(player == 0) {
-		texture = game->videoDriver->getTexture("res/knight.png");
+		texture = game->videoDriver->getTexture("res/unitKnight.png");
 	} else {
-		texture = game->videoDriver->getTexture("res/knightEnemy.png");
+		texture = game->videoDriver->getTexture("res/unitKnightEnemy.png");
 	}
 	
 	addModel();

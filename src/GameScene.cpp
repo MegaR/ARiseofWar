@@ -30,7 +30,7 @@ GameScene::GameScene() {
 	background = game->gui->addImage(rect<s32>(0,0, game->screenWidth, game->screenHeight));
 	background->setVisible(false);
 	background->setScaleImage(true);
-	ITexture* buttonTexture = Game::getInstance().videoDriver->getTexture("res/buttonSmall.png");
+	ITexture* buttonTexture = Game::getInstance().videoDriver->getTexture("res/guiButtonSmall.png");
 
 	returnToMenuButton = new Button(bX-100, bY, bW, bH, "Return\nto Menu", buttonTexture);
 	exitGameButton = new Button(bX, bY, bW, bH, "Exit\nGame", buttonTexture);
@@ -46,11 +46,11 @@ GameScene::GameScene() {
 
 	tilesystem.create(this);
 	
-	IAnimatedMesh* mesh = game->sceneManager->getMesh("res/selected.3DS");
+	IAnimatedMesh* mesh = game->sceneManager->getMesh("res/tileSelected.3DS");
 	selectedNode = game->sceneManager->addMeshSceneNode(mesh);
 	selectedNode->setMaterialFlag(EMF_LIGHTING, false);
 	selectedNode->setMaterialType(video::EMT_TRANSPARENT_ALPHA_CHANNEL);
-	selectedNode->setMaterialTexture( 0, game->videoDriver->getTexture("res/selectedTexture.png") );
+	selectedNode->setMaterialTexture( 0, game->videoDriver->getTexture("res/tileSelected.png") );
 	selectedNode->setPosition(vector3d<f32>(50, 0, 50) );
 	selectedNode->setID(0);
 }
@@ -108,13 +108,13 @@ void GameScene::update() {
 	}
 
 	if(enemyunits == false){
-		background->setImage(game->videoDriver->getTexture("res/WinScreenEmpty.png"));
+		background->setImage(game->videoDriver->getTexture("res/guiWin.png"));
 		background->setVisible(true);
 		nextTurnButton->btn->setVisible(false);
 	}
 
 	if(playerunits == false){
-		background->setImage(game->videoDriver->getTexture("res/LoseScreenEmpty.png"));
+		background->setImage(game->videoDriver->getTexture("res/guiLose.png"));
 		background->setVisible(true);
 		nextTurnButton->btn->setVisible(false);
 	}
