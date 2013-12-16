@@ -11,6 +11,8 @@ Barracks::Barracks(int tileX, int tileY, int player) : Building(tileX, tileY, pl
 	createModel();
 	node->setScale(vector3df(0.5f,0.5f,0.5f));
 	node->setRotation(vector3df(0,30,0));
+	GUI = game->gui->addImage(rect<s32>(0,0, 200, 100));
+	GUI->setImage(game->videoDriver->getTexture("res/background.png"));
 }
 
 
@@ -20,6 +22,7 @@ Barracks::~Barracks(void)
 
 void Barracks::update(){
 	createUnit();
+	selected();
 }
 
 void Barracks::createUnit(){
@@ -33,4 +36,17 @@ void Barracks::createUnit(){
 		}
 		delete list;
 	}
+}
+
+void Barracks::selected(){
+	Game* game = &Game::getInstance();
+	
+	if(((GameScene*)game->currentScene)->storedEntity  == this){
+		
+		GUI->setVisible(true);
+	}
+}
+
+void Barracks::deselected(){
+		GUI->setVisible(false);
 }

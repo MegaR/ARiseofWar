@@ -38,7 +38,6 @@ void MenuScene::update()
 	
 	if (playButton->pressed == true)
 	{
-		//button* poop = new button(1, 1, 50, 50, "POOP");
 		Game::getInstance().changeScene(new GameScene());
 	}
 

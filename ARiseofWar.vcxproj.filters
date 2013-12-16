@@ -72,6 +72,9 @@
     <ClCompile Include="src\TownCenter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\UnitPeasant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameScene.h">
@@ -125,10 +128,14 @@
     <ClInclude Include="src\Barracks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="src\TileWheat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\TownCenter.h">
+=======
+    <ClInclude Include="src\UnitPeasant.h">
+>>>>>>> 8098ee42eb47c51bcdfedcc6fda80a9593e66442
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
