@@ -162,6 +162,10 @@ void Unit::addDistanceTiles(int x, int y, int distance) {
 		return;
 	}
 
+	if(!scene->tilesystem.tiles[x][y]->walkable) {
+		return;
+	}
+
 	Entity* entity = scene->getEntity(x,y);
 	if( entity != NULL && entity != this ) {
 		return;

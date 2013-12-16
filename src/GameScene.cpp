@@ -41,7 +41,10 @@ GameScene::GameScene() {
 	entities.push_back(new UnitKnight(5,0,1));
 	entities.push_back(new UnitKnight(0,5,1));
 	entities.push_back(new UnitKnight(7,5,1));
+	entities.push_back(new Barracks(10,10));
 
+
+	tilesystem.create(this);
 	
 	IAnimatedMesh* mesh = game->sceneManager->getMesh("res/selected.3DS");
 	selectedNode = game->sceneManager->addMeshSceneNode(mesh);
@@ -393,36 +396,32 @@ std::vector<vector2d<int>>* GameScene::get_neighbors(vector2d<int> current) {
 
 	if(current.X > 0) {
 		if(!getEntity(current.X-1, current.Y) ) {
-			list->push_back(vector2d<int>(current.X-1, current.Y));
+			if(tilesystem.tiles[current.X-1][current.Y]->walkable) {
+				list->push_back(vector2d<int>(current.X-1, current.Y));
+			}
 		}
-		/*if(current.Y > 0) {
-			list->push_back(vector2d<int>(current.X-1, current.Y-1));
-		}
-		if(current.Y < MAPSIZE) {
-			list->push_back(vector2d<int>(current.X-1, current.Y+1));
-		}*/
 	}
 
 	if(current.X < MAPSIZE-1) {
 		if(!getEntity(current.X+1, current.Y) ) {
-			list->push_back(vector2d<int>(current.X+1, current.Y));
+			if(tilesystem.tiles[current.X+1][current.Y]->walkable) {
+				list->push_back(vector2d<int>(current.X+1, current.Y));
+			}
 		}
-		/*if(current.Y > 0) {
-			list->push_back(vector2d<int>(current.X+1, current.Y-1));
-		}
-		if(current.Y < MAPSIZE) {
-			list->push_back(vector2d<int>(current.X+1, current.Y+1));
-		}*/
 	}
 
 	if(current.Y > 0) {
 		if(!getEntity(current.X, current.Y-1) ) {
-			list->push_back(vector2d<int>(current.X, current.Y-1));
+			if(tilesystem.tiles[current.X][current.Y-1]->walkable) {
+				list->push_back(vector2d<int>(current.X, current.Y-1));
+			}
 		}
 	}
 	if(current.Y < MAPSIZE-1) {
 		if(!getEntity(current.X, current.Y+1) ) {
-			list->push_back(vector2d<int>(current.X, current.Y+1));
+			if(tilesystem.tiles[current.X][current.Y+1]->walkable) {
+				list->push_back(vector2d<int>(current.X, current.Y+1));
+			}
 		}
 	}
 
