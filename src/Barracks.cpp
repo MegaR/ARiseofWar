@@ -16,11 +16,19 @@ Barracks::~Barracks(void)
 {
 }
 
+void Barracks::update(){
+	createUnit();
+}
+
 void Barracks::createUnit(){
 	Game* game = &Game::getInstance();
-	if(game->eventReceiver->isKeyDown(KEY_KEY_K)){
-		((GameScene*)game->currentScene)->entities.push_back(new UnitKnight(5,5, 1));
+	if(game->eventReceiver->isKeyPressed(KEY_KEY_K)){
+		std::vector<vector2d<int>> *list = new std::vector<vector2d<int>>();
+
+		list = ((GameScene*)game->currentScene)->get_neighbors(vector2d<s32>(tileX,tileY));
+		if(list->size() > 0){
+			((GameScene*)game->currentScene)->entities.push_back(new UnitKnight(list->at(0).X,list->at(0).Y, 1));
+		}
+		delete list;
 	}
-
-
 }
