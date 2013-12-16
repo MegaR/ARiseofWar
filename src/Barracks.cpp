@@ -15,3 +15,12 @@ Barracks::Barracks(int tileX, int tileY) : Building(tileX, tileY)
 Barracks::~Barracks(void)
 {
 }
+
+void Barracks::createUnit(){
+	Game* game = &Game::getInstance();
+	if(game->eventReceiver->isKeyDown(KEY_KEY_K)){
+		((GameScene*)game->currentScene)->entities.push_back(new UnitKnight(5,5, 1));
+	}
+
+
+}
