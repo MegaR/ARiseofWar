@@ -101,6 +101,7 @@
     <ClCompile Include="src\TileSystem.cpp" />
     <ClCompile Include="src\Unit.cpp" />
     <ClCompile Include="src\UnitKnight.cpp" />
+    <ClCompile Include="src\UnitPeasant.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Barracks.h" />
@@ -120,6 +121,7 @@
     <ClInclude Include="src\TileSystem.h" />
     <ClInclude Include="src\Unit.h" />
     <ClInclude Include="src\UnitKnight.h" />
+    <ClInclude Include="src\UnitPeasant.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Irrlicht.dll" />
