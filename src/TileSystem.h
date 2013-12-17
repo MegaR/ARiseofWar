@@ -17,6 +17,10 @@ using namespace irr;
 using namespace core;
 
 #define MAPSIZE 30
+#define CHANCEDECREASE 10
+#define STARTRESOURCECHANCE 100
+#define RANDOMRESOURCECHANCE 90
+#define RANDOMRESOURCECHUNKS 25
 
 class TileSystem
 {
