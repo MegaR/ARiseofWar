@@ -39,10 +39,10 @@ GameScene::GameScene() {
 
 	entities.push_back(new UnitPeasant(1,0,0));
 	entities.push_back(new UnitKnight(1,1,0));
-	entities.push_back(new UnitPeasant(5,0,1));
-	entities.push_back(new UnitPeasant(0,5,1));
-	entities.push_back(new UnitKnight(7,5,1));
-	entities.push_back(new Barracks(5,5, 1));
+	//entities.push_back(new UnitPeasant(5,0,1));
+	//entities.push_back(new UnitPeasant(0,5,1));
+	//entities.push_back(new UnitKnight(7,5,1));
+	entities.push_back(new Barracks(5,5, 0));
 	entities.push_back(new TownCenter(3,3, 1));
 
 
