@@ -43,7 +43,7 @@ public:
 	std::vector<vector2d<int>>* get_neighbors(vector2d<int> current);
 	bool playerunits;
 	bool enemyunits;
-
+	int currentPlayer;
 private:
 	void moveCamera(float x, float y, float z);
 	IGUIImage* background;
@@ -57,5 +57,5 @@ private:
 	IMeshSceneNode *selectedNode;
 
 	Player* players[2];
-	int currentPlayer;
+	
 };
