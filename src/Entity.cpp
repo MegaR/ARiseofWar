@@ -9,7 +9,7 @@ Entity::Entity(void)
 
 Entity::~Entity()
 {
-	node->removeAll();
+	node->remove();
 }
 
 
