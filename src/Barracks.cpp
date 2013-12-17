@@ -34,7 +34,6 @@ void Barracks::update(){
 
 void Barracks::createUnit(){
 	Game* game = &Game::getInstance();
-	
 	std::vector<vector2d<int>> *list = new std::vector<vector2d<int>>();
 	
 	list = ((GameScene*)game->currentScene)->get_neighbors(vector2d<s32>(tileX,tileY));
@@ -50,7 +49,6 @@ void Barracks::addtoqueue(){
 	if(game->eventReceiver->isKeyPressed(KEY_KEY_K) && allowBuild  == true ){
 		buildturn = ((GameScene*)game->currentScene)->turnCount;
 		cout << "pressed K" << endl; 
-
 	}
 }
 
