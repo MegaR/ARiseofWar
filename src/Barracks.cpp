@@ -25,11 +25,13 @@ Barracks::Barracks(int tileX, int tileY, int player) : Building(tileX, tileY, pl
 
 Barracks::~Barracks(void)
 {
+	GUI->remove();
+	delete knightButton;
 }
 
 void Barracks::update(){
+	knightButton->update();
 	addtoqueue();
-	selected();
 }
 
 void Barracks::createUnit(){
@@ -46,7 +48,7 @@ void Barracks::createUnit(){
 void Barracks::addtoqueue(){
 	Game* game = &Game::getInstance();
 	
-	if(game->eventReceiver->isKeyPressed(KEY_KEY_K) && allowBuild  == true ){
+	if((game->eventReceiver->isKeyPressed(KEY_KEY_K) || knightButton->pressed) && allowBuild  == true ){
 		buildturn = ((GameScene*)game->currentScene)->turnCount;
 		cout << "pressed K" << endl; 
 	}
@@ -55,12 +57,10 @@ void Barracks::addtoqueue(){
 void Barracks::selected(){
 	Game* game = &Game::getInstance();
 	
-	if(((GameScene*)game->currentScene)->storedEntity  == this){
-		GUI->setImage(game->videoDriver->getTexture("res/guiBackgroundMenu.png"));
-		GUI->setVisible(true);
-		knightButton->btn->setVisible(true);
-		allowBuild = true;
-	}
+	GUI->setImage(game->videoDriver->getTexture("res/guiBackgroundMenu.png"));
+	GUI->setVisible(true);
+	knightButton->btn->setVisible(true);
+	allowBuild = true;
 }
 
 void Barracks::deselected(){

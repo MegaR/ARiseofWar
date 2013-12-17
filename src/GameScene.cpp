@@ -37,7 +37,7 @@ GameScene::GameScene() {
 	exitGameButton = new Button(bX, bY, bW, bH, "Exit\nGame", buttonTexture);
 	nextTurnButton = new Button(bX-200, bY, bW, bH, "Next\nTurn", buttonTexture);
 
-
+	entities.push_back(new Barracks(3,3,0));
 	tilesystem.create(this);
 	
 	IAnimatedMesh* mesh = game->sceneManager->getMesh("res/tileSelected.3DS");
