@@ -1,5 +1,5 @@
 #include "Button.h"
-
+#include "Game.h"
 Button::Button(int x, int y, int w, int h, std::string t, ITexture* _img)
 {
 	wstring ws;

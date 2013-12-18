@@ -1,5 +1,4 @@
 #include "UnitPeasant.h"
-
 #include "Game.h"
 
 #include <iostream>
@@ -23,6 +22,17 @@ UnitPeasant::UnitPeasant(int _x, int _y, int _player) : Unit(_x, _y, _player)
 		texture = game->videoDriver->getTexture("res/unitPeasantEnemy.png");
 	}
 	
+	showGUI = false;
+	isSelected = false;
+	buildingBuilt = false;
+
+	GUI = game->gui->addImage(rect<s32>(0,40, 95, 135));
+	GUI->setImage(game->videoDriver->getTexture("res/guiBackgroundMenu.png"));
+	GUI->setVisible(false);
+
+	buildBarracksButton = new Button(10, 50, 75, 75, "Build Barracks", game->videoDriver->getTexture("res/guiButtonSmall.png"));
+	buildBarracksButton->btn->setVisible(false);
+
 	for(int i = 0; i < maxModels; i++) {
 		addModel();
 	}
@@ -31,4 +41,60 @@ UnitPeasant::UnitPeasant(int _x, int _y, int _player) : Unit(_x, _y, _player)
 
 UnitPeasant::~UnitPeasant()
 {
+	delete buildBarracksButton;
+	GUI->remove();
+}
+
+void UnitPeasant::update()
+{
+	Unit::update();
+	buildBarracksButton->update();
+
+	GUI->setVisible(showGUI);
+	buildBarracksButton->btn->setVisible(showGUI);
+
+	if((isSelected == false) && (buildingBuilt == true))
+	{
+		showGUI = false;
+	}
+
+	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
+	if(scene->nextTurnButton->pressed)
+	{
+		showGUI = false;
+		isSelected = false;
+		buildingBuilt = false;
+	}
+
+	if (buildBarracksButton->pressed)
+	{
+		buildingBuilt = true;
+		if((scene->getEntity(tileX+1, tileY))||(scene->getEntity(tileX, tileY+1))||(scene->getEntity(tileX+1, tileY+1)))
+		{
+			cout << "can't build, object in the way" << endl;
+		}
+		else 
+		{
+			scene->entities.push_back(new Barracks(tileX, tileY, player));
+			scene->removeEntity(this);
+		}
+	}	
+}
+
+void UnitPeasant::selected()
+{
+	Unit::selected();
+	showGUI = true;
+	isSelected = true;
+}
+
+void UnitPeasant::deselected()
+{
+	Unit::deselected();
+	isSelected = false;
+}
+
+void UnitPeasant::buildBuilding()
+{
+
 }

@@ -1,5 +1,5 @@
 #pragma once
-#include "building.h"
+#include "Building.h"
 #include "UnitKnight.h"
 #include "Button.h"
 
