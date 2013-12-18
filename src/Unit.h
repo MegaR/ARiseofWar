@@ -17,6 +17,8 @@ public:
 	Unit(int tileX, int tileY, int player);
 	virtual ~Unit();
 
+	int maxHP;
+	int maxModels;
 	int attack;
 	int maxDistance;
 	int attackDistance;
@@ -40,13 +42,14 @@ public:
 	void update();
 	void updateAnimations();
 	void attackTarget(Entity* target);
+	void updateModels();
 	void addModel();
 	void removeModel();
 	void followPath();
 	void selected();
 	void deselected();
 	bool inAttackRange(int x, int y, int attackDistance);
-	virtual void handleDamage(int damage);
+	virtual bool handleDamage(int damage);
 
 private:
 	void addDistanceTiles(int x, int y, int distance);
