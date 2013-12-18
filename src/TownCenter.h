@@ -6,5 +6,20 @@ class TownCenter :
 public:
 	TownCenter(int tileX, int tileY, int player);
 	~TownCenter(void);
+
+	void update();
+	void createUnit();
+	void addtoqueue();
+	void selected();
+	void deselected();
+	void startTurn();
+
+	bool allowBuild;
+	int buildturn;
+
+	IGUIStaticText* txt;
+	IGUIImage* GUI;
+
+
 };
 

@@ -28,6 +28,7 @@ Barracks::Barracks(int tileX, int tileY, int player) : Building(tileX, tileY, pl
 Barracks::~Barracks(void)
 {
 	GUI->remove();
+	txt->remove();
 	delete knightButton;
 }
 
