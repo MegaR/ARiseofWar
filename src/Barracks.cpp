@@ -66,14 +66,12 @@ void Barracks::selected(){
 	GUI->setVisible(true);
 	txt->setVisible(true);
 	knightButton->btn->setVisible(true);
-	allowBuild = true;
 }
 
 void Barracks::deselected(){
 		GUI->setVisible(false);
 		txt->setVisible(false);
 		knightButton->btn->setVisible(false);
-		allowBuild = false;
 }
 
 void  Barracks::startTurn(){
