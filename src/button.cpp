@@ -14,6 +14,7 @@ Button::Button(int x, int y, int w, int h, std::string t, ITexture* _img)
 	if (img)
 	{ 
 		btn->setImage(img, rect<s32>(0,0,w,h)); 
+		btn->setDrawBorder(0);
 		btn->setUseAlphaChannel(true);
 	}
 
