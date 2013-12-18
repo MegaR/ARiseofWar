@@ -45,7 +45,6 @@ std::vector<vector2d<int>>* Building::getSurroundingTiles() {
 bool Building::inAttackRange(int x, int y, int attackDistance) {
 	for(int offsetX = 0; offsetX < sizeX; offsetX++) {
 		for(int offsetY = 0; offsetY < sizeY; offsetY++) {
-			cout << sizeX;
 			int calcX = abs(tileX+offsetX-x);
 			int calcY = abs(tileY+offsetY-y);
 			if ((calcX+calcY)<=attackDistance) return true;
