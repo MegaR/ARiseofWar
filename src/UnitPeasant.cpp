@@ -22,8 +22,6 @@ UnitPeasant::UnitPeasant(int _x, int _y, int _player) : Unit(_x, _y, _player)
 		texture = game->videoDriver->getTexture("res/unitPeasantEnemy.png");
 	}
 	
-<<<<<<< HEAD
-	addModel();
 
 	showGUI = false;
 	isSelected = false;
@@ -33,13 +31,12 @@ UnitPeasant::UnitPeasant(int _x, int _y, int _player) : Unit(_x, _y, _player)
 	GUI->setImage(game->videoDriver->getTexture("res/guiBackgroundMenu.png"));
 	GUI->setVisible(false);
 
-	buildBarracksButton = new Button(10, 50, 75, 75, "Build Barracks", game->videoDriver->getTexture("res/guiButtonSmall.png"));
+	buildBarracksButton = new Button(10, 50, 75, 75, "Barracks", game->videoDriver->getTexture("res/guiButtonSmall.png"));
 	buildBarracksButton->btn->setVisible(false);
-=======
+
 	for(int i = 0; i < maxModels; i++) {
 		addModel();
 	}
->>>>>>> 75ddfef46a2f0e83d2c8e2390eaf7c405fd00942
 }
 
 
@@ -73,7 +70,11 @@ void UnitPeasant::update()
 	if (buildBarracksButton->pressed)
 	{
 		buildingBuilt = true;
-		if((scene->getEntity(tileX+1, tileY))||(scene->getEntity(tileX, tileY+1))||(scene->getEntity(tileX+1, tileY+1)))
+		TileGrass* validTile2 = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[tileX+1][tileY]);
+		TileGrass* validTile3 = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[tileX][tileY+1]);
+		TileGrass* validTile4 = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[tileX+1][tileY+1]);
+
+		if((scene->getEntity(tileX+1, tileY)) || (scene->getEntity(tileX, tileY+1)) || (scene->getEntity(tileX+1, tileY+1)) || (!validTile2) || (!validTile3) || (!validTile4))
 		{
 			cout << "can't build, object in the way" << endl;
 		}

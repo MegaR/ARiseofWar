@@ -13,7 +13,7 @@ TownCenter::TownCenter(int tileX, int tileY, int player) : Building(tileX, tileY
 	sizeY = 2;
 	createModel();
 
-	node->setScale(vector3df(0.5f,0.5f,0.5f));
+	node->setScale(vector3df(0.9f,0.9f,0.9f));
 	node->setRotation(vector3df(0,30,0));
 	GUI = game->gui->addImage(rect<s32>(0,0, 300, 125));
 	txt =	game->gui->addStaticText(L"peasant duurt 1 burten om te bouwen" ,rect<s32>(0,0, 300, 100));
