@@ -31,7 +31,7 @@ public:
 	virtual void selected();
 	virtual void deselected();
 
-	virtual void handleDamage(int damage);
+	virtual bool handleDamage(int damage);
 
 	void render();
 	virtual void update();
@@ -40,7 +40,4 @@ public:
 	float distance(Entity* other);
 
 	bool inAttackRange(int x, int y, int attackDistance);
-
-//protected:
-	float x, y, z;
 };

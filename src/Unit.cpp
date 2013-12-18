@@ -290,10 +290,21 @@ void Unit::attackTarget(Entity* target)
 	if(!target->inAttackRange(tileX, tileY, attackDistance)) { return; }
 
 	int damage = attack - target->defense;
-	target->handleDamage(damage);
+	if(damage > 0) {
+		target->handleDamage(damage);
+	}
 
 	currentAnimation = ATTACKING_ANIMATION;
 	hasAttacked = true;
+}
+
+void Unit::updateModels() {
+	while (modelNodes.size() > hp / (maxHP / maxModels) && modelNodes.size() > 1) {
+		removeModel();
+	}
+	while (modelNodes.size() < hp / (maxHP / maxModels) ) {
+		addModel();
+	}
 }
 
 void Unit::addModel() {
@@ -333,11 +344,12 @@ void Unit::endTurn() {
 
 }
 
-void Unit::handleDamage(int damage){
-	Entity::handleDamage(damage);
-	for(int i = 0; i < damage; i++){
-		removeModel();
+bool Unit::handleDamage(int damage){
+	if(Entity::handleDamage(damage)) {
+		updateModels();
+		return true;
 	}
+	return false;
 }
 
 void Unit::enemyTurn() {

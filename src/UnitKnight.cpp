@@ -7,11 +7,13 @@ using namespace std;
 
 UnitKnight::UnitKnight(int _x, int _y, int _player) : Unit(_x, _y, _player)
 {
-	hp = 5;
+	maxHP = 10;
+	hp = 10;
 	attack = 5;
 	defense = 3;
 	maxDistance = 4;
 	attackDistance = 1;
+	maxModels = 5;
 	
 	Game* game = &Game::getInstance();
 	model = game->sceneManager->getMesh("res/unitKnight.md2");
@@ -21,11 +23,9 @@ UnitKnight::UnitKnight(int _x, int _y, int _player) : Unit(_x, _y, _player)
 		texture = game->videoDriver->getTexture("res/unitKnightEnemy.png");
 	}
 	
-	addModel();
-	addModel();
-	addModel();
-	addModel();
-	addModel();
+	for(int i = 0; i < maxModels; i++) {
+		addModel();
+	}
 }
 
 UnitKnight::~UnitKnight()

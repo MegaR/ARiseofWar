@@ -33,10 +33,10 @@ void TileSystem::create(Scene* scene) {
 	generateStartResource(MAPSIZE-enemyX, enemyY, 0, scene);
 	generateStartResource(MAPSIZE-enemyX, enemyY, 1, scene);
 
-	for(int i = 0; i < 10; i ++) {
-		int randomX = rand() % 15 + 7;
-		int randomY = rand() % 30;
-		spreadResource(randomX, randomY, rand()%2, scene, 70);
+	for(int i = 0; i < RANDOMRESOURCECHUNKS; i ++) {
+		int randomX = rand() % MAPSIZE;
+		int randomY = rand() % MAPSIZE;
+		spreadResource(randomX, randomY, rand()%2, scene, RANDOMRESOURCECHANCE);
 	}
 }
 
@@ -75,7 +75,7 @@ void TileSystem::generateStartResource(int playerX, int playerY, int tileType, S
 		randY += playerY;
 	} while(gameScene->getEntity(randX, randY) || randX < 0 || randY < 0 || randX >= MAPSIZE || randY >= MAPSIZE );
 
-	spreadResource(randX, randY, tileType, scene, 100);
+	spreadResource(randX, randY, tileType, scene, STARTRESOURCECHANCE);
 }
 
 void TileSystem::spreadResource(int x, int y, int tileType, Scene* scene, int chance) {
@@ -92,14 +92,13 @@ void TileSystem::spreadResource(int x, int y, int tileType, Scene* scene, int ch
 	}
 
 	if(rand()%100 < chance) {
-		cout << "SPAWN MORE SHIZZLE" << endl;
 		vector<vector2d<s32>>* neighbors = ((GameScene*)scene)->get_neighbors(vector2d<s32>(x,y));
 		int randomDirection = rand();
 		for(int i = 0; i < neighbors->size(); i++) {
 			int ii = i + randomDirection % neighbors->size();
 			if(((GameScene*)scene)->getEntity(neighbors->at(ii).X, neighbors->at(ii).Y) ) continue;
 
-			spreadResource(neighbors->at(ii).X, neighbors->at(ii).Y, tileType, scene, chance - 10);
+			spreadResource(neighbors->at(ii).X, neighbors->at(ii).Y, tileType, scene, chance - CHANCEDECREASE);
 			break;
 			
 		}

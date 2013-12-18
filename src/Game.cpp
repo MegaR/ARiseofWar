@@ -71,13 +71,13 @@ void Game::loop() {
 	while(device->run()) {
 		delta = (f32)(device->getTimer()->getTime() - prevTime) / 1000.f;
 		prevTime = device->getTimer()->getTime();
-		eventReceiver->update();
+		
 
 		videoDriver->beginScene(true, true, SColor(255,0,0,0));
 		currentScene->update();
 		sceneManager->drawAll();
 		gui->drawAll();
-
+		eventReceiver->update();
 		videoDriver->endScene();
 	}
 }
