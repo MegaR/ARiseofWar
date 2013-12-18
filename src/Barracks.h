@@ -19,6 +19,7 @@ public:
 	bool allowBuild;
 	int buildturn;
 
+	IGUIStaticText* txt;
 	IGUIImage* GUI;
 };
 
