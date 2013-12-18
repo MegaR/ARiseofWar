@@ -29,10 +29,16 @@ TownCenter::TownCenter(int tileX, int tileY, int player) : Building(tileX, tileY
 
 TownCenter::~TownCenter(void)
 {
+	Game* game = &Game::getInstance();
 	GUI->remove();
 	txt->remove();
 	//delete peasantButton;
 	peasantButton->btn->setVisible(false);
+	if(player == 0){
+		((GameScene*)game->currentScene)->enemyunits =true;
+	}else if( player == 1){
+		((GameScene*)game->currentScene)->playerunits = true;
+	}
 
 }
 
