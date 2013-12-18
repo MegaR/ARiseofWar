@@ -11,10 +11,11 @@ public:
 	~UnitPeasant();
 
 	void update();
-	void buildBuilding();
 	void selected();
 	void deselected();
 	virtual void enemyTurn();
+	bool attemptBuildBarracks();
+	bool reasonableSpace();
 
 	bool showGUI, isSelected, buildingBuilt;
 	IGUIImage* GUI;

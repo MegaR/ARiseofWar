@@ -15,6 +15,7 @@ public:
 	void selected();
 	void deselected();
 	void startTurn();
+	void enemyTurn();
 
 	bool allowBuild;
 	int buildturn;

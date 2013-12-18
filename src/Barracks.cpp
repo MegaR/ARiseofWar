@@ -79,8 +79,18 @@ void Barracks::deselected(){
 
 void  Barracks::startTurn(){
 	Game* game = &Game::getInstance();
-	if((buildturn+4)== ((GameScene*)game->currentScene)->turnCount){
+	if((buildturn+4) == ((GameScene*)game->currentScene)->turnCount){
 		createUnit();
-		cout<< "this was true" << endl;
+		cout<< "creating unit" << endl;
+	}
+}
+
+void Barracks::enemyTurn() {
+	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
+	if(allowBuild) {
+		if(rand()%4 == 0) {
+			buildturn = scene->turnCount;
+			allowBuild = false;
+		}
 	}
 }

@@ -68,21 +68,25 @@ void UnitPeasant::update()
 
 	if (buildBarracksButton->pressed)
 	{
-		buildingBuilt = true;
-		TileGrass* validTile2 = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[tileX+1][tileY]);
-		TileGrass* validTile3 = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[tileX][tileY+1]);
-		TileGrass* validTile4 = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[tileX+1][tileY+1]);
-
-		if((scene->getEntity(tileX+1, tileY)) || (scene->getEntity(tileX, tileY+1)) || (scene->getEntity(tileX+1, tileY+1)) || (!validTile2) || (!validTile3) || (!validTile4))
-		{
-			cout << "can't build, object in the way" << endl;
-		}
-		else 
-		{
-			scene->entities.push_back(new Barracks(tileX, tileY, player));
-			scene->removeEntity(this);
-		}
+		attemptBuildBarracks();
 	}	
+}
+
+bool UnitPeasant::attemptBuildBarracks() {
+	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
+	buildingBuilt = true;
+	TileGrass* validTile2 = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[tileX+1][tileY]);
+	TileGrass* validTile3 = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[tileX][tileY+1]);
+	TileGrass* validTile4 = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[tileX+1][tileY+1]);
+
+	if((scene->getEntity(tileX+1, tileY)) || (scene->getEntity(tileX, tileY+1)) || (scene->getEntity(tileX+1, tileY+1)) || (!validTile2) || (!validTile3) || (!validTile4))
+	{
+		return false;
+	} else {
+		scene->entities.push_back(new Barracks(tileX, tileY, player));
+		scene->removeEntity(this);
+		return true;
+	}
 }
 
 void UnitPeasant::selected()
@@ -99,10 +103,32 @@ void UnitPeasant::deselected()
 	showGUI = false;
 }
 
-void UnitPeasant::buildBuilding() {
+void UnitPeasant::enemyTurn() {
+	if(reasonableSpace()) {
+		if(attemptBuildBarracks()) {
+			return;
+		}
+	}
+
+	int destX = rand() % MAPSIZE;
+	int destY = rand() % MAPSIZE;
+
+	this->moveTo(destX, destY);
 
 }
 
-void UnitPeasant::enemyTurn() {
-	cout << "PEASANT AI" << endl;
+bool UnitPeasant::reasonableSpace() {
+	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
+	bool reasonable = true;
+
+	for(int i = 0; i < scene->entities.size(); i++) {
+		Building* building = dynamic_cast<Building*>(scene->entities.at(i) );
+		if(building) {
+			if(building->inAttackRange(tileX, tileY, 5)) {
+				reasonable = false;
+			}
+		}
+	}
+
+	return reasonable;
 }
