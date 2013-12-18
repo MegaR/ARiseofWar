@@ -14,11 +14,9 @@ TownCenter::TownCenter(int tileX, int tileY, int player) : Building(tileX, tileY
 	hp = 10;
 	defense = 2;
 	createModel();
-
-	//node->setScale(vector3df(0.5f,0.5f,0.5f));
 	node->setRotation(vector3df(0,15,0));
 	GUI = game->gui->addImage(rect<s32>(0,0, 300, 125));
-	txt =	game->gui->addStaticText(L"peasant duurt 1 beurten om te bouwen" ,rect<s32>(0,0, 300, 100));
+	txt =	game->gui->addStaticText(L"peasant duurt 1 beurt om te bouwen" ,rect<s32>(0,0, 300, 100));
 	GUI->setVisible(false); 
 	txt->setVisible(false);
 	allowBuild = true;

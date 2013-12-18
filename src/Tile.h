@@ -11,7 +11,7 @@ class Tile
 {
 public:
 	Tile(int x = 0, int y = 0);
-	~Tile(void);
+	virtual ~Tile(void);
 
 	bool walkable;
 	IMeshSceneNode* node;

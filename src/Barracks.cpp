@@ -11,7 +11,7 @@ Barracks::Barracks(int tileX, int tileY, int player) : Building(tileX, tileY, pl
 	sizeX = 2;
 	sizeY = 2;
 	createModel();
-	node->setScale(vector3df(0.5f,0.5f,0.5f));
+	node->setScale(vector3df(0.69f,0.69f,0.69f));
 	node->setRotation(vector3df(0,30,0));
 	GUI = game->gui->addImage(rect<s32>(0,0, 300, 125));
 	txt =	game->gui->addStaticText(L"knight duurt 2 beurten om te bouwen" ,rect<s32>(0,0, 300, 100));
