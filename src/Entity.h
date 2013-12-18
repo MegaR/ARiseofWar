@@ -40,7 +40,4 @@ public:
 	float distance(Entity* other);
 
 	bool inAttackRange(int x, int y, int attackDistance);
-
-//protected:
-	float x, y, z;
 };
