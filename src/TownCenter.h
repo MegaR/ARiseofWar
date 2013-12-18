@@ -19,7 +19,5 @@ public:
 
 	IGUIStaticText* txt;
 	IGUIImage* GUI;
-
-
 };
 

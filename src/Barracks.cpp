@@ -20,6 +20,9 @@ Barracks::Barracks(int tileX, int tileY, int player) : Building(tileX, tileY, pl
 	allowBuild = true;
 	buildturn = 420;
 
+	hp = 4;
+	defense = 2;
+
 	knightButton = new Button(120, 35, 75, 75, "knight", game->videoDriver->getTexture("res/guiButtonWide.png") );
 	knightButton->btn->setVisible(false);
 }
