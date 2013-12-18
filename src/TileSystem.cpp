@@ -92,7 +92,7 @@ void TileSystem::spreadResource(int x, int y, int tileType, Scene* scene, int ch
 			tiles[x][y] = new TileWheat(x, y);
 			break;
 		case 2:
-			tiles[x][y] = new TileForrest(x, y);
+			tiles[x][y] = new TileForest(x, y);
 			break;
 	}
 
