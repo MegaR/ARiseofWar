@@ -61,7 +61,9 @@
     <ClCompile Include="src\Tile.cpp">
       <Filter>Game\Tiles</Filter>
     </ClCompile>
-    <ClCompile Include="src\TileForrest.cpp" />
+    <ClCompile Include="src\TileForest.cpp">
+      <Filter>Game\Tiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Button.h">
@@ -124,7 +126,9 @@
     <ClInclude Include="src\Tile.h">
       <Filter>Game\Tiles</Filter>
     </ClInclude>
-    <ClInclude Include="src\TileForrest.h" />
+    <ClInclude Include="src\TileForest.h">
+      <Filter>Game\Tiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Irrlicht.dll">
