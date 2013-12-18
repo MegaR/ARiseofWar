@@ -22,9 +22,6 @@ UnitPeasant::UnitPeasant(int _x, int _y, int _player) : Unit(_x, _y, _player)
 		texture = game->videoDriver->getTexture("res/unitPeasantEnemy.png");
 	}
 	
-<<<<<<< HEAD
-	addModel();
-
 	showGUI = false;
 	isSelected = false;
 	buildingBuilt = false;
@@ -35,11 +32,10 @@ UnitPeasant::UnitPeasant(int _x, int _y, int _player) : Unit(_x, _y, _player)
 
 	buildBarracksButton = new Button(10, 50, 75, 75, "Build Barracks", game->videoDriver->getTexture("res/guiButtonSmall.png"));
 	buildBarracksButton->btn->setVisible(false);
-=======
+
 	for(int i = 0; i < maxModels; i++) {
 		addModel();
 	}
->>>>>>> 75ddfef46a2f0e83d2c8e2390eaf7c405fd00942
 }
 
 
