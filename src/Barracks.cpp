@@ -13,12 +13,14 @@ Barracks::Barracks(int tileX, int tileY, int player) : Building(tileX, tileY, pl
 	createModel();
 	node->setScale(vector3df(0.5f,0.5f,0.5f));
 	node->setRotation(vector3df(0,30,0));
-	GUI = game->gui->addImage(rect<s32>(0,0, 200, 100));
-	GUI->setVisible(false);
+	GUI = game->gui->addImage(rect<s32>(0,0, 300, 125));
+	txt =	game->gui->addStaticText(L"knight duurt 2 burten om te bouwen" ,rect<s32>(0,0, 300, 100));
+	GUI->setVisible(false); 
+	txt->setVisible(false);
 	allowBuild = false;
 	buildturn = 520;
 
-	knightButton = new Button(10, 10, 75, 75, "knight", game->videoDriver->getTexture("res/guiButtonWide.png") );
+	knightButton = new Button(120, 35, 75, 75, "knight", game->videoDriver->getTexture("res/guiButtonWide.png") );
 	knightButton->btn->setVisible(false);
 }
 
@@ -26,6 +28,7 @@ Barracks::Barracks(int tileX, int tileY, int player) : Building(tileX, tileY, pl
 Barracks::~Barracks(void)
 {
 	GUI->remove();
+	txt->remove();
 	delete knightButton;
 }
 
@@ -59,12 +62,14 @@ void Barracks::selected(){
 	
 	GUI->setImage(game->videoDriver->getTexture("res/guiBackgroundMenu.png"));
 	GUI->setVisible(true);
+	txt->setVisible(true);
 	knightButton->btn->setVisible(true);
 	allowBuild = true;
 }
 
 void Barracks::deselected(){
 		GUI->setVisible(false);
+		txt->setVisible(false);
 		knightButton->btn->setVisible(false);
 		allowBuild = false;
 }
