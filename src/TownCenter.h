@@ -1,5 +1,6 @@
 #pragma once
 #include "building.h"
+#include "button.h"
 class TownCenter :
 	public Building
 {
@@ -20,5 +21,6 @@ public:
 
 	IGUIStaticText* txt;
 	IGUIImage* GUI;
+	Button* peasantButton;
 };
 

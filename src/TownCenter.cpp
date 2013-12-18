@@ -1,9 +1,5 @@
 #include "TownCenter.h"
 #include "Game.h"
-
-Button* peasantButton;
-
-
 TownCenter::TownCenter(int tileX, int tileY, int player) : Building(tileX, tileY, player)
 {
 	Game* game = &Game::getInstance();

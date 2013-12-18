@@ -1,8 +1,6 @@
 #include "Barracks.h"
 #include "Game.h"
 
-Button* knightButton;
-
 Barracks::Barracks(int tileX, int tileY, int player) : Building(tileX, tileY, player)
 {
 	Game* game = &Game::getInstance();
@@ -32,7 +30,7 @@ Barracks::~Barracks(void)
 {
 	GUI->remove();
 	txt->remove();
-	//delete knightButton;
+	delete knightButton;
 }
 
 void Barracks::update(){

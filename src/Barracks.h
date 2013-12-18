@@ -22,5 +22,6 @@ public:
 
 	IGUIStaticText* txt;
 	IGUIImage* GUI;
+	Button* knightButton;
 };
 
