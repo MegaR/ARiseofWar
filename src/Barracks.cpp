@@ -32,7 +32,7 @@ Barracks::~Barracks(void)
 {
 	GUI->remove();
 	txt->remove();
-	delete knightButton;
+	//delete knightButton;
 }
 
 void Barracks::update(){
@@ -42,10 +42,16 @@ void Barracks::update(){
 
 void Barracks::createUnit(){
 	Game* game = &Game::getInstance();
-	std::vector<vector2d<int>> *list = new std::vector<vector2d<int>>();
+	std::vector<vector2d<int>> *list;
 	
 	allowBuild = true;
-	list = ((GameScene*)game->currentScene)->get_neighbors(vector2d<s32>(tileX,tileY));
+	list = this->getSurroundingTiles();
+	for(int i = 0; i < list->size(); i++) {
+		if( ((GameScene*)game->currentScene)->getEntity(list->at(i).X, list->at(i).Y)) {
+			list->erase(list->begin()+i);
+			i--;
+		}
+	}
 	if(list->size() > 0){
 		((GameScene*)game->currentScene)->entities.push_back(new UnitKnight(list->at(0).X,list->at(0).Y, player ));
 		delete list;
@@ -87,10 +93,8 @@ void  Barracks::startTurn(){
 
 void Barracks::enemyTurn() {
 	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
-	if(allowBuild) {
-		if(rand()%4 == 0) {
-			buildturn = scene->turnCount;
-			allowBuild = false;
-		}
+	if(allowBuild && rand()%3 == 0) {
+		buildturn = scene->turnCount;
+		allowBuild = false;
 	}
 }
