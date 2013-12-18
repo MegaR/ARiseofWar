@@ -22,7 +22,7 @@ TownCenter::TownCenter(int tileX, int tileY, int player) : Building(tileX, tileY
 	allowBuild = true;
 	buildturn = 420;
 
-	peasantButton = new Button(120, 35, 75, 75, "peasant", game->videoDriver->getTexture("res/guiButtonWide.png") );
+	peasantButton = new Button(120, 35, 75, 75, "peasant", game->videoDriver->getTexture("res/guiButtonCreate.png") );
 	peasantButton->btn->setVisible(false);
 }
 

@@ -30,7 +30,7 @@ UnitPeasant::UnitPeasant(int _x, int _y, int _player) : Unit(_x, _y, _player)
 	GUI->setImage(game->videoDriver->getTexture("res/guiBackgroundMenu.png"));
 	GUI->setVisible(false);
 
-	buildBarracksButton = new Button(10, 50, 75, 75, "Barracks", game->videoDriver->getTexture("res/guiButtonSmall.png"));
+	buildBarracksButton = new Button(10, 50, 75, 75, "Barracks", game->videoDriver->getTexture("res/guiButtonCreate.png"));
 	buildBarracksButton->btn->setVisible(false);
 
 	for(int i = 0; i < maxModels; i++) {
@@ -96,6 +96,7 @@ void UnitPeasant::deselected()
 {
 	Unit::deselected();
 	isSelected = false;
+	showGUI = false;
 }
 
 void UnitPeasant::buildBuilding() {
