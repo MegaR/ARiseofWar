@@ -47,14 +47,17 @@ bool Entity::inAttackRange(int x, int y, int attackDistance) {
 	return ((x+y)<=attackDistance);
 }
 
-void Entity::handleDamage(int damage){
+bool Entity::handleDamage(int damage){
 	hp -= damage;
+	cout << hp << endl;
 
-	if( hp < 0){
+	if( hp <= 0){
 		GameScene* scene = (GameScene*)Game::getInstance().currentScene;
 		scene->removeEntity(this);
-		return;
+		return false;
 	}
+
+	return true;
 }
 
 vector2d<int> Entity::getVector() {

@@ -8,6 +8,8 @@ using namespace std;
 UnitPeasant::UnitPeasant(int _x, int _y, int _player) : Unit(_x, _y, _player)
 {
 	hp = 1;
+	maxHP = 1;
+	maxModels = 1;
 	attack = 2;
 	defense = 1;
 	maxDistance = 7;
@@ -21,7 +23,9 @@ UnitPeasant::UnitPeasant(int _x, int _y, int _player) : Unit(_x, _y, _player)
 		texture = game->videoDriver->getTexture("res/unitPeasantEnemy.png");
 	}
 	
-	addModel();
+	for(int i = 0; i < maxModels; i++) {
+		addModel();
+	}
 }
 
 
