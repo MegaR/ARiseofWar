@@ -20,7 +20,7 @@ TownCenter::TownCenter(int tileX, int tileY, int player) : Building(tileX, tileY
 	GUI->setVisible(false); 
 	txt->setVisible(false);
 	allowBuild = false;
-	buildturn = 520;
+	buildturn = 420;
 
 	peasantButton = new Button(120, 35, 75, 75, "peasant", game->videoDriver->getTexture("res/guiButtonWide.png") );
 	peasantButton->btn->setVisible(false);
@@ -82,9 +82,10 @@ void TownCenter::deselected(){
 
 void TownCenter::startTurn(){
 	Game* game = &Game::getInstance();
-	cout << buildturn << endl;
-	if((buildturn+4)== ((GameScene*)game->currentScene)->turnCount){
+	
+	if((buildturn+2)== ((GameScene*)game->currentScene)->turnCount){
 		createUnit();
+		
 		cout<< "this was true" << endl;
 	}
 }

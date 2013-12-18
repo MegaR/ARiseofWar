@@ -18,7 +18,7 @@ Barracks::Barracks(int tileX, int tileY, int player) : Building(tileX, tileY, pl
 	GUI->setVisible(false); 
 	txt->setVisible(false);
 	allowBuild = false;
-	buildturn = 520;
+	buildturn = 420;
 
 	knightButton = new Button(120, 35, 75, 75, "knight", game->videoDriver->getTexture("res/guiButtonWide.png") );
 	knightButton->btn->setVisible(false);
@@ -76,7 +76,6 @@ void Barracks::deselected(){
 
 void  Barracks::startTurn(){
 	Game* game = &Game::getInstance();
-	cout << buildturn << endl;
 	if((buildturn+4)== ((GameScene*)game->currentScene)->turnCount){
 		createUnit();
 		cout<< "this was true" << endl;
