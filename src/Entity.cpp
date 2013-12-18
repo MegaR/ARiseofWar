@@ -37,6 +37,17 @@ void Entity::selected() {
 
 }
 
+std::vector<vector2d<int>>* Entity::getSurroundingTiles() {
+	vector<vector2d<int>>* tiles = new vector<vector2d<int>>();
+
+	if(tileX-1 > 0) tiles->push_back(vector2d<int>(tileX-1, tileY));
+	if(tileX+1 < MAPSIZE) tiles->push_back(vector2d<int>(tileX+1, tileY));
+	if(tileY-1 > 0) tiles->push_back(vector2d<int>(tileX, tileY-1));
+	if(tileY+1 < MAPSIZE) tiles->push_back(vector2d<int>(tileX, tileY+1));
+
+	return tiles;
+}
+
 void Entity::deselected() {
 
 }

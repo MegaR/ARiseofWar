@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include <irrlicht.h>
 using namespace irr;
 using namespace core;
@@ -32,6 +33,7 @@ public:
 	virtual void deselected();
 
 	virtual bool handleDamage(int damage);
+	std::vector<vector2d<int>>* getSurroundingTiles();
 
 	void render();
 	virtual void update();
@@ -39,5 +41,5 @@ public:
 	vector2d<int> getVector();
 	float distance(Entity* other);
 
-	bool inAttackRange(int x, int y, int attackDistance);
+	virtual bool inAttackRange(int x, int y, int attackDistance);
 };

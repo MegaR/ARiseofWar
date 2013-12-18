@@ -20,6 +20,7 @@ void TileSystem::create(Scene* scene) {
 	gameScene->entities.push_back(new UnitKnight(playerX+2, playerY, 0));
 	gameScene->entities.push_back(new UnitKnight(playerX+2, playerY+1, 0));
 	gameScene->entities.push_back(new UnitPeasant(playerX+2, playerY+2, 0));
+	gameScene->entities.push_back(new TownCenter(playerX+5, playerY, 1));
 
 	int enemyY = rand() % (MAPSIZE-4)+2;
 	int enemyX = rand() % 4+2;
