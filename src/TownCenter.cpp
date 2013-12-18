@@ -19,7 +19,7 @@ TownCenter::TownCenter(int tileX, int tileY, int player) : Building(tileX, tileY
 	txt =	game->gui->addStaticText(L"peasant duurt 1 burten om te bouwen" ,rect<s32>(0,0, 300, 100));
 	GUI->setVisible(false); 
 	txt->setVisible(false);
-	allowBuild = false;
+	allowBuild = true;
 	buildturn = 420;
 
 	peasantButton = new Button(120, 35, 75, 75, "peasant", game->videoDriver->getTexture("res/guiButtonWide.png") );
@@ -46,6 +46,7 @@ void TownCenter::createUnit(){
 	Game* game = &Game::getInstance();
 	std::vector<vector2d<int>> *list = new std::vector<vector2d<int>>();
 	
+	allowBuild = true;
 	list = ((GameScene*)game->currentScene)->get_neighbors(vector2d<s32>(tileX,tileY));
 	if(list->size() > 0){
 		((GameScene*)game->currentScene)->entities.push_back(new UnitPeasant(list->at(0).X,list->at(0).Y, player ));
@@ -58,7 +59,8 @@ void TownCenter::addtoqueue(){
 	
 	if((game->eventReceiver->isKeyPressed(KEY_KEY_P) || peasantButton->pressed) && allowBuild  == true ){
 		buildturn = ((GameScene*)game->currentScene)->turnCount;
-		cout << "pressed P" << endl; 
+		cout << "queued" << endl; 
+		allowBuild = false;
 	}
 
 }
@@ -70,14 +72,12 @@ void TownCenter::selected(){
 	GUI->setVisible(true);
 	txt->setVisible(true);
 	peasantButton->btn->setVisible(true);
-	allowBuild = true;
 }
 
 void TownCenter::deselected(){
 		GUI->setVisible(false);
 		txt->setVisible(false);
 		peasantButton->btn->setVisible(false);
-		allowBuild = false;
 }
 
 void TownCenter::startTurn(){

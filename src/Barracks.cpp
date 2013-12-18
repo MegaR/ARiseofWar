@@ -17,7 +17,7 @@ Barracks::Barracks(int tileX, int tileY, int player) : Building(tileX, tileY, pl
 	txt =	game->gui->addStaticText(L"knight duurt 2 burten om te bouwen" ,rect<s32>(0,0, 300, 100));
 	GUI->setVisible(false); 
 	txt->setVisible(false);
-	allowBuild = false;
+	allowBuild = true;
 	buildturn = 420;
 
 	knightButton = new Button(120, 35, 75, 75, "knight", game->videoDriver->getTexture("res/guiButtonWide.png") );
@@ -41,6 +41,7 @@ void Barracks::createUnit(){
 	Game* game = &Game::getInstance();
 	std::vector<vector2d<int>> *list = new std::vector<vector2d<int>>();
 	
+	allowBuild = true;
 	list = ((GameScene*)game->currentScene)->get_neighbors(vector2d<s32>(tileX,tileY));
 	if(list->size() > 0){
 		((GameScene*)game->currentScene)->entities.push_back(new UnitKnight(list->at(0).X,list->at(0).Y, player ));
@@ -53,7 +54,8 @@ void Barracks::addtoqueue(){
 	
 	if((game->eventReceiver->isKeyPressed(KEY_KEY_K) || knightButton->pressed) && allowBuild  == true ){
 		buildturn = ((GameScene*)game->currentScene)->turnCount;
-		cout << "pressed K" << endl; 
+		cout << "queued" << endl;
+		allowBuild = false;
 	}
 }
 
