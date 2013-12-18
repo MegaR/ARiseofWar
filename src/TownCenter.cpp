@@ -11,12 +11,12 @@ TownCenter::TownCenter(int tileX, int tileY, int player) : Building(tileX, tileY
 	texture = game->videoDriver->getTexture("res/buildingTownCenter.png");
 	sizeX = 2;
 	sizeY = 2;
+	hp = 10;
+	defense = 2;
 	createModel();
-
-	node->setScale(vector3df(0.9f,0.9f,0.9f));
-	node->setRotation(vector3df(0,30,0));
+	node->setRotation(vector3df(0,15,0));
 	GUI = game->gui->addImage(rect<s32>(0,0, 300, 125));
-	txt =	game->gui->addStaticText(L"peasant duurt 1 burten om te bouwen" ,rect<s32>(0,0, 300, 100));
+	txt =	game->gui->addStaticText(L"peasant duurt 1 beurt om te bouwen" ,rect<s32>(0,0, 300, 100));
 	GUI->setVisible(false); 
 	txt->setVisible(false);
 	allowBuild = true;

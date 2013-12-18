@@ -398,30 +398,26 @@ bool Unit::attemptTarget(Entity* target) {
 vector2d<int> Unit::availableTile(Entity* target) {
 	GameScene* scene = (GameScene*) (Game::getInstance().currentScene);
 	vector2d<int> tile(-1, -1);
-	vector<vector2d<int>> candidates;
+	vector<vector2d<int>>* candidates;
 
-	if( target->tileX+1 < MAPSIZE && !scene->getEntity(target->tileX+1, target->tileY) ) {
-		candidates.push_back(vector2d<int>(target->tileX+1, target->tileY) );
-	}
-	if( target->tileX-1 >= 0 &&  !scene->getEntity(target->tileX-1, target->tileY) ) {
-		candidates.push_back(vector2d<int>(target->tileX-1, target->tileY) );
-	}
-	if( target->tileY+1 < MAPSIZE &&  !scene->getEntity(target->tileX, target->tileY+1) ) {
-		candidates.push_back(vector2d<int>(target->tileX, target->tileY+1) );
-	}
-	if( target->tileY-1 >= 0 &&  !scene->getEntity(target->tileX, target->tileY-1) ) {
-		candidates.push_back(vector2d<int>(target->tileX, target->tileY-1) );
+	candidates = target->getSurroundingTiles();
+	for(int i = 0; i < candidates->size(); i++) {
+		if(scene->getEntity(candidates->at(i).X, candidates->at(i).Y) ) {
+			candidates->erase(candidates->begin() + i);
+			i--;
+		}		
 	}
 	
 	float lowest = FLT_MAX;
-	for(int i = 0; i < candidates.size(); i++) {
-		float distance = candidates[i].getDistanceFrom(vector2d<int>(tileX, tileY) );
+	for(int i = 0; i < candidates->size(); i++) {
+		float distance = candidates->at(i).getDistanceFrom(vector2d<int>(tileX, tileY) );
 		if(distance < lowest ) {
-			tile = candidates[i];
+			tile = candidates->at(i);
 			lowest = distance;
 		}
 	}
 
+	delete candidates;
 	return tile;
 }
 

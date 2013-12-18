@@ -14,11 +14,14 @@ Barracks::Barracks(int tileX, int tileY, int player) : Building(tileX, tileY, pl
 	node->setScale(vector3df(0.69f,0.69f,0.69f));
 	node->setRotation(vector3df(0,30,0));
 	GUI = game->gui->addImage(rect<s32>(0,0, 300, 125));
-	txt =	game->gui->addStaticText(L"knight durt 2 burten om te bouwen" ,rect<s32>(0,0, 300, 100));
+	txt =	game->gui->addStaticText(L"knight duurt 2 beurten om te bouwen" ,rect<s32>(0,0, 300, 100));
 	GUI->setVisible(false); 
 	txt->setVisible(false);
 	allowBuild = true;
 	buildturn = 420;
+
+	hp = 4;
+	defense = 2;
 
 	knightButton = new Button(120, 35, 75, 75, "knight", game->videoDriver->getTexture("res/guiButtonWide.png") );
 	knightButton->btn->setVisible(false);

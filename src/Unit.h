@@ -48,7 +48,6 @@ public:
 	void followPath();
 	void selected();
 	void deselected();
-	bool inAttackRange(int x, int y, int attackDistance);
 	virtual bool handleDamage(int damage);
 
 private:

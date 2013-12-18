@@ -30,13 +30,15 @@ void TileSystem::create(Scene* scene) {
 	
 	generateStartResource(playerX, playerY, 0, scene);
 	generateStartResource(playerX, playerY, 1, scene);
+	generateStartResource(playerX, playerY, 2, scene);
 	generateStartResource(MAPSIZE-enemyX, enemyY, 0, scene);
 	generateStartResource(MAPSIZE-enemyX, enemyY, 1, scene);
+	generateStartResource(MAPSIZE-enemyX, enemyY, 2, scene);
 
 	for(int i = 0; i < RANDOMRESOURCECHUNKS; i ++) {
 		int randomX = rand() % MAPSIZE;
 		int randomY = rand() % MAPSIZE;
-		spreadResource(randomX, randomY, rand()%2, scene, RANDOMRESOURCECHANCE);
+		spreadResource(randomX, randomY, rand()%3, scene, RANDOMRESOURCECHANCE);
 	}
 }
 
@@ -88,6 +90,9 @@ void TileSystem::spreadResource(int x, int y, int tileType, Scene* scene, int ch
 			break;
 		case 1:
 			tiles[x][y] = new TileWheat(x, y);
+			break;
+		case 2:
+			tiles[x][y] = new TileForrest(x, y);
 			break;
 	}
 
