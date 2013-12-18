@@ -94,7 +94,10 @@ void UnitPeasant::deselected()
 	isSelected = false;
 }
 
-void UnitPeasant::buildBuilding()
-{
+void UnitPeasant::buildBuilding() {
 
+}
+
+void UnitPeasant::enemyTurn() {
+	cout << "PEASANT AI" << endl;
 }

@@ -335,7 +335,6 @@ void Unit::removeModel() {
 }
 
 void Unit::startTurn() {
-	cout << "start unit" << endl;
 	hasAttacked = false;
 	hasMoved = false;
 }

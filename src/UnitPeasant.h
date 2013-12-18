@@ -14,6 +14,7 @@ public:
 	void buildBuilding();
 	void selected();
 	void deselected();
+	virtual void enemyTurn();
 
 	bool showGUI, isSelected, buildingBuilt;
 	IGUIImage* GUI;
