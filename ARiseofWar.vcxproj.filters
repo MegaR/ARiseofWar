@@ -1,148 +1,164 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UnitKnight.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\EnemyPlayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Tile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TileGrass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Unit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MenuScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TileSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Button.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>GUI</Filter>
     </ClCompile>
     <ClCompile Include="src\EventReceiver.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\TileRocks.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity.cpp">
+      <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="src\Building.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Unit.cpp">
+      <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="src\Barracks.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TileWheat.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Entities\Buildings</Filter>
     </ClCompile>
     <ClCompile Include="src\TownCenter.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Entities\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UnitKnight.cpp">
+      <Filter>Entities\Units</Filter>
     </ClCompile>
     <ClCompile Include="src\UnitPeasant.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Entities\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameScene.cpp">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MenuScene.cpp">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Player.cpp">
+      <Filter>Game\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EnemyPlayer.cpp">
+      <Filter>Game\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TileWheat.cpp">
+      <Filter>Game\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TileGrass.cpp">
+      <Filter>Game\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TileRocks.cpp">
+      <Filter>Game\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TileSystem.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tile.cpp">
+      <Filter>Game\Tiles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\GameScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UnitKnight.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\EnemyPlayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Tile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TileGrass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Unit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MenuScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TileSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Button.h">
-      <Filter>Header Files</Filter>
+      <Filter>GUI</Filter>
     </ClInclude>
     <ClInclude Include="src\EventReceiver.h">
-      <Filter>Header Files</Filter>
+      <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\TileRocks.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entity.h">
+      <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="src\Building.h">
-      <Filter>Header Files</Filter>
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Unit.h">
+      <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="src\Barracks.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="src\TileWheat.h">
-      <Filter>Header Files</Filter>
+      <Filter>Entities\Buildings</Filter>
     </ClInclude>
     <ClInclude Include="src\TownCenter.h">
-=======
+      <Filter>Entities\Buildings</Filter>
+    </ClInclude>
     <ClInclude Include="src\UnitPeasant.h">
->>>>>>> 8098ee42eb47c51bcdfedcc6fda80a9593e66442
-      <Filter>Header Files</Filter>
+      <Filter>Entities\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UnitKnight.h">
+      <Filter>Entities\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MenuScene.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameScene.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Player.h">
+      <Filter>Game\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EnemyPlayer.h">
+      <Filter>Game\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TileWheat.h">
+      <Filter>Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TileGrass.h">
+      <Filter>Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TileRocks.h">
+      <Filter>Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TileSystem.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tile.h">
+      <Filter>Game\Tiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Irrlicht.dll" />
-    <None Include="res\tileGrass.3DS">
-      <Filter>Resource Files</Filter>
+    <None Include="Irrlicht.dll">
+      <Filter>Components</Filter>
     </None>
+    <None Include="res\tileGrass.3DS">
+      <Filter>Components</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{bac6451f-2edf-4a88-8131-7c719acc3d83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Units">
+      <UniqueIdentifier>{072bc73a-1bdc-471a-8b5b-0e5df5beede4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Buildings">
+      <UniqueIdentifier>{0c3fa3c3-0bac-4563-bdff-60910508c567}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{04aa1a40-05b6-47de-99a5-c2bd20c2fff9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{24d498f1-ff86-46e8-b474-2657ef2f04d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{514ca543-e4d0-4991-b607-12b1330468d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes">
+      <UniqueIdentifier>{cdfbe7f7-dbf9-47cd-b84b-382d20ca8e31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Players">
+      <UniqueIdentifier>{a456ed2a-44e5-4790-aa33-e2d9ea4eec79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Tiles">
+      <UniqueIdentifier>{06fd9b21-6094-4210-b343-e69c818fcc36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

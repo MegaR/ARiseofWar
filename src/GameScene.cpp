@@ -1,10 +1,7 @@
 #include "GameScene.h"
 #include "UnitKnight.h"
 #include "UnitPeasant.h"
-
-Button* returnToMenuButton;
-Button* exitGameButton;
-Button* nextTurnButton;
+#include "Game.h"
 
 GameScene::GameScene() {
 	Game* game = &Game::getInstance();
@@ -83,8 +80,8 @@ void GameScene::update() {
 	//Button handlers enzo
 	if (returnToMenuButton->pressed == true)
 	{
-		
 		game->changeScene(new MenuScene());
+		return;
 	}
 
 	if (exitGameButton->pressed == true)

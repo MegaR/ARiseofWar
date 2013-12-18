@@ -10,7 +10,7 @@
 #include "Barracks.h"
 #include "TownCenter.h"
 
-#include "Game.h"
+//#include "Game.h"
 
 #define CAMERAMIN 10
 #define CAMERAMAX 70
@@ -39,6 +39,9 @@ public:
 	void removeEntity(Entity* ent);
 	vector2d<int> mouseRay();
 	Entity* getEntity(int x, int y);
+	Button* returnToMenuButton;
+	Button* exitGameButton;
+	Button* nextTurnButton;
 	std::vector<vector2d<int>>* findPath(vector2d<int> start, vector2d<int> end);
 	std::vector<vector2d<int>>* get_neighbors(vector2d<int> current);
 	bool playerunits;
