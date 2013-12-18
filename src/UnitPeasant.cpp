@@ -22,7 +22,10 @@ UnitPeasant::UnitPeasant(int _x, int _y, int _player) : Unit(_x, _y, _player)
 		texture = game->videoDriver->getTexture("res/unitPeasantEnemy.png");
 	}
 	
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6bc13642316d9763e2c981caf6b7cac61387c513
 	showGUI = false;
 	isSelected = false;
 	buildingBuilt = false;
