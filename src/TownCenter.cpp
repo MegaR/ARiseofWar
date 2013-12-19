@@ -75,6 +75,7 @@ void TownCenter::addtoqueue(){
 
 void TownCenter::selected(){
 	Game* game = &Game::getInstance();
+	if(player != 0) return;
 	
 	GUI->setImage(game->videoDriver->getTexture("res/guiBackgroundMenu.png"));
 	GUI->setVisible(true);
