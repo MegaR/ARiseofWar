@@ -4,7 +4,11 @@ TownCenter::TownCenter(int tileX, int tileY, int player) : Building(tileX, tileY
 {
 	Game* game = &Game::getInstance();
 	model = game->sceneManager->getMesh("res/buildingTownCenter.md2");
-	texture = game->videoDriver->getTexture("res/buildingTownCenter.png");
+	if(player == 0) {
+		texture = game->videoDriver->getTexture("res/buildingTownCenter.png");
+	} else {
+		texture = game->videoDriver->getTexture("res/buildingTownCenterEnemy.png");
+	}
 	sizeX = 2;
 	sizeY = 2;
 	hp = 10;
@@ -29,7 +33,6 @@ TownCenter::~TownCenter(void)
 	GUI->remove();
 	txt->remove();
 	delete peasantButton;
-	peasantButton->btn->setVisible(false);
 	if(player == 0){
 		((GameScene*)game->currentScene)->enemyunits =true;
 	}else if( player == 1){
