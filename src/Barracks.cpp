@@ -5,7 +5,11 @@ Barracks::Barracks(int tileX, int tileY, int player) : Building(tileX, tileY, pl
 {
 	Game* game = &Game::getInstance();
 	model = game->sceneManager->getMesh("res/buildingBarracks.3DS");
-	texture = game->videoDriver->getTexture("res/buildingBarracks.png");
+	if(player == 0) {
+		texture = game->videoDriver->getTexture("res/buildingBarracks.png");
+	} else {
+		texture = game->videoDriver->getTexture("res/buildingBarracksEnemy.png");
+	}
 	sizeX = 2;
 	sizeY = 2;
 	createModel();

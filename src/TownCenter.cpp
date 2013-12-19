@@ -28,7 +28,7 @@ TownCenter::~TownCenter(void)
 	Game* game = &Game::getInstance();
 	GUI->remove();
 	txt->remove();
-	//delete peasantButton;
+	delete peasantButton;
 	peasantButton->btn->setVisible(false);
 	if(player == 0){
 		((GameScene*)game->currentScene)->enemyunits =true;
