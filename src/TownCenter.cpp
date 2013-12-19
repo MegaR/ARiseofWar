@@ -44,14 +44,16 @@ void TownCenter::update(){
 }
 
 void TownCenter::createUnit(){
-
 	Game* game = &Game::getInstance();
+	GameScene* scene = (GameScene*)game->currentScene;
 	std::vector<vector2d<int>> *list;
 	
 	allowBuild = true;
 	list = this->getSurroundingTiles();
 	for(int i = 0; i < list->size(); i++) {
-		if( ((GameScene*)game->currentScene)->getEntity(list->at(i).X, list->at(i).Y)) {
+		TileGrass* tile = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[list->at(i).X][list->at(i).Y]);
+
+		if( scene->getEntity(list->at(i).X, list->at(i).Y) || !tile) {
 			list->erase(list->begin()+i);
 			i--;
 		}
