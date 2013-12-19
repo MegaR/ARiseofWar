@@ -81,3 +81,10 @@ float Entity::distance(Entity* other) {
 
 void Entity::enemyTurn() {
 }
+
+void Entity::cameraFocus() {
+	Game* game = &Game::getInstance();
+	ISceneNodeAnimator* animator = game->sceneManager->createFlyStraightAnimator(game->camera->getPosition(), vector3df(tileX*10, game->camera->getPosition().Y, tileY*10), 1000);
+	game->camera->addAnimator(animator);
+	game->camera->setTarget(vector3df(tileX*10, 0, tileY*10+5));
+}

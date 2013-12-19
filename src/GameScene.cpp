@@ -187,6 +187,7 @@ void GameScene::moveCamera(float x, float y, float z) {
 	position.Y += -1;
 	position.Z += 0.5f;
 	camera->setTarget(position);
+	camera->removeAnimators();
 	
 }
 

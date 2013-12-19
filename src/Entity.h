@@ -40,6 +40,7 @@ public:
 
 	vector2d<int> getVector();
 	float distance(Entity* other);
+	void cameraFocus();
 
 	virtual bool inAttackRange(int x, int y, int attackDistance);
 };

@@ -24,6 +24,10 @@ TownCenter::TownCenter(int tileX, int tileY, int player) : Building(tileX, tileY
 
 	peasantButton = new Button(120, 35, 75, 75, "peasant", game->videoDriver->getTexture("res/guiButtonCreate.png") );
 	peasantButton->btn->setVisible(false);
+
+	if(player == 0) {
+		cameraFocus();
+	}
 }
 
 
@@ -42,6 +46,10 @@ TownCenter::~TownCenter(void)
 }
 
 void TownCenter::update(){
+	Game* game = &Game::getInstance();
+	if(player == 0 && game->eventReceiver->isKeyPressed(KEY_KEY_H) ) {
+		this->cameraFocus();
+	}
 	peasantButton->update();
 	addtoqueue();
 }
@@ -106,7 +114,7 @@ void TownCenter::startTurn(){
 
 void TownCenter::enemyTurn() {
 	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
-	if(allowBuild && rand()%5 == 0) {
+	if(allowBuild && rand()%3 == 0) {
 		buildturn = scene->turnCount;
 		allowBuild = false;
 	}
