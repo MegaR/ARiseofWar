@@ -100,7 +100,7 @@ void  Barracks::startTurn(){
 
 void Barracks::enemyTurn() {
 	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
-	if(allowBuild && rand()%3 == 0) {
+	if(allowBuild && rand()%2 == 0) {
 		buildturn = scene->turnCount;
 		allowBuild = false;
 	}
