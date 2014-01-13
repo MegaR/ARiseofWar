@@ -1,7 +1,7 @@
 #include "Barracks.h"
 #include "Game.h"
 
-Barracks::Barracks(int tileX, int tileY, int player) : Building(tileX, tileY, player)
+Barracks::Barracks(int tileX, int tileY, int player, Scene* scene) : Building(tileX, tileY, player, scene)
 {
 	Game* game = &Game::getInstance();
 	model = game->sceneManager->getMesh("res/buildingBarracks.3DS");
@@ -58,7 +58,7 @@ void Barracks::createUnit(){
 		}
 	}
 	if(list->size() > 0){
-		((GameScene*)game->currentScene)->entities.push_back(new UnitKnight(list->at(0).X,list->at(0).Y, player ));
+		((GameScene*)game->currentScene)->entities.push_back(new UnitKnight(list->at(0).X,list->at(0).Y, player, scene ));
 		delete list;
 	}
 }

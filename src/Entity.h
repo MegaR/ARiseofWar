@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <irrlicht.h>
+#include "Scene.h"
 using namespace irr;
 using namespace core;
 using namespace scene;
@@ -12,7 +13,7 @@ using namespace gui;
 class Entity
 {
 public:
-	Entity(void);
+	Entity(Scene* scene);
 	virtual ~Entity();
 
 	int tileX;
@@ -43,4 +44,6 @@ public:
 	void cameraFocus();
 
 	virtual bool inAttackRange(int x, int y, int attackDistance);
+protected:
+	Scene* scene;
 };

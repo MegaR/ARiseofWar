@@ -1,6 +1,6 @@
 #include "TownCenter.h"
 #include "Game.h"
-TownCenter::TownCenter(int tileX, int tileY, int player) : Building(tileX, tileY, player)
+TownCenter::TownCenter(int tileX, int tileY, int player, Scene* scene) : Building(tileX, tileY, player, scene)
 {
 	Game* game = &Game::getInstance();
 	model = game->sceneManager->getMesh("res/buildingTownCenter.md2");
@@ -70,7 +70,7 @@ void TownCenter::createUnit(){
 		}
 	}
 	if(list->size() > 0){
-		((GameScene*)game->currentScene)->entities.push_back(new UnitPeasant(list->at(0).X,list->at(0).Y, player ));
+		((GameScene*)game->currentScene)->entities.push_back(new UnitPeasant(list->at(0).X,list->at(0).Y, player, scene ));
 		delete list;
 	}
 }

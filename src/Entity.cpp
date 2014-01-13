@@ -3,8 +3,9 @@
 #include <iostream>
 using namespace std;
 
-Entity::Entity(void)
+Entity::Entity(Scene* scene)
 {
+	this->scene = scene;
 }
 
 Entity::~Entity()

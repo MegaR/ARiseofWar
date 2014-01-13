@@ -5,7 +5,7 @@ class TownCenter :
 	public Building
 {
 public:
-	TownCenter(int tileX, int tileY, int player);
+	TownCenter(int tileX, int tileY, int player, Scene* scene);
 	~TownCenter(void);
 
 	void update();

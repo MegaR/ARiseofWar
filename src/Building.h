@@ -4,7 +4,7 @@
 class Building : public Entity
 {
 public:
-	Building(int tileX, int tileY, int player);
+	Building(int tileX, int tileY, int player, Scene* scene);
 	~Building(void);
 	void createModel();
 	std::vector<vector2d<int>>* getSurroundingTiles();
