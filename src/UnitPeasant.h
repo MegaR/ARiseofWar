@@ -7,7 +7,7 @@
 class UnitPeasant: public Unit
 {
 public:
-	UnitPeasant(int _x, int _y, int _player);
+	UnitPeasant(int _x, int _y, int _player, Scene* scene);
 	~UnitPeasant();
 
 	void update();

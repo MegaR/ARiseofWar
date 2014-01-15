@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-UnitPeasant::UnitPeasant(int _x, int _y, int _player) : Unit(_x, _y, _player)
+UnitPeasant::UnitPeasant(int _x, int _y, int _player, Scene* scene) : Unit(_x, _y, _player, scene)
 {
 	hp = 1;
 	maxHP = 1;
@@ -73,7 +73,8 @@ void UnitPeasant::update()
 }
 
 bool UnitPeasant::attemptBuildBarracks() {
-	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
+	if(tileX <=0 || tileY >= MAPSIZE-1) return false;
+	GameScene* scene = (GameScene*)this->scene;
 	buildingBuilt = true;
 	TileGrass* validTile2 = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[tileX+1][tileY]);
 	TileGrass* validTile3 = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[tileX][tileY+1]);
@@ -83,7 +84,7 @@ bool UnitPeasant::attemptBuildBarracks() {
 	{
 		return false;
 	} else {
-		scene->entities.push_back(new Barracks(tileX, tileY, player));
+		scene->entities.push_back(new Barracks(tileX, tileY, player, scene));
 		scene->removeEntity(this);
 		return true;
 	}

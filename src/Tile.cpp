@@ -3,6 +3,7 @@
 
 Tile::Tile(int x, int y)
 {
+	this->entity = NULL;
 }
 
 
@@ -23,4 +24,12 @@ void Tile::createModel(const path model, const path texture, int x, int y) {
 	node->setRotation(vector3df(0,rand()%3*90,0));
 	node->setID(1);
 
+}
+
+Entity* Tile::getEntity() {
+	return entity;
+}
+
+void Tile::setEntity(Entity* entity) {
+	this->entity = entity;
 }

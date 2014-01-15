@@ -1,7 +1,7 @@
 #include "Building.h"
 #include "Game.h"
 
-Building::Building(int tileX, int tileY, int player) : Entity()
+Building::Building(int tileX, int tileY, int player, Scene* scene) : Entity(scene)
 {
 	this->tileX = tileX;
 	this->tileY = tileY;
@@ -11,9 +11,20 @@ Building::Building(int tileX, int tileY, int player) : Entity()
 
 Building::~Building(void)
 {
+	for(int x = 0; x < sizeX; x++) {
+		for(int y = 0; y < sizeY; y++) {
+			((GameScene*)scene)->tilesystem.tiles[tileX+x][tileY+y]->setEntity(NULL);
+		}
+	}
 }
 
 void Building::createModel() {
+	for(int x = 0; x < sizeX; x++) {
+		for(int y = 0; y < sizeY; y++) {
+			((GameScene*)scene)->tilesystem.tiles[tileX+x][tileY+y]->setEntity(this);
+		}
+	}
+
 	IMeshSceneNode* meshNode = Game::getInstance().sceneManager->addMeshSceneNode( model );
 	meshNode->setMaterialTexture( 0, texture );
 	meshNode->getMaterial(0).Shininess = 0;

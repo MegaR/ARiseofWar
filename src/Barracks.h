@@ -6,7 +6,7 @@
 class Barracks : public Building
 {
 public:
-	Barracks(int tileX, int tileY, int player);
+	Barracks(int tileX, int tileY, int player, Scene* scene);
 	~Barracks(void);
 	
 	void update();

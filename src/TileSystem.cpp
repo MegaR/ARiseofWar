@@ -16,17 +16,17 @@ void TileSystem::create(Scene* scene) {
 
 	int playerY = rand() % (MAPSIZE-4)+2;
 	int playerX = rand() % 4+2;
-	gameScene->entities.push_back(new TownCenter(playerX, playerY, 0));
-	gameScene->entities.push_back(new UnitKnight(playerX+2, playerY, 0));
-	gameScene->entities.push_back(new UnitKnight(playerX+2, playerY+1, 0));
-	gameScene->entities.push_back(new UnitPeasant(playerX+2, playerY+2, 0));
+	gameScene->entities.push_back(new TownCenter(playerX, playerY, 0, scene));
+	gameScene->entities.push_back(new UnitKnight(playerX+2, playerY, 0, scene));
+	gameScene->entities.push_back(new UnitKnight(playerX+2, playerY+1, 0, scene));
+	gameScene->entities.push_back(new UnitPeasant(playerX+2, playerY+2, 0, scene));
 
 	int enemyY = rand() % (MAPSIZE-4)+2;
 	int enemyX = rand() % 4+2;
-	gameScene->entities.push_back(new TownCenter(MAPSIZE-enemyX, enemyY, 1));
-	gameScene->entities.push_back(new UnitKnight(MAPSIZE-enemyX-1, enemyY, 1));
-	gameScene->entities.push_back(new UnitKnight(MAPSIZE-enemyX-1, enemyY+1, 1));
-	gameScene->entities.push_back(new UnitPeasant(MAPSIZE-enemyX-1, enemyY+2, 1));
+	gameScene->entities.push_back(new TownCenter(MAPSIZE-enemyX, enemyY, 1, scene));
+	gameScene->entities.push_back(new UnitKnight(MAPSIZE-enemyX-1, enemyY, 1, scene));
+	gameScene->entities.push_back(new UnitKnight(MAPSIZE-enemyX-1, enemyY+1, 1, scene));
+	gameScene->entities.push_back(new UnitPeasant(MAPSIZE-enemyX-1, enemyY+2, 1, scene));
 	
 	generateStartResource(playerX, playerY, 0, scene);
 	generateStartResource(playerX, playerY, 1, scene);
@@ -75,13 +75,13 @@ void TileSystem::generateStartResource(int playerX, int playerY, int tileType, S
 		}
 		randX += playerX;
 		randY += playerY;
-	} while(gameScene->getEntity(randX, randY) || randX < 0 || randY < 0 || randX >= MAPSIZE || randY >= MAPSIZE );
+	} while( randX < 0 || randY < 0 || randX >= MAPSIZE || randY >= MAPSIZE || tiles[randX][randY]->getEntity());
 
 	spreadResource(randX, randY, tileType, scene, STARTRESOURCECHANCE);
 }
 
 void TileSystem::spreadResource(int x, int y, int tileType, Scene* scene, int chance) {
-	if(((GameScene*)scene)->getEntity(x, y)) return;
+	if(tiles[x][y]->getEntity() ) return;
 
 	delete tiles[x][y];
 	switch(tileType) {

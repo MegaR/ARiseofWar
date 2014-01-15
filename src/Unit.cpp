@@ -4,8 +4,9 @@
 #include <iostream>
 using namespace std;
 
-Unit::Unit(int tileX, int tileY, int player)
+Unit::Unit(int tileX, int tileY, int player, Scene* scene) : Entity(scene)
 {
+	((GameScene*)scene)->tilesystem.tiles[tileX][tileY]->setEntity(this);
 	this->tileX = tileX;
 	this->tileY = tileY;
 	this->player = player;
@@ -30,6 +31,8 @@ Unit::~Unit()
 	while(modelNodes.size() > 0) {
 		removeModel();
 	}
+	
+	((GameScene*)Game::getInstance().currentScene)->tilesystem.tiles[tileX][tileY]->setEntity(NULL);
 }
 
 void Unit::update() 
@@ -235,8 +238,11 @@ void Unit::moveTo(int desX, int desY)
 	}
 	delete newPath;
 
+	
+	((GameScene*)scene)->tilesystem.tiles[tileX][tileY]->setEntity(NULL);
 	tileX = path[path.size()-1].X;
 	tileY = path[path.size()-1].Y;
+	((GameScene*)scene)->tilesystem.tiles[tileX][tileY]->setEntity(this);
 	hasMoved = true;
 }
 

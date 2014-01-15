@@ -14,7 +14,7 @@
 class Unit: public Entity
 {
 public:
-	Unit(int tileX, int tileY, int player);
+	Unit(int tileX, int tileY, int player, Scene* scene);
 	virtual ~Unit();
 
 	int maxHP;

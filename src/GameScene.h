@@ -13,7 +13,7 @@
 //#include "Game.h"
 
 #define CAMERAMIN 10
-#define CAMERAMAX 70
+#define CAMERAMAX 150
 #define CAMERASPEED 50
 #define ZOOMSPEED 5
 

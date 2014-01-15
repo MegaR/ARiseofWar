@@ -225,7 +225,6 @@ void GameScene::actionEntity() {
 
 	if(hit == vector2d<int>(-1, -1) ) return;
 	ent = getEntity(hit.X, hit.Y);
-
 	if(!ent) {
 		((Unit*)storedEntity)->moveTo(hit.X, hit.Y);
 		clickEntity();
@@ -243,7 +242,6 @@ void GameScene::clickEntity(){
 	Entity *ent;
 
 	if(hit == vector2d<int>(-1, -1) ) return;
-	
 	Building* building = dynamic_cast<Building*>(getEntity(hit.X, hit.Y) );
 	if(!building) {
 		selectedNode->setPosition(vector3df(hit.X*10,0,hit.Y*10));
@@ -274,20 +272,8 @@ void GameScene::selectEntity(Entity* ent) {
 
 
 Entity* GameScene::getEntity(int x, int y) {
-	for(int i = 0; i < entities.size(); i++) {
-		Building* building = dynamic_cast<Building*>(entities[i]);
-		if( !building ) {
-			if(entities[i]->tileX == x && entities[i]->tileY== y) {
-				return entities[i];
-			}
-		} else { // entity is a building
-			if(x >= building->tileX && x < building->tileX + building->sizeX && y >= building->tileY && y < building->tileY + building->sizeY) {
-				return entities[i];
-			}
-		}
-	}
-	
-	return NULL;
+	if(x < 0 || y < 0 || x >= MAPSIZE || y >= MAPSIZE) return 0;
+	return tilesystem.tiles[x][y]->getEntity();
 }
 
 void GameScene::removeEntity(Entity* ent){
