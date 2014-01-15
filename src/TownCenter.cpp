@@ -16,11 +16,10 @@ TownCenter::TownCenter(int tileX, int tileY, int player, Scene* scene) : Buildin
 	createModel();
 	node->setRotation(vector3df(0,15,0));
 	GUI = game->gui->addImage(rect<s32>(0,0, 300, 125));
-	txt =	game->gui->addStaticText(L"peasant duurt 1 beurt om te bouwen" ,rect<s32>(0,0, 300, 100));
+	txt =	game->gui->addStaticText(L"Peasant duurt 2 beurten om te bouwen" ,rect<s32>(0,0, 300, 100));
 	GUI->setVisible(false); 
 	txt->setVisible(false);
-	allowBuild = true;
-	buildturn = 420;
+	buildturn = -1;
 
 	peasantButton = new Button(120, 35, 75, 75, "peasant", game->videoDriver->getTexture("res/guiButtonCreate.png") );
 	peasantButton->btn->setVisible(false);
@@ -38,7 +37,7 @@ TownCenter::~TownCenter(void)
 	txt->remove();
 	delete peasantButton;
 	if(player == 0){
-		((GameScene*)game->currentScene)->enemyunits =true;
+		((GameScene*)game->currentScene)->enemyunits = true;
 	}else if( player == 1){
 		((GameScene*)game->currentScene)->playerunits = true;
 	}
@@ -59,7 +58,6 @@ void TownCenter::createUnit(){
 	GameScene* scene = (GameScene*)game->currentScene;
 	std::vector<vector2d<int>> *list;
 	
-	allowBuild = true;
 	list = this->getSurroundingTiles();
 	for(int i = 0; i < list->size(); i++) {
 		TileGrass* tile = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[list->at(i).X][list->at(i).Y]);
@@ -70,18 +68,20 @@ void TownCenter::createUnit(){
 		}
 	}
 	if(list->size() > 0){
-		((GameScene*)game->currentScene)->entities.push_back(new UnitPeasant(list->at(0).X,list->at(0).Y, player, scene ));
+		((GameScene*)scene)->entities.push_back(new UnitPeasant(list->at(0).X,list->at(0).Y, player, scene ));
 		delete list;
+
 	}
 }
 
 void TownCenter::addtoqueue(){
 	Game* game = &Game::getInstance();
 	
-	if((game->eventReceiver->isKeyPressed(KEY_KEY_P) || peasantButton->pressed) && allowBuild  == true ){
-		buildturn = ((GameScene*)game->currentScene)->turnCount;
-		cout << "queued" << endl; 
-		allowBuild = false;
+	if((game->eventReceiver->isKeyPressed(KEY_KEY_P) || peasantButton->pressed) && allowBuild()){
+		buildturn = ((GameScene*)game->currentScene)->turnCount + PEASANTBUILDTIME;
+		((GameScene*)scene)->players[player]->useResources(PEASANTCOST);
+		peasantButton->btn->setEnabled(false);
+		cout << "queued peasant" << endl;
 	}
 
 }
@@ -94,6 +94,11 @@ void TownCenter::selected(){
 	GUI->setVisible(true);
 	txt->setVisible(true);
 	peasantButton->btn->setVisible(true);
+	if(allowBuild()) {
+		peasantButton->btn->setEnabled(true);
+	} else {
+		peasantButton->btn->setEnabled(false);
+	}
 }
 
 void TownCenter::deselected(){
@@ -102,20 +107,27 @@ void TownCenter::deselected(){
 		peasantButton->btn->setVisible(false);
 }
 
-void TownCenter::startTurn(){
-	Game* game = &Game::getInstance();
-	
-	if((buildturn+2)== ((GameScene*)game->currentScene)->turnCount){
+void TownCenter::startTurn(){	
+	if(buildturn == ((GameScene*)scene)->turnCount){
 		createUnit();
-		
-		cout<< "this was true" << endl;
 	}
 }
 
 void TownCenter::enemyTurn() {
-	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
-	if(allowBuild && rand()%3 == 0) {
-		buildturn = scene->turnCount;
-		allowBuild = false;
+	if(allowBuild() && rand()%3 == 0) {
+		buildturn = ((GameScene*)scene)->turnCount;
+		((GameScene*)scene)->players[player]->useResources(PEASANTCOST);
 	}
+}
+
+bool TownCenter::allowBuild() {
+	Player* player = ((GameScene*)scene)->players[this->player];
+	if(!player->hasResources(PEASANTCOST)) {
+		return false;
+	}
+
+	if(buildturn < ((GameScene*)scene)->turnCount) {
+		return true;
+	}
+	return false;
 }

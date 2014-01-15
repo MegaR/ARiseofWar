@@ -47,6 +47,7 @@ public:
 	bool playerunits;
 	bool enemyunits;
 	int currentPlayer;
+	Player* players[2];
 private:
 	void moveCamera(float x, float y, float z);
 	IGUIImage* background;
@@ -58,7 +59,4 @@ private:
 	std::vector<vector2d<int>>* reconstructed_path(vector2d<int> came_from[][MAPSIZE], vector2d<int> end, vector2d<int> start);
 
 	IMeshSceneNode *selectedNode;
-
-	Player* players[2];
-	
 };
