@@ -92,6 +92,7 @@
     <ClCompile Include="src\EventReceiver.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameScene.cpp" />
+    <ClCompile Include="src\Lumbermill.cpp" />
     <ClCompile Include="src\MenuScene.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Scene.cpp" />
@@ -115,6 +116,7 @@
     <ClInclude Include="src\EventReceiver.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\GameScene.h" />
+    <ClInclude Include="src\Lumbermill.h" />
     <ClInclude Include="src\MenuScene.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\Scene.h" />
