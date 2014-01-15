@@ -75,6 +75,9 @@ void UnitPeasant::update()
 bool UnitPeasant::attemptBuildBarracks() {
 	if(tileX <=0 || tileY >= MAPSIZE-1) return false;
 	GameScene* scene = (GameScene*)this->scene;
+	if(!scene->players[player]->hasResources(BARRACKSCOST)) {
+		return false;
+	}
 	buildingBuilt = true;
 	TileGrass* validTile2 = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[tileX+1][tileY]);
 	TileGrass* validTile3 = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[tileX][tileY+1]);
@@ -85,6 +88,7 @@ bool UnitPeasant::attemptBuildBarracks() {
 		return false;
 	} else {
 		scene->entities.push_back(new Barracks(tileX, tileY, player, scene));
+		scene->players[player]->useResources(BARRACKSCOST);
 		scene->removeEntity(this);
 		return true;
 	}

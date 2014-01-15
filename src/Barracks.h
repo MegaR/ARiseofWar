@@ -3,6 +3,8 @@
 #include "UnitKnight.h"
 #include "Button.h"
 
+#define BARRACKSCOST 0, 0, 0, 10
+
 class Barracks : public Building
 {
 public:

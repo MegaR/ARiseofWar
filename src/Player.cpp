@@ -4,7 +4,7 @@
 Player::Player(void) {
 	wood = 10;
 	food = 0;
-	stone = 0;
+	stone = 10;
 	gold = 0;
 }
 

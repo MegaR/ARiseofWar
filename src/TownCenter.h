@@ -2,9 +2,6 @@
 #include "building.h"
 #include "button.h"
 
-#define PEASANTBUILDTIME 2
-#define PEASANTCOST 10, 0, 0, 0
-
 class TownCenter :
 	public Building
 {

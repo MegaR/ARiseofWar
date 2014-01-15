@@ -4,6 +4,9 @@
 #include "Barracks.h"
 #include "Button.h"
 
+#define PEASANTBUILDTIME 2
+#define PEASANTCOST 10, 0, 0, 0
+
 class UnitPeasant: public Unit
 {
 public:

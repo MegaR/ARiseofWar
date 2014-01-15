@@ -32,7 +32,9 @@ Unit::~Unit()
 		removeModel();
 	}
 	
-	((GameScene*)Game::getInstance().currentScene)->tilesystem.tiles[tileX][tileY]->setEntity(NULL);
+	if(((GameScene*)Game::getInstance().currentScene)->tilesystem.tiles[tileX][tileY]->getEntity() == this) {
+		((GameScene*)Game::getInstance().currentScene)->tilesystem.tiles[tileX][tileY]->setEntity(NULL);
+	}
 }
 
 void Unit::update() 
