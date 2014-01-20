@@ -19,8 +19,7 @@ Barracks::Barracks(int tileX, int tileY, int player, Scene* scene) : Building(ti
 	txt =	game->gui->addStaticText(L"knight duurt 2 beurten om te bouwen" ,rect<s32>(0,0, 300, 100));
 	GUI->setVisible(false); 
 	txt->setVisible(false);
-	allowBuild = true;
-	buildturn = 420;
+	buildturn = -1;
 
 	hp = 4;
 	defense = 2;
@@ -47,7 +46,6 @@ void Barracks::createUnit(){
 	GameScene* scene = (GameScene*)game->currentScene;
 	std::vector<vector2d<int>> *list;
 	
-	allowBuild = true;
 	list = this->getSurroundingTiles();
 	for(int i = 0; i < list->size(); i++) {
 		TileGrass* tile = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[list->at(i).X][list->at(i).Y]);
@@ -66,10 +64,11 @@ void Barracks::createUnit(){
 void Barracks::addtoqueue(){
 	Game* game = &Game::getInstance();
 	
-	if((game->eventReceiver->isKeyPressed(KEY_KEY_K) || knightButton->pressed) && allowBuild  == true ){
-		buildturn = ((GameScene*)game->currentScene)->turnCount;
-		cout << "queued" << endl;
-		allowBuild = false;
+	if((game->eventReceiver->isKeyPressed(KEY_KEY_K) || knightButton->pressed) && allowBuild()){
+		buildturn = ((GameScene*)scene)->turnCount + KNIGHTBUILDTIME;
+		((GameScene*)scene)->players[player]->useResources(KNIGHTCOST);
+		knightButton->btn->setEnabled(false);
+		cout << "queued peasant" << endl;
 	}
 }
 
@@ -82,6 +81,11 @@ void Barracks::selected(){
 	GUI->setVisible(true);
 	txt->setVisible(true);
 	knightButton->btn->setVisible(true);
+	if(allowBuild()) {
+		knightButton->btn->setEnabled(true);
+	} else {
+		knightButton->btn->setEnabled(false);
+	}
 }
 
 void Barracks::deselected(){
@@ -92,16 +96,27 @@ void Barracks::deselected(){
 
 void  Barracks::startTurn(){
 	Game* game = &Game::getInstance();
-	if((buildturn+4) == ((GameScene*)game->currentScene)->turnCount){
+	if(buildturn == ((GameScene*)scene)->turnCount) {
 		createUnit();
-		cout<< "creating unit" << endl;
+		cout<< "creating knight" << endl;
 	}
 }
 
 void Barracks::enemyTurn() {
 	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
-	if(allowBuild && rand()%2 == 0) {
+	if(allowBuild() && rand()%2 == 0) {
 		buildturn = scene->turnCount;
-		allowBuild = false;
 	}
+}
+
+bool Barracks::allowBuild() {
+	Player* player = ((GameScene*)scene)->players[this->player];
+	if(!player->hasResources(KNIGHTCOST)) {
+		return false;
+	}
+
+	if(buildturn < ((GameScene*)scene)->turnCount) {
+		return true;
+	}
+	return false;
 }

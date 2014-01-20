@@ -19,7 +19,7 @@ public:
 	void startTurn();
 	void enemyTurn();
 
-	bool allowBuild;
+	bool allowBuild();
 	int buildturn;
 
 	IGUIStaticText* txt;

@@ -11,14 +11,17 @@ Lumbermill::Lumbermill(int tileX, int tileY, int player, Scene* scene) : Buildin
 	sizeX = 1;
 	sizeY = 1;
 	createModel();
-	node->setScale(vector3df(0.69f,0.69f,0.69f));
-	node->setRotation(vector3df(0,30,0));
+	node->setScale(vector3df(1.25f, 1.25f, 1.25f));
+	node->setRotation(vector3df(0,10,0));
 
 	hp = 4;
 	defense = 2;
 }
 
-
 Lumbermill::~Lumbermill(void)
 {
+}
+
+void  Lumbermill::startTurn(){
+	((GameScene*)scene)->players[player]->useResources(LUMBERMILLINCREASE);
 }
