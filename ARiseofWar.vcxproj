@@ -90,6 +90,7 @@
     <ClCompile Include="src\EnemyPlayer.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\EventReceiver.cpp" />
+    <ClCompile Include="src\Farm.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameScene.cpp" />
     <ClCompile Include="src\LumberMill.cpp" />
@@ -115,6 +116,7 @@
     <ClInclude Include="src\EnemyPlayer.h" />
     <ClInclude Include="src\Entity.h" />
     <ClInclude Include="src\EventReceiver.h" />
+    <ClInclude Include="src\Farm.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\GameScene.h" />
     <ClInclude Include="src\LumberMill.h" />

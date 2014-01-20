@@ -68,6 +68,7 @@
       <Filter>Entities\Buildings</Filter>
     </ClCompile>
     <ClCompile Include="src\Quarry.cpp" />
+    <ClCompile Include="src\Farm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Button.h">
@@ -137,6 +138,7 @@
       <Filter>Entities\Buildings</Filter>
     </ClInclude>
     <ClInclude Include="src\Quarry.h" />
+    <ClInclude Include="src\Farm.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Irrlicht.dll">
