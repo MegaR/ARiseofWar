@@ -64,7 +64,7 @@
     <ClCompile Include="src\TileForest.cpp">
       <Filter>Game\Tiles</Filter>
     </ClCompile>
-    <ClCompile Include="src\Lumbermill.cpp">
+    <ClCompile Include="src\LumberMill.cpp">
       <Filter>Entities\Buildings</Filter>
     </ClCompile>
   </ItemGroup>
@@ -132,7 +132,7 @@
     <ClInclude Include="src\TileForest.h">
       <Filter>Game\Tiles</Filter>
     </ClInclude>
-    <ClInclude Include="src\Lumbermill.h">
+    <ClInclude Include="src\LumberMill.h">
       <Filter>Entities\Buildings</Filter>
     </ClInclude>
   </ItemGroup>

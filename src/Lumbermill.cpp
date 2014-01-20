@@ -2,9 +2,10 @@
 #include "Game.h" 
 
 
-Lumbermill::Lumbermill(int tileX, int tileY, int player, Scene* scene) : Building(tileX, tileY, player, scene)
+LumberMill::LumberMill(int tileX, int tileY, int player, Scene* scene) : Building(tileX, tileY, player, scene)
 {
 	Game* game = &Game::getInstance();
+
 	model = game->sceneManager->getMesh("res/LumberMill.md2");
 	texture = game->videoDriver->getTexture("res/lumbermill.png");
 	sizeX = 1;
@@ -17,10 +18,10 @@ Lumbermill::Lumbermill(int tileX, int tileY, int player, Scene* scene) : Buildin
 	defense = 2;
 }
 
-Lumbermill::~Lumbermill(void)
+LumberMill::~LumberMill(void)
 {
 }
 
-void  Lumbermill::startTurn(){
+void  LumberMill::startTurn(){
 	((GameScene*)scene)->players[player]->useResources(LUMBERMILLINCREASE);
 }
