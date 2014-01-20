@@ -5,8 +5,9 @@
 Lumbermill::Lumbermill(int tileX, int tileY, int player, Scene* scene) : Building(tileX, tileY, player, scene)
 {
 	Game* game = &Game::getInstance();
-	model = game->sceneManager->getMesh("res/LumberMill.md2");
-	texture = game->videoDriver->getTexture("res/lumbermill.png");
+	model = game->sceneManager->getMesh("res/buildingLumbermill.md2");
+	if (player == 0) { texture = game->videoDriver->getTexture("res/buildingLumbermill.png"); }
+	else { texture = game->videoDriver->getTexture("res/buildingLumbermill.png"); }
 	sizeX = 1;
 	sizeY = 1;
 	createModel();
