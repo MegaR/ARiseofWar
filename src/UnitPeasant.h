@@ -4,6 +4,7 @@
 #include "Barracks.h"
 #include "Button.h"
 #include "LumberMill.h"
+#include "Quarry.h"
 
 #include "TileForest.h"
 #include "TileGrass.h"
@@ -24,10 +25,13 @@ public:
 	bool attemptBuildBarracks();
 	bool attemptBuildLumberMill();
 	void buildLumberMill(int tileX, int tileY);
+	bool attemptBuildQuarry();
+	void buildQuarry(int tileX, int tileY);
 	bool reasonableSpace();
 
 	IGUIImage* GUI;
 	Button* buildBarracksButton;
 	Button* buildLumberMillButton;
+	Button* buildQuarryButton;
 };
 

@@ -9,7 +9,7 @@ LumberMill::LumberMill(int tileX, int tileY, int player, Scene* scene) : Buildin
 	if (player == 0) {
 		texture = game->videoDriver->getTexture("res/buildingLumbermill.png");
 	} else { 
-		texture = game->videoDriver->getTexture("res/buildingLumbermill.png");
+		texture = game->videoDriver->getTexture("res/buildingLumbermillEnemy.png");
 	}
 
 	sizeX = 1;

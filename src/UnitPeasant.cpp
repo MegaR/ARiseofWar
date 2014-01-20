@@ -28,8 +28,10 @@ UnitPeasant::UnitPeasant(int _x, int _y, int _player, Scene* scene) : Unit(_x, _
 
 	buildBarracksButton = new Button(10, 50, 75, 75, "Barracks", game->videoDriver->getTexture("res/guiButtonCreate.png"));
 	buildBarracksButton->btn->setVisible(false);
-	buildLumberMillButton = new Button(90, 50, 75, 75, "Lumber Mill", game->videoDriver->getTexture("res/guiButtonCreate.png"));
+	buildLumberMillButton = new Button(90, 50, 75, 75, "Lumber\nMill", game->videoDriver->getTexture("res/guiButtonCreate.png"));
 	buildLumberMillButton->btn->setVisible(false);
+	buildQuarryButton = new Button(170, 50, 75, 75, "Quarry", game->videoDriver->getTexture("res/guiButtonCreate.png"));
+	buildQuarryButton->btn->setVisible(false);
 
 
 	for(int i = 0; i < maxModels; i++) {
@@ -41,6 +43,7 @@ UnitPeasant::UnitPeasant(int _x, int _y, int _player, Scene* scene) : Unit(_x, _
 UnitPeasant::~UnitPeasant() {
 	delete buildLumberMillButton;
 	delete buildBarracksButton;
+	delete buildQuarryButton;
 	GUI->remove();
 }
 
@@ -48,6 +51,7 @@ void UnitPeasant::update() {
 	Unit::update();
 	buildBarracksButton->update();
 	buildLumberMillButton->update();
+	buildQuarryButton->update();
 
 	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
 
@@ -58,6 +62,10 @@ void UnitPeasant::update() {
 
 	if (buildLumberMillButton->pressed) {
 		attemptBuildLumberMill();
+	}
+
+	if(buildQuarryButton->pressed) {
+		attemptBuildQuarry();
 	}
 }
 
@@ -118,11 +126,47 @@ void UnitPeasant::buildLumberMill(int tileX, int tileY) {
 	((GameScene*)scene)->removeEntity(this);
 }
 
+bool UnitPeasant::attemptBuildQuarry() {
+	GameScene* scene = (GameScene*)this->scene;
+	if(!scene->players[player]->hasResources(QUARRYCOST)) {
+		return false;
+	}
+
+	TileRocks* tile;
+	tile = dynamic_cast<TileRocks*>(scene->tilesystem.tiles[tileX+1][tileY]);
+	if(tile != NULL) {buildQuarry(tileX+1, tileY); return true;}
+	tile = dynamic_cast<TileRocks*>(scene->tilesystem.tiles[tileX-1][tileY]);
+	if(tile != NULL) {buildQuarry(tileX-1, tileY); return true;}
+	tile = dynamic_cast<TileRocks*>(scene->tilesystem.tiles[tileX][tileY+1]);
+	if(tile != NULL) {buildQuarry(tileX, tileY+1); return true;}
+	tile = dynamic_cast<TileRocks*>(scene->tilesystem.tiles[tileX][tileY-1]);
+	if(tile != NULL) {buildQuarry(tileX, tileY-1); return true;}
+	tile = dynamic_cast<TileRocks*>(scene->tilesystem.tiles[tileX+1][tileY+1]);
+	if(tile != NULL) {buildQuarry(tileX+1, tileY+1); return true;}
+	tile = dynamic_cast<TileRocks*>(scene->tilesystem.tiles[tileX+1][tileY-1]);
+	if(tile != NULL) {buildQuarry(tileX+1, tileY-1); return true;}
+	tile = dynamic_cast<TileRocks*>(scene->tilesystem.tiles[tileX-1][tileY+1]);
+	if(tile != NULL) {buildQuarry(tileX-1, tileY+1); return true;}
+	tile = dynamic_cast<TileRocks*>(scene->tilesystem.tiles[tileX-1][tileY-1]);
+	if(tile != NULL) {buildQuarry(tileX-1, tileY-1); return true;}
+
+	return false;
+}
+
+void UnitPeasant::buildQuarry(int tileX, int tileY) {
+	delete ((GameScene*)scene)->tilesystem.tiles[tileX][tileY];
+	((GameScene*)scene)->tilesystem.tiles[tileX][tileY] = new TileGrass(tileX, tileY);
+	((GameScene*)scene)->entities.push_back(new Quarry(tileX, tileY, player, scene));
+	((GameScene*)scene)->players[player]->useResources(QUARRYCOST);
+	((GameScene*)scene)->removeEntity(this);
+}
+
 void UnitPeasant::selected() {
 	Unit::selected();
 	GUI->setVisible(true);
 	buildBarracksButton->btn->setVisible(true);
 	buildLumberMillButton->btn->setVisible(true);
+	buildQuarryButton->btn->setVisible(true);
 	if( ((GameScene*)scene)->players[player]->hasResources(BARRACKSCOST) ) {
 		buildBarracksButton->btn->setEnabled(true);
 	} else {
@@ -133,6 +177,11 @@ void UnitPeasant::selected() {
 	} else {
 		buildLumberMillButton->btn->setEnabled(false);
 	}
+	if( ((GameScene*)scene)->players[player]->hasResources(QUARRYCOST) ) {
+		buildQuarryButton->btn->setEnabled(true);
+	} else {
+		buildQuarryButton->btn->setEnabled(false);
+	}
 }
 
 void UnitPeasant::deselected() {
@@ -140,6 +189,7 @@ void UnitPeasant::deselected() {
 	GUI->setVisible(false);
 	buildBarracksButton->btn->setVisible(false);
 	buildLumberMillButton->btn->setVisible(false);
+	buildQuarryButton->btn->setVisible(false);
 }
 
 void UnitPeasant::enemyTurn() {

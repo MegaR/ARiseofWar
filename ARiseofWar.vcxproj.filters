@@ -67,6 +67,7 @@
     <ClCompile Include="src\LumberMill.cpp">
       <Filter>Entities\Buildings</Filter>
     </ClCompile>
+    <ClCompile Include="src\Quarry.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Button.h">
@@ -135,6 +136,7 @@
     <ClInclude Include="src\LumberMill.h">
       <Filter>Entities\Buildings</Filter>
     </ClInclude>
+    <ClInclude Include="src\Quarry.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Irrlicht.dll">
