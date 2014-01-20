@@ -11,6 +11,7 @@ LumberMill::LumberMill(int tileX, int tileY, int player, Scene* scene) : Buildin
 	} else { 
 		texture = game->videoDriver->getTexture("res/buildingLumbermill.png");
 	}
+
 	sizeX = 1;
 	sizeY = 1;
 	createModel();
