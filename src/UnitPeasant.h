@@ -3,8 +3,14 @@
 #include "Unit.h"
 #include "Barracks.h"
 #include "Button.h"
+#include "LumberMill.h"
+#include "Quarry.h"
+#include "Farm.h"
 
-#define PEASANTBUILDTIME 2
+#include "TileForest.h"
+#include "TileGrass.h"
+
+#define PEASANTBUILDTIME 1
 #define PEASANTCOST 10, 0, 0, 0
 
 class UnitPeasant: public Unit
@@ -18,10 +24,18 @@ public:
 	void deselected();
 	virtual void enemyTurn();
 	bool attemptBuildBarracks();
+	bool attemptBuildLumberMill();
+	void buildLumberMill(int tileX, int tileY);
+	bool attemptBuildQuarry();
+	void buildQuarry(int tileX, int tileY);
+	bool attemptBuildFarm();
+	void buildFarm(int tileX, int tileY);
 	bool reasonableSpace();
 
-	bool showGUI, isSelected, buildingBuilt;
 	IGUIImage* GUI;
 	Button* buildBarracksButton;
+	Button* buildLumberMillButton;
+	Button* buildQuarryButton;
+	Button* buildFarmButton;
 };
 

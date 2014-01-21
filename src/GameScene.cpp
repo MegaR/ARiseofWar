@@ -9,6 +9,7 @@ GameScene::GameScene() {
 	game->camera->setPosition( vector3df(0, 35, -40));
 	moveCamera(0,0,0);
 	players[0] = new Player();
+	players[0]->createGui();
 	players[1] = new EnemyPlayer();
 	currentPlayer = 0;
 	turnCount = 0;

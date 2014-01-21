@@ -21,10 +21,6 @@ UnitPeasant::UnitPeasant(int _x, int _y, int _player, Scene* scene) : Unit(_x, _
 	} else {
 		texture = game->videoDriver->getTexture("res/unitPeasantEnemy.png");
 	}
-	
-	showGUI = false;
-	isSelected = false;
-	buildingBuilt = false;
 
 	GUI = game->gui->addImage(rect<s32>(0,40, 95, 135));
 	GUI->setImage(game->videoDriver->getTexture("res/guiBackgroundMenu.png"));
@@ -32,6 +28,13 @@ UnitPeasant::UnitPeasant(int _x, int _y, int _player, Scene* scene) : Unit(_x, _
 
 	buildBarracksButton = new Button(10, 50, 75, 75, "Barracks", game->videoDriver->getTexture("res/guiButtonCreate.png"));
 	buildBarracksButton->btn->setVisible(false);
+	buildLumberMillButton = new Button(90, 50, 75, 75, "Lumber\nMill", game->videoDriver->getTexture("res/guiButtonCreate.png"));
+	buildLumberMillButton->btn->setVisible(false);
+	buildQuarryButton = new Button(170, 50, 75, 75, "Quarry", game->videoDriver->getTexture("res/guiButtonCreate.png"));
+	buildQuarryButton->btn->setVisible(false);
+	buildFarmButton = new Button(250, 50, 75, 75, "Farm", game->videoDriver->getTexture("res/guiButtonCreate.png"));
+	buildFarmButton->btn->setVisible(false);
+
 
 	for(int i = 0; i < maxModels; i++) {
 		addModel();
@@ -39,37 +42,43 @@ UnitPeasant::UnitPeasant(int _x, int _y, int _player, Scene* scene) : Unit(_x, _
 }
 
 
-UnitPeasant::~UnitPeasant()
-{
+UnitPeasant::~UnitPeasant() {
+	delete buildLumberMillButton;
 	delete buildBarracksButton;
+	delete buildQuarryButton;
+	delete buildFarmButton;
 	GUI->remove();
 }
 
-void UnitPeasant::update()
-{
+void UnitPeasant::update() {
 	Unit::update();
 	buildBarracksButton->update();
-
-	GUI->setVisible(showGUI);
-	buildBarracksButton->btn->setVisible(showGUI);
-
-	if((isSelected == false) && (buildingBuilt == true))
-	{
-		showGUI = false;
-	}
+	buildLumberMillButton->update();
+	buildQuarryButton->update();
+	buildFarmButton->update();
 
 	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
-	if(scene->nextTurnButton->pressed)
-	{
-		showGUI = false;
-		isSelected = false;
-		buildingBuilt = false;
-	}
 
 	if (buildBarracksButton->pressed)
 	{
-		attemptBuildBarracks();
-	}	
+		if(attemptBuildBarracks())
+			return;
+	}
+
+	if (buildLumberMillButton->pressed) {
+		if(attemptBuildLumberMill())
+			return;
+	}
+
+	if(buildQuarryButton->pressed) {
+		if(attemptBuildQuarry())
+			return;
+	}
+
+	if(buildFarmButton->pressed) {
+		if(attemptBuildFarm())
+			return;
+	}
 }
 
 bool UnitPeasant::attemptBuildBarracks() {
@@ -78,7 +87,7 @@ bool UnitPeasant::attemptBuildBarracks() {
 	if(!scene->players[player]->hasResources(BARRACKSCOST)) {
 		return false;
 	}
-	buildingBuilt = true;
+
 	TileGrass* validTile2 = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[tileX+1][tileY]);
 	TileGrass* validTile3 = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[tileX][tileY+1]);
 	TileGrass* validTile4 = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[tileX+1][tileY+1]);
@@ -94,18 +103,147 @@ bool UnitPeasant::attemptBuildBarracks() {
 	}
 }
 
-void UnitPeasant::selected()
-{
-	Unit::selected();
-	showGUI = true;
-	isSelected = true;
+bool UnitPeasant::attemptBuildLumberMill() {
+	GameScene* scene = (GameScene*)this->scene;
+	if(!scene->players[player]->hasResources(LUMBERMILLCOST)) {
+		return false;
+	}
+
+	TileForest* tile;
+	tile = dynamic_cast<TileForest*>(scene->tilesystem.tiles[tileX+1][tileY]);
+	if(tile != NULL) {buildLumberMill(tileX+1, tileY); return true;}
+	tile = dynamic_cast<TileForest*>(scene->tilesystem.tiles[tileX-1][tileY]);
+	if(tile != NULL) {buildLumberMill(tileX-1, tileY); return true;}
+	tile = dynamic_cast<TileForest*>(scene->tilesystem.tiles[tileX][tileY+1]);
+	if(tile != NULL) {buildLumberMill(tileX, tileY+1); return true;}
+	tile = dynamic_cast<TileForest*>(scene->tilesystem.tiles[tileX][tileY-1]);
+	if(tile != NULL) {buildLumberMill(tileX, tileY-1); return true;}
+	tile = dynamic_cast<TileForest*>(scene->tilesystem.tiles[tileX+1][tileY+1]);
+	if(tile != NULL) {buildLumberMill(tileX+1, tileY+1); return true;}
+	tile = dynamic_cast<TileForest*>(scene->tilesystem.tiles[tileX+1][tileY-1]);
+	if(tile != NULL) {buildLumberMill(tileX+1, tileY-1); return true;}
+	tile = dynamic_cast<TileForest*>(scene->tilesystem.tiles[tileX-1][tileY+1]);
+	if(tile != NULL) {buildLumberMill(tileX-1, tileY+1); return true;}
+	tile = dynamic_cast<TileForest*>(scene->tilesystem.tiles[tileX-1][tileY-1]);
+	if(tile != NULL) {buildLumberMill(tileX-1, tileY-1); return true;}
+
+	return false;
 }
 
-void UnitPeasant::deselected()
-{
+void UnitPeasant::buildLumberMill(int tileX, int tileY) {
+	delete ((GameScene*)scene)->tilesystem.tiles[tileX][tileY];
+	((GameScene*)scene)->tilesystem.tiles[tileX][tileY] = new TileGrass(tileX, tileY);
+	((GameScene*)scene)->entities.push_back(new LumberMill(tileX, tileY, player, scene));
+	((GameScene*)scene)->players[player]->useResources(LUMBERMILLCOST);
+	((GameScene*)scene)->removeEntity(this);
+}
+
+bool UnitPeasant::attemptBuildQuarry() {
+	GameScene* scene = (GameScene*)this->scene;
+	if(!scene->players[player]->hasResources(QUARRYCOST)) {
+		return false;
+	}
+
+	TileRocks* tile;
+	tile = dynamic_cast<TileRocks*>(scene->tilesystem.tiles[tileX+1][tileY]);
+	if(tile != NULL) {buildQuarry(tileX+1, tileY); return true;}
+	tile = dynamic_cast<TileRocks*>(scene->tilesystem.tiles[tileX-1][tileY]);
+	if(tile != NULL) {buildQuarry(tileX-1, tileY); return true;}
+	tile = dynamic_cast<TileRocks*>(scene->tilesystem.tiles[tileX][tileY+1]);
+	if(tile != NULL) {buildQuarry(tileX, tileY+1); return true;}
+	tile = dynamic_cast<TileRocks*>(scene->tilesystem.tiles[tileX][tileY-1]);
+	if(tile != NULL) {buildQuarry(tileX, tileY-1); return true;}
+	tile = dynamic_cast<TileRocks*>(scene->tilesystem.tiles[tileX+1][tileY+1]);
+	if(tile != NULL) {buildQuarry(tileX+1, tileY+1); return true;}
+	tile = dynamic_cast<TileRocks*>(scene->tilesystem.tiles[tileX+1][tileY-1]);
+	if(tile != NULL) {buildQuarry(tileX+1, tileY-1); return true;}
+	tile = dynamic_cast<TileRocks*>(scene->tilesystem.tiles[tileX-1][tileY+1]);
+	if(tile != NULL) {buildQuarry(tileX-1, tileY+1); return true;}
+	tile = dynamic_cast<TileRocks*>(scene->tilesystem.tiles[tileX-1][tileY-1]);
+	if(tile != NULL) {buildQuarry(tileX-1, tileY-1); return true;}
+
+	return false;
+}
+
+void UnitPeasant::buildQuarry(int tileX, int tileY) {
+	delete ((GameScene*)scene)->tilesystem.tiles[tileX][tileY];
+	((GameScene*)scene)->tilesystem.tiles[tileX][tileY] = new TileGrass(tileX, tileY);
+	((GameScene*)scene)->entities.push_back(new Quarry(tileX, tileY, player, scene));
+	((GameScene*)scene)->players[player]->useResources(QUARRYCOST);
+	((GameScene*)scene)->removeEntity(this);
+}
+
+bool UnitPeasant::attemptBuildFarm() {
+	GameScene* scene = (GameScene*)this->scene;
+	if(!scene->players[player]->hasResources(QUARRYCOST)) {
+		return false;
+	}
+
+	TileWheat* tile;
+	tile = dynamic_cast<TileWheat*>(scene->tilesystem.tiles[tileX+1][tileY]);
+	if(tile != NULL) {buildFarm(tileX+1, tileY); return true;}
+	tile = dynamic_cast<TileWheat*>(scene->tilesystem.tiles[tileX-1][tileY]);
+	if(tile != NULL) {buildFarm(tileX-1, tileY); return true;}
+	tile = dynamic_cast<TileWheat*>(scene->tilesystem.tiles[tileX][tileY+1]);
+	if(tile != NULL) {buildFarm(tileX, tileY+1); return true;}
+	tile = dynamic_cast<TileWheat*>(scene->tilesystem.tiles[tileX][tileY-1]);
+	if(tile != NULL) {buildFarm(tileX, tileY-1); return true;}
+	tile = dynamic_cast<TileWheat*>(scene->tilesystem.tiles[tileX+1][tileY+1]);
+	if(tile != NULL) {buildFarm(tileX+1, tileY+1); return true;}
+	tile = dynamic_cast<TileWheat*>(scene->tilesystem.tiles[tileX+1][tileY-1]);
+	if(tile != NULL) {buildFarm(tileX+1, tileY-1); return true;}
+	tile = dynamic_cast<TileWheat*>(scene->tilesystem.tiles[tileX-1][tileY+1]);
+	if(tile != NULL) {buildFarm(tileX-1, tileY+1); return true;}
+	tile = dynamic_cast<TileWheat*>(scene->tilesystem.tiles[tileX-1][tileY-1]);
+	if(tile != NULL) {buildFarm(tileX-1, tileY-1); return true;}
+
+	return false;
+}
+
+void UnitPeasant::buildFarm(int tileX, int tileY) {
+	delete ((GameScene*)scene)->tilesystem.tiles[tileX][tileY];
+	((GameScene*)scene)->tilesystem.tiles[tileX][tileY] = new TileGrass(tileX, tileY);
+	((GameScene*)scene)->entities.push_back(new Farm(tileX, tileY, player, scene));
+	((GameScene*)scene)->players[player]->useResources(FARMCOST);
+	((GameScene*)scene)->removeEntity(this);
+}
+
+void UnitPeasant::selected() {
+	Unit::selected();
+	GUI->setVisible(true);
+	buildBarracksButton->btn->setVisible(true);
+	buildLumberMillButton->btn->setVisible(true);
+	buildQuarryButton->btn->setVisible(true);
+	buildFarmButton->btn->setVisible(true);
+	if( ((GameScene*)scene)->players[player]->hasResources(BARRACKSCOST) ) {
+		buildBarracksButton->btn->setEnabled(true);
+	} else {
+		buildBarracksButton->btn->setEnabled(false);
+	}
+	if( ((GameScene*)scene)->players[player]->hasResources(LUMBERMILLCOST) ) {
+		buildLumberMillButton->btn->setEnabled(true);
+	} else {
+		buildLumberMillButton->btn->setEnabled(false);
+	}
+	if( ((GameScene*)scene)->players[player]->hasResources(QUARRYCOST) ) {
+		buildQuarryButton->btn->setEnabled(true);
+	} else {
+		buildQuarryButton->btn->setEnabled(false);
+	}
+	if( ((GameScene*)scene)->players[player]->hasResources(FARMCOST) ) {
+		buildFarmButton->btn->setEnabled(true);
+	} else {
+		buildFarmButton->btn->setEnabled(false);
+	}
+}
+
+void UnitPeasant::deselected() {
 	Unit::deselected();
-	isSelected = false;
-	showGUI = false;
+	GUI->setVisible(false);
+	buildBarracksButton->btn->setVisible(false);
+	buildLumberMillButton->btn->setVisible(false);
+	buildQuarryButton->btn->setVisible(false);
+	buildFarmButton->btn->setVisible(false);
 }
 
 void UnitPeasant::enemyTurn() {
