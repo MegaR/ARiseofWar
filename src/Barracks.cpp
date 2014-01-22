@@ -16,7 +16,7 @@ Barracks::Barracks(int tileX, int tileY, int player, Scene* scene) : Building(ti
 	node->setScale(vector3df(0.69f,0.69f,0.69f));
 	node->setRotation(vector3df(0,30,0));
 	GUI = game->gui->addImage(rect<s32>(0,40, 510, 200));
-	GUI->setImage(game->videoDriver->getTexture("res/guiBuildMenu.png"));
+	GUI->setImage(game->videoDriver->getTexture("res/guiBarracks.png"));
 	knightTXT = game->gui->addStaticText(L"Het duurt 2 beurten om de Knight te maken.", rect<s32>(10, 135, 170, 195));
 	archerTXT = game->gui->addStaticText(L"Het duurt 1 beurt om de Archer te maken.", rect<s32>(180, 135, 340, 195));
 	//spearmanTXT = game->gui->addStaticText(L"Het duurt 1 beurt om de Spearman te maken.", rect<s32>(350, 135, 510, 195));
@@ -29,13 +29,13 @@ Barracks::Barracks(int tileX, int tileY, int player, Scene* scene) : Building(ti
 	hp = 4;
 	defense = 2;
 
-	knightButton = new Button(10, 50, 75, 75, "Knight", game->videoDriver->getTexture("res/guiButtonCreate.png") );
+	knightButton = new Button(10, 50, 75, 75, "Knight", "Food: 10\nGold: 10", game->videoDriver->getTexture("res/guiButtonCreate.png") );
 	knightButton->btn->setVisible(false);
 	
-	archerButton = new Button(180, 50, 75, 75, "Archer", game->videoDriver->getTexture("res/guiButtonCreate.png") );
+	archerButton = new Button(180, 50, 75, 75, "Archer", "Food: 10\nStone: 10", game->videoDriver->getTexture("res/guiButtonCreate.png") );
 	archerButton->btn->setVisible(false);
 
-	//spearmanButton = new Button(350, 50, 75, 75, "Spearman", game->videoDriver->getTexture("res/guiButtonCreate.png") );
+	//spearmanButton = new Button(350, 50, 75, 75, "Spearman", "Food: 10\nGold: 5\nStone: 5", game->videoDriver->getTexture("res/guiButtonCreate.png") );
 	//spearmanButton->btn->setVisible(false);
 
 	creatingUnit = 0; //0 = Nothing, 1 = Knight, 2 = Archer, 3 = Spearman.
@@ -130,8 +130,7 @@ void Barracks::selected(){
 	Game* game = &Game::getInstance();
 
 	if(player != 0) return;
-	
-	//GUI->setImage(game->videoDriver->getTexture("res/guiBuildMenu.png"));
+
 	GUI->setVisible(true);
 
 	knightTXT->setVisible(true);

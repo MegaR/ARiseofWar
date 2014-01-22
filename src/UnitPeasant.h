@@ -12,7 +12,7 @@
 #include "TileGrass.h"
 
 #define PEASANTBUILDTIME 1
-#define PEASANTCOST 10, 0, 0, 0
+#define PEASANTCOST 5, 10, 0, 5
 
 class UnitPeasant: public Unit
 {

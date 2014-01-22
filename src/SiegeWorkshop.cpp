@@ -25,7 +25,7 @@ SiegeWorkshop::SiegeWorkshop(int tileX, int tileY, int player, Scene* scene) : B
 	hp = 5;
 	defense = 2;
 
-	CatapultButton = new Button(120, 35, 75, 75, "Catapult", game->videoDriver->getTexture("res/guiButtonCreate.png") );
+	CatapultButton = new Button(120, 35, 75, 75, "Catapult", "", game->videoDriver->getTexture("res/guiButtonCreate.png") );
 	CatapultButton->btn->setVisible(false);
 }
 
