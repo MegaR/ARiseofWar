@@ -4,7 +4,7 @@
 #include "UnitArcher.h"
 #include "Button.h"
 
-#define BARRACKSCOST 0, 0, 0, 10
+#define BARRACKSCOST 10, 20, 10, 10
 
 class Barracks : public Building
 {

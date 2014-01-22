@@ -1,7 +1,7 @@
 #pragma once
 #include "Building.h"
 
-#define FARMCOST 10, 0, 0, 0
+#define FARMCOST 0, 30, 5, 15
 #define FARMINCREASE -10, 0, 0, 0
 
 class Farm : public Building
