@@ -22,7 +22,7 @@ UnitPeasant::UnitPeasant(int _x, int _y, int _player, Scene* scene) : Unit(_x, _
 		texture = game->videoDriver->getTexture("res/unitPeasantEnemy.png");
 	}
 
-	GUI = game->gui->addImage(rect<s32>(0, 40, 435, 285));
+	GUI = game->gui->addImage(rect<s32>(0, 40, 435, 135));
 	GUI->setImage(game->videoDriver->getTexture("res/guiPeasant.png"));
 	GUI->setVisible(false);
 
