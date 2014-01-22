@@ -173,7 +173,7 @@ void  Barracks::startTurn(){
 	}
 }
 
-void Barracks::enemyTurn() {
+bool Barracks::enemyTurn() {
 	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
 
 	if(allowBuildKnight() && rand()%3 == 0) {
@@ -187,6 +187,8 @@ void Barracks::enemyTurn() {
 	/*if(allowBuildSpearman() && rand()%3 == 0) {
 		buildturn = scene->turnCount;
 	}*/
+	
+	return false;
 }
 
 bool Barracks::allowBuildKnight() {

@@ -80,7 +80,8 @@ float Entity::distance(Entity* other) {
 	return getVector().getDistanceFrom(other->getVector());
 }
 
-void Entity::enemyTurn() {
+bool Entity::enemyTurn() {
+	return false;
 }
 
 void Entity::cameraFocus() {

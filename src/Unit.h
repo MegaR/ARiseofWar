@@ -30,7 +30,7 @@ public:
 	bool isAnimating[4];
 
 	virtual void startTurn();
-	virtual void enemyTurn();
+	virtual bool enemyTurn();
 	virtual void endTurn();
 	// moveAnimation
 	// attackAnimation

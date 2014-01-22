@@ -18,7 +18,7 @@ public:
 	void selected();
 	void deselected();
 	void startTurn();
-	void enemyTurn();
+	bool enemyTurn();
 
 	int buildturn;
 	int creatingUnit;
