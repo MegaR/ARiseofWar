@@ -69,6 +69,12 @@
     </ClCompile>
     <ClCompile Include="src\Quarry.cpp" />
     <ClCompile Include="src\Farm.cpp" />
+    <ClCompile Include="src\SiegeWorkshop.cpp">
+      <Filter>Entities\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UnitCatapult.cpp">
+      <Filter>Entities\Units</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Button.h">
@@ -139,6 +145,12 @@
     </ClInclude>
     <ClInclude Include="src\Quarry.h" />
     <ClInclude Include="src\Farm.h" />
+    <ClInclude Include="src\SiegeWorkshop.h">
+      <Filter>Entities\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UnitCatapult.h">
+      <Filter>Entities\Units</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Irrlicht.dll">
