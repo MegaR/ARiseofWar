@@ -31,10 +31,9 @@ GameScene::GameScene() {
 	background->setScaleImage(true);
 	ITexture* buttonTexture = Game::getInstance().videoDriver->getTexture("res/guiButtonSmall.png");
 
-	returnToMenuButton = new Button(bX-100, bY, bW, bH, "Return\nto Menu", buttonTexture);
-	exitGameButton = new Button(bX, bY, bW, bH, "Exit\nGame", buttonTexture);
-	nextTurnButton = new Button(bX-200, bY, bW, bH, "Next\nTurn", buttonTexture);
-
+	returnToMenuButton = new Button(bX-100, bY, bW, bH, "Return\nto Menu", "", buttonTexture);
+	exitGameButton = new Button(bX, bY, bW, bH, "Exit\nGame", "", buttonTexture);
+	nextTurnButton = new Button(bX-200, bY, bW, bH, "Next\nTurn", "", buttonTexture);
 	
 	tilesystem.create(this);
 	

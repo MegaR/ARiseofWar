@@ -21,7 +21,7 @@ TownCenter::TownCenter(int tileX, int tileY, int player, Scene* scene) : Buildin
 	txt->setVisible(false);
 	buildturn = -1;
 
-	peasantButton = new Button(120, 35, 75, 75, "peasant", game->videoDriver->getTexture("res/guiButtonCreate.png") );
+	peasantButton = new Button(120, 35, 75, 75, "Peasant", "Wood: 5\nFood: 10\nStone: 5", game->videoDriver->getTexture("res/guiButtonCreate.png") );
 	peasantButton->btn->setVisible(false);
 
 	if(player == 0) {

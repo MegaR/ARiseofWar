@@ -14,7 +14,7 @@ using namespace gui;
 class Button
 {
 public:
-	Button(int x, int y, int w, int h, std::string t, ITexture* _img = NULL);
+	Button(int x, int y, int w, int h, std::string t, std::string tt, ITexture* _img = NULL);
 	~Button();
 
 	IGUIButton* btn;

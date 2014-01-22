@@ -22,19 +22,19 @@ UnitPeasant::UnitPeasant(int _x, int _y, int _player, Scene* scene) : Unit(_x, _
 		texture = game->videoDriver->getTexture("res/unitPeasantEnemy.png");
 	}
 
-	GUI = game->gui->addImage(rect<s32>(0,40, 335, 135));
-	GUI->setImage(game->videoDriver->getTexture("res/guiBackgroundMenu.png"));
+	GUI = game->gui->addImage(rect<s32>(0, 40, 435, 285));
+	GUI->setImage(game->videoDriver->getTexture("res/guiPeasant.png"));
 	GUI->setVisible(false);
 
-	buildBarracksButton = new Button(10, 50, 75, 75, "Barracks", game->videoDriver->getTexture("res/guiButtonCreate.png"));
+	buildBarracksButton = new Button(10, 50, 75, 75, "Barracks", "Stone: 10", game->videoDriver->getTexture("res/guiButtonCreate.png"));
 	buildBarracksButton->btn->setVisible(false);
-	buildLumberMillButton = new Button(90, 50, 75, 75, "Lumber\nMill", game->videoDriver->getTexture("res/guiButtonCreate.png"));
+	buildLumberMillButton = new Button(95, 50, 75, 75, "Lumber\nMill", "Wood: 10", game->videoDriver->getTexture("res/guiButtonCreate.png"));
 	buildLumberMillButton->btn->setVisible(false);
-	buildQuarryButton = new Button(170, 50, 75, 75, "Quarry", game->videoDriver->getTexture("res/guiButtonCreate.png"));
+	buildQuarryButton = new Button(180, 50, 75, 75, "Quarry", "Stone: 10", game->videoDriver->getTexture("res/guiButtonCreate.png"));
 	buildQuarryButton->btn->setVisible(false);
-	buildFarmButton = new Button(250, 50, 75, 75, "Farm", game->videoDriver->getTexture("res/guiButtonCreate.png"));
+	buildFarmButton = new Button(265, 50, 75, 75, "Farm", "Wood: 10", game->videoDriver->getTexture("res/guiButtonCreate.png"));
 	buildFarmButton->btn->setVisible(false);
-	buildSiegeWorkshopButton = new  Button(290, 50, 75, 75, "SiegeWorkshop", game->videoDriver->getTexture("res/guiButtonCreate.png"));
+	buildSiegeWorkshopButton = new  Button(350, 50, 75, 75, "Siege\nWorkshop", "Wood: 30\nStone: 20", game->videoDriver->getTexture("res/guiButtonCreate.png"));
 	buildSiegeWorkshopButton->btn->setVisible(false);
 
 	for(int i = 0; i < maxModels; i++) {

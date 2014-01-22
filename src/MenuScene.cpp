@@ -20,8 +20,9 @@ MenuScene::MenuScene(void):Scene()
 	background->setImage(game->videoDriver->getTexture("res/guiBackgroundMenu.png"));
 	background->setScaleImage(true);
 
-	playButton = new Button(bX, bY-75, bW, bH, "Play", game->videoDriver->getTexture("res/guiButtonWide.png") );
-	exitButton = new Button(bX, bY+75, bW, bH, "Exit", game->videoDriver->getTexture("res/guiButtonWide.png") );
+	ITexture* buttonTexture = Game::getInstance().videoDriver->getTexture("res/guiButtonWide.png");
+	playButton = new Button(bX, bY-75, bW, bH, "Play", "Click to play!", buttonTexture);
+	exitButton = new Button(bX, bY+75, bW, bH, "Exit", "", buttonTexture);
 }
 
 MenuScene::~MenuScene()
