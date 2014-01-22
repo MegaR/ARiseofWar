@@ -16,7 +16,7 @@ TownCenter::TownCenter(int tileX, int tileY, int player, Scene* scene) : Buildin
 	createModel();
 	node->setRotation(vector3df(0,15,0));
 	GUI = game->gui->addImage(rect<s32>(0,0, 300, 125));
-	txt =	game->gui->addStaticText(L"Peasant duurt 2 beurten om te bouwen" ,rect<s32>(0,0, 300, 100));
+	txt =	game->gui->addStaticText(L"Het duurt 2 beurten om de Peasant te maken." ,rect<s32>(0,0, 300, 100));
 	GUI->setVisible(false); 
 	txt->setVisible(false);
 	buildturn = -1;
