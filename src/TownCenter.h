@@ -2,6 +2,8 @@
 #include "building.h"
 #include "button.h"
 
+#define defaultincome -5,-5,-5,-5
+
 class TownCenter :
 	public Building
 {
