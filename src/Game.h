@@ -16,6 +16,7 @@ using namespace irrklang;
 #pragma comment(lib, "irrKlang.lib") // link with irrKlang.dll
 
 #include "Scene.h"
+#include "OptionsScene.h"
 #include "MenuScene.h"
 #include "GameScene.h"
 #include "EventReceiver.h"
@@ -40,6 +41,10 @@ public:
 	int screenWidth;
 	int screenHeight;
 	f32 delta;
+
+	bool musicOn;
+	bool soundEffectsOn;
+	bool shadowsOn;
 
 private:
 	Game();
