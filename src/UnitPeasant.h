@@ -14,10 +14,12 @@
 #define PEASANTBUILDTIME 1
 #define PEASANTCOST 5, 10, 5, 0
 
+//AI
 #define MINWOOD 30
 #define MINFOOD 30
 #define MINSTONE 30
 #define MINGOLD 30
+#define BARRACKSSIEGERATIO 2
 
 class UnitPeasant: public Unit
 {
@@ -43,7 +45,9 @@ public:
 	vector2d<int> findWheat();
 	vector2d<int> findStone();
 	vector2d<int> findForest();
+	void gotoClearing();
 	bool reasonableSpace(int tileX, int tileY);
+	float barracksSiegeRatio();
 
 	IGUIImage* GUI;
 	Button* buildBarracksButton;
