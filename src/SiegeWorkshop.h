@@ -18,8 +18,8 @@ public:
 	void selected();
 	void deselected();
 	void startTurn();
-	bool enemyTurn();
 
+	bool enemyTurn();
 	bool allowBuild();
 	int buildturn;
 

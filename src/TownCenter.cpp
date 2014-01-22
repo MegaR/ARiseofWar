@@ -78,7 +78,7 @@ void TownCenter::addtoqueue(){
 	Game* game = &Game::getInstance();
 	
 	if((game->eventReceiver->isKeyPressed(KEY_KEY_P) || peasantButton->pressed) && allowBuild()){
-		buildturn = ((GameScene*)scene)->turnCount + (PEASANTBUILDTIME*2);
+		buildturn = ((GameScene*)scene)->turnCount + (PEASANTBUILDTIME);
 		((GameScene*)scene)->players[player]->useResources(PEASANTCOST);
 		peasantButton->btn->setEnabled(false);
 		cout << "queued peasant" << endl;
@@ -108,8 +108,9 @@ void TownCenter::deselected(){
 }
 
 void TownCenter::startTurn(){	
-	if(buildturn == ((GameScene*)scene)->turnCount){
+	if(buildturn != -1 && buildturn <= ((GameScene*)scene)->turnCount){
 		createUnit();
+		buildturn = -1;
 	}
 }
 
@@ -117,7 +118,7 @@ bool TownCenter::enemyTurn() {
 	if(allowBuild() && rand()%3 == 0) {
 		buildturn = ((GameScene*)scene)->turnCount;
 		((GameScene*)scene)->players[player]->useResources(PEASANTCOST);
-	}
+	} 
 	return false;
 }
 
