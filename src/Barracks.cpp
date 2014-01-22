@@ -15,29 +15,47 @@ Barracks::Barracks(int tileX, int tileY, int player, Scene* scene) : Building(ti
 	createModel();
 	node->setScale(vector3df(0.69f,0.69f,0.69f));
 	node->setRotation(vector3df(0,30,0));
-	GUI = game->gui->addImage(rect<s32>(0,0, 300, 125));
-	txt =	game->gui->addStaticText(L"knight duurt 2 beurten om te bouwen" ,rect<s32>(0,0, 300, 100));
+	GUI = game->gui->addImage(rect<s32>(0,40, 510, 200));
+	GUI->setImage(game->videoDriver->getTexture("res/guiBuildMenu.png"));
+	knightTXT = game->gui->addStaticText(L"Het duurt 2 beurten om de Knight te maken.", rect<s32>(10, 135, 170, 195));
+	archerTXT = game->gui->addStaticText(L"Het duurt 1 beurt om de Archer te maken.", rect<s32>(180, 135, 340, 195));
+	//spearmanTXT = game->gui->addStaticText(L"Het duurt 1 beurt om de Spearman te maken.", rect<s32>(350, 135, 510, 195));
 	GUI->setVisible(false); 
-	txt->setVisible(false);
+	knightTXT->setVisible(false);
+	archerTXT->setVisible(false);
+	//spearmanTXT->setVisible(false);
 	buildturn = -1;
 
 	hp = 4;
 	defense = 2;
 
-	knightButton = new Button(120, 35, 75, 75, "knight", game->videoDriver->getTexture("res/guiButtonCreate.png") );
+	knightButton = new Button(50, 45, 75, 75, "Knight", game->videoDriver->getTexture("res/guiButtonCreate.png") );
 	knightButton->btn->setVisible(false);
+	
+	archerButton = new Button(220, 45, 75, 75, "Archer", game->videoDriver->getTexture("res/guiButtonCreate.png") );
+	archerButton->btn->setVisible(false);
+
+	//spearmanButton = new Button(390, 45, 75, 75, "Spearman", game->videoDriver->getTexture("res/guiButtonCreate.png") );
+	//spearmanButton->btn->setVisible(false);
+
+	creatingUnit = 0; //0 = Nothing, 1 = Knight, 2 = Archer, 3 = Spearman.
 }
 
 
 Barracks::~Barracks(void)
 {
 	GUI->remove();
-	txt->remove();
+	knightTXT->remove();
+	archerTXT->remove();
+	//spearmanTXT->remove();
 	delete knightButton;
 }
 
 void Barracks::update(){
 	knightButton->update();
+	archerButton->update();
+	//spearmanButton->update();
+
 	addtoqueue();
 }
 
@@ -56,7 +74,10 @@ void Barracks::createUnit(){
 		}
 	}
 	if(list->size() > 0){
-		((GameScene*)game->currentScene)->entities.push_back(new UnitKnight(list->at(0).X,list->at(0).Y, player, scene ));
+		if (creatingUnit == 1) { ((GameScene*)game->currentScene)->entities.push_back(new UnitKnight(list->at(0).X,list->at(0).Y, player, scene)); }
+		else if (creatingUnit == 2) { ((GameScene*)game->currentScene)->entities.push_back(new UnitArcher(list->at(0).X,list->at(0).Y, player, scene)); }
+		//else if (creatingUnit == 3) { ((GameScene*)game->currentScene)->entities.push_back(new UnitSpearman(list->at(0).X,list->at(0).Y, player, scene)); }
+		else { cout << "No valid unit ID" << endl; }
 		delete list;
 	}
 }
@@ -64,12 +85,42 @@ void Barracks::createUnit(){
 void Barracks::addtoqueue(){
 	Game* game = &Game::getInstance();
 	
-	if((game->eventReceiver->isKeyPressed(KEY_KEY_K) || knightButton->pressed) && allowBuild()){
+	if((game->eventReceiver->isKeyPressed(KEY_KEY_K) || knightButton->pressed) && allowBuildKnight()){
 		buildturn = ((GameScene*)scene)->turnCount + KNIGHTBUILDTIME;
 		((GameScene*)scene)->players[player]->useResources(KNIGHTCOST);
+
 		knightButton->btn->setEnabled(false);
-		cout << "queued Knight" << endl;
+		archerButton->btn->setEnabled(false);
+		//spearmanButton->btn->setEnabled(false);
+
+		creatingUnit = 1;
+
+		cout << "queued knight" << endl;
 	}
+
+	if((game->eventReceiver->isKeyPressed(KEY_KEY_L) || archerButton->pressed) && allowBuildArcher()){
+		buildturn = ((GameScene*)scene)->turnCount + ARCHERBUILDTIME;
+		((GameScene*)scene)->players[player]->useResources(ARCHERCOST);
+
+		knightButton->btn->setEnabled(false);
+		archerButton->btn->setEnabled(false);
+		//spearmanButton->btn->setEnabled(false);
+		creatingUnit = 2;
+
+		cout << "queued archer" << endl;
+	}
+
+	/*if((game->eventReceiver->isKeyPressed(KEY_KEY_J) || spearmanButton->pressed) && allowBuildSpearman()){
+		buildturn = ((GameScene*)scene)->turnCount + SPEARMANBUILDTIME;
+		((GameScene*)scene)->players[player]->useResources(SPEARMANCOST);
+
+		knightButton->btn->setEnabled(false);
+		archerButton->btn->setEnabled(false);
+		spearmanButton->btn->setEnabled(false);
+		creatingUnit = 3;
+
+		cout << "queued spearman" << endl;
+	}*/
 }
 
 void Barracks::selected(){
@@ -77,41 +128,72 @@ void Barracks::selected(){
 
 	if(player != 0) return;
 	
-	GUI->setImage(game->videoDriver->getTexture("res/guiBackgroundMenu.png"));
+	//GUI->setImage(game->videoDriver->getTexture("res/guiBuildMenu.png"));
 	GUI->setVisible(true);
-	txt->setVisible(true);
+
+	knightTXT->setVisible(true);
 	knightButton->btn->setVisible(true);
-	if(allowBuild()) {
+	if(allowBuildKnight()) {
 		knightButton->btn->setEnabled(true);
 	} else {
 		knightButton->btn->setEnabled(false);
 	}
+	
+	archerTXT->setVisible(true);
+	archerButton->btn->setVisible(true);
+	if(allowBuildArcher()) {
+		archerButton->btn->setEnabled(true);
+	} else {
+		archerButton->btn->setEnabled(false);
+	}
+	
+	/*archerTXT->setVisible(true);
+	archerButton->btn->setVisible(true);
+	if(allowBuildArcher()) {
+		archerButton->btn->setEnabled(true);
+	} else {
+		archerButton->btn->setEnabled(false);
+	}*/
 }
 
 void Barracks::deselected(){
 		GUI->setVisible(false);
-		txt->setVisible(false);
+		knightTXT->setVisible(false);
+		archerTXT->setVisible(false);
+		//spearmanTXT->setVisible(false);
 		knightButton->btn->setVisible(false);
+		archerButton->btn->setVisible(false);
+		//spearmanButton->btn->setVisible(false);
 }
 
 void  Barracks::startTurn(){
 	Game* game = &Game::getInstance();
 	if(buildturn == ((GameScene*)scene)->turnCount) {
 		createUnit();
-		cout<< "creating knight" << endl;
 	}
 }
 
 bool Barracks::enemyTurn() {
 	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
-	if(allowBuild() && rand()%2 == 0) {
+
+	if(allowBuildKnight() && rand()%3 == 0) {
 		buildturn = scene->turnCount;
 	}
+
+	if(allowBuildArcher() && rand()%3 == 0) {
+		buildturn = scene->turnCount;
+	}
+
+	/*if(allowBuildSpearman() && rand()%3 == 0) {
+		buildturn = scene->turnCount;
+	}*/
+	
 	return false;
 }
 
-bool Barracks::allowBuild() {
+bool Barracks::allowBuildKnight() {
 	Player* player = ((GameScene*)scene)->players[this->player];
+
 	if(!player->hasResources(KNIGHTCOST)) {
 		return false;
 	}
@@ -121,3 +203,29 @@ bool Barracks::allowBuild() {
 	}
 	return false;
 }
+
+bool Barracks::allowBuildArcher() {
+	Player* player = ((GameScene*)scene)->players[this->player];
+
+	if(!player->hasResources(ARCHERCOST)) {
+		return false;
+	}
+
+	if(buildturn < ((GameScene*)scene)->turnCount) {
+		return true;
+	}
+	return false;
+}
+
+/*bool Barracks::allowBuildSpearman() {
+	Player* player = ((GameScene*)scene)->players[this->player];
+
+	if(!player->hasResources(SPEARMANCOST)) {
+		return false;
+	}
+
+	if(buildturn < ((GameScene*)scene)->turnCount) {
+		return true;
+	}
+	return false;
+}*/
