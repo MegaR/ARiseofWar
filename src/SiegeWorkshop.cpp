@@ -103,11 +103,12 @@ void  SiegeWorkshop::startTurn(){
 	}
 }
 
-void SiegeWorkshop::enemyTurn() {
+bool SiegeWorkshop::enemyTurn() {
 	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
 	if(allowBuild() && rand()%2 == 0) {
 		buildturn = scene->turnCount;
 	}
+	return false;
 }
 
 bool SiegeWorkshop::allowBuild() {

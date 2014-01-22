@@ -44,7 +44,7 @@ void EnemyPlayer::update() {
 		} else {
 			Unit* unit = 0;
 			unit = dynamic_cast<Unit*>(current);
-			if(unit || unit->currentAnimation == IDLE_ANIMATION) {
+			if(unit) {
 				if(unit->currentAnimation == IDLE_ANIMATION) {
 					current = 0;
 				}
