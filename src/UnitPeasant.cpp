@@ -34,7 +34,8 @@ UnitPeasant::UnitPeasant(int _x, int _y, int _player, Scene* scene) : Unit(_x, _
 	buildQuarryButton->btn->setVisible(false);
 	buildFarmButton = new Button(250, 50, 75, 75, "Farm", game->videoDriver->getTexture("res/guiButtonCreate.png"));
 	buildFarmButton->btn->setVisible(false);
-
+	buildSiegeWorkshopButton = new  Button(290, 50, 75, 75, "SiegeWorkshop", game->videoDriver->getTexture("res/guiButtonCreate.png"));
+	buildSiegeWorkshopButton->btn->setVisible(false);
 
 	for(int i = 0; i < maxModels; i++) {
 		addModel();
@@ -47,6 +48,7 @@ UnitPeasant::~UnitPeasant() {
 	delete buildBarracksButton;
 	delete buildQuarryButton;
 	delete buildFarmButton;
+	delete buildSiegeWorkshopButton;
 	GUI->remove();
 }
 
@@ -56,6 +58,7 @@ void UnitPeasant::update() {
 	buildLumberMillButton->update();
 	buildQuarryButton->update();
 	buildFarmButton->update();
+	buildSiegeWorkshopButton->update();
 
 	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
 
@@ -77,6 +80,11 @@ void UnitPeasant::update() {
 
 	if(buildFarmButton->pressed) {
 		if(attemptBuildFarm())
+			return;
+	}
+
+	if(buildSiegeWorkshopButton->pressed){
+		if(attemptBuildSiegeWorkshop())
 			return;
 	}
 }
@@ -208,6 +216,21 @@ void UnitPeasant::buildFarm(int tileX, int tileY) {
 	((GameScene*)scene)->removeEntity(this);
 }
 
+bool UnitPeasant::attemptBuildSiegeWorkshop(){
+	GameScene* scene = (GameScene*)this->scene;
+	if(!scene->players[player]->hasResources(SIEGEWORKSHOPCOST)) {
+		return false;
+	}
+	buildSiegeWorkshop(tileX,tileY);
+	return true;
+}
+
+void UnitPeasant::buildSiegeWorkshop(int tileX, int tileY){
+	((GameScene*)scene)->entities.push_back(new SiegeWorkshop(tileX, tileY, player, scene));
+	((GameScene*)scene)->players[player]->useResources(SIEGEWORKSHOPCOST);
+	((GameScene*)scene)->removeEntity(this);
+}
+
 void UnitPeasant::selected() {
 	Unit::selected();
 	GUI->setVisible(true);
@@ -215,6 +238,7 @@ void UnitPeasant::selected() {
 	buildLumberMillButton->btn->setVisible(true);
 	buildQuarryButton->btn->setVisible(true);
 	buildFarmButton->btn->setVisible(true);
+	buildSiegeWorkshopButton->btn->setVisible(true);
 	if( ((GameScene*)scene)->players[player]->hasResources(BARRACKSCOST) ) {
 		buildBarracksButton->btn->setEnabled(true);
 	} else {
@@ -235,6 +259,12 @@ void UnitPeasant::selected() {
 	} else {
 		buildFarmButton->btn->setEnabled(false);
 	}
+
+	if( ((GameScene*)scene)->players[player]->hasResources(SIEGEWORKSHOPCOST) ) {
+		buildSiegeWorkshopButton->btn->setEnabled(true);
+	} else {
+		buildSiegeWorkshopButton->btn->setEnabled(false);
+	}
 }
 
 void UnitPeasant::deselected() {
@@ -244,6 +274,7 @@ void UnitPeasant::deselected() {
 	buildLumberMillButton->btn->setVisible(false);
 	buildQuarryButton->btn->setVisible(false);
 	buildFarmButton->btn->setVisible(false);
+	buildSiegeWorkshopButton->btn->setVisible(false);
 }
 
 void UnitPeasant::enemyTurn() {

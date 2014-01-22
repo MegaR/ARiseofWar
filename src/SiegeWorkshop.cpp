@@ -5,11 +5,11 @@
 SiegeWorkshop::SiegeWorkshop(int tileX, int tileY, int player, Scene* scene) : Building(tileX, tileY, player, scene)
 {
 	Game* game = &Game::getInstance();
-	model = game->sceneManager->getMesh("res/buildingSiegeworkshop.3DS");
+	model = game->sceneManager->getMesh("res/Siegeworkshop.md2");
 	if(player == 0) {
-		texture = game->videoDriver->getTexture("res/buildingSiegeworkshop.png");
+		texture = game->videoDriver->getTexture("res/Siegeworkshop.png");
 	} else {
-		texture = game->videoDriver->getTexture("res/buildingSiegeworkshopEnemy.png");
+		texture = game->videoDriver->getTexture("res/SiegeworkshopEnemy.png");
 	}
 	sizeX = 1;
 	sizeY = 1;
@@ -121,3 +121,4 @@ bool SiegeWorkshop::allowBuild() {
 	}
 	return false;
 }
+

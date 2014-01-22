@@ -6,6 +6,7 @@
 #include "LumberMill.h"
 #include "Quarry.h"
 #include "Farm.h"
+#include "SiegeWorkshop.h"
 
 #include "TileForest.h"
 #include "TileGrass.h"
@@ -30,6 +31,8 @@ public:
 	void buildQuarry(int tileX, int tileY);
 	bool attemptBuildFarm();
 	void buildFarm(int tileX, int tileY);
+	bool attemptBuildSiegeWorkshop();
+	void buildSiegeWorkshop(int tileX,int tileY);
 	bool reasonableSpace();
 
 	IGUIImage* GUI;
@@ -37,5 +40,6 @@ public:
 	Button* buildLumberMillButton;
 	Button* buildQuarryButton;
 	Button* buildFarmButton;
+	Button* buildSiegeWorkshopButton;
 };
 
