@@ -15,6 +15,9 @@ void Game::start() {
         false, false, false, eventReceiver);
 	screenWidth = 800;
 	screenHeight = 600;
+	musicOn = false;
+	soundEffectsOn = false;
+	shadowsOn = true;
 	#else
 	IrrlichtDevice *nulldevice = createDevice(video::EDT_NULL);
 	core::dimension2d<u32> deskres = nulldevice->getVideoModeList()->getDesktopResolution();
@@ -22,6 +25,9 @@ void Game::start() {
 	device = createDevice(video::EDT_OPENGL, deskres, 32, true, true, true, eventReceiver);
 	screenWidth = deskres.Width;
 	screenHeight = deskres.Height;
+	musicOn = true;
+	soundEffectsOn = true;
+	shadowsOn = true;
 	#endif
 
 	if (!device) return;

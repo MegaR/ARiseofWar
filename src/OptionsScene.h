@@ -5,11 +5,11 @@
 #include "Game.h"
 #include "Button.h"
 
-class MenuScene : public Scene
+class OptionsScene : public Scene
 {
 public:
-	MenuScene(void);
-	~MenuScene();
+	OptionsScene(void);
+	~OptionsScene();
 
 	void update();
 

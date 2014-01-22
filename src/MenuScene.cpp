@@ -1,13 +1,14 @@
 #include "MenuScene.h"
-#include "Game.h"
+//#include "Game.h"
 	
 Button* playButton;
+Button* optionsButton;
 Button* exitButton;
 
 MenuScene::MenuScene(void):Scene()
 {
 	Game* game = &Game::getInstance();
-	
+
 	int sW = game->screenWidth;
 	int sH = game->screenHeight;
 	int bW = 250, 
@@ -21,16 +22,18 @@ MenuScene::MenuScene(void):Scene()
 	background->setScaleImage(true);
 
 	ITexture* buttonTexture = Game::getInstance().videoDriver->getTexture("res/guiButtonWide.png");
-	playButton = new Button(bX, bY-75, bW, bH, "Play", "Click to play!", buttonTexture);
-	exitButton = new Button(bX, bY+75, bW, bH, "Exit", "", buttonTexture);
+	playButton = new Button(bX, bY-125, bW, bH, "Play", "Click to play!", buttonTexture);
+	optionsButton = new Button(bX, bY, bW, bH, "Settings", "", buttonTexture);
+	exitButton = new Button(bX, bY+125, bW, bH, "Exit", "", buttonTexture);
 
 	BGM = createIrrKlangDevice();
-	BGM->play2D("res/bgmMenu.mp3", true);
+	if (Game::getInstance().musicOn == true) BGM->play2D("res/bgmMenu.mp3", true);
 }
 
 MenuScene::~MenuScene()
 {
 	delete playButton;
+	delete optionsButton;
 	delete exitButton;
 	BGM->drop();
 	background->remove();
@@ -39,11 +42,17 @@ MenuScene::~MenuScene()
 void MenuScene::update()
 {
 	playButton->update();
+	optionsButton->update();
 	exitButton->update();
 	
 	if (playButton->pressed == true)
 	{
 		Game::getInstance().changeScene(new GameScene());
+	}
+
+	if (optionsButton->pressed == true)
+	{
+		Game::getInstance().changeScene(new OptionsScene());
 	}
 
 	if (exitButton->pressed == true)

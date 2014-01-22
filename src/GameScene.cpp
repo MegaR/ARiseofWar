@@ -45,7 +45,7 @@ GameScene::GameScene() {
 	selectedNode->setID(0);
 
 	BGM = createIrrKlangDevice();
-	BGM->play2D("res/bgmGame.mp3", true);
+	if (Game::getInstance().musicOn == true) BGM->play2D("res/bgmGame.mp3", true);
 }
 
 GameScene::~GameScene() {
