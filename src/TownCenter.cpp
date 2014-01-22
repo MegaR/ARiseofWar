@@ -107,7 +107,9 @@ void TownCenter::deselected(){
 		peasantButton->btn->setVisible(false);
 }
 
-void TownCenter::startTurn(){	
+void TownCenter::startTurn(){
+	Player* player = ((GameScene*)scene)->players[this->player];
+	player->useResources(defaultincome);
 	if(buildturn != -1 && buildturn <= ((GameScene*)scene)->turnCount){
 		createUnit();
 		buildturn = -1;
