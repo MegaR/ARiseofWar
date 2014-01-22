@@ -17,7 +17,7 @@ SiegeWorkshop::SiegeWorkshop(int tileX, int tileY, int player, Scene* scene) : B
 	node->setScale(vector3df(0.69f,0.69f,0.69f));
 	node->setRotation(vector3df(0,30,0));
 	GUI = game->gui->addImage(rect<s32>(0,0, 300, 125));
-	txt =	game->gui->addStaticText(L"catapult duurt 3 beurten om te bouwen" ,rect<s32>(0,0, 300, 100));
+	txt =	game->gui->addStaticText(L"Het duurt 3 beurten om de Catapult te bouwen" ,rect<s32>(0,0, 300, 100));
 	GUI->setVisible(false); 
 	txt->setVisible(false);
 	buildturn = -1;

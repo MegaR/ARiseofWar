@@ -10,7 +10,7 @@
 #include "Barracks.h"
 #include "TownCenter.h"
 
-//#include "Game.h"
+#include "Game.h"
 
 #define CAMERAMIN 10
 #define CAMERAMAX 150
@@ -59,4 +59,5 @@ private:
 	std::vector<vector2d<int>>* reconstructed_path(vector2d<int> came_from[][MAPSIZE], vector2d<int> end, vector2d<int> start);
 
 	IMeshSceneNode *selectedNode;
+	ISoundEngine* BGM;
 };
