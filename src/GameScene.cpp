@@ -95,6 +95,7 @@ void GameScene::update() {
 		nextTurn();
 	}
 
+	players[currentPlayer]->update();
 	for(int i = 0; i < entities.size(); i++) {
 		entities.at(i)->update();
 	}

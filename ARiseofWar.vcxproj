@@ -107,6 +107,7 @@
     <ClCompile Include="src\TileWheat.cpp" />
     <ClCompile Include="src\TownCenter.cpp" />
     <ClCompile Include="src\Unit.cpp" />
+    <ClCompile Include="src\UnitArcher.cpp" />
     <ClCompile Include="src\UnitCatapult.cpp" />
     <ClCompile Include="src\UnitKnight.cpp" />
     <ClCompile Include="src\UnitPeasant.cpp" />
@@ -135,6 +136,7 @@
     <ClInclude Include="src\TileWheat.h" />
     <ClInclude Include="src\TownCenter.h" />
     <ClInclude Include="src\Unit.h" />
+    <ClInclude Include="src\UnitArcher.h" />
     <ClInclude Include="src\UnitCatapult.h" />
     <ClInclude Include="src\UnitKnight.h" />
     <ClInclude Include="src\UnitPeasant.h" />

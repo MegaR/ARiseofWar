@@ -69,6 +69,7 @@
     </ClCompile>
     <ClCompile Include="src\Quarry.cpp" />
     <ClCompile Include="src\Farm.cpp" />
+    <ClCompile Include="src\UnitArcher.cpp">
     <ClCompile Include="src\SiegeWorkshop.cpp">
       <Filter>Entities\Buildings</Filter>
     </ClCompile>
@@ -145,6 +146,7 @@
     </ClInclude>
     <ClInclude Include="src\Quarry.h" />
     <ClInclude Include="src\Farm.h" />
+    <ClInclude Include="src\UnitArcher.h">
     <ClInclude Include="src\SiegeWorkshop.h">
       <Filter>Entities\Buildings</Filter>
     </ClInclude>

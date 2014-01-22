@@ -14,5 +14,8 @@ public:
 	~EnemyPlayer(void);
 
 	void turn();
+	void update();
 private:
+	Entity* current;
+	std::vector<Entity*> queue;
 };

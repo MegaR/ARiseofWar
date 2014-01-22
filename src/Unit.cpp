@@ -359,18 +359,19 @@ bool Unit::handleDamage(int damage){
 	return false;
 }
 
-void Unit::enemyTurn() {
+bool Unit::enemyTurn() {
 	vector<Entity*>* targets = findTargets();
 	
 	for(int i = 0; i < targets->size(); i++) {
 		if( attemptTarget(targets->at(i) ) ) {
 			delete targets;
-			return;
+			return false;
 		}
 	}
 
 	cout << "turn failed!" << endl;
 	delete targets;
+	return false;
 }
 
 bool Unit::attemptTarget(Entity* target) {

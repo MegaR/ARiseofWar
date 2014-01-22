@@ -23,7 +23,7 @@ public:
 	void update();
 	void selected();
 	void deselected();
-	virtual void enemyTurn();
+	virtual bool enemyTurn();
 	bool attemptBuildBarracks();
 	bool attemptBuildLumberMill();
 	void buildLumberMill(int tileX, int tileY);

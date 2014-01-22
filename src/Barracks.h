@@ -1,6 +1,7 @@
 #pragma once
 #include "Building.h"
 #include "UnitKnight.h"
+#include "UnitArcher.h"
 #include "Button.h"
 
 #define BARRACKSCOST 0, 0, 0, 10
@@ -17,13 +18,24 @@ public:
 	void selected();
 	void deselected();
 	void startTurn();
-	void enemyTurn();
+	bool enemyTurn();
 
-	bool allowBuild();
 	int buildturn;
+	int creatingUnit;
 
-	IGUIStaticText* txt;
+	bool allowBuildKnight();
+	bool allowBuildArcher();
+	//bool allowBuildSpearman();
+	
 	IGUIImage* GUI;
+
+	IGUIStaticText* knightTXT;
+	IGUIStaticText* archerTXT;
+	//IGUIStaticText* spearmanTXT;
+	
+
 	Button* knightButton;
+	Button* archerButton;
+	//Button* spearmanButton;
 };
 
