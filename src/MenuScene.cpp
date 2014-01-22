@@ -23,12 +23,16 @@ MenuScene::MenuScene(void):Scene()
 	ITexture* buttonTexture = Game::getInstance().videoDriver->getTexture("res/guiButtonWide.png");
 	playButton = new Button(bX, bY-75, bW, bH, "Play", "Click to play!", buttonTexture);
 	exitButton = new Button(bX, bY+75, bW, bH, "Exit", "", buttonTexture);
+
+	BGM = createIrrKlangDevice();
+	BGM->play2D("res/bgmMenu.mp3", true);
 }
 
 MenuScene::~MenuScene()
 {
 	delete playButton;
 	delete exitButton;
+	BGM->drop();
 	background->remove();
 }
 

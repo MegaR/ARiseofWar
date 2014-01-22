@@ -1,7 +1,7 @@
 #include "GameScene.h"
 #include "UnitKnight.h"
 #include "UnitPeasant.h"
-#include "Game.h"
+//#include "Game.h"
 
 GameScene::GameScene() {
 	Game* game = &Game::getInstance();
@@ -16,7 +16,6 @@ GameScene::GameScene() {
 	storedEntity = (Entity*)NULL;
 	playerunits = true;
 	enemyunits = true;
-
 	
 	int sW = game->screenWidth;
 	int sH = game->screenHeight;
@@ -44,6 +43,9 @@ GameScene::GameScene() {
 	selectedNode->setMaterialTexture( 0, game->videoDriver->getTexture("res/tileSelected.png") );
 	selectedNode->setPosition(vector3d<f32>(50, 0, 50) );
 	selectedNode->setID(0);
+
+	BGM = createIrrKlangDevice();
+	BGM->play2D("res/bgmGame.mp3", true);
 }
 
 GameScene::~GameScene() {
@@ -51,6 +53,7 @@ GameScene::~GameScene() {
 	delete players[1];
 	delete returnToMenuButton;
 	delete exitGameButton;
+	BGM->drop();
 	
 	for(int i = 0; i < entities.size(); i++) {
 		delete entities.at(i);
