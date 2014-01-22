@@ -170,13 +170,21 @@ void  Barracks::startTurn(){
 
 bool Barracks::enemyTurn() {
 	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
+	int buildselector = rand()%2;
 
-	if(allowBuildKnight() && rand()%3 == 0) {
-		buildturn = scene->turnCount;
+	if(buildselector == 1 && allowBuildKnight() && rand()%3 == 0) {
+		buildturn = ((GameScene*)scene)->turnCount + KNIGHTBUILDTIME;
+		((GameScene*)scene)->players[player]->useResources(KNIGHTCOST);
+		creatingUnit = 1;
+		cout << "enemy builds knight" << endl;
+
 	}
 
-	if(allowBuildArcher() && rand()%3 == 0) {
-		buildturn = scene->turnCount;
+	if(buildselector == 0 &&  allowBuildArcher() && rand()%3 == 0) {
+		buildturn = ((GameScene*)scene)->turnCount + ARCHERBUILDTIME;
+		((GameScene*)scene)->players[player]->useResources(ARCHERCOST);
+		creatingUnit = 2;
+		cout << "enemy builds archer" << endl;
 	}
 
 	/*if(allowBuildSpearman() && rand()%3 == 0) {

@@ -14,6 +14,11 @@
 #define PEASANTBUILDTIME 1
 #define PEASANTCOST 5, 10, 5, 0
 
+#define MINWOOD 30
+#define MINFOOD 30
+#define MINSTONE 30
+#define MINGOLD 30
+
 class UnitPeasant: public Unit
 {
 public:
@@ -23,7 +28,6 @@ public:
 	void update();
 	void selected();
 	void deselected();
-	virtual bool enemyTurn();
 	bool attemptBuildBarracks();
 	bool attemptBuildLumberMill();
 	void buildLumberMill(int tileX, int tileY);
@@ -33,7 +37,13 @@ public:
 	void buildFarm(int tileX, int tileY);
 	bool attemptBuildSiegeWorkshop();
 	void buildSiegeWorkshop(int tileX,int tileY);
-	bool reasonableSpace();
+
+	virtual bool enemyTurn();
+	bool resourceBuilding();
+	vector2d<int> findWheat();
+	vector2d<int> findStone();
+	vector2d<int> findForest();
+	bool reasonableSpace(int tileX, int tileY);
 
 	IGUIImage* GUI;
 	Button* buildBarracksButton;
