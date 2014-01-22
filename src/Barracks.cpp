@@ -68,7 +68,7 @@ void Barracks::addtoqueue(){
 		buildturn = ((GameScene*)scene)->turnCount + KNIGHTBUILDTIME;
 		((GameScene*)scene)->players[player]->useResources(KNIGHTCOST);
 		knightButton->btn->setEnabled(false);
-		cout << "queued peasant" << endl;
+		cout << "queued Knight" << endl;
 	}
 }
 
