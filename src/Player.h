@@ -16,6 +16,7 @@ public:
 	~Player(void);
 
 	virtual void startTurn();
+	virtual void update();
 	virtual void endTurn();
 
 	void createGui();

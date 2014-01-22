@@ -85,3 +85,6 @@ void Player::startTurn(){
 void Player::endTurn(){
 
 }
+
+void Player::update() {
+}

@@ -246,10 +246,10 @@ void UnitPeasant::deselected() {
 	buildFarmButton->btn->setVisible(false);
 }
 
-void UnitPeasant::enemyTurn() {
+bool UnitPeasant::enemyTurn() {
 	if(reasonableSpace()) {
 		if(attemptBuildBarracks()) {
-			return;
+			return true;
 		}
 	}
 
@@ -257,7 +257,7 @@ void UnitPeasant::enemyTurn() {
 	int destY = rand() % MAPSIZE;
 
 	this->moveTo(destX, destY);
-
+	return false;
 }
 
 bool UnitPeasant::reasonableSpace() {
