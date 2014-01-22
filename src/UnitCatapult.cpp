@@ -42,7 +42,7 @@ void UnitCatapult::addModel(){
 		modelNode->setID(0);
 
 		currentAnimation = IDLE_ANIMATION;
-		
+		cout << "add model cata" << endl; 
 		modelNode->setPosition(vector3df(0, 0.0f, 0));
     }
 
