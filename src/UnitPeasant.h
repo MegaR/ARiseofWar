@@ -14,8 +14,8 @@
 #define PEASANTBUILDTIME 1
 #define PEASANTCOST 5, 10, 5, 0
 
-#define MINWOOD 0
-#define MINFOOD 0
+#define MINWOOD 30
+#define MINFOOD 30
 #define MINSTONE 30
 #define MINGOLD 30
 
