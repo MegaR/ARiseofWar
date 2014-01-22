@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\Button.cpp">
-      <Filter>GUI</Filter>
+    <ClCompile Include="src\EnemyPlayer.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="src\EventReceiver.cpp">
       <Filter>Game</Filter>
@@ -10,26 +10,47 @@
     <ClCompile Include="src\Game.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\Entity.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Building.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Unit.cpp">
-      <Filter>Entities</Filter>
+    <ClCompile Include="src\Player.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="src\Barracks.cpp">
-      <Filter>Entities\Buildings</Filter>
+      <Filter>Game\Entities\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Building.cpp">
+      <Filter>Game\Entities\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Farm.cpp">
+      <Filter>Game\Entities\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LumberMill.cpp">
+      <Filter>Game\Entities\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quarry.cpp">
+      <Filter>Game\Entities\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SiegeWorkshop.cpp">
+      <Filter>Game\Entities\Buildings</Filter>
     </ClCompile>
     <ClCompile Include="src\TownCenter.cpp">
-      <Filter>Entities\Buildings</Filter>
+      <Filter>Game\Entities\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UnitArcher.cpp">
+      <Filter>Game\Entities\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UnitCatapult.cpp">
+      <Filter>Game\Entities\Units</Filter>
     </ClCompile>
     <ClCompile Include="src\UnitKnight.cpp">
-      <Filter>Entities\Units</Filter>
+      <Filter>Game\Entities\Units</Filter>
     </ClCompile>
     <ClCompile Include="src\UnitPeasant.cpp">
-      <Filter>Entities\Units</Filter>
+      <Filter>Game\Entities\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity.cpp">
+      <Filter>Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Unit.cpp">
+      <Filter>Game\Entities\Units</Filter>
     </ClCompile>
     <ClCompile Include="src\GameScene.cpp">
       <Filter>Game\Scenes</Filter>
@@ -37,13 +58,13 @@
     <ClCompile Include="src\MenuScene.cpp">
       <Filter>Game\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="src\Player.cpp">
-      <Filter>Game\Players</Filter>
+    <ClCompile Include="src\Scene.cpp">
+      <Filter>Game\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="src\EnemyPlayer.cpp">
-      <Filter>Game\Players</Filter>
+    <ClCompile Include="src\Tile.cpp">
+      <Filter>Game\Tiles</Filter>
     </ClCompile>
-    <ClCompile Include="src\TileWheat.cpp">
+    <ClCompile Include="src\TileForest.cpp">
       <Filter>Game\Tiles</Filter>
     </ClCompile>
     <ClCompile Include="src\TileGrass.cpp">
@@ -53,33 +74,18 @@
       <Filter>Game\Tiles</Filter>
     </ClCompile>
     <ClCompile Include="src\TileSystem.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Scene.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Tile.cpp">
       <Filter>Game\Tiles</Filter>
     </ClCompile>
-    <ClCompile Include="src\TileForest.cpp">
+    <ClCompile Include="src\TileWheat.cpp">
       <Filter>Game\Tiles</Filter>
     </ClCompile>
-    <ClCompile Include="src\LumberMill.cpp">
-      <Filter>Entities\Buildings</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Quarry.cpp" />
-    <ClCompile Include="src\Farm.cpp" />
-    <ClCompile Include="src\UnitArcher.cpp">
-    <ClCompile Include="src\SiegeWorkshop.cpp">
-      <Filter>Entities\Buildings</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UnitCatapult.cpp">
-      <Filter>Entities\Units</Filter>
+    <ClCompile Include="src\Button.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Button.h">
-      <Filter>GUI</Filter>
+    <ClInclude Include="src\EnemyPlayer.h">
+      <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="src\EventReceiver.h">
       <Filter>Game</Filter>
@@ -87,26 +93,47 @@
     <ClInclude Include="src\Game.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\Entity.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Building.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Unit.h">
-      <Filter>Entities</Filter>
+    <ClInclude Include="src\Player.h">
+      <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="src\Barracks.h">
-      <Filter>Entities\Buildings</Filter>
+      <Filter>Game\Entities\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Building.h">
+      <Filter>Game\Entities\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Farm.h">
+      <Filter>Game\Entities\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LumberMill.h">
+      <Filter>Game\Entities\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quarry.h">
+      <Filter>Game\Entities\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SiegeWorkshop.h">
+      <Filter>Game\Entities\Buildings</Filter>
     </ClInclude>
     <ClInclude Include="src\TownCenter.h">
-      <Filter>Entities\Buildings</Filter>
+      <Filter>Game\Entities\Buildings</Filter>
     </ClInclude>
     <ClInclude Include="src\UnitPeasant.h">
-      <Filter>Entities\Units</Filter>
+      <Filter>Game\Entities\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Unit.h">
+      <Filter>Game\Entities\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UnitArcher.h">
+      <Filter>Game\Entities\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UnitCatapult.h">
+      <Filter>Game\Entities\Units</Filter>
     </ClInclude>
     <ClInclude Include="src\UnitKnight.h">
-      <Filter>Entities\Units</Filter>
+      <Filter>Game\Entities\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entity.h">
+      <Filter>Game\Entities</Filter>
     </ClInclude>
     <ClInclude Include="src\MenuScene.h">
       <Filter>Game\Scenes</Filter>
@@ -114,13 +141,16 @@
     <ClInclude Include="src\GameScene.h">
       <Filter>Game\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="src\Player.h">
-      <Filter>Game\Players</Filter>
-    </ClInclude>
-    <ClInclude Include="src\EnemyPlayer.h">
-      <Filter>Game\Players</Filter>
+    <ClInclude Include="src\Scene.h">
+      <Filter>Game\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="src\TileWheat.h">
+      <Filter>Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tile.h">
+      <Filter>Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TileForest.h">
       <Filter>Game\Tiles</Filter>
     </ClInclude>
     <ClInclude Include="src\TileGrass.h">
@@ -130,65 +160,41 @@
       <Filter>Game\Tiles</Filter>
     </ClInclude>
     <ClInclude Include="src\TileSystem.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Scene.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Tile.h">
       <Filter>Game\Tiles</Filter>
     </ClInclude>
-    <ClInclude Include="src\TileForest.h">
-      <Filter>Game\Tiles</Filter>
-    </ClInclude>
-    <ClInclude Include="src\LumberMill.h">
-      <Filter>Entities\Buildings</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quarry.h" />
-    <ClInclude Include="src\Farm.h" />
-    <ClInclude Include="src\UnitArcher.h">
-    <ClInclude Include="src\SiegeWorkshop.h">
-      <Filter>Entities\Buildings</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UnitCatapult.h">
-      <Filter>Entities\Units</Filter>
+    <ClInclude Include="src\Button.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Irrlicht.dll">
-      <Filter>Components</Filter>
+      <Filter>crap</Filter>
     </None>
     <None Include="res\tileGrass.3DS">
-      <Filter>Components</Filter>
+      <Filter>crap</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Entities">
-      <UniqueIdentifier>{bac6451f-2edf-4a88-8131-7c719acc3d83}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Entities\Units">
-      <UniqueIdentifier>{072bc73a-1bdc-471a-8b5b-0e5df5beede4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Entities\Buildings">
-      <UniqueIdentifier>{0c3fa3c3-0bac-4563-bdff-60910508c567}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI">
-      <UniqueIdentifier>{04aa1a40-05b6-47de-99a5-c2bd20c2fff9}</UniqueIdentifier>
+    <Filter Include="crap">
+      <UniqueIdentifier>{f65fd840-d2d4-4897-b4ab-4643fe8d8c03}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game">
-      <UniqueIdentifier>{24d498f1-ff86-46e8-b474-2657ef2f04d8}</UniqueIdentifier>
+      <UniqueIdentifier>{88722857-990a-4f93-97cb-ef9874331cd4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components">
-      <UniqueIdentifier>{514ca543-e4d0-4991-b607-12b1330468d9}</UniqueIdentifier>
+    <Filter Include="Game\Entities">
+      <UniqueIdentifier>{8f4d5c07-230a-442e-9cd8-be69616f952a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entities\Buildings">
+      <UniqueIdentifier>{31871356-7806-4d87-80b0-37035730d65e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entities\Units">
+      <UniqueIdentifier>{3f219c2d-b4b6-466a-88ab-c3c4d74ffde6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Scenes">
-      <UniqueIdentifier>{cdfbe7f7-dbf9-47cd-b84b-382d20ca8e31}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Players">
-      <UniqueIdentifier>{a456ed2a-44e5-4790-aa33-e2d9ea4eec79}</UniqueIdentifier>
+      <UniqueIdentifier>{725f8e0c-3d59-4494-a5a0-2a04196e6c90}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Tiles">
-      <UniqueIdentifier>{06fd9b21-6094-4210-b343-e69c818fcc36}</UniqueIdentifier>
+      <UniqueIdentifier>{6f5ac8b2-56c7-494e-80e2-0fad6a465d7f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
