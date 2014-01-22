@@ -3,9 +3,9 @@
 
 Player::Player(void) {
 	wood = 10;
-	food = 10;
-	gold = 0;
-	stone = 10;
+	food = 20;
+	gold = 5;
+	stone = 20;
 
 	top = NULL;
 }

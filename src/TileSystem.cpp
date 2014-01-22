@@ -18,14 +18,14 @@ void TileSystem::create(Scene* scene) {
 	int playerX = rand() % 4+2;
 	gameScene->entities.push_back(new TownCenter(playerX, playerY, 0, scene));
 	gameScene->entities.push_back(new UnitKnight(playerX+2, playerY, 0, scene));
-	gameScene->entities.push_back(new UnitKnight(playerX+2, playerY+1, 0, scene));
+	gameScene->entities.push_back(new UnitArcher(playerX+2, playerY+1, 0, scene));
 	gameScene->entities.push_back(new UnitPeasant(playerX+2, playerY+2, 0, scene));
 
 	int enemyY = rand() % (MAPSIZE-4)+2;
 	int enemyX = rand() % 4+2;
 	gameScene->entities.push_back(new TownCenter(MAPSIZE-enemyX, enemyY, 1, scene));
 	gameScene->entities.push_back(new UnitKnight(MAPSIZE-enemyX-1, enemyY, 1, scene));
-	gameScene->entities.push_back(new UnitKnight(MAPSIZE-enemyX-1, enemyY+1, 1, scene));
+	gameScene->entities.push_back(new UnitArcher(MAPSIZE-enemyX-1, enemyY+1, 1, scene));
 	gameScene->entities.push_back(new UnitPeasant(MAPSIZE-enemyX-1, enemyY+2, 1, scene));
 	
 	generateStartResource(playerX, playerY, 0, scene);
