@@ -1,7 +1,7 @@
 #pragma once
 #include "Building.h"
 
-#define LUMBERMILLCOST 10, 0, 0, 0
+#define LUMBERMILLCOST 30, 0, 10, 10
 #define LUMBERMILLINCREASE -10, 0, 0, 0
 
 class LumberMill : public Building

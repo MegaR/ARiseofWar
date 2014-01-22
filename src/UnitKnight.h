@@ -2,7 +2,7 @@
 
 #include "Unit.h"
 
-#define KNIGHTCOST 0, 10, 10, 0
+#define KNIGHTCOST 0, 10, 0, 10
 #define KNIGHTBUILDTIME 3
 
 class UnitKnight: public Unit

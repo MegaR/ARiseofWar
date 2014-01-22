@@ -2,10 +2,10 @@
 #include "Game.h"
 
 Player::Player(void) {
-	wood = 10;
-	food = 20;
-	gold = 5;
-	stone = 20;
+	wood = 40;
+	food = 40;
+	gold = 40;
+	stone = 40;
 
 	top = NULL;
 }

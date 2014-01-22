@@ -173,6 +173,12 @@
     <None Include="res\tileGrass.3DS">
       <Filter>crap</Filter>
     </None>
+    <None Include="irrKlang.dll">
+      <Filter>crap</Filter>
+    </None>
+    <None Include="ikpMP3.dll">
+      <Filter>crap</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="crap">

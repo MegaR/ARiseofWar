@@ -2,7 +2,7 @@
 
 #include "Unit.h"
 
-#define ARCHERCOST 0, 10, 0, 10
+#define ARCHERCOST 0, 10, 10, 0
 #define ARCHERBUILDTIME 1
 
 class UnitArcher: public Unit

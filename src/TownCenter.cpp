@@ -17,12 +17,12 @@ TownCenter::TownCenter(int tileX, int tileY, int player, Scene* scene) : Buildin
 	node->setRotation(vector3df(0,15,0));
 	GUI = game->gui->addImage(rect<s32>(0,40, 275, 135));
 	GUI->setImage(game->videoDriver->getTexture("res/guiPeasant.png"));
-	txt = game->gui->addStaticText(L"Het duurt 2 beurten om de Peasant te maken." ,rect<s32>(95, 50, 265, 125));
+	txt = game->gui->addStaticText(L"Het duurt 1 beurt om de Peasant te maken." ,rect<s32>(95, 50, 265, 125));
 	GUI->setVisible(false); 
 	txt->setVisible(false);
 	buildturn = -1;
 
-	peasantButton = new Button(10, 50, 75, 75, "Peasant", "Wood: 5\nFood: 10\nStone: 5", game->videoDriver->getTexture("res/guiButtonCreate.png") );
+	peasantButton = new Button(10, 50, 75, 75, "Peasant", "Wood: 5\nFood: 10\nStone: 5\nGold: 0", game->videoDriver->getTexture("res/guiButtonCreate.png") );
 	peasantButton->btn->setVisible(false);
 
 	if(player == 0) {

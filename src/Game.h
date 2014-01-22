@@ -11,6 +11,10 @@ using namespace video;
 using namespace io;
 using namespace gui;
 
+#include <irrKlang.h>
+using namespace irrklang;
+#pragma comment(lib, "irrKlang.lib") // link with irrKlang.dll
+
 #include "Scene.h"
 #include "MenuScene.h"
 #include "GameScene.h"
