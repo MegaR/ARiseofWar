@@ -33,19 +33,19 @@ void Player::createGui() {
 	top->setImage(Game::getInstance().videoDriver->getTexture("res/guiBackgroundMenu.png"));
 
 	woodIcon = gui->addImage(rect<s32>(4, 4, 36, 36));
-	woodIcon->setImage(Game::getInstance().videoDriver->getTexture("res/iconWood.png"));
+	woodIcon->setImage(Game::getInstance().videoDriver->getTexture("res/guiWood.png"));
 	woodText = gui->addStaticText(L"500", rect<s32>(40, 8, 100, 40) );
 
 	foodIcon = gui->addImage(rect<s32>(100, 4, 132, 36));
-	foodIcon->setImage(Game::getInstance().videoDriver->getTexture("res/iconFood.png"));
+	foodIcon->setImage(Game::getInstance().videoDriver->getTexture("res/guiFood.png"));
 	foodText = gui->addStaticText(L"500", rect<s32>(136, 8, 196, 40) );
 
 	stoneIcon = gui->addImage(rect<s32>(196, 4, 228, 36));
-	stoneIcon->setImage(Game::getInstance().videoDriver->getTexture("res/iconStone.png"));
+	stoneIcon->setImage(Game::getInstance().videoDriver->getTexture("res/guiStone.png"));
 	stoneText = gui->addStaticText(L"500", rect<s32>(232, 8, 292, 40) );
 
 	goldIcon = gui->addImage(rect<s32>(292, 4, 324, 36));
-	goldIcon->setImage(Game::getInstance().videoDriver->getTexture("res/iconGold.png"));
+	goldIcon->setImage(Game::getInstance().videoDriver->getTexture("res/guiGold.png"));
 	goldText = gui->addStaticText(L"500", rect<s32>(328, 8, 388, 40) );
 
 	useResources(0,0,0,0);

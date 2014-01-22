@@ -29,13 +29,13 @@ Barracks::Barracks(int tileX, int tileY, int player, Scene* scene) : Building(ti
 	hp = 4;
 	defense = 2;
 
-	knightButton = new Button(50, 45, 75, 75, "Knight", game->videoDriver->getTexture("res/guiButtonCreate.png") );
+	knightButton = new Button(10, 50, 75, 75, "Knight", game->videoDriver->getTexture("res/guiButtonCreate.png") );
 	knightButton->btn->setVisible(false);
 	
-	archerButton = new Button(220, 45, 75, 75, "Archer", game->videoDriver->getTexture("res/guiButtonCreate.png") );
+	archerButton = new Button(180, 50, 75, 75, "Archer", game->videoDriver->getTexture("res/guiButtonCreate.png") );
 	archerButton->btn->setVisible(false);
 
-	//spearmanButton = new Button(390, 45, 75, 75, "Spearman", game->videoDriver->getTexture("res/guiButtonCreate.png") );
+	//spearmanButton = new Button(350, 50, 75, 75, "Spearman", game->videoDriver->getTexture("res/guiButtonCreate.png") );
 	//spearmanButton->btn->setVisible(false);
 
 	creatingUnit = 0; //0 = Nothing, 1 = Knight, 2 = Archer, 3 = Spearman.
@@ -48,7 +48,10 @@ Barracks::~Barracks(void)
 	knightTXT->remove();
 	archerTXT->remove();
 	//spearmanTXT->remove();
+	
 	delete knightButton;
+	delete archerButton;
+	//delete spearmanButton;
 }
 
 void Barracks::update(){
@@ -133,34 +136,27 @@ void Barracks::selected(){
 
 	knightTXT->setVisible(true);
 	knightButton->btn->setVisible(true);
-	if(allowBuildKnight()) {
-		knightButton->btn->setEnabled(true);
-	} else {
-		knightButton->btn->setEnabled(false);
-	}
+	if(allowBuildKnight()) { knightButton->btn->setEnabled(true); } 
+	else { knightButton->btn->setEnabled(false); }
 	
 	archerTXT->setVisible(true);
 	archerButton->btn->setVisible(true);
-	if(allowBuildArcher()) {
-		archerButton->btn->setEnabled(true);
-	} else {
-		archerButton->btn->setEnabled(false);
-	}
+	if(allowBuildArcher()) { archerButton->btn->setEnabled(true); } 
+	else { archerButton->btn->setEnabled(false); }
 	
 	/*archerTXT->setVisible(true);
 	archerButton->btn->setVisible(true);
-	if(allowBuildArcher()) {
-		archerButton->btn->setEnabled(true);
-	} else {
-		archerButton->btn->setEnabled(false);
-	}*/
+	if(allowBuildArcher()) { archerButton->btn->setEnabled(true); } 
+	else { archerButton->btn->setEnabled(false); }*/
 }
 
 void Barracks::deselected(){
 		GUI->setVisible(false);
+
 		knightTXT->setVisible(false);
 		archerTXT->setVisible(false);
 		//spearmanTXT->setVisible(false);
+
 		knightButton->btn->setVisible(false);
 		archerButton->btn->setVisible(false);
 		//spearmanButton->btn->setVisible(false);
