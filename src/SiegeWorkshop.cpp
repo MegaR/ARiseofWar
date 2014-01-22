@@ -57,7 +57,7 @@ void SiegeWorkshop::createUnit(){
 		}
 	}
 	if(list->size() > 0){
-		//((GameScene*)game->currentScene)->entities.push_back(new UnitCatapult(list->at(0).X,list->at(0).Y, player, scene ));
+		((GameScene*)game->currentScene)->entities.push_back(new UnitCatapult(list->at(0).X,list->at(0).Y, player, scene ));
 		delete list;
 	}
 }
@@ -66,8 +66,8 @@ void SiegeWorkshop::addtoqueue(){
 	Game* game = &Game::getInstance();
 	
 	if((game->eventReceiver->isKeyPressed(KEY_KEY_C) || CatapultButton->pressed) && allowBuild()){
-		//buildturn = ((GameScene*)scene)->turnCount + CATAPULTBUILDTIME;
-		//((GameScene*)scene)->players[player]->useResources(CATAPULTCOST);
+		buildturn = ((GameScene*)scene)->turnCount + CATAPULTBUILDTIME;
+		((GameScene*)scene)->players[player]->useResources(CATAPULTCOST);
 		CatapultButton->btn->setEnabled(false);
 		cout << "queued Catapult" << endl;
 	}

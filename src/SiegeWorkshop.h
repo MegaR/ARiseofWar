@@ -1,6 +1,7 @@
 #pragma once
 #include "Building.h"
 #include "Button.h"
+#include "UnitCatapult.h"
 
 #define SIEGEWORKSHOPCOST  0,0,0,0
 
