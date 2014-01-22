@@ -278,7 +278,14 @@ void UnitPeasant::deselected() {
 }
 
 bool UnitPeasant::enemyTurn() {
-	if(reasonableSpace()) {
+	if(resourceBuilding()) {
+		return true;
+	}
+
+
+
+	return false;
+	/*if(reasonableSpace(tileX, tileY)) {
 		if(attemptBuildBarracks()) {
 			return true;
 		}
@@ -288,10 +295,185 @@ bool UnitPeasant::enemyTurn() {
 	int destY = rand() % MAPSIZE;
 
 	this->moveTo(destX, destY);
+	return false;*/
+}
+
+bool UnitPeasant::resourceBuilding() {
+	Player* player = ((GameScene*)scene)->players[1];
+	vector2d<int> dest;
+
+	if(!player->hasResources(0, MINFOOD, 0, 0)) {
+		cout << "need food" << endl;
+		if(player->hasResources(FARMCOST) ) {
+			dest = findWheat();
+			cout << "X: " << dest.X << " Y: " << dest.Y << endl;
+			if(dest != vector2d<int>(-1,-1) ) {
+				moveTo(dest.X+1, dest.Y);
+				if(attemptBuildFarm()) {
+					return true;
+				}
+				moveTo(dest.X-1, dest.Y);
+				if(attemptBuildFarm()) {
+					return true;
+				}
+				moveTo(dest.X, dest.Y+1);
+				if(attemptBuildFarm()) {
+					return true;
+				}
+				moveTo(dest.X, dest.Y-1);
+				if(attemptBuildFarm()) {
+					return true;
+				}
+			}
+		} else {
+			cout << "not enough resources for farm" << endl;
+		}
+	}
+
+	if(!player->hasResources(MINWOOD, 0, 0, 0)) {
+		cout << "need wood" << endl;
+		if(player->hasResources(LUMBERMILLCOST) ) {
+			dest = findForest();
+			cout << "X: " << dest.X << " Y: " << dest.Y << endl;
+			if(dest != vector2d<int>(-1,-1) ) {
+				moveTo(dest.X+1, dest.Y);
+				if(attemptBuildLumberMill()) {
+					return true;
+				}
+				moveTo(dest.X-1, dest.Y);
+				if(attemptBuildLumberMill()) {
+					return true;
+				}
+				moveTo(dest.X, dest.Y+1);
+				if(attemptBuildLumberMill()) {
+					return true;
+				}
+				moveTo(dest.X, dest.Y-1);
+				if(attemptBuildLumberMill()) {
+					return true;
+				}
+			}
+		} else {
+			cout << "not enough resources for lumbermill" << endl;
+		}
+	}
+
+	if(!player->hasResources(0, 0, MINSTONE, MINGOLD)) {
+		cout << "need stone/gold" << endl;
+		if(player->hasResources(QUARRYCOST) ) {
+			dest = findStone();
+			cout << "X: " << dest.X << " Y: " << dest.Y << endl;
+			if(dest != vector2d<int>(-1,-1) ) {
+				moveTo(dest.X+1, dest.Y);
+				if(attemptBuildQuarry()) {
+					return true;
+				}
+				moveTo(dest.X-1, dest.Y);
+				if(attemptBuildQuarry()) {
+					return true;
+				}
+				moveTo(dest.X, dest.Y+1);
+				if(attemptBuildQuarry()) {
+					return true;
+				}
+				moveTo(dest.X, dest.Y-1);
+				if(attemptBuildQuarry()) {
+					return true;
+				}
+			}
+		} else {
+			cout << "not enough resources for quarry" << endl;
+		}
+	}
+
 	return false;
 }
 
-bool UnitPeasant::reasonableSpace() {
+vector2d<int> UnitPeasant::findWheat() {
+	GameScene* gameScene = (GameScene*) scene; 
+	//growing cube check for resource
+	for(int size = 1; size < MAPSIZE; size++) {
+		
+		for(int x = -size; x < size; x += size*2) {
+			for(int y = -size; y < size; y++) {
+				if(tileX + x >= MAPSIZE || tileX + x < 0 || tileY + y >= MAPSIZE || tileY + y < 0) continue;
+
+				TileWheat* tile;
+				tile = dynamic_cast<TileWheat*>(gameScene->tilesystem.tiles[tileX+x][tileY+y]);
+				if(tile) return vector2d<int>(tileX+x, tileY+y);
+			}
+		}
+
+		for(int y = -size; y < size; y += size*2) {
+			for(int x = -size; x < size; x++) {
+				if(tileX + x >= MAPSIZE || tileX + x < 0 || tileY + y >= MAPSIZE || tileY + y < 0) continue;
+
+				TileWheat* tile;
+				tile = dynamic_cast<TileWheat*>(gameScene->tilesystem.tiles[tileX+x][tileY+y]);
+				if(tile) return vector2d<int>(tileX+x, tileY+y);
+			}
+		}
+	}
+	return vector2d<int>(-1,-1);
+}
+
+vector2d<int> UnitPeasant::findStone() {
+	GameScene* gameScene = (GameScene*) scene; 
+	//growing cube check for resource
+	for(int size = 1; size < MAPSIZE; size++) {
+		
+		for(int x = -size; x < size; x += size*2) {
+			for(int y = -size; y < size; y++) {
+				if(tileX + x >= MAPSIZE || tileX + x < 0 || tileY + y >= MAPSIZE || tileY + y < 0) continue;
+
+				TileRocks* tile;
+				tile = dynamic_cast<TileRocks*>(gameScene->tilesystem.tiles[tileX+x][tileY+y]);
+				if(tile) return vector2d<int>(tileX+x, tileY+y);
+			}
+		}
+
+		for(int y = -size; y < size; y += size*2) {
+			for(int x = -size; x < size; x++) {
+				if(tileX + x >= MAPSIZE || tileX + x < 0 || tileY + y >= MAPSIZE || tileY + y < 0) continue;
+
+				TileRocks* tile;
+				tile = dynamic_cast<TileRocks*>(gameScene->tilesystem.tiles[tileX+x][tileY+y]);
+				if(tile) return vector2d<int>(tileX+x, tileY+y);
+			}
+		}
+	}
+	return vector2d<int>(-1,-1);
+}
+
+vector2d<int> UnitPeasant::findForest() {
+	GameScene* gameScene = (GameScene*) scene; 
+	//growing cube check for resource
+	for(int size = 1; size < MAPSIZE; size++) {
+		
+		for(int x = -size; x < size; x += size*2) {
+			for(int y = -size; y < size; y++) {
+				if(tileX + x >= MAPSIZE || tileX + x < 0 || tileY + y >= MAPSIZE || tileY + y < 0) continue;
+
+				TileForest* tile;
+				tile = dynamic_cast<TileForest*>(gameScene->tilesystem.tiles[tileX+x][tileY+y]);
+				if(tile) return vector2d<int>(tileX+x, tileY+y);
+			}
+		}
+
+		for(int y = -size; y < size; y += size*2) {
+			for(int x = -size; x < size; x++) {
+				if(tileX + x >= MAPSIZE || tileX + x < 0 || tileY + y >= MAPSIZE || tileY + y < 0) continue;
+
+				TileForest* tile;
+				tile = dynamic_cast<TileForest*>(gameScene->tilesystem.tiles[tileX+x][tileY+y]);
+				if(tile) return vector2d<int>(tileX+x, tileY+y);
+			}
+		}
+	}
+	return vector2d<int>(-1,-1);
+}
+
+bool UnitPeasant::reasonableSpace(int tileX, int tileY) {
 	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
 	bool reasonable = true;
 

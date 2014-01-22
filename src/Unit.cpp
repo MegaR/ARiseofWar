@@ -369,6 +369,7 @@ bool Unit::enemyTurn() {
 		}
 	}
 
+	cameraFocus();
 	cout << "turn failed!" << endl;
 	delete targets;
 	return false;
