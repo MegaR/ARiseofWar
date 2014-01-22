@@ -3,7 +3,7 @@
 #include "Button.h"
 #include "UnitCatapult.h"
 
-#define SIEGEWORKSHOPCOST  0,0,0,0
+#define SIEGEWORKSHOPCOST  30,0,0,20
 
 class SiegeWorkshop : public Building
 {

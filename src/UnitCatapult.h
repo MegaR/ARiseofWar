@@ -1,7 +1,7 @@
 #pragma once
 #include "Unit.h" 
 
-#define CATAPULTCOST 20, 0, 10, 0
+#define CATAPULTCOST 20, 0, 0, 10
 #define CATAPULTBUILDTIME 5
 
 class UnitCatapult : public Unit
