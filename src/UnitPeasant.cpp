@@ -261,6 +261,7 @@ void UnitPeasant::buildSiegeWorkshop(int tileX, int tileY){
 }
 
 void UnitPeasant::selected() {
+	if(player != 0) return;
 	Unit::selected();
 	GUI->setVisible(true);
 	buildBarracksButton->btn->setVisible(true);
