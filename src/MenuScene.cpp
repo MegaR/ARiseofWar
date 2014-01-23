@@ -47,11 +47,13 @@ void MenuScene::update()
 	
 	if (playButton->pressed == true)
 	{
+		if (Game::getInstance().soundEffectsOn == true) BGM->play2D("res/seButtonClick.wav", false);
 		Game::getInstance().changeScene(new GameScene());
 	}
 
 	if (optionsButton->pressed == true)
 	{
+		if (Game::getInstance().soundEffectsOn == true) BGM->play2D("res/seButtonClick.wav", false);
 		Game::getInstance().changeScene(new OptionsScene());
 	}
 

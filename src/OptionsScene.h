@@ -15,5 +15,13 @@ public:
 
 private:
 	IGUIImage* background;
+	IGUIStaticText* musicText;
+	IGUIStaticText* soundEffectText;
+	IGUIStaticText* shadowsText;
+
+	const wchar_t* wcMusic;
+	const wchar_t* wcSoundEffects;
+	const wchar_t* wcShadows;
+
 	ISoundEngine* BGM;
 };

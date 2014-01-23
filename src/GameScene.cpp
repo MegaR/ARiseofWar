@@ -83,17 +83,20 @@ void GameScene::update() {
 	//Button handlers enzo
 	if (returnToMenuButton->pressed == true)
 	{
+		if (game->soundEffectsOn == true) BGM->play2D("res/seButtonClick.wav", false);
 		game->changeScene(new MenuScene());
 		return;
 	}
 
 	if (exitGameButton->pressed == true)
 	{
+		if (game->soundEffectsOn == true) BGM->play2D("res/seButtonClick.wav", false);
 		Game::getInstance().device->closeDevice();
 		exit (1);
 	}
 
 	if (nextTurnButton->pressed == true) {
+		if (game->soundEffectsOn == true) BGM->play2D("res/seButtonClick.wav", false);
 		nextTurn();
 	}
 

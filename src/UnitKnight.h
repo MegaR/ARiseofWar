@@ -10,5 +10,9 @@ class UnitKnight: public Unit
 public:
 	UnitKnight(int _x, int _y, int _player, Scene* scene);
 	~UnitKnight();
+	
+	void selected();
+	void update();
+	void startTurn();
 };
 

@@ -16,7 +16,7 @@ void Game::start() {
 	screenWidth = 800;
 	screenHeight = 600;
 	musicOn = false;
-	soundEffectsOn = false;
+	soundEffectsOn = true;
 	shadowsOn = true;
 	#else
 	IrrlichtDevice *nulldevice = createDevice(video::EDT_NULL);

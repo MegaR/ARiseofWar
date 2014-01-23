@@ -4,6 +4,8 @@
 #include <iostream>
 using namespace std;
 
+ISoundEngine* uBGM;
+
 Unit::Unit(int tileX, int tileY, int player, Scene* scene) : Entity(scene)
 {
 	((GameScene*)scene)->tilesystem.tiles[tileX][tileY]->setEntity(this);
@@ -23,11 +25,16 @@ Unit::Unit(int tileX, int tileY, int player, Scene* scene) : Entity(scene)
 
 	node = Game::getInstance().sceneManager->addEmptySceneNode(0, 0);
 	node->setPosition(vector3df(tileX * 10, 0, tileY * 10) );
+
+	uBGM = createIrrKlangDevice();
 }
 
 Unit::~Unit()
 {
 	cout << "destroying Unit" << endl;
+
+	uBGM->play2D("res/seDeath.wav", false);
+
 	while(modelNodes.size() > 0) {
 		removeModel();
 	}
@@ -35,6 +42,7 @@ Unit::~Unit()
 	if(((GameScene*)Game::getInstance().currentScene)->tilesystem.tiles[tileX][tileY]->getEntity() == this) {
 		((GameScene*)Game::getInstance().currentScene)->tilesystem.tiles[tileX][tileY]->setEntity(NULL);
 	}
+	//uBGM->drop(); // sorry for the memory leaks
 }
 
 void Unit::update() 

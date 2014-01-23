@@ -4,6 +4,9 @@
 #include <iostream>
 using namespace std;
 
+ISoundEngine* upBGM;
+bool upplayed;
+
 UnitPeasant::UnitPeasant(int _x, int _y, int _player, Scene* scene) : Unit(_x, _y, _player, scene)
 {
 	hp = 1;
@@ -44,6 +47,8 @@ UnitPeasant::UnitPeasant(int _x, int _y, int _player, Scene* scene) : Unit(_x, _
 	for(int i = 0; i < maxModels; i++) {
 		addModel();
 	}
+
+	upBGM = createIrrKlangDevice();
 }
 
 
@@ -54,6 +59,7 @@ UnitPeasant::~UnitPeasant() {
 	delete buildFarmButton;
 	delete buildSiegeWorkshopButton;
 	GUI->remove();
+	//upBGM->drop();
 }
 
 void UnitPeasant::update() {
@@ -91,6 +97,24 @@ void UnitPeasant::update() {
 		if(attemptBuildSiegeWorkshop())
 			return;
 	}
+
+	if (Game::getInstance().soundEffectsOn == true)
+	{
+		if ((player == 0) && (path.size() > 0))
+		{ 
+			if (!upplayed)
+			{
+				upBGM->play2D("res/sePeasantMove.wav", false);
+				upplayed = true;
+			}
+		}
+	}
+}
+
+void UnitPeasant::startTurn()
+{
+	Unit::startTurn();
+	upplayed = false;
 }
 
 bool UnitPeasant::attemptBuildBarracks() {
@@ -268,6 +292,14 @@ void UnitPeasant::selected() {
 		buildSiegeWorkshopButton->btn->setEnabled(true);
 	} else {
 		buildSiegeWorkshopButton->btn->setEnabled(false);
+	}
+	
+	if (Game::getInstance().soundEffectsOn == true)
+	{
+		if ((player == 0) && !(path.size() > 0))
+		{ 
+			upBGM->play2D("res/sePeasantSelected.wav", false); 
+		}
 	}
 }
 
