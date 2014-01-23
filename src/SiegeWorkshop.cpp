@@ -16,8 +16,8 @@ SiegeWorkshop::SiegeWorkshop(int tileX, int tileY, int player, Scene* scene) : B
 	createModel();
 	node->setScale(vector3df(1.75f, 1.75f, 1.75f));
 	node->setRotation(vector3df(0,30,0));
-	GUI = game->gui->addImage(rect<s32>(0,0, 300, 125));
-	txt =	game->gui->addStaticText(L"Het duurt 3 beurten om de Catapult te maken." ,rect<s32>(0,0, 300, 100));
+	GUI = game->gui->addImage(rect<s32>(0,40, 300, 165));
+	txt =	game->gui->addStaticText(L"Het duurt 3 beurten om de Catapult te maken." ,rect<s32>(0,40, 300, 140));
 	GUI->setVisible(false); 
 	txt->setVisible(false);
 	buildturn = -1;
@@ -25,7 +25,7 @@ SiegeWorkshop::SiegeWorkshop(int tileX, int tileY, int player, Scene* scene) : B
 	hp = 5;
 	defense = 2;
 
-	CatapultButton = new Button(120, 35, 75, 75, "Catapult", "Wood: 20\nFood: 0\nStone: 10\nGold: 0", game->videoDriver->getTexture("res/guiButtonCreate.png") );
+	CatapultButton = new Button(120, 75, 75, 75, "Catapult", "Wood: 20\nFood: 0\nStone: 10\nGold: 0", game->videoDriver->getTexture("res/guiButtonCreate.png") );
 	CatapultButton->btn->setVisible(false);
 }
 

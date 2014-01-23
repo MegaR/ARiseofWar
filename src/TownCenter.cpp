@@ -22,7 +22,7 @@ TownCenter::TownCenter(int tileX, int tileY, int player, Scene* scene) : Buildin
 	txt->setVisible(false);
 	buildturn = -1;
 
-	peasantButton = new Button(10, 50, 75, 75, "Peasant", "Wood: 5\nFood: 10\nStone: 5\nGold: 0", game->videoDriver->getTexture("res/guiButtonCreate.png") );
+	peasantButton = new Button(10, 50, 75, 75, "Peasant", "Wood: 5\nFood: 5\nStone: 5\nGold: 0", game->videoDriver->getTexture("res/guiButtonCreate.png") );
 	peasantButton->btn->setVisible(false);
 
 	if(player == 0) {
@@ -112,7 +112,16 @@ void TownCenter::startTurn(){
 }
 
 bool TownCenter::enemyTurn() {
-	if(allowBuild() && rand()%6 > 0) {
+	int numPeasants = 0;
+	for(int i = 0; i < ((GameScene*)scene)->entities.size(); i++) {
+		if(dynamic_cast<UnitPeasant*>( ((GameScene*)scene)->entities[i]) ) {
+			if(((GameScene*)scene)->entities[i]->player == 1) {
+				numPeasants++;
+			}
+		}
+	}
+
+	if(allowBuild() && numPeasants < 2) {
 		buildturn = ((GameScene*)scene)->turnCount + PEASANTBUILDTIME;
 		((GameScene*)scene)->players[player]->useResources(PEASANTCOST);
 	} 

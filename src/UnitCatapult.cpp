@@ -7,10 +7,10 @@ using namespace std;
 
 UnitCatapult::UnitCatapult(int _x, int _y, int _player, Scene* scene)  : Unit(_x, _y, _player, scene)
 {	
-	maxHP = 20;
-	hp = 20;
-	attack = 8;
-	defense = 3;
+	maxHP = 8;
+	hp = maxHP;
+	attack = 9;
+	defense = 1;
 	maxDistance = 3;
 	attackDistance = 2;
 	maxModels = 1;

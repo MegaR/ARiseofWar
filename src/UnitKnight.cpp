@@ -11,7 +11,7 @@ bool ukplayed;
 UnitKnight::UnitKnight(int _x, int _y, int _player, Scene* scene) : Unit(_x, _y, _player, scene)
 {
 	maxHP = 10;
-	hp = 10;
+	hp = maxHP;
 	attack = 5;
 	defense = 3;
 	maxDistance = 4;

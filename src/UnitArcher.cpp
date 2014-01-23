@@ -11,7 +11,7 @@ bool uaplayed;
 UnitArcher::UnitArcher(int _x, int _y, int _player, Scene* scene) : Unit(_x, _y, _player, scene)
 {
 	maxHP = 9;
-	hp = 9;
+	hp = maxHP;
 	attack = 4;
 	defense = 2;
 	maxDistance = 5;
