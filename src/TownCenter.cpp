@@ -112,8 +112,8 @@ void TownCenter::startTurn(){
 }
 
 bool TownCenter::enemyTurn() {
-	if(allowBuild() && rand()%3 == 0) {
-		buildturn = ((GameScene*)scene)->turnCount;
+	if(allowBuild() && rand()%6 > 0) {
+		buildturn = ((GameScene*)scene)->turnCount + PEASANTBUILDTIME;
 		((GameScene*)scene)->players[player]->useResources(PEASANTCOST);
 	} 
 	return false;
