@@ -15,10 +15,10 @@
 #define PEASANTCOST 5, 10, 5, 0
 
 //AI
-#define MINWOOD 30
-#define MINFOOD 30
-#define MINSTONE 30
-#define MINGOLD 30
+#define MINWOOD 40
+#define MINFOOD 40
+#define MINSTONE 40
+#define MINGOLD 40
 #define BARRACKSSIEGERATIO 2
 
 class UnitPeasant: public Unit
