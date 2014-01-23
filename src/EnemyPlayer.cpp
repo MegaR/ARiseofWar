@@ -15,19 +15,82 @@ void EnemyPlayer::turn() {
 	queue.empty();
 	for(int i = 0; i < scene->entities.size(); i++) {
 		if(scene->entities[i]->player == 1) {
-			queue.push_back(scene->entities[i]);
+			insertToQueue(scene->entities[i]);
 		}
 	}
 	current = 0;
-	/*
-	//todo: sort entities
-	for(int i = 0; i < scene->entities.size(); i++) {
-		if(scene->entities[i]->player == 1) {
-			scene->entities[i]->enemyTurn();
+}
+
+void EnemyPlayer::insertToQueue(Entity* entity) {
+	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
+
+	if( dynamic_cast<MOVE1*>(entity) ) {
+		queue.insert(queue.begin(), entity);
+
+	} else if( dynamic_cast<MOVE2*>(entity) ) {
+		for(int i = 0; i < queue.size(); i++) {
+			if( !dynamic_cast<MOVE1*>(queue[i]) ) {
+				queue.insert(queue.begin()+i, entity);
+				return;
+			}
 		}
+			queue.push_back(entity);
+	} else if( dynamic_cast<MOVE3*>(entity) ) {
+		for(int i = 0; i < queue.size(); i++) {
+			if( !dynamic_cast<MOVE1*>(queue[i]) ||
+				!dynamic_cast<MOVE2*>(queue[i]) ) {
+				queue.insert(queue.begin()+i, entity);
+				return;
+			}
+		}
+			queue.push_back(entity);
+	} else if( dynamic_cast<MOVE4*>(entity) ) {
+		for(int i = 0; i < queue.size(); i++) {
+			if( !dynamic_cast<MOVE1*>(queue[i]) ||
+				!dynamic_cast<MOVE2*>(queue[i]) ||
+				!dynamic_cast<MOVE3*>(queue[i]) ) {
+				queue.insert(queue.begin()+i, entity);
+				return;
+			}
+		}
+			queue.push_back(entity);
+	} else if( dynamic_cast<MOVE5*>(entity) ) {
+		for(int i = 0; i < queue.size(); i++) {
+			if( !dynamic_cast<MOVE1*>(queue[i]) ||
+				!dynamic_cast<MOVE2*>(queue[i]) ||
+				!dynamic_cast<MOVE3*>(queue[i]) ||
+				!dynamic_cast<MOVE4*>(queue[i]) ) {
+				queue.insert(queue.begin()+i, entity);
+				return;
+			}
+		}
+			queue.push_back(entity);
+	} else if( dynamic_cast<MOVE6*>(entity) ) {
+		for(int i = 0; i < queue.size(); i++) {
+			if( !dynamic_cast<MOVE1*>(queue[i]) ||
+				!dynamic_cast<MOVE2*>(queue[i]) ||
+				!dynamic_cast<MOVE3*>(queue[i]) ||
+				!dynamic_cast<MOVE4*>(queue[i]) ||
+				!dynamic_cast<MOVE5*>(queue[i]) ) {
+				queue.insert(queue.begin()+i, entity);
+				return;
+			}
+		}
+			queue.push_back(entity);
+	} else if( dynamic_cast<MOVE7*>(entity) ) {
+		for(int i = 0; i < queue.size(); i++) {
+			if( !dynamic_cast<MOVE1*>(queue[i]) ||
+				!dynamic_cast<MOVE2*>(queue[i]) ||
+				!dynamic_cast<MOVE3*>(queue[i]) ||
+				!dynamic_cast<MOVE4*>(queue[i]) ||
+				!dynamic_cast<MOVE5*>(queue[i]) ||
+				!dynamic_cast<MOVE6*>(queue[i]) ) {
+				queue.insert(queue.begin()+i, entity);
+				return;
+			}
+		}
+			queue.push_back(entity);
 	}
-	scene->nextTurn();
-	*/
 }
 
 void EnemyPlayer::update() {
@@ -36,8 +99,8 @@ void EnemyPlayer::update() {
 	if(queue.size() > 0) {
 
 		if(current == 0) {
-			current = queue.back();
-			queue.pop_back();
+			current = queue.front();
+			queue.erase(queue.begin() );
 			if(current->enemyTurn()) {
 				current = 0;
 			}

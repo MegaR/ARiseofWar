@@ -318,20 +318,20 @@ bool UnitPeasant::enemyTurn() {
 		return true;
 	}
 
+	if(!hasMoved) {
+		gotoClearing();
+	}
 
-
-	return false;
-	/*if(reasonableSpace(tileX, tileY)) {
-		if(attemptBuildBarracks()) {
-			return true;
+	if(reasonableSpace(tileX, tileY) ) {
+		cout << "BR ratio: " << barracksSiegeRatio() << endl;
+		if(barracksSiegeRatio() < BARRACKSSIEGERATIO) {
+			if(attemptBuildBarracks()) return true;
+		} else {
+			if(attemptBuildSiegeWorkshop()) return true;
 		}
 	}
 
-	int destX = rand() % MAPSIZE;
-	int destY = rand() % MAPSIZE;
-
-	this->moveTo(destX, destY);
-	return false;*/
+	return false;
 }
 
 bool UnitPeasant::resourceBuilding() {
@@ -509,18 +509,73 @@ vector2d<int> UnitPeasant::findForest() {
 	return vector2d<int>(-1,-1);
 }
 
-bool UnitPeasant::reasonableSpace(int tileX, int tileY) {
-	GameScene* scene = (GameScene*)Game::getInstance().currentScene;
-	bool reasonable = true;
+void UnitPeasant::gotoClearing() {
+	GameScene* gameScene = (GameScene*) scene;
 
-	for(int i = 0; i < scene->entities.size(); i++) {
-		Building* building = dynamic_cast<Building*>(scene->entities.at(i) );
-		if(building) {
-			if(building->inAttackRange(tileX, tileY, 5)) {
-				reasonable = false;
+	for(int size = 1; size < MAPSIZE; size++) {
+		
+		for(int x = -size; x < size; x += size*2) {
+			for(int y = -size; y < size; y++) {
+				if(tileX + x >= MAPSIZE || tileX + x < 0 || tileY + y >= MAPSIZE || tileY + y < 0) continue;
+
+				if(reasonableSpace(tileX+x, tileY+y)) {
+						cout << "found clearing X: " << tileX+x << " Y: " << tileY + y << endl;
+						moveTo(tileX+x, tileY+y);
+						return;
+				}
+			}
+		}
+
+		for(int y = -size; y < size; y += size*2) {
+			for(int x = -size; x < size; x++) {
+				if(tileX + x >= MAPSIZE || tileX + x < 0 || tileY + y >= MAPSIZE || tileY + y < 0) continue;
+
+				if(reasonableSpace(tileX+x, tileY+y)) {
+						cout << "found clearing X: " << tileX+x << " Y: " << tileY + y << endl;
+						moveTo(tileX+x, tileY+y);
+						return;
+				}
+			}
+		}
+	}
+}
+
+bool UnitPeasant::reasonableSpace(int tileX, int tileY) {
+	GameScene* scene = (GameScene*)this->scene;
+
+	for(int x = -1; x < 3; x++) {
+		for(int y = -1; y < 3; y++) {
+			if(tileX + x >= MAPSIZE || tileX + x < 0 || tileY + y >= MAPSIZE || tileY + y < 0) return false;
+			Tile* tile = scene->tilesystem.tiles[tileX+x][tileY+y];
+			if(!tile->walkable || (tile->getEntity() && tile->getEntity() != this) ) {
+				return false;
 			}
 		}
 	}
 
-	return reasonable;
+	return true;
+}
+
+float UnitPeasant::barracksSiegeRatio() {
+	GameScene* scene = (GameScene*)this->scene;
+	float barracks = 0;
+	float sieges = 0;
+	for(int i = 0; i < scene->entities.size(); i++) {
+		Barracks* barrack;
+		SiegeWorkshop* siege;
+
+		barrack = dynamic_cast<Barracks*>(scene->entities[i]);
+		if(barrack && barrack->player == player) {
+			barracks++;
+			continue;
+		}
+
+		siege = dynamic_cast<SiegeWorkshop*>(scene->entities[i]);
+		if(siege && siege->player == player) {
+			sieges++;
+		}
+	}
+
+	if(sieges == 0) return barracks;
+	return barracks / sieges;
 }

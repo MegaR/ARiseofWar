@@ -372,12 +372,12 @@ bool Unit::enemyTurn() {
 	
 	for(int i = 0; i < targets->size(); i++) {
 		if( attemptTarget(targets->at(i) ) ) {
+			cameraFocus();
 			delete targets;
 			return false;
 		}
 	}
 
-	cameraFocus();
 	cout << "turn failed!" << endl;
 	delete targets;
 	return false;
