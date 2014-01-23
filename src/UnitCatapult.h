@@ -2,7 +2,7 @@
 #include "Unit.h" 
 
 #define CATAPULTCOST 20, 0, 10, 0
-#define CATAPULTBUILDTIME 5
+#define CATAPULTBUILDTIME 4 //actually 3?
 
 class UnitCatapult : public Unit
 {
