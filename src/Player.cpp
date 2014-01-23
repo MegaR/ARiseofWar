@@ -51,14 +51,14 @@ void Player::createGui() {
 	useResources(0,0,0,0);
 }
 
-bool Player::hasResources(int wood, int food, int gold, int stone) {
+bool Player::hasResources(int wood, int food, int stone, int gold) {
 	if(this->wood >= wood && this->food >= food && this->gold >= gold && this->stone >= stone) {
 		return true;
 	}
 	return false;
 }
 
-void Player::useResources(int wood, int food, int gold, int stone) {
+void Player::useResources(int wood, int food, int stone, int gold) {
 	this->wood -= wood;
 	this->food -= food;
 	this->gold -= gold;

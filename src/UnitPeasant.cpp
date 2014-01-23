@@ -32,13 +32,13 @@ UnitPeasant::UnitPeasant(int _x, int _y, int _player, Scene* scene) : Unit(_x, _
 	buildBarracksButton = new Button(10, 50, 75, 75, "Barracks", "Wood: 10\nFood: 20\nStone: 10\nGold: 10", game->videoDriver->getTexture("res/guiButtonCreate.png"));
 	buildBarracksButton->btn->setVisible(false);
 
-	buildLumberMillButton = new Button(95, 50, 75, 75, "Lumber\nMill", "Wood: 30\nFood: 0\nStone: 10\nGold: 10", game->videoDriver->getTexture("res/guiButtonCreate.png"));
+	buildLumberMillButton = new Button(95, 50, 75, 75, "Lumber\nMill", "Wood: 10\nFood: 0\nStone: 10\nGold: 10", game->videoDriver->getTexture("res/guiButtonCreate.png"));
 	buildLumberMillButton->btn->setVisible(false);
 
-	buildQuarryButton = new Button(180, 50, 75, 75, "Quarry", "Wood: 0\nFood: 0\nStone: 20\nGold: 30", game->videoDriver->getTexture("res/guiButtonCreate.png"));
+	buildQuarryButton = new Button(180, 50, 75, 75, "Quarry", "Wood: 0\nFood: 0\nStone: 20\nGold: 20", game->videoDriver->getTexture("res/guiButtonCreate.png"));
 	buildQuarryButton->btn->setVisible(false);
 
-	buildFarmButton = new Button(265, 50, 75, 75, "Farm", "Wood: 0\nFood: 30\nStone: 5\nGold: 15", game->videoDriver->getTexture("res/guiButtonCreate.png"));
+	buildFarmButton = new Button(265, 50, 75, 75, "Farm", "Wood: 10\nFood: 10\nStone: 5\nGold: 15", game->videoDriver->getTexture("res/guiButtonCreate.png"));
 	buildFarmButton->btn->setVisible(false);
 
 	buildSiegeWorkshopButton = new  Button(350, 50, 75, 75, "Siege\nWorkshop", "Wood: 25\nFood: 0\nStone: 15\nGold: 10", game->videoDriver->getTexture("res/guiButtonCreate.png"));

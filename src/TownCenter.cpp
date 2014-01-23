@@ -37,11 +37,6 @@ TownCenter::~TownCenter(void)
 	GUI->remove();
 	txt->remove();
 	delete peasantButton;
-	if(player == 0){
-		((GameScene*)game->currentScene)->enemyunits = true;
-	}else if( player == 1){
-		((GameScene*)game->currentScene)->playerunits = true;
-	}
 
 }
 
