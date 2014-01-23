@@ -26,6 +26,7 @@ public:
 	~UnitPeasant();
 
 	void update();
+	void startTurn();
 	void selected();
 	void deselected();
 	bool attemptBuildBarracks();
