@@ -2,7 +2,7 @@
 #include "Building.h"
 
 #define QUARRYCOST 0, 0, 20, 30
-#define QUARRYINCREASE 0, 0, 0, -10
+#define QUARRYINCREASE 0, 0, -10, -10
 
 class Quarry : public Building
 {
