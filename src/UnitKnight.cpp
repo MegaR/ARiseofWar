@@ -36,6 +36,7 @@ UnitKnight::UnitKnight(int _x, int _y, int _player, Scene* scene) : Unit(_x, _y,
 
 UnitKnight::~UnitKnight()
 {
+	ukBGM->play2D("res/seDeath.wav", false);
 	//ukBGM->drop();
 }
 

@@ -33,8 +33,6 @@ Unit::~Unit()
 {
 	cout << "destroying Unit" << endl;
 
-	uBGM->play2D("res/seDeath.wav", false);
-
 	while(modelNodes.size() > 0) {
 		removeModel();
 	}

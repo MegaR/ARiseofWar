@@ -53,6 +53,7 @@ UnitPeasant::UnitPeasant(int _x, int _y, int _player, Scene* scene) : Unit(_x, _
 
 
 UnitPeasant::~UnitPeasant() {
+	upBGM->play2D("res/sePeasantDeath.wav", false);
 	delete buildLumberMillButton;
 	delete buildBarracksButton;
 	delete buildQuarryButton;
@@ -298,7 +299,7 @@ void UnitPeasant::selected() {
 	{
 		if ((player == 0) && !(path.size() > 0))
 		{ 
-			upBGM->play2D("res/sePeasantSelected.wav", false); 
+			upBGM->play2D("res/sePeasantSelected.mp3", false); 
 		}
 	}
 }

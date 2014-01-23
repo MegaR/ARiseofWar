@@ -36,6 +36,7 @@ UnitArcher::UnitArcher(int _x, int _y, int _player, Scene* scene) : Unit(_x, _y,
 
 UnitArcher::~UnitArcher()
 {
+	uaBGM->play2D("res/seDeath.wav", false);
 	//uaBGM->drop();
 }
 
