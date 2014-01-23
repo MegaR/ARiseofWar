@@ -6,6 +6,14 @@
 #include <iostream>
 using namespace std;
 
+#define MOVE1 UnitPeasant
+#define MOVE2 UnitKnight
+#define MOVE3 UnitArcher
+#define MOVE4 UnitCatapult
+#define MOVE5 TownCenter
+#define MOVE6 Barracks
+#define MOVE7 SiegeWorkshop
+
 class EnemyPlayer :
 	public Player
 {
@@ -18,4 +26,5 @@ public:
 private:
 	Entity* current;
 	std::vector<Entity*> queue;
+	void insertToQueue(Entity* entity);
 };
