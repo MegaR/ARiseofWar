@@ -16,6 +16,7 @@ MenuScene::MenuScene(void):Scene()
 	int bX, bY;
 	bX = (sW/2) - (bW/2);
 	bY = (sH/2) - (bH/2);
+	startGame = false;
 
 	background = game->gui->addImage(rect<s32>(0,0, game->screenWidth, game->screenHeight));
 	background->setImage(game->videoDriver->getTexture("res/guiBackgroundMenu.png"));
@@ -28,6 +29,10 @@ MenuScene::MenuScene(void):Scene()
 
 	BGM = createIrrKlangDevice();
 	if (Game::getInstance().musicOn == true) BGM->play2D("res/bgmMenu.mp3", true);
+
+	loading = game->gui->addImage(rect<s32>((game->screenWidth / 2) - (960/2), (game->screenHeight / 2) - (540/2), game->screenWidth, game->screenHeight));
+	loading->setImage(game->videoDriver->getTexture("res/guiLoading.png") );
+	loading->setVisible(false);
 }
 
 MenuScene::~MenuScene()
@@ -37,6 +42,7 @@ MenuScene::~MenuScene()
 	delete exitButton;
 	BGM->drop();
 	background->remove();
+	loading->remove();
 }
 
 void MenuScene::update()
@@ -47,6 +53,13 @@ void MenuScene::update()
 	
 	if (playButton->pressed == true)
 	{
+		Game* game = &Game::getInstance();
+		loading->setVisible(true);
+		startGame = true;
+		return;
+	}
+
+	if(startGame) {
 		if (Game::getInstance().soundEffectsOn == true) BGM->play2D("res/seButtonClick.wav", false);
 		Game::getInstance().changeScene(new GameScene());
 	}

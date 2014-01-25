@@ -16,4 +16,6 @@ public:
 private:
 	IGUIImage* background;
 	ISoundEngine* BGM;
+	IGUIImage* loading;
+	bool startGame;
 };

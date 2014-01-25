@@ -11,7 +11,7 @@ bool uaplayed;
 UnitArcher::UnitArcher(int _x, int _y, int _player, Scene* scene) : Unit(_x, _y, _player, scene)
 {
 	maxHP = 9;
-	hp = 9;
+	hp = maxHP;
 	attack = 4;
 	defense = 2;
 	maxDistance = 5;
@@ -36,6 +36,7 @@ UnitArcher::UnitArcher(int _x, int _y, int _player, Scene* scene) : Unit(_x, _y,
 
 UnitArcher::~UnitArcher()
 {
+	uaBGM->play2D("res/seDeath.wav", false);
 	//uaBGM->drop();
 }
 

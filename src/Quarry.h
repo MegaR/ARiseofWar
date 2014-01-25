@@ -1,7 +1,7 @@
 #pragma once
 #include "Building.h"
 
-#define QUARRYCOST 0, 0, 20, 30
+#define QUARRYCOST 0, 0, 20, 20
 #define QUARRYINCREASE 0, 0, -10, -10
 
 class Quarry : public Building
