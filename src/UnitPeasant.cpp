@@ -212,7 +212,7 @@ void UnitPeasant::buildQuarry(int tileX, int tileY) {
 
 bool UnitPeasant::attemptBuildFarm() {
 	GameScene* scene = (GameScene*)this->scene;
-	if(!scene->players[player]->hasResources(QUARRYCOST)) {
+	if(!scene->players[player]->hasResources(FARMCOST)) {
 		return false;
 	}
 
