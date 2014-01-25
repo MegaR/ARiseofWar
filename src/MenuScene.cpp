@@ -30,7 +30,7 @@ MenuScene::MenuScene(void):Scene()
 	BGM = createIrrKlangDevice();
 	if (Game::getInstance().musicOn == true) BGM->play2D("res/bgmMenu.mp3", true);
 
-	loading = game->gui->addImage(rect<s32>((game->screenWidth / 2) - (960/2), (game->screenHeight / 2) - (540/2), 960, 540));
+	loading = game->gui->addImage(rect<s32>((game->screenWidth / 2) - (960/2), (game->screenHeight / 2) - (540/2), game->screenWidth, game->screenHeight));
 	loading->setImage(game->videoDriver->getTexture("res/guiLoading.png") );
 	loading->setVisible(false);
 }
