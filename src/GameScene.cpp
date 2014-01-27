@@ -205,8 +205,13 @@ void GameScene::updateCamera() {
 
 	if(cameraTarget.Y > CAMERAMAX) cameraTarget.Y = CAMERAMAX;
 	if(cameraTarget.Y < CAMERAMIN) cameraTarget.Y = CAMERAMIN;
+	if(cameraTarget.X > MAPSIZE * 10) cameraTarget.X = MAPSIZE * 10;
+	if(cameraTarget.X < 0) cameraTarget.X = 0;
+	if(cameraTarget.Z > MAPSIZE * 10) cameraTarget.Z = MAPSIZE * 10;
+	if(cameraTarget.Z < 0) cameraTarget.Z = 0;
 
 	vector3df X = (cameraTarget-position).setLength(CAMERASPEED);
+	cout << Game::getInstance().delta << endl;
 	X *= Game::getInstance().delta;
 	X += position;
 	camera->setPosition(X);
