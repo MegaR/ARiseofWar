@@ -40,7 +40,7 @@ public:
 
 	void moveTo(int _tileX, int _tileY);
 	void update();
-	void updateAnimations();
+	virtual void updateAnimations();
 	void attackTarget(Entity* target);
 	void updateModels();
 	void addModel();
