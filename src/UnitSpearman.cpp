@@ -10,13 +10,13 @@ bool usplayed;
 
 UnitSpearman::UnitSpearman(int _x, int _y, int _player, Scene* scene) : Unit(_x, _y, _player, scene)
 {
-	maxHP = 9;
+	maxHP = 10;
 	hp = maxHP;
-	attack = 4;
-	defense = 2;
-	maxDistance = 5;
-	attackDistance = 3;
-	maxModels = 3;
+	attack = 5;
+	defense = 3;
+	maxDistance = 4;
+	attackDistance = 2;
+	maxModels = 5;
 	
 	Game* game = &Game::getInstance();
 	model = game->sceneManager->getMesh("res/UnitSpearman.md2");
