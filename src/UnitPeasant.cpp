@@ -316,6 +316,7 @@ void UnitPeasant::deselected() {
 }
 
 bool UnitPeasant::enemyTurn() {
+	cameraFocus();
 	if(resourceBuilding()) {
 		return true;
 	}

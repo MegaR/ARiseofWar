@@ -76,6 +76,7 @@ void Game::loop() {
 
 	while(device->run()) {
 		delta = (f32)(device->getTimer()->getTime() - prevTime) / 1000.f;
+		if(delta > 0.030) { delta = 0.030; }
 		prevTime = device->getTimer()->getTime();
 		
 
