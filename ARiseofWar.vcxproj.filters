@@ -85,6 +85,9 @@
     <ClCompile Include="src\OptionsScene.cpp">
       <Filter>Game\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="src\UnitSpearman.cpp">
+      <Filter>Game\Entities\Units</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\EnemyPlayer.h">
@@ -170,6 +173,9 @@
     </ClInclude>
     <ClInclude Include="src\OptionsScene.h">
       <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UnitSpearman.h">
+      <Filter>Game\Entities\Units</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

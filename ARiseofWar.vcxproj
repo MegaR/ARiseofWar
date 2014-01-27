@@ -112,6 +112,7 @@
     <ClCompile Include="src\UnitCatapult.cpp" />
     <ClCompile Include="src\UnitKnight.cpp" />
     <ClCompile Include="src\UnitPeasant.cpp" />
+    <ClCompile Include="src\UnitSpearman.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Barracks.h" />
@@ -142,6 +143,7 @@
     <ClInclude Include="src\UnitCatapult.h" />
     <ClInclude Include="src\UnitKnight.h" />
     <ClInclude Include="src\UnitPeasant.h" />
+    <ClInclude Include="src\UnitSpearman.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ikpMP3.dll" />

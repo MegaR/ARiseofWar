@@ -2,6 +2,7 @@
 #include "Building.h"
 #include "UnitKnight.h"
 #include "UnitArcher.h"
+#include "UnitSpearman.h"
 #include "Button.h"
 
 #define BARRACKSCOST 10, 20, 10, 10
@@ -25,17 +26,16 @@ public:
 
 	bool allowBuildKnight();
 	bool allowBuildArcher();
-	//bool allowBuildSpearman();
+	bool allowBuildSpearman();
 	
 	IGUIImage* GUI;
 
 	IGUIStaticText* knightTXT;
 	IGUIStaticText* archerTXT;
-	//IGUIStaticText* spearmanTXT;
-	
+	IGUIStaticText* spearmanTXT;
 
 	Button* knightButton;
 	Button* archerButton;
-	//Button* spearmanButton;
+	Button* spearmanButton;
 };
 
