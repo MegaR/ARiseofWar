@@ -86,7 +86,6 @@ bool Entity::enemyTurn() {
 
 void Entity::cameraFocus() {
 	Game* game = &Game::getInstance();
-	ISceneNodeAnimator* animator = game->sceneManager->createFlyStraightAnimator(game->camera->getPosition(), vector3df(tileX*10, game->camera->getPosition().Y, tileY*10), 1000);
-	game->camera->addAnimator(animator);
-	game->camera->setTarget(vector3df(tileX*10, 0, tileY*10+5));
+	GameScene* scene = (GameScene*) this->scene;
+	scene->cameraTarget = vector3df( (tileX+1)*10, game->camera->getPosition().Y, (tileY-1)*10);
 }

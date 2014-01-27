@@ -8,6 +8,7 @@ class UnitCatapult : public Unit
 {
 public:
 
+	void updateAnimations();
 	void addModel();
 	UnitCatapult(int _x, int _y, int _player, Scene* scene);
 	~UnitCatapult(void);
