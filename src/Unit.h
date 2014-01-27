@@ -19,7 +19,6 @@ public:
 
 	int maxHP;
 	int maxModels;
-	int attack;
 	int maxDistance;
 	int attackDistance;
 

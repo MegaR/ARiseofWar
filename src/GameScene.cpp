@@ -211,7 +211,6 @@ void GameScene::updateCamera() {
 	if(cameraTarget.Z < 0) cameraTarget.Z = 0;
 
 	vector3df X = (cameraTarget-position).setLength(CAMERASPEED);
-	cout << Game::getInstance().delta << endl;
 	X *= Game::getInstance().delta;
 	X += position;
 	camera->setPosition(X);
