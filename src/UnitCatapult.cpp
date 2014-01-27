@@ -53,3 +53,72 @@ void UnitCatapult::addModel(){
 UnitCatapult::~UnitCatapult(void)
 {
 }
+
+void UnitCatapult::updateAnimations() {
+	switch(currentAnimation)
+	{
+		case IDLE_ANIMATION:
+			if (!isAnimating[currentAnimation])
+			{
+				for (int i = 0; i < modelNodes.size(); i++) 
+				{
+					modelNodes[i]->setFrameLoop(0, 0);
+					modelNodes[i]->setAnimationSpeed(0);
+				}
+			
+				isAnimating[IDLE_ANIMATION] = true;
+				isAnimating[WALKING_ANIMATION] = false;
+				isAnimating[ATTACKING_ANIMATION] = false;
+				isAnimating[DEATH_ANIMATION] = false;
+				cout << "Turned on Idle Animation" << endl;
+			}
+			break;
+
+		case WALKING_ANIMATION:
+			if (!isAnimating[currentAnimation])
+			{
+				for (int i = 0; i < modelNodes.size(); i++) 
+				{
+					modelNodes[i]->setFrameLoop(0, 40);
+					modelNodes[i]->setCurrentFrame(0);
+					modelNodes[i]->setAnimationSpeed(60);
+				}
+			
+				isAnimating[IDLE_ANIMATION] = false;
+				isAnimating[WALKING_ANIMATION] = true;
+				isAnimating[ATTACKING_ANIMATION] = false;
+				isAnimating[DEATH_ANIMATION] = false;
+				cout << "Turned on Walking Animation" << endl;
+			}
+			break;
+
+		case ATTACKING_ANIMATION:
+			if (!isAnimating[currentAnimation])
+			{
+				for (int i = 0; i < modelNodes.size(); i++) 
+				{
+					modelNodes[i]->setFrameLoop(40, 70);
+					modelNodes[i]->setCurrentFrame(40);
+					modelNodes[i]->setAnimationSpeed(15);
+				}
+			
+				isAnimating[IDLE_ANIMATION] = false;
+				isAnimating[WALKING_ANIMATION] = false;
+				isAnimating[ATTACKING_ANIMATION] = true;
+				isAnimating[DEATH_ANIMATION] = false;
+				cout << "Turned on Attacking Animation" << endl;
+			}
+
+			int currentAnimationFrame;
+			for (int i = 0; i < modelNodes.size(); i++) 
+			{
+				currentAnimationFrame = modelNodes[i]->getFrameNr();
+				if (currentAnimationFrame > 65) currentAnimation = IDLE_ANIMATION;
+			}
+			break;
+
+		default:{ 
+			cout << "Unknown animation ID!" << endl;
+		}break;
+	}
+}
