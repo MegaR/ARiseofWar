@@ -14,7 +14,7 @@
 
 #define CAMERAMIN 10
 #define CAMERAMAX 150
-#define CAMERASPEED 50
+#define CAMERASPEED 80
 #define ZOOMSPEED 5
 
 class GameScene : public Scene
@@ -37,6 +37,7 @@ public:
 	void actionEntity();
 	void deselectEntity();
 	void removeEntity(Entity* ent);
+	void updateCamera();
 	vector2d<int> mouseRay();
 	Entity* getEntity(int x, int y);
 	Button* returnToMenuButton;
@@ -48,6 +49,7 @@ public:
 	bool enemyunits;
 	int currentPlayer;
 	Player* players[2];
+	vector3df cameraTarget;
 private:
 	void moveCamera(float x, float y, float z);
 	IGUIImage* background;

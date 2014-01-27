@@ -116,6 +116,8 @@ void GameScene::update() {
 		background->setVisible(true);
 		nextTurnButton->btn->setVisible(false);
 	}
+
+	updateCamera();
 }
 
 void GameScene::nextTurn() {
@@ -195,20 +197,35 @@ void GameScene::updateMouse() {
 
 }
 
+void GameScene::updateCamera() {
+	if(cameraTarget == vector3df()) return;
+
+	ICameraSceneNode* camera = Game::getInstance().camera;
+	vector3df position = camera->getPosition();
+
+	if(cameraTarget.Y > CAMERAMAX) cameraTarget.Y = CAMERAMAX;
+	if(cameraTarget.Y < CAMERAMIN) cameraTarget.Y = CAMERAMIN;
+
+	vector3df X = (cameraTarget-position).setLength(CAMERASPEED);
+	X *= Game::getInstance().delta;
+	X += position;
+	camera->setPosition(X);
+	X.Y += -1;
+	X.Z += 0.5f;
+	camera->setTarget(X);
+
+	if( (cameraTarget - position).getLength() < 1) {
+		cameraTarget = vector3df();
+	}
+}
+
 void GameScene::moveCamera(float x, float y, float z) {
 	ICameraSceneNode* camera = Game::getInstance().camera;
 	vector3df position = camera->getPosition();
-	position.X += x;
-	position.Y += y;
-	if(position.Y > CAMERAMAX) position.Y = CAMERAMAX;
-	if(position.Y < CAMERAMIN) position.Y = CAMERAMIN;
-	position.Z += z;
-	camera->setPosition(position);
-	position.Y += -1;
-	position.Z += 0.5f;
-	camera->setTarget(position);
-	camera->removeAnimators();
-	
+	if(cameraTarget != vector3df() ) { position = cameraTarget; }
+	cameraTarget.X = position.X + x;
+	cameraTarget.Y = position.Y + y;
+	cameraTarget.Z = position.Z + z;
 }
 
 vector2d<int> GameScene::mouseRay(){
