@@ -50,6 +50,7 @@ public:
 	int currentPlayer;
 	Player* players[2];
 	vector3df cameraTarget;
+	void start();
 private:
 	void moveCamera(float x, float y, float z);
 	IGUIImage* background;
@@ -61,5 +62,4 @@ private:
 	std::vector<vector2d<int>>* reconstructed_path(vector2d<int> came_from[][MAPSIZE], vector2d<int> end, vector2d<int> start);
 
 	IMeshSceneNode *selectedNode;
-	ISoundEngine* BGM;
 };

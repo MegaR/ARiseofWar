@@ -10,12 +10,12 @@ class MenuScene : public Scene
 public:
 	MenuScene(void);
 	~MenuScene();
+	void start();
 
 	void update();
 
 private:
 	IGUIImage* background;
-	ISoundEngine* BGM;
 	IGUIImage* loading;
 	bool startGame;
 };

@@ -56,5 +56,7 @@ public:
 	Button* buildQuarryButton;
 	Button* buildFarmButton;
 	Button* buildSiegeWorkshopButton;
+private:
+	bool upplayed;
 };
 

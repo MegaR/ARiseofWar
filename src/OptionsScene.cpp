@@ -42,9 +42,10 @@ OptionsScene::OptionsScene(void):Scene()
 	
 	ITexture* buttonBackTexture = Game::getInstance().videoDriver->getTexture("res/guiButtonWide.png");
 	saveSettingsButton = new Button(sW-250-10, sH-100-10, 250, 100, "Back to Menu", "Save settings and return to menu.", buttonBackTexture); 
+}
 
-	BGM = createIrrKlangDevice();
-	if (Game::getInstance().musicOn == true) BGM->play2D("res/bgmMenu.mp3", true);
+void OptionsScene::start() {
+	if (Game::getInstance().musicOn == true) music = game->playSound("res/bgmMenu.mp3", true);
 }
 
 OptionsScene::~OptionsScene()
@@ -58,7 +59,6 @@ OptionsScene::~OptionsScene()
 	delete toggleShadowsButton;
 	delete saveSettingsButton;
 
-	BGM->drop();
 	background->remove();
 }
 
@@ -94,24 +94,24 @@ void OptionsScene::update()
 	if (toggleMusicButton->pressed == true)
 	{
 		game->musicOn = !game->musicOn;
-		if (game->soundEffectsOn == true) BGM->play2D("res/seButtonClick.wav", false);
+		if (game->soundEffectsOn == true) Game::getInstance().playSound("res/seButtonClick.wav", false);
 	}
 	
 	if (toggleSoundEffectsButton->pressed == true)
 	{
 		game->soundEffectsOn = !game->soundEffectsOn;
-		if (game->soundEffectsOn == true) BGM->play2D("res/seButtonClick.wav", false);
+		if (game->soundEffectsOn == true) Game::getInstance().playSound("res/seButtonClick.wav", false);
 	}
 
 	if (toggleShadowsButton->pressed == true)
 	{
 		game->shadowsOn = !game->shadowsOn;
-		if (game->soundEffectsOn == true) BGM->play2D("res/seButtonClick.wav", false);
+		if (game->soundEffectsOn == true) Game::getInstance().playSound("res/seButtonClick.wav", false);
 	}
 
 	if (saveSettingsButton->pressed == true)
 	{
-		if (game->soundEffectsOn == true) BGM->play2D("res/seButtonClick.wav", false);
+		if (game->soundEffectsOn == true) Game::getInstance().playSound("res/seButtonClick.wav", false);
 
 		Game::getInstance().changeScene(new MenuScene());
 	}

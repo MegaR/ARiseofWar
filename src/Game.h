@@ -28,11 +28,13 @@ public:
 	void start();
 	void loop();
 	void changeScene(Scene* newScene);
+	ISound* playSound(const char* file, bool loop = false);
 
 	IrrlichtDevice* device;
 	IVideoDriver* videoDriver;
 	ISceneManager* sceneManager;
 	IGUIEnvironment* gui;
+	ISoundEngine* soundEngine;
 
 	Scene* currentScene;
 	ICameraSceneNode* camera;

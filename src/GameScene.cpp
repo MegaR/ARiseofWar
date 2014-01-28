@@ -43,9 +43,10 @@ GameScene::GameScene() {
 	selectedNode->setMaterialTexture( 0, game->videoDriver->getTexture("res/tileSelected.png") );
 	selectedNode->setPosition(vector3d<f32>(50, 0, 50) );
 	selectedNode->setID(0);
+}
 
-	BGM = createIrrKlangDevice();
-	if (Game::getInstance().musicOn == true) BGM->play2D("res/bgmGame.mp3", true);
+void GameScene::start() {
+	if (Game::getInstance().musicOn) music = Game::getInstance().playSound("res/bgmGame.mp3", true);
 }
 
 GameScene::~GameScene() {
@@ -53,7 +54,6 @@ GameScene::~GameScene() {
 	delete players[1];
 	delete returnToMenuButton;
 	delete exitGameButton;
-	BGM->drop();
 	
 	for(int i = 0; i < entities.size(); i++) {
 		delete entities.at(i);
@@ -64,39 +64,41 @@ GameScene::~GameScene() {
 
 void GameScene::update() {
 	Game* game = &Game::getInstance();
-	updateMouse();
 	returnToMenuButton->update();
 	exitGameButton->update();
 	nextTurnButton->update();
-	//left click
-	if(game->eventReceiver->isLeftMousePressed()){
-		clickEntity();
 
-	}
-	//right click
-	if(game->eventReceiver->isRightMousePressed()){
-		if(storedEntity) {
-			actionEntity();
+	if(currentPlayer == 0) {
+	updateMouse();
+		//left click
+		if(game->eventReceiver->isLeftMousePressed()){
+			clickEntity();
+		}
+		//right click
+		if(game->eventReceiver->isRightMousePressed()){
+			if(storedEntity) {
+				actionEntity();
+			}
 		}
 	}
 
 	//Button handlers enzo
 	if (returnToMenuButton->pressed == true)
 	{
-		if (game->soundEffectsOn == true) BGM->play2D("res/seButtonClick.wav", false);
+		if (game->soundEffectsOn == true) Game::getInstance().playSound("res/seButtonClick.wav", false);
 		game->changeScene(new MenuScene());
 		return;
 	}
 
 	if (exitGameButton->pressed == true)
 	{
-		if (game->soundEffectsOn == true) BGM->play2D("res/seButtonClick.wav", false);
+		if (game->soundEffectsOn == true) Game::getInstance().playSound("res/seButtonClick.wav", false);
 		Game::getInstance().device->closeDevice();
 		exit (1);
 	}
 
 	if (nextTurnButton->pressed == true) {
-		if (game->soundEffectsOn == true) BGM->play2D("res/seButtonClick.wav", false);
+		if (game->soundEffectsOn == true) Game::getInstance().playSound("res/seButtonClick.wav", false);
 		nextTurn();
 	}
 
@@ -213,14 +215,18 @@ void GameScene::updateCamera() {
 	vector3df X = (cameraTarget-position).setLength(CAMERASPEED);
 	X *= Game::getInstance().delta;
 	X += position;
+
+	if( (cameraTarget - position).getLength() < 1) {
+		X = cameraTarget;
+		cameraTarget = vector3df();
+	}
+
 	camera->setPosition(X);
 	X.Y += -1;
 	X.Z += 0.5f;
 	camera->setTarget(X);
 
-	if( (cameraTarget - position).getLength() < 1) {
-		cameraTarget = vector3df();
-	}
+	
 }
 
 void GameScene::moveCamera(float x, float y, float z) {

@@ -36,6 +36,7 @@ void Game::start() {
 	videoDriver = device->getVideoDriver();
 	sceneManager = device->getSceneManager();
 	gui = device->getGUIEnvironment();
+	soundEngine = createIrrKlangDevice();
 
 	setGuiTheme();
 
@@ -50,9 +51,15 @@ void Game::start() {
 	changeScene(new MenuScene());
 
 	loop();
+
+	soundEngine->drop();
 	device->drop();
 	delete eventReceiver;
 	return;
+}
+
+ISound* Game::playSound(const char* file, bool loop) {
+	return soundEngine->play2D(file, loop);
 }
 
 void Game::setGuiTheme() {
@@ -67,6 +74,7 @@ void Game::setGuiTheme() {
 
 void Game::changeScene(Scene* newScene) {
 	delete currentScene;
+	soundEngine->stopAllSounds();
 	currentScene = newScene;
 	currentScene->start();
 }

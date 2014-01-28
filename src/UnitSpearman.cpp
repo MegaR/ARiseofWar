@@ -5,9 +5,6 @@
 #include <iostream>
 using namespace std;
 
-ISoundEngine* usBGM;
-bool usplayed;
-
 UnitSpearman::UnitSpearman(int _x, int _y, int _player, Scene* scene) : Unit(_x, _y, _player, scene)
 {
 	maxHP = 10;
@@ -30,14 +27,12 @@ UnitSpearman::UnitSpearman(int _x, int _y, int _player, Scene* scene) : Unit(_x,
 		addModel();
 	}
 
-	usBGM = createIrrKlangDevice();
 	usplayed = false;
 }
 
 UnitSpearman::~UnitSpearman()
 {
-	usBGM->play2D("res/seDeath.wav", false);
-	//usBGM->drop();
+	Game::getInstance().playSound("res/seDeath.wav", false);
 }
 
 void UnitSpearman::selected() {
@@ -47,7 +42,7 @@ void UnitSpearman::selected() {
 	{
 		if ((player == 0) && !(path.size() > 0))
 		{ 
-			usBGM->play2D("res/seSpearmanSelected.wav", false); 
+			Game::getInstance().playSound("res/seSpearmanSelected.wav", false); 
 		}
 	}
 }
@@ -62,7 +57,7 @@ void UnitSpearman::update()
 		{ 
 			if (!usplayed)
 			{
-				usBGM->play2D("res/seSpearmanMove.wav", false);
+				Game::getInstance().playSound("res/seSpearmanMove.wav", false);
 				usplayed = true;
 			}
 		}

@@ -5,9 +5,6 @@
 #include <iostream>
 using namespace std;
 
-ISoundEngine* uaBGM;
-bool uaplayed;
-
 UnitArcher::UnitArcher(int _x, int _y, int _player, Scene* scene) : Unit(_x, _y, _player, scene)
 {
 	maxHP = 9;
@@ -29,14 +26,12 @@ UnitArcher::UnitArcher(int _x, int _y, int _player, Scene* scene) : Unit(_x, _y,
 	for(int i = 0; i < maxModels; i++) {
 		addModel();
 	}
-
-	uaBGM = createIrrKlangDevice();
 	uaplayed = false;
 }
 
 UnitArcher::~UnitArcher()
 {
-	uaBGM->play2D("res/seDeath.wav", false);
+	Game::getInstance().playSound("res/seDeath.wav", false);
 	//uaBGM->drop();
 }
 
@@ -47,7 +42,7 @@ void UnitArcher::selected() {
 	{
 		if ((player == 0) && !(path.size() > 0))
 		{ 
-			uaBGM->play2D("res/seArcherSelected.wav", false); 
+			Game::getInstance().playSound("res/seArcherSelected.wav", false); 
 		}
 	}
 }
@@ -62,7 +57,7 @@ void UnitArcher::update()
 		{ 
 			if (!uaplayed)
 			{
-				uaBGM->play2D("res/seArcherMove.wav", false);
+				Game::getInstance().playSound("res/seArcherMove.wav", false);
 				uaplayed = true;
 			}
 		}

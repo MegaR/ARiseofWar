@@ -14,5 +14,7 @@ public:
 	void selected();
 	void update();
 	void startTurn();
+private:
+	bool uaplayed;
 };
 

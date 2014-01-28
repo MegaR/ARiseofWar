@@ -5,9 +5,6 @@
 #include <iostream>
 using namespace std;
 
-ISoundEngine* ukBGM;
-bool ukplayed;
-
 UnitKnight::UnitKnight(int _x, int _y, int _player, Scene* scene) : Unit(_x, _y, _player, scene)
 {
 	maxHP = 10;
@@ -30,13 +27,12 @@ UnitKnight::UnitKnight(int _x, int _y, int _player, Scene* scene) : Unit(_x, _y,
 		addModel();
 	}
 
-	ukBGM = createIrrKlangDevice();
 	ukplayed = false;
 }
 
 UnitKnight::~UnitKnight()
 {
-	ukBGM->play2D("res/seDeath.wav", false);
+	Game::getInstance().playSound("res/seDeath.wav", false);
 	//ukBGM->drop();
 }
 
@@ -46,7 +42,7 @@ void UnitKnight::selected() {
 	{
 		if ((player == 0) && !(path.size() > 0))
 		{ 
-			ukBGM->play2D("res/seKnightSelected.wav", false); 
+			Game::getInstance().playSound("res/seKnightSelected.wav", false); 
 		}
 	}
 }
@@ -61,7 +57,7 @@ void UnitKnight::update()
 		{ 
 			if (!ukplayed)
 			{
-				ukBGM->play2D("res/seKnightMove.wav", false);
+				Game::getInstance().playSound("res/seKnightMove.wav", false);
 				ukplayed = true;
 			}
 		}

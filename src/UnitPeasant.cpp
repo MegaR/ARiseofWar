@@ -4,9 +4,6 @@
 #include <iostream>
 using namespace std;
 
-ISoundEngine* upBGM;
-bool upplayed;
-
 UnitPeasant::UnitPeasant(int _x, int _y, int _player, Scene* scene) : Unit(_x, _y, _player, scene)
 {
 	hp = 1;
@@ -47,13 +44,11 @@ UnitPeasant::UnitPeasant(int _x, int _y, int _player, Scene* scene) : Unit(_x, _
 	for(int i = 0; i < maxModels; i++) {
 		addModel();
 	}
-
-	upBGM = createIrrKlangDevice();
 }
 
 
 UnitPeasant::~UnitPeasant() {
-	upBGM->play2D("res/sePeasantDeath.wav", false);
+	Game::getInstance().playSound("res/sePeasantDeath.wav", false);
 	delete buildLumberMillButton;
 	delete buildBarracksButton;
 	delete buildQuarryButton;
@@ -105,7 +100,7 @@ void UnitPeasant::update() {
 		{ 
 			if (!upplayed)
 			{
-				upBGM->play2D("res/sePeasantMove.wav", false);
+				Game::getInstance().playSound("res/sePeasantMove.wav", false);
 				upplayed = true;
 			}
 		}
@@ -119,7 +114,7 @@ void UnitPeasant::startTurn()
 }
 
 bool UnitPeasant::attemptBuildBarracks() {
-	if(tileX <=0 || tileY >= MAPSIZE-1) return false;
+	if(tileX < 0 || tileY >= MAPSIZE-1) return false;
 	GameScene* scene = (GameScene*)this->scene;
 	if(!scene->players[player]->hasResources(BARRACKSCOST)) {
 		return false;
@@ -250,6 +245,14 @@ bool UnitPeasant::attemptBuildSiegeWorkshop(){
 	if(!scene->players[player]->hasResources(SIEGEWORKSHOPCOST)) {
 		return false;
 	}
+
+	TileGrass* validTile2 = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[tileX+1][tileY]);
+	TileGrass* validTile3 = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[tileX][tileY+1]);
+	TileGrass* validTile4 = dynamic_cast<TileGrass*>(scene->tilesystem.tiles[tileX+1][tileY+1]);
+
+	if((scene->getEntity(tileX+1, tileY)) || (scene->getEntity(tileX, tileY+1)) || (scene->getEntity(tileX+1, tileY+1)) || (!validTile2) || (!validTile3) || (!validTile4)) {
+		return false;
+	}
 	buildSiegeWorkshop(tileX,tileY);
 	return true;
 }
@@ -301,7 +304,7 @@ void UnitPeasant::selected() {
 	{
 		if ((player == 0) && !(path.size() > 0))
 		{ 
-			upBGM->play2D("res/sePeasantSelected.mp3", false); 
+			Game::getInstance().playSound("res/sePeasantSelected.mp3", false); 
 		}
 	}
 }

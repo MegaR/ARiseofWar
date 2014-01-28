@@ -27,12 +27,13 @@ MenuScene::MenuScene(void):Scene()
 	optionsButton = new Button(bX, bY, bW, bH, "Settings", "", buttonTexture);
 	exitButton = new Button(bX, bY+125, bW, bH, "Exit", "", buttonTexture);
 
-	BGM = createIrrKlangDevice();
-	if (Game::getInstance().musicOn == true) BGM->play2D("res/bgmMenu.mp3", true);
-
 	loading = game->gui->addImage(rect<s32>((game->screenWidth / 2) - (742/2), (game->screenHeight / 2) - (484/2), game->screenWidth, game->screenHeight));
 	loading->setImage(game->videoDriver->getTexture("res/guiLoading.png") );
 	loading->setVisible(false);
+}
+
+void MenuScene::start() {
+	if (Game::getInstance().musicOn) music = Game::getInstance().playSound("res/bgmMenu.mp3", true);
 }
 
 MenuScene::~MenuScene()
@@ -40,7 +41,6 @@ MenuScene::~MenuScene()
 	delete playButton;
 	delete optionsButton;
 	delete exitButton;
-	BGM->drop();
 	background->remove();
 	loading->remove();
 }
@@ -60,13 +60,13 @@ void MenuScene::update()
 	}
 
 	if(startGame) {
-		if (Game::getInstance().soundEffectsOn == true) BGM->play2D("res/seButtonClick.wav", false);
+		if (Game::getInstance().soundEffectsOn == true) Game::getInstance().playSound("res/seButtonClick.wav", false);
 		Game::getInstance().changeScene(new GameScene());
 	}
 
 	if (optionsButton->pressed == true)
 	{
-		if (Game::getInstance().soundEffectsOn == true) BGM->play2D("res/seButtonClick.wav", false);
+		if (Game::getInstance().soundEffectsOn == true) Game::getInstance().playSound("res/seButtonClick.wav", false);
 		Game::getInstance().changeScene(new OptionsScene());
 	}
 

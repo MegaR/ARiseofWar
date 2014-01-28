@@ -12,6 +12,7 @@ public:
 	~OptionsScene();
 
 	void update();
+	void start();
 
 private:
 	IGUIImage* background;
@@ -22,6 +23,4 @@ private:
 	const wchar_t* wcMusic;
 	const wchar_t* wcSoundEffects;
 	const wchar_t* wcShadows;
-
-	ISoundEngine* BGM;
 };

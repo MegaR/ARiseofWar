@@ -58,6 +58,7 @@ void UnitCatapult::updateAnimations() {
 	switch(currentAnimation)
 	{
 		case IDLE_ANIMATION:
+			if(hasAttacked) { currentAnimation = ATTACKING_ANIMATION; break; }
 			if (!isAnimating[currentAnimation])
 			{
 				for (int i = 0; i < modelNodes.size(); i++) 

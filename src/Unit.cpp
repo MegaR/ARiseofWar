@@ -4,8 +4,6 @@
 #include <iostream>
 using namespace std;
 
-ISoundEngine* uBGM;
-
 Unit::Unit(int tileX, int tileY, int player, Scene* scene) : Entity(scene)
 {
 	((GameScene*)scene)->tilesystem.tiles[tileX][tileY]->setEntity(this);
@@ -25,8 +23,6 @@ Unit::Unit(int tileX, int tileY, int player, Scene* scene) : Entity(scene)
 
 	node = Game::getInstance().sceneManager->addEmptySceneNode(0, 0);
 	node->setPosition(vector3df(tileX * 10, 0, tileY * 10) );
-
-	uBGM = createIrrKlangDevice();
 }
 
 Unit::~Unit()
@@ -40,7 +36,6 @@ Unit::~Unit()
 	if(((GameScene*)Game::getInstance().currentScene)->tilesystem.tiles[tileX][tileY]->getEntity() == this) {
 		((GameScene*)Game::getInstance().currentScene)->tilesystem.tiles[tileX][tileY]->setEntity(NULL);
 	}
-	//uBGM->drop(); // sorry for the memory leaks
 }
 
 void Unit::update() 
@@ -63,6 +58,8 @@ void Unit::updateAnimations()
 	switch(currentAnimation)
 	{
 		case IDLE_ANIMATION:{
+			if(hasAttacked) { currentAnimation = ATTACKING_ANIMATION; break; }
+
 			if (!isAnimating[currentAnimation])
 			{
 				for (int i = 0; i < modelNodes.size(); i++) 

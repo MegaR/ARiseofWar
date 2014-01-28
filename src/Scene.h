@@ -1,7 +1,8 @@
 #pragma once
 
 #include <ISceneCollisionManager.h>
-
+#include <irrKlang.h>
+using namespace irrklang;
 
 class Scene
 {
@@ -13,4 +14,6 @@ public:
 	virtual void start();
 	virtual void update();
 	virtual void render();
+protected:
+	ISound* music;
 };
