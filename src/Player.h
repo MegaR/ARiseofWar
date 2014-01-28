@@ -14,6 +14,8 @@ class Player
 public:
 	Player(void);
 	~Player(void);
+	
+	IGUIImage* topRight;
 
 	virtual void startTurn();
 	virtual void update();
@@ -24,7 +26,7 @@ public:
 	bool hasResources(int wood, int food, int gold, int stone);
 	void useResources(int wood, int food, int gold, int stone);
 private:
-	IGUIImage* top;
+	IGUIImage* topLeft;
 	IGUIImage* woodIcon;
 	IGUIImage* foodIcon;
 	IGUIImage* goldIcon;

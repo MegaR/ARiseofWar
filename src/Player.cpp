@@ -7,13 +7,14 @@ Player::Player(void) {
 	gold = 40;
 	stone = 40;
 
-	top = NULL;
+	topLeft = NULL;
 }
 
 
 Player::~Player(void) {
-	if(top) {
-		top->remove();
+	if(topLeft) {
+		topLeft->remove();
+		topRight->remove();
 		woodIcon->remove();
 		foodIcon->remove();
 		stoneIcon->remove();
@@ -29,8 +30,12 @@ void Player::createGui() {
 	Game* game = &Game::getInstance();
 	IGUIEnvironment* gui = game->gui;
 
-	top = gui->addImage(rect<s32>(0,0, game->screenWidth, 40));
-	top->setImage(Game::getInstance().videoDriver->getTexture("res/guiBackgroundMenu.png"));
+	topLeft = gui->addImage(rect<s32>(0,0, 400, 40));
+	topLeft->setImage(game->videoDriver->getTexture("res/guiResources.png") );
+
+	topRight = gui->addImage(rect<s32>(game->screenWidth - 400, 0, game->screenWidth, 40) );
+	topRight->setImage(game->videoDriver->getTexture("res/guiStats.png") );
+	topRight->setVisible(false);
 
 	woodIcon = gui->addImage(rect<s32>(4, 4, 36, 36));
 	woodIcon->setImage(Game::getInstance().videoDriver->getTexture("res/guiWood.png"));
@@ -63,7 +68,7 @@ void Player::useResources(int wood, int food, int stone, int gold) {
 	this->food -= food;
 	this->gold -= gold;
 	this->stone -= stone;
-	if(top) {
+	if(topLeft) {
 		std::wstring text = to_wstring(((long long)this->wood));
 		woodText->setText( text.c_str() );
 		text = to_wstring(((long long)this->food));

@@ -7,7 +7,7 @@ Entity::Entity(Scene* scene)
 {
 	this->scene = scene;
 	Game* game = &Game::getInstance();
-	this->hpText = game->gui->addStaticText(L"health: 100, attack: 10, defense: 50", rect<s32>(game->screenWidth - 400, 10,  game->screenWidth, 100));
+	this->hpText = game->gui->addStaticText(L"health: 100, attack: 10, defense: 50", rect<s32>(game->screenWidth - 350, 10,  game->screenWidth, 100));
 	this->hpText->setVisible(false);
 	attack = 0;
 }
@@ -42,6 +42,7 @@ void Entity::selected() {
 	hpText->setVisible(true);
 	std::wstring text = L"hp: " + to_wstring((long long)hp ) + L", attack: " + to_wstring((long long) attack) + L", defense: " + to_wstring((long long) defense);
 	hpText->setText( text.c_str() );
+	((GameScene*)scene)->players[0]->topRight->setVisible(true);
 }
 
 std::vector<vector2d<int>>* Entity::getSurroundingTiles() {
@@ -57,6 +58,7 @@ std::vector<vector2d<int>>* Entity::getSurroundingTiles() {
 
 void Entity::deselected() {
 	hpText->setVisible(false);
+	((GameScene*)scene)->players[0]->topRight->setVisible(false);
 }
 
 bool Entity::inAttackRange(int x, int y, int attackDistance) {
