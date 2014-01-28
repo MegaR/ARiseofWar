@@ -153,11 +153,11 @@ void Unit::updateAnimations()
 }
 
 void Unit::selected() {
-	
-	if(player == 0) {
-		if(!hasMoved) {
-			addDistanceTiles(tileX, tileY, maxDistance);
-		}
+	Entity::selected();
+	if(player!=0) return;
+
+	if(!hasMoved) {
+		addDistanceTiles(tileX, tileY, maxDistance);
 	}
 }
 
@@ -222,6 +222,7 @@ void Unit::addDistanceTiles(int x, int y, int distance) {
 }
 
 void Unit::deselected() {
+	Entity::deselected();
 	while(distanceTiles.size() > 0) {
 		distanceTiles.at(distanceTiles.size()-1)->remove();
 		distanceTiles.pop_back();

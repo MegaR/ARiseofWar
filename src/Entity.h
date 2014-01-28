@@ -21,10 +21,12 @@ public:
 	int player;
 	int hp;
 	int defense;
+	int attack;
 
 	IAnimatedMesh* model;
 	ITexture* texture;
 	ISceneNode* node;
+	IGUIStaticText* hpText;
 
 	virtual void startTurn();
 	virtual bool enemyTurn();
