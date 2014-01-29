@@ -1,16 +1,9 @@
 #include "OptionsScene.h"
 #include "Game.h"
 
-Game* game;
-
-Button* toggleMusicButton;
-Button* toggleSoundEffectsButton;
-Button* toggleShadowsButton;
-Button* saveSettingsButton;
-
 OptionsScene::OptionsScene(void):Scene()
 {
-	game = &Game::getInstance();
+	Game* game = &Game::getInstance();
 	
 	int sW = game->screenWidth;
 	int sH = game->screenHeight;
@@ -45,6 +38,7 @@ OptionsScene::OptionsScene(void):Scene()
 }
 
 void OptionsScene::start() {
+	Game* game = &Game::getInstance();
 	if (Game::getInstance().musicOn == true) music = game->playSound("res/bgmMenu.mp3", true);
 }
 
@@ -64,6 +58,7 @@ OptionsScene::~OptionsScene()
 
 void OptionsScene::update()
 {
+	Game* game = &Game::getInstance();
 	toggleMusicButton->update();
 	toggleSoundEffectsButton->update();
 	toggleShadowsButton->update();

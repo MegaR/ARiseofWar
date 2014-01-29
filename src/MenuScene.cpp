@@ -1,9 +1,5 @@
 #include "MenuScene.h"
 //#include "Game.h"
-	
-Button* playButton;
-Button* optionsButton;
-Button* exitButton;
 
 MenuScene::MenuScene(void):Scene()
 {
@@ -47,13 +43,13 @@ MenuScene::~MenuScene()
 
 void MenuScene::update()
 {
+	Game* game = &Game::getInstance();
 	playButton->update();
 	optionsButton->update();
 	exitButton->update();
 	
 	if (playButton->pressed == true)
 	{
-		Game* game = &Game::getInstance();
 		loading->setVisible(true);
 		startGame = true;
 		return;
@@ -62,18 +58,18 @@ void MenuScene::update()
 	if(startGame) {
 		if (Game::getInstance().soundEffectsOn == true) Game::getInstance().playSound("res/seButtonClick.wav", false);
 		Game::getInstance().changeScene(new GameScene());
+		return;
 	}
 
 	if (optionsButton->pressed == true)
 	{
 		if (Game::getInstance().soundEffectsOn == true) Game::getInstance().playSound("res/seButtonClick.wav", false);
 		Game::getInstance().changeScene(new OptionsScene());
+		return;
 	}
 
 	if (exitButton->pressed == true)
 	{
-		Game* game = &Game::getInstance();
-		
 		game->device->closeDevice();
 		exit (1);
 	}

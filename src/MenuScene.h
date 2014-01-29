@@ -18,4 +18,7 @@ private:
 	IGUIImage* background;
 	IGUIImage* loading;
 	bool startGame;
+	Button* playButton;
+	Button* optionsButton;
+	Button* exitButton;
 };

@@ -20,6 +20,11 @@ private:
 	IGUIStaticText* soundEffectText;
 	IGUIStaticText* shadowsText;
 
+	Button* toggleMusicButton;
+	Button* toggleSoundEffectsButton;
+	Button* toggleShadowsButton;
+	Button* saveSettingsButton;
+
 	const wchar_t* wcMusic;
 	const wchar_t* wcSoundEffects;
 	const wchar_t* wcShadows;
