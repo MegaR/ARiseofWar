@@ -84,12 +84,26 @@ void EnemyPlayer::insertToQueue(Entity* entity) {
 				!dynamic_cast<MOVE3*>(queue[i]) ||
 				!dynamic_cast<MOVE4*>(queue[i]) ||
 				!dynamic_cast<MOVE5*>(queue[i]) ||
-				!dynamic_cast<MOVE6*>(queue[i]) ) {
+				!dynamic_cast<MOVE6*>(queue[i])) {
 				queue.insert(queue.begin()+i, entity);
 				return;
 			}
 		}
 			queue.push_back(entity);
+	} else if( dynamic_cast<MOVE8*>(entity) ) {
+		for(int i = 0; i < queue.size(); i++) {
+			if( !dynamic_cast<MOVE1*>(queue[i]) ||
+				!dynamic_cast<MOVE2*>(queue[i]) ||
+				!dynamic_cast<MOVE3*>(queue[i]) ||
+				!dynamic_cast<MOVE4*>(queue[i]) ||
+				!dynamic_cast<MOVE5*>(queue[i]) ||
+				!dynamic_cast<MOVE6*>(queue[i]) ||
+				!dynamic_cast<MOVE7*>(queue[i]) ) {
+				queue.insert(queue.begin()+i, entity);
+				return;
+			}
+		}
+	queue.push_back(entity);
 	}
 }
 

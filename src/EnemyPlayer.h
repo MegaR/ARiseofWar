@@ -9,10 +9,11 @@ using namespace std;
 #define MOVE1 UnitPeasant
 #define MOVE2 UnitKnight
 #define MOVE3 UnitArcher
-#define MOVE4 UnitCatapult
-#define MOVE5 TownCenter
-#define MOVE6 Barracks
-#define MOVE7 SiegeWorkshop
+#define MOVE4 UnitSpearman
+#define MOVE5 UnitCatapult
+#define MOVE6 TownCenter
+#define MOVE7 Barracks
+#define MOVE8 SiegeWorkshop
 
 class EnemyPlayer :
 	public Player
