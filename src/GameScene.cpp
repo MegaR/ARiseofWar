@@ -130,6 +130,11 @@ void GameScene::nextTurn() {
 	for(int i = 0; i < entities.size(); i++) {
 		if(entities[i]->player == currentPlayer) {
 			entities[i]->endTurn();
+			if(entities[i]->player == 0){
+				nextTurnButton->btn->setVisible(false);
+			}else{
+				nextTurnButton->btn->setVisible(true);
+			}
 		}
 		TownCenter* tc = dynamic_cast<TownCenter*>(entities[i]);
 		if(tc){
